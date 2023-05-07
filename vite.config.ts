@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-   base: '/react-project/',
+   base: '/bread/',
    plugins: [react()],
    resolve: {
       alias: {
