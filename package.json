@@ -37,6 +37,7 @@
       "fireray": "^2.4.8",
       "formik": "^2.2.9",
       "generate-react-cli": "^8.3.0",
+      "gh-pages": "^5.0.0",
       "global": "^4.4.0",
       "lodash": "^4.17.21",
       "lodash-cli": "^4.17.5",
