@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userReducer } from './reducers/UserSlice';
-import { usersReducer } from './reducers/UsersSlice';
-import { globalReducer } from './reducers/GlobalSlice';
-import { chatsReducer } from './reducers/ChatsSlice';
+import { userReducer } from './reducers/user.reducer';
+import { usersReducer } from './reducers/users.reducer';
+import { globalReducer } from './reducers/global.reducer';
+import { chatsReducer } from './reducers/chats.reducer';
 
 export const store = configureStore({
    reducer: {

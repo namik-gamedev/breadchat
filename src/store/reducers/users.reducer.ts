@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from 'src/types/types';
+import { IUser, IUserWithDBFields } from 'src/types/types';
 
 interface StateType {
-   data: IUser[];
+   data: IUserWithDBFields[];
 }
 
 const initialState: StateType = {
@@ -13,7 +13,7 @@ const usersSlice = createSlice({
    name: 'users',
    initialState,
    reducers: {
-      setUsers: (state, { payload }: PayloadAction<IUser[]>) => {
+      setUsers: (state, { payload }: PayloadAction<IUserWithDBFields[]>) => {
          state.data = payload;
       },
       removeAllUsers: (state) => {

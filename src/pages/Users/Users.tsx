@@ -1,20 +1,14 @@
-import React, { FC, useEffect, useState } from 'react';
+import { Grid } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
-import DeleteIcon from '@mui/icons-material/Delete';
-import IconButton from '@mui/material/IconButton';
+import ForumIcon from '@mui/icons-material/Forum';
+import { FC, useEffect } from 'react';
 import { StyledBox } from 'src/components/UI/StyledBox';
-import { db } from 'src/firebase/firebase';
-import { useAppSelector } from 'src/hooks/useAppSelector';
-import { onValue, ref } from 'firebase/database';
-import { UserAvatar } from 'src/components/UI/UserAvatar';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
-import { setChat } from 'src/store/reducers/ChatSlice';
-import { IUser } from 'src/types/types';
-import { ListItem, Grid } from '@mui/material';
-import { UserThumbnail } from './UserThumbnail';
+import { useAppSelector } from 'src/hooks/useAppSelector';
+import { UserThumbnail, UserThumbnailProps } from '../../components/UI/UserThumbnail';
+import IconButton from '@mui/material/IconButton';
+import { UserThumbnailWithChatBtn } from './UserThumbnailWithChatBtn';
 
 export interface UsersProps {}
 
@@ -32,20 +26,6 @@ export const Users: FC<UsersProps> = ({}) => {
       };
    }, []);
 
-   const handleClick = (user: IUser) => {
-      // todo: GET CHAT FROM DB
-      dispatch(
-         setChat({
-            messages: [
-               {
-                  sender: 0,
-                  text: 'hi, debil',
-               },
-            ],
-         })
-      );
-   };
-
    return (
       <Stack spacing={2}>
          <StyledBox sx={{ p: 2.5 }}>
@@ -56,13 +36,11 @@ export const Users: FC<UsersProps> = ({}) => {
 
          <StyledBox sx={{ p: 2 }}>
             {users.length > 0 ? (
-               <Grid container spacing={3}>
+               <Stack spacing={3}>
                   {users!.map((user) => (
-                     <Grid key={user.uid} item xs={12} sm={6} md={4}>
-                        <UserThumbnail user={user} />
-                     </Grid>
+                     <UserThumbnailWithChatBtn user={user} />
                   ))}
-               </Grid>
+               </Stack>
             ) : (
                <Typography textAlign='center' variant='body1'>
                   No users ;(

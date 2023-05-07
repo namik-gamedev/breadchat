@@ -20,10 +20,12 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 import { useNavigate } from 'react-router-dom';
 import { EMAIL_ALREADY_IN_USE_ERR } from 'src/constants/Auth.consts';
 import { StyledForm } from 'src/components/UI/StyledForm';
-import { setUser } from 'src/store/reducers/UserSlice';
+import { setUser } from 'src/store/reducers/user.reducer';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
-import { setupUserInDB } from 'src/utils/db.utils';
+import UserService from 'src/services/user.service';
+
+type photoURLType = string | null;
 
 export interface SignUpFormProps {}
 
@@ -61,9 +63,10 @@ export const SignUpForm: FC<SignUpFormProps> = ({}) => {
             const auth = appAuth;
 
             const {
-               user: { uid },
+               user: { uid, displayName, photoURL },
             } = await createUserWithEmailAndPassword(auth, email, password);
-            await setupUserInDB({ displayName: name, uid }); // TODO: add here photoURL
+            await updateProfile(appAuth.currentUser!, { displayName, photoURL });
+            await UserService.setup({ displayName: name, uid, photoURL }); // TODO: add here photoURL
 
             await signInWithEmailAndPassword(auth, email, password);
 

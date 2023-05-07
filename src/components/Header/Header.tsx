@@ -1,12 +1,14 @@
 import React, { FC, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Stack from '@mui/material/Stack';
-import { Logo } from 'src/components/Header/Logo';
+import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
-import { AppContainer } from 'src/components/UI/AppContainer';
+import { Logo } from 'src/components/Header/Logo';
 import { ThemeToggler } from './ThemeToggler';
 import { useAppSelector } from 'src/hooks/useAppSelector';
-import { ProfileMenu } from './ProfileMenu';
+import { HeaderProfileMenu } from './HeaderProfileMenu';
+import Box from '@mui/material/Box';
+import { HeaderNavigationMenu } from './HeaderNavigationMenu';
 
 export interface HeaderProps {}
 
@@ -14,21 +16,18 @@ export const Header: FC<HeaderProps> = ({}) => {
    const user = useAppSelector((state) => state.user.data);
 
    return (
-      <AppBar position='relative' color='inherit' elevation={0} sx={{ boxShadow: 5 }}>
+      <AppBar color='inherit' elevation={0} sx={{ boxShadow: 3, position: 'initial' }}>
          <Toolbar>
-            <AppContainer>
+            <Container>
                <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                  {/* <HeaderMenu /> */}
+                  {user && <HeaderNavigationMenu />}
                   <Logo />
-                  {/* <Button color='primary' variant='contained'>
-                     Sign in
-                  </Button> */}
                   <Stack spacing={1} direction='row' alignItems='center'>
                      <ThemeToggler />
-                     {user && <ProfileMenu />}
+                     {user && <HeaderProfileMenu />}
                   </Stack>
                </Stack>
-            </AppContainer>
+            </Container>
          </Toolbar>
       </AppBar>
    );

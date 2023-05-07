@@ -10,20 +10,22 @@ export const Logo: FC<LogoProps> = ({}) => {
    return (
       <UnstyledLink to='/'>
          <Stack spacing={1} alignItems='center' component='a' direction='row'>
-            <Tooltip title='Bread chat' arrow>
-               <Typography component='h1' variant='h6' aria-label='bread'>
+            <Tooltip title='BREAD' arrow>
+               <Stack direction='row'>
                   <Typography
-                     component='span'
+                     component='h1'
                      sx={{
                         color: 'primary.main',
                         letterSpacing: 4,
                      }}
                      variant='h6'
                   >
-                     BRE🍞D
+                     BREAD
                   </Typography>
-                  chat
-               </Typography>
+                  <Typography sx={{ display: { sm: 'block', xs: 'none' } }} variant='h6'>
+                     chat
+                  </Typography>
+               </Stack>
             </Tooltip>
          </Stack>
       </UnstyledLink>

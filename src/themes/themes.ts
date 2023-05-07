@@ -1,17 +1,33 @@
 import { grey } from '@mui/material/colors';
 import { ThemeOptions, createTheme } from '@mui/material/styles';
 
+const baseThemeOptions: ThemeOptions = {
+   components: {
+      MuiCssBaseline: {
+         'styleOverrides': {
+            '*::-webkit-scrollbar': {
+               width: '0.5em',
+            },
+            '*::-webkit-scrollbar-thumb': {
+               backgroundColor: 'rgba(125, 125, 125, 1)',
+               borderRadius: '50px',
+            },
+         },
+      },
+   },
+};
+
 export const lightThemeOptions: ThemeOptions = {
+   ...baseThemeOptions,
    palette: {
       mode: 'light',
       primary: {
-         main: '#bf7e16',
+         main: '#9c6141',
          contrastText: '#eae0e0',
       },
       secondary: {
-         main: '#1657bf',
+         main: '#417c9c',
       },
-
       text: {
          primary: 'rgba(0,0,0,0.87)',
       },
@@ -25,10 +41,11 @@ export const lightThemeOptions: ThemeOptions = {
 };
 
 export const darkThemeOptions: ThemeOptions = {
+   ...baseThemeOptions,
    palette: {
       mode: 'dark',
       primary: {
-         main: '#b3783f',
+         main: '#83543b',
          contrastText: '#eae0e0',
       },
       secondary: {
@@ -40,6 +57,9 @@ export const darkThemeOptions: ThemeOptions = {
       background: { default: '#1d1b1a', paper: '#292625' },
       error: {
          main: '#b94444',
+      },
+      action: {
+         active: 'rgba(255,255,255,0.7)',
       },
    },
 };

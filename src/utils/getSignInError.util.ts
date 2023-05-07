@@ -7,6 +7,7 @@ export interface SignInError {
 }
 
 export const getSignInError = (code: string): SignInError | undefined => {
+   // todo: дополнить ошибки
    switch (code) {
       case 'auth/user-not-found':
          return {

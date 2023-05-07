@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
-import { setDarkTheme } from 'src/store/reducers/GlobalSlice';
+import { setDarkTheme } from 'src/store/reducers/global.reducer';
 import Tooltip from '@mui/material/Tooltip';
 
 export interface ThemeTogglerProps {}
@@ -12,8 +12,8 @@ export interface ThemeTogglerProps {}
 const iconSx = {
    color: 'primary.main',
    fontSize: {
-      sm: '1.3em',
-      xs: '1.1em',
+      sm: '1.2em',
+      xs: '1em',
    },
 };
 

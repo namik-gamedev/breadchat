@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import Container from '@mui/material/Container';
 import { Header } from '../Header';
-import { AppContainer } from '../UI/AppContainer';
 import { Sidebar } from 'src/components/Sidebar';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 
@@ -14,10 +15,10 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
    const user = useAppSelector((state) => state.user.data);
 
    return (
-      <Box>
+      <Stack direction='column' sx={{ height: 'calc(100vh - 65px)' }}>
          <Header />
-         <AppContainer>
-            <Grid container spacing={2} sx={{ mt: 0 }} direction='row'>
+         <Container sx={{ height: 1 }}>
+            <Grid container spacing={2} sx={{ pt: 2, height: 1 }}>
                {user && (
                   <Grid
                      item
@@ -33,12 +34,12 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
                      <Sidebar />
                   </Grid>
                )}
-               <Grid item xs>
+               <Grid item xs sx={{ height: 1 }}>
                   {children}
                </Grid>
             </Grid>
-         </AppContainer>
-         {/* footer */}
-      </Box>
+         </Container>
+         {/* todo: footer */}
+      </Stack>
    );
 };

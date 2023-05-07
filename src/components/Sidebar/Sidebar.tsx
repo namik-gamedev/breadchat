@@ -7,7 +7,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import ForumIcon from '@mui/icons-material/Forum';
 import Typography from '@mui/material/Typography';
 import { StyledBox } from '../UI/StyledBox';
-import { UnstyledLink } from '../UI/UnstyledLink';
+import { NavigationMenuItems } from '../NavigationMenuItems';
 
 export interface SidebarProps {}
 
@@ -18,19 +18,7 @@ export const Sidebar: FC<SidebarProps> = ({}) => {
          {/* <Users />
          <Chats /> */}
          <MenuList>
-            <MenuItem component={UnstyledLink} to='/users'>
-               <ListItemIcon>
-                  <PersonIcon color='primary' />
-               </ListItemIcon>
-               <Typography>Users</Typography>
-            </MenuItem>
-
-            <MenuItem component={UnstyledLink} to='/chats'>
-               <ListItemIcon>
-                  <ForumIcon color='primary' />
-               </ListItemIcon>
-               <Typography>Chats</Typography>
-            </MenuItem>
+            <NavigationMenuItems />
          </MenuList>
          {/* </Stack> */}
       </StyledBox>
