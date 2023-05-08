@@ -85,7 +85,7 @@ export const SignInForm: FC<SignInFormProps> = ({}) => {
    });
 
    const handleGoogleClick = async () => {
-      const { user }: { user: User } = isAndroid ? await signInWithRedirect(appAuth, authProvider) : await signInWithPopup(appAuth, authProvider);
+      const { user }: { user: User } = await signInWithPopup(appAuth, authProvider);
       if (!user) {
          return;
       }
