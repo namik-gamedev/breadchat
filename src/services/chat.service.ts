@@ -3,7 +3,7 @@ import { db } from 'src/firebase/firebase';
 import { IUser } from 'src/types/types';
 
 export default class ChatService {
-   static add(user: IUser, interlocutor: IUser) {
+   static create(user: IUser, interlocutor: IUser) {
       const chatRef = ref(db, `chats/${user.uid}/${interlocutor.uid}`);
       set(chatRef, { interlocutor });
 

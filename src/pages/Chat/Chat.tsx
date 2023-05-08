@@ -41,7 +41,7 @@ export const Chat: FC<ChatProps> = ({}) => {
       document.title = interlocutor?.displayName || 'No user with this id';
 
       if (!chat && interlocutor) {
-         ChatService.add(user, interlocutor);
+         ChatService.create(user, interlocutor);
       }
 
       return () => {
