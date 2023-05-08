@@ -13,6 +13,7 @@ export interface ChatsProps {}
 
 export const Chats: FC<ChatsProps> = ({}) => {
    const dispatch = useAppDispatch();
+   const users = useAppSelector((state) => state.users.data);
    const chats = useAppSelector((state) => state.chats.data);
 
    useEffect(() => {
@@ -34,9 +35,11 @@ export const Chats: FC<ChatsProps> = ({}) => {
          <StyledBox sx={{ p: 2 }}>
             {chats.length > 0 ? (
                <Stack spacing={3}>
-                  {chats.map(({ interlocutor }) => (
-                     <UserThumbnailWithChatBtn user={interlocutor} />
-                  ))}
+                  {users
+                     .filter((user) => chats.find(({ interlocutor }) => interlocutor.uid === user.uid))
+                     .map((user) => (
+                        <UserThumbnailWithChatBtn user={user} />
+                     ))}
                </Stack>
             ) : (
                <Typography textAlign='center' variant='body1'>
