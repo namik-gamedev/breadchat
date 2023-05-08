@@ -24,7 +24,7 @@ import { enLocaleSpec } from 'src/locales/en.localeSpec';
 moment.updateLocale('en', enLocaleSpec);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-   <Router basename='/breadchat'>
+   <Router>
       <Provider store={store}>
          <App />
       </Provider>
