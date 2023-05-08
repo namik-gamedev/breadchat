@@ -21,7 +21,9 @@ export const UserThumbnail: FC<UserThumbnailProps> = ({ user }) => {
       <Stack direction='row' spacing={2} alignItems='center'>
          <UserAvatar online={user.online} sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={user} />
          <Box>
-            <Typography variant='h5'>{user.displayName}</Typography>
+            <Typography variant='h5' component='h2'>
+               {user.displayName}
+            </Typography>
             <Typography variant='body1' sx={{ color: 'grey' }}>
                {user.online ? (user.typing ? 'Typing...' : 'Online') : `last seen ${moment(user.lastSeen).calendar()}`}
             </Typography>
