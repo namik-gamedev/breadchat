@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IChat } from 'src/types/types';
 
 interface StateType {
-   data?: IChat[] | null;
+   data: IChat[];
 }
 
 const initialState: StateType = {
-   data: null,
+   data: [],
 };
 
 const chatsSlice = createSlice({
@@ -18,7 +18,7 @@ const chatsSlice = createSlice({
          // TODO: SORT (BY LAST MESSAGE TIME) CHATS HERE
       },
       unsetChats: (state) => {
-         state.data = null;
+         state.data = [];
       },
    },
 });
