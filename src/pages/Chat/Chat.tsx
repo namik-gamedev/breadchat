@@ -49,16 +49,7 @@ export const Chat: FC<ChatProps> = ({}) => {
       <Stack spacing={2} direction='column' sx={{ height: 1 }}>
          <ChatHeader interlocutor={interlocutor} />
          <ChatMessages chat={chat} />
-         <ChatForm
-            createChat={
-               chat
-                  ? async () => {
-                       await ChatService.create(user, interlocutor);
-                    }
-                  : undefined
-            }
-            interlocutor={interlocutor}
-         />
+         <ChatForm chat={chat} interlocutor={interlocutor} />
       </Stack>
    ) : (
       <NotFound />

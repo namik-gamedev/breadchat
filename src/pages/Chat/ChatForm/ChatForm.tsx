@@ -12,7 +12,7 @@ import AddReactionIcon from '@mui/icons-material/AddReaction';
 import { child, get, onValue, push, ref, set } from 'firebase/database';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { db } from 'src/firebase/firebase';
-import { IUser } from 'src/types/types';
+import { IChat, IUser } from 'src/types/types';
 import Picker from '@emoji-mart/react';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import { BrowserView, MobileView, useDeviceData } from 'react-device-detect';
@@ -24,13 +24,13 @@ import { debounce } from 'src/utils/debounce.util';
 import { useDebounce } from 'src/hooks/useDebounce';
 
 export interface ChatFormProps {
+   chat: IChat | undefined;
    interlocutor: IUser;
-   createChat?: () => void;
 }
 
 let timeout: NodeJS.Timer;
 
-export const ChatForm: FC<ChatFormProps> = ({ interlocutor, createChat }) => {
+export const ChatForm: FC<ChatFormProps> = ({ chat, interlocutor }) => {
    const user = useAppSelector((state) => state.user.data!);
    const [messageText, setMessageText] = useState('');
    const [isInputError, setIsInputError] = useState(false);
@@ -55,7 +55,9 @@ export const ChatForm: FC<ChatFormProps> = ({ interlocutor, createChat }) => {
          return;
       }
       setMessageText('');
-      createChat && (await createChat());
+      if (!chat) {
+         await ChatService.create(user, interlocutor);
+      }
       ChatService.message(user.uid, interlocutor.uid, messageText);
    };
 
