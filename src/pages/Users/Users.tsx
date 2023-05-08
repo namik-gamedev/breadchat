@@ -8,7 +8,7 @@ import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { UserThumbnail, UserThumbnailProps } from '../../components/UI/UserThumbnail';
 import IconButton from '@mui/material/IconButton';
-import { UserThumbnailWithChatBtn } from '../../components/UI/UserThumbnailWithChatBtn';
+import { UserThumbnailWithChatBtn } from './UserThumbnailWithChatBtn';
 
 export interface UsersProps {}
 
