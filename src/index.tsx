@@ -15,7 +15,7 @@ import { enLocaleSpec } from 'src/locales/en.localeSpec';
 // ИЗБАВИТЬСЯ ОТ ЛИШНИХ SX
 // ПЕРЕНЕСТИ ВСЕ UI-КОМПОНЕНТЫ НА STYLED
 // ЗАМЕНИТЬ ВСЕ КОНКАТЕНАЦИИ СТРОК НА ШАБЛОННЫЕ СТРОКИ
-// rename all ...Props to Props interface name
+// rename all SomeComponentNameProps to Props interface name
 
 // TODO: FEATURES
 // i18n translation
