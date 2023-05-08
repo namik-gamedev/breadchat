@@ -7,7 +7,8 @@ import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { IChat } from 'src/types/types';
 import { onValue, ref } from 'firebase/database';
-import { UserThumbnailWithChatBtn } from '../../components/UI/UserThumbnailWithChatBtn';
+import { UserThumbnailWithChatBtn } from '../Users/UserThumbnailWithChatBtn';
+import { ChatThumbnail } from './ChatThumbnail';
 
 export interface ChatsProps {}
 
@@ -37,9 +38,11 @@ export const Chats: FC<ChatsProps> = ({}) => {
                <Stack spacing={3}>
                   {users
                      .filter((user) => chats.find(({ interlocutor }) => interlocutor.uid === user.uid))
-                     .map((user) => (
-                        <UserThumbnailWithChatBtn user={user} />
-                     ))}
+                     .map((user) => {
+                        const chat = chats.find(({ interlocutor }) => interlocutor.uid === user.uid)!;
+
+                        return <ChatThumbnail chat={chat} user={user} />;
+                     })}
                </Stack>
             ) : (
                <Typography textAlign='center' variant='body1'>
