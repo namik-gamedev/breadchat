@@ -76,6 +76,8 @@ export const useDBSetup = () => {
             onValue(chatsRef, chatsCallback);
          } else {
             if (userState) {
+               console.log(1);
+
                UserService.setOnline(userState.uid, false);
             }
             dispatch(unsetUser());

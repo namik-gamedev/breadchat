@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { App } from 'src/components/App';
 import { Provider } from 'react-redux';
 import { store } from 'src/store/store';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import moment from 'moment';
 import { ruLocaleSpec } from 'src/locales/ru.localeSpec';
 import { enLocaleSpec } from 'src/locales/en.localeSpec';
