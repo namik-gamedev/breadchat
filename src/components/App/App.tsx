@@ -28,24 +28,11 @@ export const App: FC<AppProps> = ({}) => {
 
    useDBSetup();
 
-   useEffect(() => {
+   useBeforeUnload(() => {
       if (user) {
          UserService.setOnline(user.uid, false);
       }
-
-      window.onunload = () => {
-         if (!user) {
-            return;
-         }
-         UserService.setOnline(user.uid, false);
-      };
-      window.onbeforeunload = () => {
-         if (!user) {
-            return;
-         }
-         UserService.setOnline(user.uid, false);
-      };
-   }, []);
+   });
 
    return (
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>

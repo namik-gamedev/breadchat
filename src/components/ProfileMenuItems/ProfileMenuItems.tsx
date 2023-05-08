@@ -20,10 +20,14 @@ export interface ProfileMenuItemsProps {
 
 export const ProfileMenuItems: FC<ProfileMenuItemsProps> = ({ handleClose }) => {
    const user = useAppSelector((state) => state.user.data!);
+   const dispatch = useAppDispatch();
 
-   const handleSignOut = () => {
+   const handleSignOut = async () => {
       // TODO: add here all resets
-      signOut(appAuth);
+      await signOut(appAuth);
+      UserService.setOnline(user.uid, false);
+      dispatch(unsetUser());
+      dispatch(unsetChats());
    };
 
    return (
