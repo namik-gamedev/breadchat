@@ -21,6 +21,7 @@ import UserService from 'src/services/user.service';
 import ChatService from 'src/services/chat.service';
 import { ChatEmojiPicker } from './ChatEmojiPicker';
 import { debounce } from 'src/utils/debounce.util';
+import { useDebounce } from 'src/hooks/useDebounce';
 
 export interface ChatFormProps {
    interlocutor: IUser;
@@ -33,14 +34,10 @@ export const ChatForm: FC<ChatFormProps> = ({ interlocutor }) => {
    const [messageText, setMessageText] = useState('');
    const [isInputError, setIsInputError] = useState(false);
 
-   const setUserTypingToFalse = useMemo(
-      () =>
-         debounce(() => {
-            UserService.setTyping(user.uid, false);
-            console.log('false');
-         }, 1000),
-      []
-   );
+   const setUserTypingToFalse = useDebounce(() => {
+      UserService.setTyping(user.uid, false);
+      console.log('false');
+   }, 1000);
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setMessageText(e.target.value);
