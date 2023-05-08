@@ -14,13 +14,14 @@ export interface UserAvatarProps extends AvatarProps {
    user: IUser;
    sx?: SxProps;
    withoutBadge?: boolean;
+   online?: boolean;
 }
 
-export const UserAvatar: FC<UserAvatarProps> = ({ user: { displayName, photoURL }, withoutBadge = false, sx, ...props }) => {
+export const UserAvatar: FC<UserAvatarProps> = ({ user: { displayName, photoURL }, withoutBadge = false, online = true, sx, ...props }) => {
    const theme = useTheme();
 
    return (
-      <OnlineBadge invisible={withoutBadge}>
+      <OnlineBadge online={online} invisible={withoutBadge}>
          <Tooltip title={displayName} arrow>
             <Avatar sx={{ ...sx, bgcolor: theme.palette.primary.main }} src={photoURL as string | undefined} {...props} />
          </Tooltip>
