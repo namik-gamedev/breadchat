@@ -8,16 +8,14 @@ import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { UserThumbnail, UserThumbnailProps } from '../../components/UI/UserThumbnail';
 import IconButton from '@mui/material/IconButton';
-import { UserThumbnailWithChatBtn } from './UserThumbnailWithChatBtn';
+import { UserThumbnailWithChatBtn } from '../../components/UI/UserThumbnailWithChatBtn';
 
 export interface UsersProps {}
 
 export const Users: FC<UsersProps> = ({}) => {
-   const dispatch = useAppDispatch();
    const users = useAppSelector((state) => state.users.data);
    const { uid } = useAppSelector((state) => state.user.data!);
 
-   // TODO: ВЫНЕСТИ РАБОТУ С ДБ КУДА-НИБУДЬ
    useEffect(() => {
       document.title = 'Users';
 
@@ -36,11 +34,7 @@ export const Users: FC<UsersProps> = ({}) => {
 
          <StyledBox sx={{ p: 2 }}>
             {users.length > 0 ? (
-               <Stack spacing={3}>
-                  {users!.map((user) => (
-                     <UserThumbnailWithChatBtn user={user} />
-                  ))}
-               </Stack>
+               <Stack spacing={3}>{users.map((user) => user.uid !== uid && <UserThumbnailWithChatBtn user={user} />)}</Stack>
             ) : (
                <Typography textAlign='center' variant='body1'>
                   No users ;(
