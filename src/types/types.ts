@@ -19,6 +19,6 @@ export interface IMessage {
 }
 
 export interface IChat {
-   interlocutor: IUser;
+   interlocutor: IUserWithDBFields;
    messages: IMessage[];
 }
