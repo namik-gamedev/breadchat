@@ -45,6 +45,10 @@ export const Chat: FC<ChatProps> = ({}) => {
       };
    }, []);
 
+   useEffect(() => {
+      ChatService.unsetUnreadedMessagesCount(user.uid, interlocutor!.uid);
+   }, [chat?.messages]);
+
    return interlocutor ? (
       <Stack spacing={2} direction='column' sx={{ height: 1 }}>
          <ChatHeader interlocutor={interlocutor} />

@@ -21,4 +21,5 @@ export interface IMessage {
 export interface IChat {
    interlocutor: IUserWithDBFields;
    messages: IMessage[];
+   unreadedMessagesCount: number;
 }

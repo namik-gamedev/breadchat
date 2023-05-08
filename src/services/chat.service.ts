@@ -1,4 +1,4 @@
-import { child, ref, remove, set } from 'firebase/database';
+import { child, increment, ref, remove, set } from 'firebase/database';
 import { db } from 'src/firebase/firebase';
 import { IUser } from 'src/types/types';
 
@@ -13,7 +13,7 @@ export default class ChatService {
 
    static clear(uid: string, interlocutorUid: string, alsoForInterlocutor?: boolean) {
       const messagesRef = ref(db, `chats/${uid}/${interlocutorUid}/messages`);
-      const promise = remove(messagesRef);
+      remove(messagesRef);
 
       if (alsoForInterlocutor) {
          this.clear(interlocutorUid, uid);
@@ -37,5 +37,15 @@ export default class ChatService {
       if (alsoForInterlocutor) {
          this.deleteMessage(interlocutorUid, uid, createdAt);
       }
+   }
+
+   static increaseUnreadedMessagesCount(uid: string, interlocutorUid: string) {
+      const interlocutorUnreadedMessagesRef = ref(db, `chats/${interlocutorUid}/${uid}/unreadedMessagesCount`);
+      set(interlocutorUnreadedMessagesRef, increment(1));
+   }
+
+   static unsetUnreadedMessagesCount(uid: string, interlocutorUid: string) {
+      const unreadedMessagesRef = ref(db, `chats/${uid}/${interlocutorUid}/unreadedMessagesCount`);
+      set(unreadedMessagesRef, 0);
    }
 }

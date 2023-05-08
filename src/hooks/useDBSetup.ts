@@ -34,6 +34,7 @@ export const useDBSetup = () => {
       chatsSnapshot.forEach((chatSnapshot) => {
          const chatRef = chatSnapshot.ref;
          const messagesRef = child(chatRef, 'messages');
+         const unreadedMessagesCountRef = child(chatRef, 'unreadedMessagesCount');
 
          let newMessages: IMessage[] = [];
          onValue(messagesRef, (messagesSnapshot) => {
@@ -44,7 +45,12 @@ export const useDBSetup = () => {
                newMessages = [...newMessages, message];
             });
          });
-         const chat: IChat = { messages: newMessages, interlocutor: chatSnapshot.val().interlocutor };
+
+         const chat: IChat = {
+            messages: newMessages,
+            interlocutor: chatSnapshot.val().interlocutor,
+            unreadedMessagesCount: chatSnapshot.val().unreadedMessagesCount,
+         };
 
          newChats.push(chat);
       });
