@@ -25,7 +25,7 @@ export const UserThumbnail: FC<UserThumbnailProps> = ({ user }) => {
                {user.displayName}
             </Typography>
             <Typography variant='body1' sx={{ color: 'grey' }}>
-               {user.online ? (user.typing ? 'Typing...' : 'Online') : `last seen ${moment(user.lastSeen).calendar()}`}
+               {user.online ? 'Online' : `last seen ${moment(user.lastSeen).calendar()}`}
             </Typography>
          </Box>
       </Stack>
