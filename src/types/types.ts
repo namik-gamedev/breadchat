@@ -4,9 +4,6 @@ export interface IUser {
    uid: string;
    displayName: string;
    photoURL?: string | null;
-}
-
-export interface IUserWithDBFields extends IUser {
    online: boolean;
    lastSeen: number;
    typing: boolean;
@@ -19,7 +16,7 @@ export interface IMessage {
 }
 
 export interface IChat {
-   interlocutor: IUserWithDBFields;
+   interlocutor: IUser;
    messages: IMessage[];
    unreadedMessagesCount: number;
 }

@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { UserAvatar } from 'src/components/UI/UserAvatar';
-import { IUser, IUserWithDBFields } from 'src/types/types';
+import { IUser } from 'src/types/types';
 import moment from 'moment';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { StyledBox } from 'src/components/UI/StyledBox';
@@ -14,7 +14,7 @@ import ChatService from 'src/services/chat.service';
 import { UserThumbnail } from 'src/components/UI/UserThumbnail';
 
 export interface ChatHeaderProps {
-   interlocutor: IUserWithDBFields;
+   interlocutor: IUser;
 }
 
 export const ChatHeader: FC<ChatHeaderProps> = ({ interlocutor }) => {

@@ -90,7 +90,14 @@ export const SignInForm: FC<SignInFormProps> = ({}) => {
          return;
       }
 
-      const newUser: IUser = { displayName: user.displayName!, uid: user.uid, photoURL: user.photoURL };
+      const newUser: IUser = {
+         displayName: user.displayName!,
+         uid: user.uid,
+         photoURL: user.photoURL,
+         online: true,
+         lastSeen: Date.now(),
+         typing: false,
+      };
       await UserService.setup(newUser);
       dispatch(setUser(newUser)); // TODO: add here photoURL
       navigate('/');

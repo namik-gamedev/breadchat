@@ -69,6 +69,9 @@ export const useDBSetup = () => {
                displayName: user.displayName!,
                uid: user.uid,
                photoURL: user.photoURL,
+               online: true,
+               lastSeen: Date.now(),
+               typing: false,
             };
             console.log('newUser', newUser);
 

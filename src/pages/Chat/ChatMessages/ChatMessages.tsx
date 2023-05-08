@@ -2,7 +2,7 @@ import React, { FC, createRef, useEffect, useRef, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Box, { BoxProps } from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { IChat, IMessage, IUser, IUserWithDBFields } from 'src/types/types';
+import { IChat, IMessage, IUser } from 'src/types/types';
 import { ChatMessage } from '../ChatMessage/ChatMessage';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useScroll } from 'src/hooks/useScroll';
