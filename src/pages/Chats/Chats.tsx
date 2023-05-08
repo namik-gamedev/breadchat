@@ -7,12 +7,13 @@ import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { IChat } from 'src/types/types';
 import { onValue, ref } from 'firebase/database';
+import { UserThumbnailWithChatBtn } from '../../components/UI/UserThumbnailWithChatBtn';
 
 export interface ChatsProps {}
 
 export const Chats: FC<ChatsProps> = ({}) => {
    const dispatch = useAppDispatch();
-   const [chats, setChats] = useState<IChat[]>();
+   const chats = useAppSelector((state) => state.chats.data);
 
    useEffect(() => {
       document.title = 'Chats';
@@ -28,6 +29,20 @@ export const Chats: FC<ChatsProps> = ({}) => {
             <Typography sx={{ textAlign: 'center' }} variant='h4'>
                Chats
             </Typography>
+         </StyledBox>
+
+         <StyledBox sx={{ p: 2 }}>
+            {chats.length > 0 ? (
+               <Stack spacing={3}>
+                  {chats.map(({ interlocutor }) => (
+                     <UserThumbnailWithChatBtn user={interlocutor} />
+                  ))}
+               </Stack>
+            ) : (
+               <Typography textAlign='center' variant='body1'>
+                  No chats ;(
+               </Typography>
+            )}
          </StyledBox>
       </Stack>
    );
