@@ -9,6 +9,8 @@ export default class UserService {
       await set(userRef, { ...user, online: true });
    }
    static setOnline(uid: string, online: boolean) {
+      console.log(uid, online);
+
       const onlineRef = ref(db, `users/${uid}/online`);
       set(onlineRef, online);
       if (!online) {

@@ -64,6 +64,7 @@ export const useDBSetup = () => {
                uid: user.uid,
                photoURL: user.photoURL,
             };
+            console.log('newUser', newUser);
 
             UserService.setOnline(user.uid, true);
 
@@ -75,13 +76,6 @@ export const useDBSetup = () => {
             const chatsRef = ref(db, `chats/${user.uid}`);
             onValue(chatsRef, chatsCallback);
          } else {
-            if (userState) {
-               console.log(1);
-
-               UserService.setOnline(userState.uid, false);
-            }
-            dispatch(unsetUser());
-            dispatch(unsetChats());
             dispatch(setChatsLoad(true));
             dispatch(setUsersLoad(true));
          }
