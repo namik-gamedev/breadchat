@@ -2,14 +2,16 @@ import React, { FC } from 'react';
 import Badge, { BadgeProps } from '@mui/material/Badge';
 import { styled } from '@mui/material';
 
-export interface OnlineBadgeProps {}
+export interface OnlineBadgeProps extends BadgeProps {
+   online?: boolean;
+}
 
-export const OnlineBadge = styled((props: BadgeProps) => (
+export const OnlineBadge = styled(({ online = true, ...props }: OnlineBadgeProps) => (
    <Badge overlap='circular' anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant='dot' {...props} />
-))(({ theme }) => ({
+))(({ theme, online }) => ({
    '& .MuiBadge-badge': {
-      backgroundColor: '#44b705',
-      color: '#44b705',
+      backgroundColor: online ? '#44b705' : '#939393',
+      color: online ? '#44b705' : '#939393',
       boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
       '&::after': {
          position: 'absolute',
@@ -18,7 +20,7 @@ export const OnlineBadge = styled((props: BadgeProps) => (
          width: '100%',
          height: '100%',
          borderRadius: '50%',
-         animation: 'ripple 1.7s infinite ease-in-out',
+         animation: online && 'ripple 1.7s infinite ease-in-out',
          border: '1px solid currentColor',
          content: '""',
       },
