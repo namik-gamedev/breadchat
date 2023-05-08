@@ -36,7 +36,6 @@ export const ChatForm: FC<ChatFormProps> = ({ interlocutor }) => {
 
    const setUserTypingToFalse = useDebounce(() => {
       UserService.setTyping(user.uid, false);
-      console.log('false');
    }, 1000);
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
