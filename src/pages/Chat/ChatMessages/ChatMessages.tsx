@@ -9,31 +9,28 @@ import { useScroll } from 'src/hooks/useScroll';
 import { StyledBox } from 'src/components/UI/StyledBox';
 
 export interface ChatMessagesProps {
-   interlocutor: IUserWithDBFields;
+   chat: IChat | undefined;
 }
 
-export const ChatMessages: FC<ChatMessagesProps> = ({ interlocutor }) => {
-   const chat = useAppSelector((state) => state.chats.data)!.find((chat) => chat.interlocutor.uid === interlocutor.uid)!;
-
-   const { messages } = chat;
-
+export const ChatMessages: FC<ChatMessagesProps> = ({ chat }) => {
    const { ref, scroll } = useScroll<HTMLDivElement>();
 
    useEffect(() => {
       scroll();
-   }, [messages]);
+   }, [chat?.messages]);
+   console.log(chat);
 
    return (
       <StyledBox ref={ref} sx={{ overflow: 'auto' }}>
-         {messages.length > 0 ? (
+         {chat && chat.messages.length > 0 ? (
             <Stack
                spacing={1}
                sx={{
                   p: 2,
                }}
             >
-               {messages.map((message) => {
-                  return <ChatMessage interlocutor={interlocutor} message={message} key={message.createdAt} />;
+               {chat?.messages.map((message) => {
+                  return <ChatMessage interlocutor={chat?.interlocutor} message={message} key={message.createdAt} />;
                })}
             </Stack>
          ) : (

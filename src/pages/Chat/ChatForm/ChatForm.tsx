@@ -25,11 +25,12 @@ import { useDebounce } from 'src/hooks/useDebounce';
 
 export interface ChatFormProps {
    interlocutor: IUser;
+   createChat?: () => void;
 }
 
 let timeout: NodeJS.Timer;
 
-export const ChatForm: FC<ChatFormProps> = ({ interlocutor }) => {
+export const ChatForm: FC<ChatFormProps> = ({ interlocutor, createChat }) => {
    const user = useAppSelector((state) => state.user.data!);
    const [messageText, setMessageText] = useState('');
    const [isInputError, setIsInputError] = useState(false);
@@ -54,7 +55,7 @@ export const ChatForm: FC<ChatFormProps> = ({ interlocutor }) => {
          return;
       }
       setMessageText('');
-
+      createChat && (await createChat());
       ChatService.message(user.uid, interlocutor.uid, messageText);
    };
 

@@ -30,19 +30,15 @@ import { useScroll } from 'src/hooks/useScroll';
 export interface ChatProps {}
 
 export const Chat: FC<ChatProps> = ({}) => {
-   const { userUid } = useParams();
+   const { interlocutorUid } = useParams();
 
    const user = useAppSelector((state) => state.user.data!);
-   const interlocutor = useAppSelector((state) => state.users.data).find((user) => user.uid === userUid);
+   const interlocutor = useAppSelector((state) => state.users.data).find((user) => user.uid === interlocutorUid);
 
-   const chat = useAppSelector((state) => state.chats.data)?.find((chat) => chat.interlocutor.uid === userUid);
+   const chat = useAppSelector((state) => state.chats.data).find((chat) => chat.interlocutor?.uid === interlocutor?.uid);
 
    useEffect(() => {
       document.title = interlocutor?.displayName || 'No user with this id';
-
-      if (!chat && interlocutor) {
-         ChatService.create(user, interlocutor);
-      }
 
       return () => {
          document.title = 'Bread';
@@ -52,14 +48,17 @@ export const Chat: FC<ChatProps> = ({}) => {
    return interlocutor ? (
       <Stack spacing={2} direction='column' sx={{ height: 1 }}>
          <ChatHeader interlocutor={interlocutor} />
-         {chat ? (
-            <ChatMessages interlocutor={interlocutor} />
-         ) : (
-            <Stack direction='row' justifyContent='center'>
-               <CircularProgress size={70} />
-            </Stack>
-         )}
-         <ChatForm interlocutor={interlocutor} />
+         <ChatMessages chat={chat} />
+         <ChatForm
+            createChat={
+               chat
+                  ? async () => {
+                       await ChatService.create(user, interlocutor);
+                    }
+                  : undefined
+            }
+            interlocutor={interlocutor}
+         />
       </Stack>
    ) : (
       <NotFound />
