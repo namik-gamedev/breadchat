@@ -20,7 +20,7 @@ export const useDBSetup = () => {
    const userState = useAppSelector((state) => state.user.data);
 
    const usersCallback = (usersSnapshot: DataSnapshot) => {
-      const newUsers: IUserWithDBFields[] = [];
+      const newUsers: IUser[] = [];
       usersSnapshot.forEach((userSnapshot) => {
          const user = userSnapshot.val();
          newUsers.push(user);
