@@ -59,6 +59,9 @@ export default class ChatService {
    }
 
    static unsetUnreadedMessagesCount(uid: string, interlocutorUid: string) {
+      // interlocutor's field selfUnreadedMessagesCount
+      const selfUnreadedMessagesCountRef = ref(db, `chats/${interlocutorUid}/${uid}/selfUnreadedMessagesCount`);
+      set(selfUnreadedMessagesCountRef, 0);
       const unreadedMessagesCountRef = ref(db, `chats/${uid}/${interlocutorUid}/unreadedMessagesCount`);
       set(unreadedMessagesCountRef, 0);
    }
