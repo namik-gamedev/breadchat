@@ -50,6 +50,7 @@ export const useDBSetup = () => {
             messages: newMessages,
             interlocutor: chatSnapshot.val().interlocutor,
             unreadedMessagesCount: chatSnapshot.val().unreadedMessagesCount,
+            selfUnreadedMessagesCount: chatSnapshot.val().selfUnreadedMessagesCount,
          };
 
          newChats.push(chat);
