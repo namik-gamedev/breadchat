@@ -10,27 +10,19 @@ import AddReactionIcon from '@mui/icons-material/AddReaction';
 import Picker from '@emoji-mart/react';
 import emojiMartData from '@emoji-mart/data/sets/14/apple.json';
 import { useTheme } from '@mui/material';
+import { useAnchorEl } from 'src/hooks/useAnchorEl';
 
 export interface ChatEmojiPickerProps {
    setMessageText: React.Dispatch<SetStateAction<string>>;
 }
 
 export const ChatEmojiPicker: FC<ChatEmojiPickerProps> = ({ setMessageText }) => {
-   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-   const open = !!anchorEl;
+   const { anchorEl, open, handleShow, handleClose } = useAnchorEl();
 
    const theme = useTheme();
 
    const handleEmojiSelect = (emoji: any) => {
       setMessageText((prev) => prev + emoji.native);
-   };
-
-   const handleShow = (e: React.MouseEvent) => {
-      setAnchorEl(e.target as HTMLElement);
-   };
-
-   const handleClose = () => {
-      setAnchorEl(null);
    };
 
    return (

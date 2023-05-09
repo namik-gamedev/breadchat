@@ -15,6 +15,7 @@ import { StyledMenu } from 'src/components/UI/StyledMenu';
 import { UserAvatar } from 'src/components/UI/UserAvatar';
 import { ConfirmDialog } from 'src/components/UI/ConfirmDialog';
 import ChatService from 'src/services/chat.service';
+import { useAnchorEl } from 'src/hooks/useAnchorEl';
 
 export interface ChatMessageProps extends StackProps {
    interlocutor: IUser;
@@ -26,19 +27,9 @@ const BORDER_RADIUS_PX = 16;
 export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMessageProps) => {
    const user = useAppSelector((state) => state.user.data!);
 
-   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-   const isOpen = !!anchorEl;
+   const { anchorEl, open, handleShow, handleClose } = useAnchorEl();
 
    const [dialogOpen, setDialogOpen] = useState(false);
-
-   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-      e.preventDefault();
-      setAnchorEl(e.target as HTMLElement);
-   };
-
-   const handleClose = () => {
-      setAnchorEl(null);
-   };
 
    const handleMessageDeleteClick = () => {
       handleClose();
@@ -51,7 +42,7 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
 
    return (
       <Stack {...props}>
-         <Box onClick={handleClick} className='chatMessageWrapper'>
+         <Box onClick={handleShow} className='chatMessageWrapper'>
             <Stack direction='row' spacing={1} alignItems='end'>
                <Typography variant='body1' className='chatMessageText'>
                   {message.text}
@@ -61,7 +52,7 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
                </Typography>
             </Stack>
          </Box>
-         <StyledMenu anchorEl={anchorEl} open={isOpen} onClose={handleClose}>
+         <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
             <MenuItem onClick={handleMessageDeleteClick}>
                <ListItemIcon sx={{ color: 'primary.main' }}>
                   <DeleteIcon />

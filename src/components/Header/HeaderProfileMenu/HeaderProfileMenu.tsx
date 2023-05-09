@@ -16,21 +16,13 @@ import { StyledMenu } from 'src/components/UI/StyledMenu';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { unsetChats } from 'src/store/reducers/chats.reducer';
 import { ProfileMenuItems } from 'src/components/ProfileMenuItems';
+import { useAnchorEl } from 'src/hooks/useAnchorEl';
 
 export interface HeaderProfileMenuProps {}
 
 export const HeaderProfileMenu: FC<HeaderProfileMenuProps> = ({}) => {
    const user = useAppSelector((state) => state.user.data!);
-   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-   const open = !!anchorEl;
-
-   const handleClick = (e: React.MouseEvent) => {
-      setAnchorEl(e.target as HTMLElement);
-   };
-
-   const handleClose = () => {
-      setAnchorEl(null);
-   };
+   const { anchorEl, open, handleShow, handleClose } = useAnchorEl();
 
    return (
       <Box
@@ -41,7 +33,7 @@ export const HeaderProfileMenu: FC<HeaderProfileMenuProps> = ({}) => {
             },
          }}
       >
-         <UserAvatar user={user} onClick={handleClick} withoutBadge />
+         <UserAvatar user={user} onClick={handleShow} withoutBadge />
          <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
             <ProfileMenuItems handleClose={handleClose} />
          </StyledMenu>

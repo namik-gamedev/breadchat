@@ -6,20 +6,12 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { StyledMenu } from 'src/components/UI/StyledMenu';
 import { ProfileMenuItems } from 'src/components/ProfileMenuItems';
+import { useAnchorEl } from 'src/hooks/useAnchorEl';
 
 export interface HeaderNavigationMenuProps {}
 
 export const HeaderNavigationMenu: FC<HeaderNavigationMenuProps> = ({}) => {
-   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-   const open = !!anchorEl;
-
-   const handleClick = (e: React.MouseEvent) => {
-      setAnchorEl(e.target as HTMLElement);
-   };
-
-   const handleClose = () => {
-      setAnchorEl(null);
-   };
+   const { anchorEl, open, handleShow, handleClose } = useAnchorEl();
 
    return (
       <Box
@@ -30,7 +22,7 @@ export const HeaderNavigationMenu: FC<HeaderNavigationMenuProps> = ({}) => {
             },
          }}
       >
-         <IconButton onClick={handleClick}>
+         <IconButton onClick={handleShow}>
             <MenuIcon color='primary' />
          </IconButton>
          <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
