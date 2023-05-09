@@ -9,14 +9,6 @@ import Tooltip from '@mui/material/Tooltip';
 
 export interface ThemeTogglerProps {}
 
-const iconSx = {
-   color: 'primary.main',
-   fontSize: {
-      sm: '1.2em',
-      xs: '1em',
-   },
-};
-
 export const ThemeToggler: FC<ThemeTogglerProps> = ({}) => {
    const dispatch = useAppDispatch();
 
@@ -32,7 +24,7 @@ export const ThemeToggler: FC<ThemeTogglerProps> = ({}) => {
 
    return (
       <Tooltip title={`Enable ${dark ? 'light' : 'dark'}`} arrow>
-         <IconButton onClick={handleClick}>{dark ? <LightModeOutlinedIcon sx={iconSx} /> : <DarkModeOutlinedIcon sx={iconSx} />}</IconButton>
+         <IconButton onClick={handleClick}>{dark ? <LightModeOutlinedIcon color='primary' /> : <DarkModeOutlinedIcon color='primary' />}</IconButton>
       </Tooltip>
    );
 };
