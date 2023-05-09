@@ -59,7 +59,6 @@ export const ChatForm: FC<ChatFormProps> = ({ chat, interlocutor }) => {
          await ChatService.create(user, interlocutor);
       }
       await ChatService.message(user.uid, interlocutor.uid, messageText);
-      ChatService.increaseUnreadedMessagesCount(user.uid, interlocutor.uid);
    };
 
    return (

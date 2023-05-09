@@ -26,6 +26,8 @@ export default class ChatService {
       const chatRef = ref(db, `chats/${uid}/${interlocutorUid}`);
       set(child(chatRef, `messages/${createdAt}`), { sender: 0, text, createdAt });
 
+      this.increaseUnreadedMessagesCount(uid, interlocutorUid);
+
       const interlocutorChatRef = ref(db, `chats/${interlocutorUid}/${uid}`);
       set(child(interlocutorChatRef, `messages/${createdAt}`), { sender: 1, text, createdAt });
    }

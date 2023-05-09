@@ -26,6 +26,7 @@ const BORDER_RADIUS_PX = 16;
 
 export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMessageProps) => {
    const user = useAppSelector((state) => state.user.data!);
+   const chat = useAppSelector((state) => state.chats.data).find((chat) => chat.interlocutor.uid === interlocutor.uid)!;
 
    const { anchorEl, open, handleShow, handleClose } = useAnchorEl();
 
@@ -37,7 +38,17 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
    };
 
    const handleDelete = (alsoForInterlocutor: boolean) => {
-      ChatService.deleteMessage(user.uid, interlocutor.uid, message.createdAt, alsoForInterlocutor);
+      let isUnreaded;
+      if (alsoForInterlocutor) {
+         const index = chat.messages.findIndex((msg) => msg.createdAt === message.createdAt);
+         isUnreaded = chat.messages.length - index <= chat.selfUnreadedMessagesCount;
+         console.log(chat);
+
+         console.log(index);
+         console.log(isUnreaded);
+      }
+
+      ChatService.deleteMessage(user.uid, interlocutor.uid, message.createdAt, alsoForInterlocutor, isUnreaded);
    };
 
    return (
