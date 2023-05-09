@@ -18,5 +18,6 @@ export interface IMessage {
 export interface IChat {
    interlocutor: IUser;
    messages: IMessage[];
-   unreadedMessagesCount: number;
+   unreadedMessagesCount: number; // count of not readed messages from interlocutor
+   selfUnreadedMessagesCount: number; // count of not readed by interlocutor messages
 }

@@ -30,27 +30,34 @@ export default class ChatService {
       set(child(interlocutorChatRef, `messages/${createdAt}`), { sender: 1, text, createdAt });
    }
 
-   static deleteMessage(uid: string, interlocutorUid: string, createdAt: number, alsoForInterlocutor: boolean = false) {
+   static deleteMessage(uid: string, interlocutorUid: string, createdAt: number, alsoForInterlocutor: boolean = false, isUnreaded: boolean = false) {
       const messageRef = ref(db, `chats/${uid}/${interlocutorUid}/messages/${createdAt}`);
       remove(messageRef);
 
       if (alsoForInterlocutor) {
          this.deleteMessage(interlocutorUid, uid, createdAt);
+         if (isUnreaded) {
+            this.decreaseUnreadedMessagesCount(uid, interlocutorUid);
+         }
       }
    }
 
    static increaseUnreadedMessagesCount(uid: string, interlocutorUid: string) {
-      const interlocutorUnreadedMessagesRef = ref(db, `chats/${interlocutorUid}/${uid}/unreadedMessagesCount`);
-      set(interlocutorUnreadedMessagesRef, increment(1));
+      const selfUnreadedMessagesCountRef = ref(db, `chats/${uid}/${interlocutorUid}/selfUnreadedMessagesCount`);
+      set(selfUnreadedMessagesCountRef, increment(1));
+      const interlocutorUnreadedMessagesCountRef = ref(db, `chats/${interlocutorUid}/${uid}/unreadedMessagesCount`);
+      set(interlocutorUnreadedMessagesCountRef, increment(1));
    }
 
    static decreaseUnreadedMessagesCount(uid: string, interlocutorUid: string) {
-      const interlocutorUnreadedMessagesRef = ref(db, `chats/${interlocutorUid}/${uid}/unreadedMessagesCount`);
-      set(interlocutorUnreadedMessagesRef, increment(-1));
+      const selfUnreadedMessagesCountRef = ref(db, `chats/${uid}/${interlocutorUid}/selfUnreadedMessagesCount`);
+      set(selfUnreadedMessagesCountRef, increment(-1));
+      const interlocutorUnreadedMessagesCountRef = ref(db, `chats/${interlocutorUid}/${uid}/unreadedMessagesCount`);
+      set(interlocutorUnreadedMessagesCountRef, increment(-1));
    }
 
    static unsetUnreadedMessagesCount(uid: string, interlocutorUid: string) {
-      const unreadedMessagesRef = ref(db, `chats/${uid}/${interlocutorUid}/unreadedMessagesCount`);
-      set(unreadedMessagesRef, 0);
+      const unreadedMessagesCountRef = ref(db, `chats/${uid}/${interlocutorUid}/unreadedMessagesCount`);
+      set(unreadedMessagesCountRef, 0);
    }
 }
