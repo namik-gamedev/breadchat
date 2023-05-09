@@ -34,6 +34,7 @@ export const Chats: FC<ChatsProps> = ({}) => {
          </StyledBox>
 
          <StyledBox sx={{ p: 2 }}>
+            // TODO: clean code
             {chats.length > 0 ? (
                <Stack spacing={3}>
                   {users
@@ -41,7 +42,7 @@ export const Chats: FC<ChatsProps> = ({}) => {
                      .map((user) => {
                         const chat = chats.find(({ interlocutor }) => interlocutor.uid === user.uid)!;
 
-                        return <ChatThumbnail chat={chat} user={user} />;
+                        return <ChatThumbnail chat={chat} />;
                      })}
                </Stack>
             ) : (

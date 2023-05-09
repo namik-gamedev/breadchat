@@ -14,14 +14,13 @@ import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 
 export interface ChatThumbnailProps {
    chat: IChat;
-   user: IUser;
 }
 
-export const ChatThumbnail: FC<ChatThumbnailProps> = ({ chat, user }) => {
+export const ChatThumbnail: FC<ChatThumbnailProps> = ({ chat }) => {
    return (
       <Stack direction='row' sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
-         <UserThumbnail user={user} />
-         <IconButton component={UnstyledLink} to={`/chat/${user.uid}`}>
+         <UserThumbnail user={chat.interlocutor} />
+         <IconButton component={UnstyledLink} to={`/chat/${chat.interlocutor.uid}`}>
             <Badge badgeContent={chat.unreadedMessagesCount} color='info'>
                <ForumIcon color='primary' />
             </Badge>
