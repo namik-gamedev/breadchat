@@ -6,7 +6,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { styled, Typography } from '@mui/material';
-import { IMessage, IUser, IUserWithDBFields } from 'src/types/types';
+import { IMessage, IUser } from 'src/types/types';
 import { blue, orange } from '@mui/material/colors';
 import { CSSProperties } from '@mui/styled-engine-sc';
 import { useAppSelector } from 'src/hooks/useAppSelector';
