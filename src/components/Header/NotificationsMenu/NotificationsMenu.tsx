@@ -6,9 +6,11 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useAnchorEl } from 'src/hooks/useAnchorEl';
 import Popover from '@mui/material/Popover';
+import Stack from '@mui/material/Stack';
 import { StyledMenu } from 'src/components/UI/StyledMenu';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { ChatThumbnail } from 'src/pages/Chats/ChatThumbnail';
+import Typography from '@mui/material/Typography';
 
 export interface NotificationsMenuProps {}
 
@@ -36,12 +38,24 @@ export const NotificationsMenu: FC<NotificationsMenuProps> = ({}) => {
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
+            elevation={2}
          >
-            {chatsWithUnreadedMessages.map((chat) => (
-               <Box sx={{ width: 300, p: 2 }}>
-                  <ChatThumbnail chat={chat} />
-               </Box>
-            ))}
+            <Stack
+               sx={{
+                  width: 300,
+                  p: 2,
+               }}
+            >
+               {chatsWithUnreadedMessages.length > 0 ? (
+                  chatsWithUnreadedMessages.map((chat) => (
+                     <Box onClick={handleClose}>
+                        <ChatThumbnail chat={chat} />
+                     </Box>
+                  ))
+               ) : (
+                  <Typography sx={{ textAlign: 'center' }}>No notifications ;(</Typography>
+               )}
+            </Stack>
          </Popover>
       </Box>
    );
