@@ -16,6 +16,7 @@ import { enLocaleSpec } from 'src/locales/en.localeSpec';
 // ПЕРЕНЕСТИ ВСЕ UI-КОМПОНЕНТЫ НА STYLED
 // ЗАМЕНИТЬ ВСЕ КОНКАТЕНАЦИИ СТРОК НА ШАБЛОННЫЕ СТРОКИ
 // rename all SomeComponentNameProps to Props interface name
+// проставить везде key в array.map
 
 // TODO: FEATURES
 // i18n translation
