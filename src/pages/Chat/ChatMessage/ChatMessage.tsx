@@ -86,8 +86,17 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
       </Stack>
    );
 })(({ message: { sender }, theme: { palette, spacing, breakpoints } }) => ({
-   flexDirection: 'row',
-   justifyContent: sender === 0 ? 'end' : 'start',
+   flexDirection: 'column',
+   alignItems: sender === 0 ? 'end' : 'start',
+   '&::after': {
+      content: '""',
+      borderStyle: 'solid',
+      width: 0,
+      height: 0,
+      borderWidth: '0 10px 8px 0',
+      transform: sender === 0 ? undefined : 'rotateY(180deg)',
+      borderColor: `transparent ${sender === 0 ? palette.primary.main : palette.secondary.main} transparent transparent`,
+   },
    '> .chatMessageWrapper': {
       maxWidth: 520,
       [breakpoints.down('md')]: {
@@ -109,6 +118,7 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
 
       backgroundColor: sender === 0 ? palette.primary.main : palette.secondary.main,
       opacity: 1,
+
       '.chatMessageText': {
          color: 'white',
          wordBreak: 'break-word',
