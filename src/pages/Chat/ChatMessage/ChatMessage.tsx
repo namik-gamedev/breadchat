@@ -16,6 +16,8 @@ import { UserAvatar } from 'src/components/UI/UserAvatar';
 import { ConfirmDialog } from 'src/components/UI/ConfirmDialog';
 import ChatService from 'src/services/chat.service';
 import { useAnchorEl } from 'src/hooks/useAnchorEl';
+import CheckIcon from '@mui/icons-material/Check';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 export interface ChatMessageProps extends StackProps {
    interlocutor: IUser;
@@ -28,6 +30,9 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
    const user = useAppSelector((state) => state.user.data!);
    const chat = useAppSelector((state) => state.chats.data).find((chat) => chat.interlocutor.uid === interlocutor.uid)!;
 
+   const messageIndex = chat.messages.findIndex((msg) => msg.createdAt === message.createdAt);
+   const isUnreaded = chat.messages.length - messageIndex <= chat.selfUnreadedMessagesCount;
+
    const { anchorEl, open, handleShow, handleClose } = useAnchorEl();
 
    const [dialogOpen, setDialogOpen] = useState(false);
@@ -38,17 +43,7 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
    };
 
    const handleDelete = (alsoForInterlocutor: boolean) => {
-      let isUnreaded;
-      if (alsoForInterlocutor) {
-         const index = chat.messages.findIndex((msg) => msg.createdAt === message.createdAt);
-         isUnreaded = chat.messages.length - index <= chat.selfUnreadedMessagesCount;
-         console.log(chat);
-
-         console.log(index);
-         console.log(isUnreaded);
-      }
-
-      ChatService.deleteMessage(user.uid, interlocutor.uid, message.createdAt, alsoForInterlocutor, isUnreaded);
+      ChatService.deleteMessage(user.uid, interlocutor.uid, message.createdAt, alsoForInterlocutor, alsoForInterlocutor ? isUnreaded : false);
    };
 
    return (
@@ -60,6 +55,7 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
                </Typography>
                <Typography variant='body2' className='chatMessageDate'>
                   {moment(message.createdAt).calendar()}
+                  {isUnreaded ? <CheckIcon fontSize='small' /> : <DoneAllIcon fontSize='small' />}
                </Typography>
             </Stack>
          </Box>
@@ -118,7 +114,8 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
          wordBreak: 'break-word',
       },
       '.chatMessageDate': {
-         textAlign: sender === 0 ? 'start' : 'end',
+         display: 'flex',
+         gap: spacing(0.5),
          wordBreak: 'keep-all',
          color: 'rgba(255, 255, 255, 0.7)',
       },
