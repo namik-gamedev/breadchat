@@ -21,11 +21,11 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ chat }) => {
    console.log(chat);
 
    return (
-      <StyledBox ref={ref} sx={{ overflow: 'auto' }}>
+      <Box ref={ref} sx={{ overflow: 'auto' }}>
          {chat && chat.messages.length > 0 ? (
             <Stack
                sx={{
-                  p: 2,
+                  p: 1,
                }}
             >
                {chat?.messages.map((message) => {
@@ -37,6 +37,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ chat }) => {
                No messages in chat ;(
             </Typography>
          )}
-      </StyledBox>
+      </Box>
    );
 };
