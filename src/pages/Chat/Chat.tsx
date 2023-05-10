@@ -52,7 +52,7 @@ export const Chat: FC<ChatProps> = ({}) => {
    }, [chat?.messages]);
 
    return interlocutor ? (
-      <StyledBox sx={{ p: 2, height: 1 }}>
+      <StyledBox sx={{ p: 2, maxHeight: 1 }}>
          <Stack spacing={1} direction='column' sx={{ height: 1 }}>
             <ChatHeader interlocutor={interlocutor} />
             <ChatMessages chat={chat} />
