@@ -55,7 +55,7 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
                </Typography>
                <Typography variant='body2' className='chatMessageDate'>
                   {moment(message.createdAt).calendar()}
-                  {isUnreaded ? <CheckIcon fontSize='small' /> : <DoneAllIcon fontSize='small' />}
+                  {message.sender === 0 && (isUnreaded ? <CheckIcon fontSize='small' /> : <DoneAllIcon fontSize='small' />)}
                </Typography>
             </Stack>
          </Box>
