@@ -29,7 +29,7 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ interlocutor }) => {
    const handleDelete = (alsoForInterlocutor: boolean) => ChatService.delete(user.uid, interlocutor.uid, alsoForInterlocutor);
 
    return (
-      <StyledBox p={2}>
+      <Box>
          <Stack direction='row' justifyContent='space-between' alignItems='center'>
             <UserThumbnail user={interlocutor} />
             <Box>
@@ -54,6 +54,6 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ interlocutor }) => {
                handleAction={handleDelete}
             />
          </Stack>
-      </StyledBox>
+      </Box>
    );
 };
