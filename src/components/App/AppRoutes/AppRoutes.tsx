@@ -11,6 +11,7 @@ export interface AppRoutesProps {}
 
 export const AppRoutes: FC<AppRoutesProps> = ({}) => {
    const user = useAppSelector((state) => state.user.data);
+   console.log(2);
 
    return (
       <Routes>
