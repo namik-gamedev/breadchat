@@ -24,7 +24,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ chat }) => {
       <StyledBox ref={ref} sx={{ overflow: 'auto' }}>
          {chat && chat.messages.length > 0 ? (
             <Stack
-               spacing={1}
                sx={{
                   p: 2,
                }}
