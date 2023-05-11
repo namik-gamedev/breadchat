@@ -12,6 +12,8 @@ import { UserThumbnailWithChatBtn } from './UserThumbnailWithChatBtn';
 
 export interface UsersProps {}
 
+// TODO: replace user list with dynamic database search
+
 export const Users: FC<UsersProps> = ({}) => {
    const users = useAppSelector((state) => state.users.data);
    const { uid } = useAppSelector((state) => state.user.data!);
@@ -34,7 +36,7 @@ export const Users: FC<UsersProps> = ({}) => {
 
          <StyledBox sx={{ p: 2 }}>
             {users.length > 0 ? (
-               <Stack spacing={3}>{users.map((user) => user.uid !== uid && <UserThumbnailWithChatBtn user={user} />)}</Stack>
+               <Stack spacing={3}>{users.map((user) => user.uid !== uid && <UserThumbnail goToChatOnClick user={user} />)}</Stack>
             ) : (
                <Typography textAlign='center' variant='body1'>
                   No users ;(
