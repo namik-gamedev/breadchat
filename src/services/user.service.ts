@@ -1,4 +1,4 @@
-import { ref, serverTimestamp, set } from 'firebase/database';
+import { ref, set } from 'firebase/database';
 import { db } from 'src/firebase/firebase';
 import { IUser } from 'src/types/types';
 
@@ -15,7 +15,7 @@ export default class UserService {
       set(onlineRef, online);
       if (!online) {
          const lastSeenRef = ref(db, `users/${uid}/lastSeen`);
-         set(lastSeenRef, serverTimestamp());
+         set(lastSeenRef, Date.now());
       }
    }
    static setTyping(uid: string, typing: boolean) {

@@ -5,7 +5,7 @@ export interface IUser {
    displayName: string;
    photoURL?: string | null;
    online: boolean;
-   lastSeen: object; // object type needed by firebase specifications
+   lastSeen: number;
    typing: boolean;
 }
 

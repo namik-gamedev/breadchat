@@ -24,7 +24,6 @@ import { setUser } from 'src/store/reducers/user.reducer';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import UserService from 'src/services/user.service';
-import { serverTimestamp } from 'firebase/database';
 
 type photoURLType = string | null;
 
@@ -67,11 +66,11 @@ export const SignUpForm: FC<SignUpFormProps> = ({}) => {
                user: { uid, displayName, photoURL },
             } = await createUserWithEmailAndPassword(auth, email, password);
             await updateProfile(appAuth.currentUser!, { displayName, photoURL });
-            await UserService.setup({ displayName: name, uid, photoURL, online: true, lastSeen: serverTimestamp(), typing: false }); // TODO: add here photoURL
+            await UserService.setup({ displayName: name, uid, photoURL, online: true, lastSeen: Date.now(), typing: false }); // TODO: add here photoURL
 
             await signInWithEmailAndPassword(auth, email, password);
 
-            dispatch(setUser({ displayName: name, uid, online: true, lastSeen: serverTimestamp(), typing: false }));
+            dispatch(setUser({ displayName: name, uid, online: true, lastSeen: Date.now(), typing: false }));
             navigate('/');
          } catch (e: any) {
             switch (e.code) {
