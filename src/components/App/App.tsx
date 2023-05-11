@@ -10,7 +10,7 @@ import { darkTheme, lightTheme } from 'src/themes/themes';
 import { onAuthStateChanged } from 'firebase/auth';
 import { appAuth, db } from 'src/firebase/firebase';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
-import { onValue, ref } from 'firebase/database';
+import { onDisconnect, onValue, ref, serverTimestamp } from 'firebase/database';
 import { setUsers } from 'src/store/reducers/users.reducer';
 import { DataLoading } from './DataLoading';
 import { setChats } from 'src/store/reducers/chats.reducer';
@@ -28,11 +28,12 @@ export const App: FC<AppProps> = ({}) => {
 
    useDBSetup();
 
-   useBeforeUnload(() => {
-      if (user) {
-         UserService.setOnline(user.uid, false);
-      }
-   });
+   useEffect(() => {
+      const userOnlineRef = ref(db, `users/${user?.uid}/online`);
+      const lastSeeneRef = ref(db, `users/${user?.uid}/lastSeen`);
+      onDisconnect(userOnlineRef).set(false);
+      onDisconnect(lastSeeneRef).set(serverTimestamp());
+   }, []);
 
    return (
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
