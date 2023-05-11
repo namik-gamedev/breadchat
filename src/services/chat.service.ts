@@ -1,4 +1,4 @@
-import { child, increment, ref, remove, set } from 'firebase/database';
+import { child, increment, ref, remove, serverTimestamp, set } from 'firebase/database';
 import { db } from 'src/firebase/firebase';
 import { IUser } from 'src/types/types';
 
@@ -21,7 +21,7 @@ export default class ChatService {
    }
 
    static message(uid: string, interlocutorUid: string, text: string) {
-      const createdAt = Date.now();
+      const createdAt = serverTimestamp();
 
       const chatRef = ref(db, `chats/${uid}/${interlocutorUid}`);
       set(child(chatRef, `messages/${createdAt}`), { sender: 0, text, createdAt });
