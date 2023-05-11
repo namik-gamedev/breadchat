@@ -3,7 +3,7 @@ import { useAppDispatch } from './useAppDispatch';
 import { setUser, unsetUser } from 'src/store/reducers/user.reducer';
 import { onAuthStateChanged } from 'firebase/auth';
 import { appAuth, db } from 'src/firebase/firebase';
-import { DataSnapshot, child, get, goOffline, limitToFirst, onDisconnect, onValue, ref, serverTimestamp } from 'firebase/database';
+import { DataSnapshot, child, get, goOffline, limitToFirst, onDisconnect, onValue, ref } from 'firebase/database';
 import { IChat, IMessage, IUser } from 'src/types/types';
 import { setUsers } from 'src/store/reducers/users.reducer';
 import { setChats, unsetChats } from 'src/store/reducers/chats.reducer';
@@ -67,7 +67,7 @@ export const useDBSetup = () => {
                uid: user.uid,
                photoURL: user.photoURL,
                online: true,
-               lastSeen: serverTimestamp(),
+               lastSeen: Date.now(),
                typing: false,
             };
             console.log('newUser', newUser);

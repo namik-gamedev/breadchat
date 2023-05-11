@@ -30,8 +30,6 @@ import { getSignInError } from 'src/utils/getSignInError.util';
 import { IUser } from 'src/types/types';
 import UserService from 'src/services/user.service';
 import { isAndroid } from 'react-device-detect';
-import { serverTimestamp } from 'firebase/database';
-
 export interface SignInFormProps {}
 
 export interface SignInValues {
@@ -63,7 +61,7 @@ export const SignInForm: FC<SignInFormProps> = ({}) => {
       try {
          const { user } = await signInWithEmailAndPassword(auth, email, password);
 
-         dispatch(setUser({ displayName: user.displayName!, uid: user.uid, online: true, lastSeen: serverTimestamp(), typing: false })); // TODO: add here photoURL
+         dispatch(setUser({ displayName: user.displayName!, uid: user.uid, online: true, lastSeen: Date.now(), typing: false })); // TODO: add here photoURL
          setSubmitting(false);
          navigate('/');
       } catch (e: any) {
@@ -96,7 +94,7 @@ export const SignInForm: FC<SignInFormProps> = ({}) => {
          uid: user.uid,
          photoURL: user.photoURL,
          online: true,
-         lastSeen: serverTimestamp(),
+         lastSeen: Date.now(),
          typing: false,
       };
       await UserService.setup(newUser);
