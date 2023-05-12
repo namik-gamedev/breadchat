@@ -18,6 +18,7 @@ import ChatService from 'src/services/chat.service';
 import { useAnchorEl } from 'src/hooks/useAnchorEl';
 import CheckIcon from '@mui/icons-material/Check';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import { isMessageUnreaded } from 'src/utils/isMessageUnreaded.util';
 
 export interface ChatMessageProps extends StackProps {
    interlocutor: IUser;
@@ -30,8 +31,7 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
    const user = useAppSelector((state) => state.user.data!);
    const chat = useAppSelector((state) => state.chats.data).find((chat) => chat.interlocutor.uid === interlocutor.uid)!;
 
-   const messageIndex = chat.messages.findIndex((msg) => msg.createdAt === message.createdAt);
-   const isUnreaded = chat.messages.length - messageIndex <= chat.selfUnreadedMessagesCount;
+   const isUnreaded = isMessageUnreaded(chat, message);
 
    const { anchorEl, open, handleShow, handleClose } = useAnchorEl();
 
