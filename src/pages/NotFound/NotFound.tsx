@@ -42,7 +42,7 @@ export const NotFound: FC<NotFoundProps> = ({}) => {
                },
                letterSpacing: 1,
                fontWeight: 300,
-               color: 'grey',
+               color: 'text.secondary',
             }}
          >
             We couldn't find that page.

@@ -22,7 +22,7 @@ export const PasswordField: FC<TextFieldProps> = (props) => {
             endAdornment: (
                <InputAdornment position='end'>
                   <IconButton onClick={handleShowPassword}>
-                     {show ? <Visibility sx={{ color: 'grey' }} /> : <VisibilityOff sx={{ color: 'grey' }} />}
+                     {show ? <Visibility sx={{ color: 'text.secondary' }} /> : <VisibilityOff sx={{ color: 'text.secondary' }} />}
                   </IconButton>
                </InputAdornment>
             ),

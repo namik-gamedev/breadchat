@@ -8,6 +8,7 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import { IChat } from 'src/types/types';
 import { onValue, ref } from 'firebase/database';
 import { UserThumbnail } from 'src/components/UI/UserThumbnail';
+import { ChatThumbnail } from './ChatThumbnail';
 
 export interface ChatsProps {}
 
@@ -34,7 +35,7 @@ export const Chats: FC<ChatsProps> = ({}) => {
                {chats.map((chat) => {
                   const user = users.find((user) => chat.interlocutor.uid === user.uid)!;
 
-                  return <UserThumbnail goToChatOnClick user={user} />;
+                  return <ChatThumbnail goToChatOnClick user={user} />;
                })}
             </Stack>
          ) : (
