@@ -9,8 +9,8 @@ import Popover from '@mui/material/Popover';
 import Stack from '@mui/material/Stack';
 import { StyledMenu } from 'src/components/UI/StyledMenu';
 import { useAppSelector } from 'src/hooks/useAppSelector';
-import { ChatThumbnail } from 'src/pages/Chats/ChatThumbnail';
 import Typography from '@mui/material/Typography';
+import { UserThumbnail } from 'src/components/UI/UserThumbnail';
 
 export interface NotificationsMenuProps {}
 
@@ -41,6 +41,7 @@ export const NotificationsMenu: FC<NotificationsMenuProps> = ({}) => {
             elevation={2}
          >
             <Stack
+               spacing={2}
                sx={{
                   width: 300,
                   p: 2,
@@ -49,7 +50,7 @@ export const NotificationsMenu: FC<NotificationsMenuProps> = ({}) => {
                {chatsWithUnreadedMessages.length > 0 ? (
                   chatsWithUnreadedMessages.map((chat) => (
                      <Box onClick={handleClose}>
-                        <ChatThumbnail chat={chat} />
+                        <UserThumbnail goToChatOnClick user={chat.interlocutor} />
                      </Box>
                   ))
                ) : (

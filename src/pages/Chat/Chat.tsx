@@ -35,7 +35,7 @@ export const Chat: FC<ChatProps> = ({}) => {
    const user = useAppSelector((state) => state.user.data!);
    const interlocutor = useAppSelector((state) => state.users.data).find((user) => user.uid === interlocutorUid);
 
-   const chat = useAppSelector((state) => state.chats.data).find((chat) => chat.interlocutor?.uid === interlocutor?.uid);
+   const chat = useAppSelector((state) => state.chats.data).find((chat) => chat.interlocutor.uid === interlocutorUid);
 
    useEffect(() => {
       document.title = interlocutor?.displayName || 'No user with this id';
@@ -47,19 +47,24 @@ export const Chat: FC<ChatProps> = ({}) => {
 
    useEffect(() => {
       if (chat) {
+         console.log(1);
+
          ChatService.unsetUnreadedMessagesCount(user.uid, interlocutor!.uid);
+      } else {
+         ChatService.create(user, interlocutor!);
       }
    }, [chat?.messages]);
 
-   return interlocutor ? (
-      <StyledBox sx={{ p: 2, maxHeight: 1 }}>
-         <Stack spacing={1} direction='column' sx={{ height: 1 }}>
+   if (!interlocutor) {
+      return <NotFound />;
+   }
+   return (
+      <StyledBox sx={{ p: 2, height: 1 }}>
+         <Stack spacing={2} direction='column' sx={{ height: 1 }}>
             <ChatHeader interlocutor={interlocutor} />
             <ChatMessages chat={chat} />
             <ChatForm chat={chat} interlocutor={interlocutor} />
          </Stack>
       </StyledBox>
-   ) : (
-      <NotFound />
    );
 };

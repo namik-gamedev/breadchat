@@ -21,9 +21,10 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ chat }) => {
    console.log(chat);
 
    return (
-      <Box ref={ref} sx={{ overflow: 'auto' }}>
+      <Box ref={ref} sx={{ height: 1, overflow: 'auto' }}>
          {chat && chat.messages.length > 0 ? (
             <Stack
+               spacing={0.2}
                sx={{
                   p: 1,
                }}
@@ -33,9 +34,9 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ chat }) => {
                })}
             </Stack>
          ) : (
-            <Typography sx={{ textAlign: 'center', p: 2 }} variant='body1'>
-               No messages in chat ;(
-            </Typography>
+            <Stack sx={{ justifyContent: 'center', alignItems: 'center', height: 1 }}>
+               <Typography variant='body1'>No messages in chat ;(</Typography>
+            </Stack>
          )}
       </Box>
    );

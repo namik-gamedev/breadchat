@@ -11,14 +11,28 @@ import { UserAvatar } from 'src/components/UI/UserAvatar';
 import { IUser } from 'src/types/types';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 
 export interface UserThumbnailProps {
+   goToChatOnClick?: boolean;
    user: IUser;
 }
 
-export const UserThumbnail: FC<UserThumbnailProps> = ({ user }) => {
+export const UserThumbnail: FC<UserThumbnailProps> = ({ goToChatOnClick = false, user }) => {
+   const navigate = useNavigate();
+
+   const handleClick = () => {
+      navigate(`/chat/${user.uid}`);
+   };
+
    return (
-      <Stack direction='row' spacing={2} alignItems='center'>
+      <Stack
+         onClick={goToChatOnClick ? handleClick : undefined}
+         sx={{ cursor: goToChatOnClick ? 'pointer' : 'default' }}
+         direction='row'
+         spacing={2}
+         alignItems='center'
+      >
          <UserAvatar online={user.online} sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={user} />
          <Box>
             <Typography variant='h5' component='h2'>

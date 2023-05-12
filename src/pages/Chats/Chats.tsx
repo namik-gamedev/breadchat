@@ -7,8 +7,7 @@ import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { IChat } from 'src/types/types';
 import { onValue, ref } from 'firebase/database';
-import { UserThumbnailWithChatBtn } from '../Users/UserThumbnailWithChatBtn';
-import { ChatThumbnail } from './ChatThumbnail';
+import { UserThumbnail } from 'src/components/UI/UserThumbnail';
 
 export interface ChatsProps {}
 
@@ -26,31 +25,23 @@ export const Chats: FC<ChatsProps> = ({}) => {
    }, []);
 
    return (
-      <Stack spacing={2}>
-         <StyledBox sx={{ p: 2.5 }}>
-            <Typography sx={{ textAlign: 'center' }} variant='h4'>
-               Chats
-            </Typography>
-         </StyledBox>
+      <Stack component={StyledBox} spacing={1} sx={{ p: 2, height: 1, overflow: 'auto' }}>
+         <Typography sx={{ textAlign: 'center' }} variant='h4'>
+            Chats
+         </Typography>
+         {chats.length > 0 ? (
+            <Stack spacing={2}>
+               {chats.map((chat) => {
+                  const user = users.find((user) => chat.interlocutor.uid === user.uid)!;
 
-         <StyledBox sx={{ p: 2 }}>
-            // TODO: clean code
-            {chats.length > 0 ? (
-               <Stack spacing={3}>
-                  {users
-                     .filter((user) => chats.find(({ interlocutor }) => interlocutor.uid === user.uid))
-                     .map((user) => {
-                        const chat = chats.find(({ interlocutor }) => interlocutor.uid === user.uid)!;
-
-                        return <ChatThumbnail chat={chat} />;
-                     })}
-               </Stack>
-            ) : (
-               <Typography textAlign='center' variant='body1'>
-                  No chats ;(
-               </Typography>
-            )}
-         </StyledBox>
+                  return <UserThumbnail goToChatOnClick user={user} />;
+               })}
+            </Stack>
+         ) : (
+            <Stack sx={{ justifyContent: 'center', alignItems: 'center', height: 1 }}>
+               <Typography variant='body1'>No chats ;(</Typography>
+            </Stack>
+         )}
       </Stack>
    );
 };
