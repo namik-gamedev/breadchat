@@ -130,7 +130,7 @@ export const SignInForm: FC<SignInFormProps> = ({}) => {
             {status && <FormHelperText sx={{ color: 'error.main' }}>{status}</FormHelperText>}
          </StyledForm>
          <Divider>
-            <Typography sx={{ color: 'grey' }}>or sign in with</Typography>
+            <Typography sx={{ color: 'text.secondary' }}>or sign in with</Typography>
             {/* google and other icons */}
          </Divider>
          <Stack justifyContent='center' spacing={2} direction='row'>
