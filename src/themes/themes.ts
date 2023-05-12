@@ -53,6 +53,7 @@ export const darkThemeOptions: ThemeOptions = {
       },
       text: {
          primary: 'rgba(255,255,255,0.87)',
+         secondary: 'rgba(255,255,255,0.57)',
       },
       background: { default: '#1d1b1a', paper: '#292625' },
       error: {
