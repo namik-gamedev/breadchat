@@ -11,12 +11,12 @@ export default class ChatService {
       set(interlocutorChatRef, { interlocutor: user });
    }
 
-   static delete(uid: string, interlocutorUid: string, alsoForInterlocutor?: boolean) {
-      const chatRef = ref(db, `chats/${uid}/${interlocutorUid}`);
-      remove(chatRef);
+   static clear(uid: string, interlocutorUid: string, alsoForInterlocutor: boolean = false) {
+      const messagesRef = ref(db, `chats/${uid}/${interlocutorUid}/messages`);
+      remove(messagesRef);
 
       if (alsoForInterlocutor) {
-         this.delete(interlocutorUid, uid);
+         this.clear(interlocutorUid, uid);
       }
    }
 

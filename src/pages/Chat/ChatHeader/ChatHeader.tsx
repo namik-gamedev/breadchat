@@ -22,36 +22,40 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ interlocutor }) => {
 
    const [dialogOpen, setDialogOpen] = useState(false);
 
-   const handleChatDeleteClick = () => {
+   const handleChatClearClick = () => {
       setDialogOpen(true);
    };
 
-   const handleDelete = (alsoForInterlocutor: boolean) => ChatService.delete(user.uid, interlocutor.uid, alsoForInterlocutor);
+   const handleClear = (alsoForInterlocutor: boolean) => {
+      console.log(alsoForInterlocutor);
+
+      ChatService.clear(user.uid, interlocutor.uid, alsoForInterlocutor);
+   };
 
    return (
       <Box>
          <Stack direction='row' justifyContent='space-between' alignItems='center'>
             <UserThumbnail user={interlocutor} />
             <Box>
-               <IconButton onClick={handleChatDeleteClick}>
+               <IconButton onClick={handleChatClearClick}>
                   <DeleteIcon />
                </IconButton>
             </Box>
             <ConfirmDialog
                open={dialogOpen}
                setOpen={setDialogOpen}
-               title='Delete chat'
-               contentText='Are you sure you want to delete this chat?'
+               title='Clear chat'
+               contentText='Are you sure you want to clear this chat?'
                checkbox
                checkboxLabel={
                   <Typography>
-                     Also delete for{' '}
+                     Also clear for{' '}
                      <Typography component='span' color='primary'>
                         {interlocutor.displayName}
                      </Typography>
                   </Typography>
                }
-               handleAction={handleDelete}
+               handleAction={handleClear}
             />
          </Stack>
       </Box>
