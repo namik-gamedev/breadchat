@@ -35,6 +35,7 @@ export const ConfirmDialog: FC<ConfirmDialogProps> = ({ open, setOpen, title, co
 
    const handleConfirm = () => {
       handleClose();
+
       handleAction(checked);
    };
 
@@ -43,7 +44,7 @@ export const ConfirmDialog: FC<ConfirmDialogProps> = ({ open, setOpen, title, co
          <DialogTitle>{title}</DialogTitle>
          <DialogContent>
             <DialogContentText>{contentText}</DialogContentText>
-            {checkbox && <FormControlLabel control={<Checkbox onChange={handleChange} />} label={checkboxLabel} />}
+            {checkbox && <FormControlLabel control={<Checkbox onChange={handleChange} checked={checked} />} label={checkboxLabel} />}
          </DialogContent>
          <DialogActions>
             <Button color='info' onClick={handleClose}>

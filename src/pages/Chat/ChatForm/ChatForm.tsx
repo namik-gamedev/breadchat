@@ -28,8 +28,6 @@ export interface ChatFormProps {
    interlocutor: IUser;
 }
 
-let timeout: NodeJS.Timer;
-
 export const ChatForm: FC<ChatFormProps> = ({ chat, interlocutor }) => {
    const user = useAppSelector((state) => state.user.data!);
    const [messageText, setMessageText] = useState('');
@@ -55,9 +53,7 @@ export const ChatForm: FC<ChatFormProps> = ({ chat, interlocutor }) => {
          return;
       }
       setMessageText('');
-      if (!chat) {
-         await ChatService.create(user, interlocutor);
-      }
+
       await ChatService.message(user.uid, interlocutor.uid, messageText);
    };
 
