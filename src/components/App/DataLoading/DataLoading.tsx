@@ -14,7 +14,7 @@ export const DataLoading: FC<DataLoadingProps> = ({}) => {
          <Typography variant='h5' textAlign='center'>
             Please, wait for few seconds!
          </Typography>
-         <Typography variant='body1' sx={{ color: 'grey', letterSpacing: 1 }} textAlign='center'>
+         <Typography variant='body1' sx={{ color: 'text.secondary', letterSpacing: 1, textAlign: 'center' }}>
             We're just trying to load a data before you'll see all the content ;)
          </Typography>
       </Stack>

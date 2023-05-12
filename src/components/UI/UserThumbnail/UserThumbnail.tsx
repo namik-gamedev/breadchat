@@ -38,7 +38,7 @@ export const UserThumbnail: FC<UserThumbnailProps> = ({ goToChatOnClick = false,
             <Typography variant='h5' component='h2'>
                {user.displayName}
             </Typography>
-            <Typography variant='body1' sx={{ color: 'grey' }}>
+            <Typography variant='body1' sx={{ color: 'text.secondary' }}>
                {user.online ? 'Online' : `last seen ${moment(user.lastSeen).calendar()}`}
             </Typography>
          </Box>
