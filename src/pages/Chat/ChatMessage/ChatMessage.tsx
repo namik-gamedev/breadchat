@@ -127,7 +127,7 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
          display: 'flex',
          gap: spacing(0.5),
          wordBreak: 'keep-all',
-         color: 'rgba(255, 255, 255, 0.7)',
+         color: 'rgba(255, 255, 255, 0.6)',
       },
    },
 }));
