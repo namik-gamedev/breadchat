@@ -11,6 +11,7 @@ import { StyledMenu } from 'src/components/UI/StyledMenu';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import Typography from '@mui/material/Typography';
 import { UserThumbnail } from 'src/components/UI/UserThumbnail';
+import { ChatThumbnail } from 'src/pages/Chats/ChatThumbnail';
 
 export interface NotificationsMenuProps {}
 
@@ -50,7 +51,7 @@ export const NotificationsMenu: FC<NotificationsMenuProps> = ({}) => {
                {chatsWithUnreadedMessages.length > 0 ? (
                   chatsWithUnreadedMessages.map((chat) => (
                      <Box onClick={handleClose}>
-                        <UserThumbnail goToChatOnClick user={chat.interlocutor} />
+                        <ChatThumbnail chat={chat} />
                      </Box>
                   ))
                ) : (
