@@ -1,6 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
 import { db } from 'src/firebase/firebase';
 import { StyledBox } from 'src/components/UI/StyledBox';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
@@ -26,18 +30,26 @@ export const Chats: FC<ChatsProps> = ({}) => {
    }, []);
 
    return (
-      <Stack component={StyledBox} spacing={1} sx={{ p: 2, height: 1, overflow: 'auto' }}>
+      <Stack component={StyledBox} spacing={1} sx={{ pt: 2, height: 1, overflow: 'auto' }}>
          <Typography sx={{ textAlign: 'center' }} variant='h4'>
             Chats
          </Typography>
-         {chats.length > 0 ? (
-            <Stack spacing={2}>
-               {chats.map((chat) => {
-                  const user = users.find((user) => chat.interlocutor.uid === user.uid)!;
 
-                  return <ChatThumbnail goToChatOnClick user={user} />;
-               })}
-            </Stack>
+         {chats.length > 0 ? (
+            <MenuList>
+               <Stack>
+                  {chats.map((chat) => (
+                     <>
+                        <MenuItem>
+                           <Box sx={{ width: 1 }}>
+                              <ChatThumbnail chat={chat} />
+                           </Box>
+                        </MenuItem>
+                        <Divider />
+                     </>
+                  ))}
+               </Stack>
+            </MenuList>
          ) : (
             <Stack sx={{ justifyContent: 'center', alignItems: 'center', height: 1 }}>
                <Typography variant='body1'>No chats ;(</Typography>

@@ -1,7 +1,10 @@
 import { Grid } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import ForumIcon from '@mui/icons-material/Forum';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
 import { FC, useEffect } from 'react';
 import { StyledBox } from 'src/components/UI/StyledBox';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
@@ -26,12 +29,28 @@ export const Users: FC<UsersProps> = ({}) => {
    }, []);
 
    return (
-      <Stack component={StyledBox} spacing={1} sx={{ p: 2, height: 1, overflow: 'auto' }}>
+      <Stack component={StyledBox} spacing={1} sx={{ pt: 2, height: 1, overflow: 'auto' }}>
          <Typography sx={{ textAlign: 'center' }} variant='h4'>
             Users
          </Typography>
          {users.length > 0 ? (
-            <Stack spacing={2}>{users.map((user) => user.uid !== uid && <UserThumbnail goToChatOnClick user={user} />)}</Stack>
+            <MenuList>
+               <Stack>
+                  {users.map(
+                     (user) =>
+                        user.uid !== uid && (
+                           <>
+                              <MenuItem>
+                                 <Box sx={{ width: 1 }}>
+                                    <UserThumbnail goToChatOnClick user={user} />
+                                 </Box>
+                              </MenuItem>
+                              <Divider />
+                           </>
+                        )
+                  )}
+               </Stack>
+            </MenuList>
          ) : (
             <Stack sx={{ justifyContent: 'center', alignItems: 'center', height: 1 }}>
                <Typography variant='body1'>No users ;(</Typography>
