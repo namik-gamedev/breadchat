@@ -12,6 +12,7 @@ import { StyledBox } from 'src/components/UI/StyledBox';
 import { ConfirmDialog } from 'src/components/UI/ConfirmDialog';
 import ChatService from 'src/services/chat.service';
 import { UserThumbnail } from 'src/components/UI/UserThumbnail';
+import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 
 export interface ChatHeaderProps {
    interlocutor: IUser;
@@ -35,12 +36,24 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ interlocutor }) => {
    return (
       <Box>
          <Stack direction='row' justifyContent='space-between' alignItems='center'>
-            <UserThumbnail user={interlocutor} />
+            <Stack direction='row' spacing={2} alignItems='center'>
+               <UserAvatar online={user.online} sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={interlocutor} />
+               <Box>
+                  <Typography variant='h6' sx={{ fontWeight: 'normal' }} component='h2'>
+                     {interlocutor.displayName}
+                  </Typography>
+                  <Typography variant='body1' sx={{ color: 'text.secondary' }}>
+                     {interlocutor.typing ? 'Typing...' : interlocutor.online ? 'Online' : `last seen ${moment(interlocutor.lastSeen).calendar()}`}
+                  </Typography>
+               </Box>
+            </Stack>
+
             <Box>
                <IconButton onClick={handleChatClearClick}>
                   <DeleteIcon />
                </IconButton>
             </Box>
+
             <ConfirmDialog
                open={dialogOpen}
                setOpen={setDialogOpen}
