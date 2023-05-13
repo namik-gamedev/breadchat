@@ -34,7 +34,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
                      <Sidebar />
                   </Grid>
                )}
-               <Grid item xs sx={{ height: 1 }}>
+               <Grid item xs sx={{ height: 1, minWidth: 0 }}>
                   {children}
                </Grid>
             </Grid>
