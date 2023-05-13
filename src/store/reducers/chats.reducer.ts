@@ -14,8 +14,7 @@ const chatsSlice = createSlice({
    initialState,
    reducers: {
       setChats: (state, { payload }: PayloadAction<IChat[]>) => {
-         state.data = payload;
-         // TODO: SORT (BY LAST MESSAGE TIME) CHATS HERE
+         state.data = payload.sort((a, b) => b.messages[b.messages.length - 1].createdAt - a.messages[a.messages.length - 1].createdAt);
       },
       unsetChats: (state) => {
          state.data = [];
