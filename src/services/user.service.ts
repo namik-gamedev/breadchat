@@ -18,8 +18,4 @@ export default class UserService {
          set(lastSeenRef, Date.now());
       }
    }
-   static setTyping(uid: string, typing: boolean) {
-      const typingRef = ref(db, `users/${uid}/typing`);
-      set(typingRef, typing);
-   }
 }

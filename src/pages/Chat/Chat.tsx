@@ -46,22 +46,23 @@ export const Chat: FC<ChatProps> = ({}) => {
    }, []);
 
    useEffect(() => {
-      if (chat) {
-         console.log(1);
-
-         ChatService.unsetUnreadedMessagesCount(user.uid, interlocutor!.uid);
-      } else {
-         ChatService.create(user, interlocutor!);
+      if (interlocutor) {
+         if (chat) {
+            ChatService.unsetUnreadedMessagesCount(user.uid, interlocutor!.uid);
+         } else {
+            ChatService.create(user, interlocutor);
+         }
       }
    }, [chat?.messages]);
 
    if (!interlocutor) {
       return <NotFound />;
    }
+
    return (
       <StyledBox sx={{ p: 2, height: 1 }}>
          <Stack spacing={2} direction='column' sx={{ height: 1 }}>
-            <ChatHeader interlocutor={interlocutor} />
+            <ChatHeader chat={chat} interlocutor={interlocutor} />
             <ChatMessages chat={chat} />
             <ChatForm chat={chat} interlocutor={interlocutor} />
          </Stack>

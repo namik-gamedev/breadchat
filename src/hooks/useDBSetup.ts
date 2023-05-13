@@ -46,6 +46,7 @@ export const useDBSetup = () => {
                interlocutor: chatSnapshot.val().interlocutor,
                unreadedMessagesCount: chatSnapshot.val().unreadedMessagesCount,
                selfUnreadedMessagesCount: chatSnapshot.val().selfUnreadedMessagesCount,
+               interlocutorTyping: chatSnapshot.val().interlocutorTyping,
             };
 
             newChats.push(chat);
@@ -68,7 +69,6 @@ export const useDBSetup = () => {
                photoURL: user.photoURL,
                online: true,
                lastSeen: Date.now(),
-               typing: false,
             };
             console.log('newUser', newUser);
 
