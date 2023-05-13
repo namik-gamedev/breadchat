@@ -33,7 +33,7 @@ export const UserThumbnail: FC<UserThumbnailProps> = ({ goToChatOnClick = false,
          spacing={2}
          alignItems='center'
       >
-         <UserAvatar online={user.online} sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={user} />
+         <UserAvatar sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={user} />
          <Box>
             <Typography variant='h6' sx={{ fontWeight: 'normal' }} component='h2'>
                {user.displayName}

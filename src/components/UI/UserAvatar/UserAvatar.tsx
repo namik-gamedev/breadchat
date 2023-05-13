@@ -14,10 +14,9 @@ export interface UserAvatarProps extends AvatarProps {
    user: IUser;
    sx?: SxProps;
    withoutBadge?: boolean;
-   online?: boolean;
 }
 
-export const UserAvatar: FC<UserAvatarProps> = ({ user: { displayName, photoURL }, withoutBadge = false, online = true, sx, ...props }) => {
+export const UserAvatar: FC<UserAvatarProps> = ({ user: { displayName, photoURL, online }, withoutBadge = false, sx, ...props }) => {
    const theme = useTheme();
 
    return (
