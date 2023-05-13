@@ -65,4 +65,9 @@ export default class ChatService {
       const unreadedMessagesCountRef = ref(db, `chats/${uid}/${interlocutorUid}/unreadedMessagesCount`);
       set(unreadedMessagesCountRef, 0);
    }
+
+   static setTyping(uid: string, interlocutorUid: string, typing: boolean) {
+      const typingRef = ref(db, `chats/${interlocutorUid}/${uid}/interlocutorTyping`);
+      set(typingRef, typing);
+   }
 }

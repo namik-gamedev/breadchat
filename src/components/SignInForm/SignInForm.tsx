@@ -61,7 +61,7 @@ export const SignInForm: FC<SignInFormProps> = ({}) => {
       try {
          const { user } = await signInWithEmailAndPassword(auth, email, password);
 
-         dispatch(setUser({ displayName: user.displayName!, uid: user.uid, online: true, lastSeen: Date.now(), typing: false })); // TODO: add here photoURL
+         dispatch(setUser({ displayName: user.displayName!, uid: user.uid, online: true, lastSeen: Date.now() })); // TODO: add here photoURL
          setSubmitting(false);
          navigate('/');
       } catch (e: any) {
@@ -95,7 +95,6 @@ export const SignInForm: FC<SignInFormProps> = ({}) => {
          photoURL: user.photoURL,
          online: true,
          lastSeen: Date.now(),
-         typing: false,
       };
       await UserService.setup(newUser);
       dispatch(setUser(newUser)); // TODO: add here photoURL

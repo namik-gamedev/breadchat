@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { UserAvatar } from 'src/components/UI/UserAvatar';
-import { IUser } from 'src/types/types';
+import { IChat, IUser } from 'src/types/types';
 import moment from 'moment';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { StyledBox } from 'src/components/UI/StyledBox';
@@ -15,10 +15,11 @@ import { UserThumbnail } from 'src/components/UI/UserThumbnail';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 
 export interface ChatHeaderProps {
+   chat: IChat | undefined;
    interlocutor: IUser;
 }
 
-export const ChatHeader: FC<ChatHeaderProps> = ({ interlocutor }) => {
+export const ChatHeader: FC<ChatHeaderProps> = ({ chat, interlocutor }) => {
    const user = useAppSelector((state) => state.user.data!);
 
    const [dialogOpen, setDialogOpen] = useState(false);
@@ -28,8 +29,6 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ interlocutor }) => {
    };
 
    const handleClear = (alsoForInterlocutor: boolean) => {
-      console.log(alsoForInterlocutor);
-
       ChatService.clear(user.uid, interlocutor.uid, alsoForInterlocutor);
    };
 
@@ -37,13 +36,17 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ interlocutor }) => {
       <Box>
          <Stack direction='row' justifyContent='space-between' alignItems='center'>
             <Stack direction='row' spacing={2} alignItems='center'>
-               <UserAvatar online={user.online} sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={interlocutor} />
+               <UserAvatar sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={interlocutor} />
                <Box>
                   <Typography variant='h6' sx={{ fontWeight: 'normal' }} component='h2'>
                      {interlocutor.displayName}
                   </Typography>
                   <Typography variant='body1' sx={{ color: 'text.secondary' }}>
-                     {interlocutor.typing ? 'Typing...' : interlocutor.online ? 'Online' : `last seen ${moment(interlocutor.lastSeen).calendar()}`}
+                     {chat?.interlocutorTyping
+                        ? 'Typing...'
+                        : interlocutor.online
+                        ? 'Online'
+                        : `last seen ${moment(interlocutor.lastSeen).calendar()}`}
                   </Typography>
                </Box>
             </Stack>
