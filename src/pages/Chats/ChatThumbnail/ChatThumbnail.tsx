@@ -33,7 +33,7 @@ export const ChatThumbnail: FC<ChatThumbnailProps> = ({ chat }) => {
          </Badge>
          <Box sx={{ minWidth: 0, width: 1 }}>
             <Stack direction='row' spacing={1} sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
-               <Typography noWrap variant='h5' component='h2'>
+               <Typography noWrap variant='h6' sx={{ fontWeight: 'normal' }} component='h2'>
                   {chat.interlocutor.displayName}
                </Typography>
                <Typography variant='body1' sx={{ color: 'text.secondary' }}>
