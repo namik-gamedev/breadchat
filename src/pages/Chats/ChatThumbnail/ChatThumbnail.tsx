@@ -22,13 +22,7 @@ export const ChatThumbnail: FC<ChatThumbnailProps> = ({ chat }) => {
    const isLastMessageUnreaded = isMessageUnreaded(chat, lastMessage);
 
    return (
-      <Stack
-         component={UnstyledLink}
-         to={`/chat/${chat.interlocutor.uid}`}
-         sx={{ cursor: 'pointer', alignItems: 'center' }}
-         direction='row'
-         spacing={2}
-      >
+      <Stack component={UnstyledLink} to={`/chat/${chat.interlocutor.uid}`} sx={{ alignItems: 'center' }} direction='row' spacing={2}>
          <UserAvatar online={chat.interlocutor.online} sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={chat.interlocutor} />
          <Box sx={{ minWidth: 0, width: 1 }}>
             <Stack direction='row' spacing={1} sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
