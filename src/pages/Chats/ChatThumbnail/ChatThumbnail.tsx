@@ -3,6 +3,7 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import { UserThumbnail, UserThumbnailProps } from 'src/components/UI/UserThumbnail';
 import Typography from '@mui/material/Typography';
+import Badge from '@mui/material/Badge';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 import { IChat } from 'src/types/types';
 import { UserAvatar } from 'src/components/UI/UserAvatar';
@@ -27,15 +28,21 @@ export const ChatThumbnail: FC<ChatThumbnailProps> = ({ chat }) => {
          direction='row'
          spacing={2}
       >
-         <UserAvatar online={chat.interlocutor.online} sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={chat.interlocutor} />
-         <Box sx={{ minWidth: 0 }}>
-            <Typography variant='h5' component='h2'>
-               {chat.interlocutor.displayName}
-            </Typography>
-            <Stack direction='row'>
+         <Badge color='info' badgeContent={chat.unreadedMessagesCount} overlap='circular'>
+            <UserAvatar online={chat.interlocutor.online} sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={chat.interlocutor} />
+         </Badge>
+         <Box sx={{ minWidth: 0, width: 1 }}>
+            <Stack direction='row' spacing={1} sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
+               <Typography noWrap variant='h5' component='h2'>
+                  {chat.interlocutor.displayName}
+               </Typography>
+               <Typography variant='body1' sx={{ color: 'text.secondary' }}>
+                  {moment(lastMessage.createdAt).fromNow(true)}
+               </Typography>
+            </Stack>
+
+            <Stack direction='row' spacing={1} sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
                <Typography variant='body1' noWrap sx={{ color: 'text.secondary' }}>
-                  {/* {chat.interlocutor.online ? 'Online' : `last seen ${moment(chat.interlocutor.lastSeen).calendar()}`} */}
-                  {/* {truncate(chat.messages[chat.messages.length - 1].text, 30)} */}
                   {lastMessage.text}
                </Typography>
                {lastMessage.sender === 0 &&
