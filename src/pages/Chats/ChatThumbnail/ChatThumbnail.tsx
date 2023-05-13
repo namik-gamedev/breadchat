@@ -11,6 +11,7 @@ import moment from 'moment';
 import CheckIcon from '@mui/icons-material/Check';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { isMessageUnreaded } from 'src/utils/isMessageUnreaded.util';
+import { UnreadedMessagesCountDisplay } from 'src/components/UI/UnreadedMessagesCountDisplay';
 
 export interface ChatThumbnailProps {
    chat: IChat;
@@ -28,9 +29,7 @@ export const ChatThumbnail: FC<ChatThumbnailProps> = ({ chat }) => {
          direction='row'
          spacing={2}
       >
-         <Badge color='info' badgeContent={chat.unreadedMessagesCount} overlap='circular'>
-            <UserAvatar online={chat.interlocutor.online} sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={chat.interlocutor} />
-         </Badge>
+         <UserAvatar online={chat.interlocutor.online} sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={chat.interlocutor} />
          <Box sx={{ minWidth: 0, width: 1 }}>
             <Stack direction='row' spacing={1} sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
                <Typography noWrap variant='h6' sx={{ fontWeight: 'normal' }} component='h2'>
@@ -45,12 +44,15 @@ export const ChatThumbnail: FC<ChatThumbnailProps> = ({ chat }) => {
                <Typography variant='body1' noWrap sx={{ color: 'text.secondary' }}>
                   {lastMessage.text}
                </Typography>
-               {lastMessage.sender === 0 &&
-                  (isLastMessageUnreaded ? (
-                     <CheckIcon sx={{ color: 'text.secondary' }} fontSize='small' />
-                  ) : (
-                     <DoneAllIcon sx={{ color: 'text.secondary' }} fontSize='small' />
-                  ))}
+               <Stack direction='row'>
+                  <UnreadedMessagesCountDisplay count={chat.unreadedMessagesCount} />
+                  {lastMessage.sender === 0 &&
+                     (isLastMessageUnreaded ? (
+                        <CheckIcon sx={{ color: 'text.secondary' }} fontSize='small' />
+                     ) : (
+                        <DoneAllIcon sx={{ color: 'text.secondary' }} fontSize='small' />
+                     ))}
+               </Stack>
             </Stack>
          </Box>
       </Stack>
