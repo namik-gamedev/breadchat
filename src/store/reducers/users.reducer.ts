@@ -16,7 +16,7 @@ const usersSlice = createSlice({
       setUsers: (state, { payload }: PayloadAction<IUser[]>) => {
          state.data = payload;
       },
-      removeAllUsers: (state) => {
+      unsetUsers: (state) => {
          state.data = [];
       },
    },
@@ -26,4 +26,4 @@ const usersSlice = createSlice({
 });
 
 export const usersReducer = usersSlice.reducer;
-export const { setUsers, removeAllUsers } = usersSlice.actions;
+export const { setUsers, unsetUsers } = usersSlice.actions;
