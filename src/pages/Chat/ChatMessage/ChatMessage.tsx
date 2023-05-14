@@ -4,12 +4,14 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
-import DeleteIcon from '@mui/icons-material/Delete';
+import Alert from '@mui/material/Alert';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { styled, Typography } from '@mui/material';
 import { IMessage, IUser } from 'src/types/types';
 import { blue, orange } from '@mui/material/colors';
 import { CSSProperties } from '@mui/styled-engine-sc';
 import { useAppSelector } from 'src/hooks/useAppSelector';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import moment from 'moment';
 import { StyledMenu } from 'src/components/UI/StyledMenu';
 import { UserAvatar } from 'src/components/UI/UserAvatar';
@@ -19,6 +21,9 @@ import { useAnchorEl } from 'src/hooks/useAnchorEl';
 import CheckIcon from '@mui/icons-material/Check';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { isMessageUnreaded } from 'src/utils/isMessageUnreaded.util';
+import copy from 'copy-to-clipboard';
+import { Close } from '@mui/icons-material';
+import { useOpen } from 'src/hooks/useOpen';
 
 export interface ChatMessageProps extends StackProps {
    interlocutor: IUser;
@@ -35,11 +40,16 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
 
    const { anchorEl, open, handleShow, handleClose } = useAnchorEl();
 
-   const [dialogOpen, setDialogOpen] = useState(false);
+   const { open: dialogOpen, handleShow: handleDialogShow, handleClose: handleDialogClose } = useOpen();
 
    const handleMessageDeleteClick = () => {
       handleClose();
-      setDialogOpen(true);
+      handleDialogShow();
+   };
+
+   const handleMessageCopyClick = () => {
+      handleClose();
+      copy(message.text);
    };
 
    const handleDelete = (alsoForInterlocutor: boolean) => {
@@ -59,17 +69,25 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
                </Typography>
             </Stack>
          </Box>
+
          <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
+            <MenuItem onClick={handleMessageCopyClick}>
+               <ListItemIcon sx={{ color: 'primary.main' }}>
+                  <ContentCopyIcon />
+               </ListItemIcon>
+               <Typography>Copy</Typography>
+            </MenuItem>
             <MenuItem onClick={handleMessageDeleteClick}>
                <ListItemIcon sx={{ color: 'primary.main' }}>
-                  <DeleteIcon />
+                  <DeleteOutlinedIcon />
                </ListItemIcon>
                <Typography>Delete</Typography>
             </MenuItem>
          </StyledMenu>
+
          <ConfirmDialog
             open={dialogOpen}
-            setOpen={setDialogOpen}
+            handleClose={handleDialogClose}
             title='Delete message'
             contentText='Are you sure you want to delete this message?'
             checkboxLabel={
