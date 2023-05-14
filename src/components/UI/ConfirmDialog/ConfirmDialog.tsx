@@ -14,22 +14,18 @@ import Stack from '@mui/material/Stack';
 
 export interface ConfirmDialogProps {
    open: boolean;
-   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+   handleClose: () => void;
    title: string;
    contentText: string;
    checkboxLabel?: React.ReactNode;
    handleAction: (checked: boolean) => any;
 }
 
-export const ConfirmDialog: FC<ConfirmDialogProps> = ({ open, setOpen, title, contentText, checkboxLabel, handleAction }) => {
+export const ConfirmDialog: FC<ConfirmDialogProps> = ({ open, handleClose, title, contentText, checkboxLabel, handleAction }) => {
    const [checked, setChecked] = useState(false);
 
    const handleChange = () => {
       setChecked((prev) => !prev);
-   };
-
-   const handleClose = () => {
-      setOpen(false);
    };
 
    const handleConfirm = () => {

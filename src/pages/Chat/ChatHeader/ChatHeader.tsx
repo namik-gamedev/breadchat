@@ -13,6 +13,7 @@ import { ConfirmDialog } from 'src/components/UI/ConfirmDialog';
 import ChatService from 'src/services/chat.service';
 import { UserThumbnail } from 'src/components/UI/UserThumbnail';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
+import { useOpen } from 'src/hooks/useOpen';
 
 export interface ChatHeaderProps {
    chat: IChat | undefined;
@@ -22,11 +23,7 @@ export interface ChatHeaderProps {
 export const ChatHeader: FC<ChatHeaderProps> = ({ chat, interlocutor }) => {
    const user = useAppSelector((state) => state.user.data!);
 
-   const [dialogOpen, setDialogOpen] = useState(false);
-
-   const handleChatClearClick = () => {
-      setDialogOpen(true);
-   };
+   const { open, handleClose, handleShow } = useOpen();
 
    const handleClear = (alsoForInterlocutor: boolean) => {
       ChatService.clear(user.uid, interlocutor.uid, alsoForInterlocutor);
@@ -52,14 +49,14 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ chat, interlocutor }) => {
             </Stack>
 
             <Box>
-               <IconButton onClick={handleChatClearClick}>
+               <IconButton onClick={handleShow}>
                   <DeleteIcon />
                </IconButton>
             </Box>
 
             <ConfirmDialog
-               open={dialogOpen}
-               setOpen={setDialogOpen}
+               open={open}
+               handleClose={handleClose}
                title='Clear chat'
                contentText='Are you sure you want to clear this chat?'
                checkboxLabel={
