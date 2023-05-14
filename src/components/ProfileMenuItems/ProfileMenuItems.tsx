@@ -13,6 +13,7 @@ import { unsetChats } from 'src/store/reducers/chats.reducer';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import UserService from 'src/services/user.service';
+import { useTranslation } from 'react-i18next';
 
 export interface ProfileMenuItemsProps {
    handleClose?: () => void;
@@ -21,6 +22,8 @@ export interface ProfileMenuItemsProps {
 export const ProfileMenuItems: FC<ProfileMenuItemsProps> = ({ handleClose }) => {
    const user = useAppSelector((state) => state.user.data!);
    const dispatch = useAppDispatch();
+
+   const { t } = useTranslation('header');
 
    const handleSignOut = async () => {
       // TODO: add here all resets
@@ -36,20 +39,20 @@ export const ProfileMenuItems: FC<ProfileMenuItemsProps> = ({ handleClose }) => 
             <ListItemIcon sx={{ color: 'primary.main' }}>
                <PersonIcon />
             </ListItemIcon>
-            <Typography>Account</Typography>
+            <Typography>{t('account')}</Typography>
          </MenuItem>
          <MenuItem onClick={handleClose}>
             <ListItemIcon sx={{ color: 'primary.main' }}>
                <SettingsIcon />
             </ListItemIcon>
-            <Typography>Settings</Typography>
+            <Typography>{t('settings')}</Typography>
          </MenuItem>
          <Divider />
          <MenuItem onClick={handleSignOut}>
             <ListItemIcon sx={{ color: 'primary.main' }}>
                <LogoutIcon />
             </ListItemIcon>
-            <Typography>Sign out</Typography>
+            <Typography>{t('sign out')}</Typography>
          </MenuItem>
       </>
    );
