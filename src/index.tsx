@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import moment from 'moment';
 import { ruLocaleSpec } from 'src/locales/ru.localeSpec';
 import { enLocaleSpec } from 'src/locales/en.localeSpec';
+import i18n from './i18n/i18n';
 
 // TODO: GLOBAL:
 // КРАСИВО НАСТРОИТЬ/ОТСОРТИРОВАТЬ ИМПОРТЫ
@@ -23,6 +24,7 @@ import { enLocaleSpec } from 'src/locales/en.localeSpec';
 
 // moment.updateLocale('ru', ruLocaleSpec);
 moment.updateLocale('en', enLocaleSpec);
+i18n.changeLanguage('ru');
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
    <Router>
