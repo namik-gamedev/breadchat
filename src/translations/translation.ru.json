@@ -19,5 +19,21 @@
    "password": "Пароль",
    "confirm password": "Подтвердите пароль",
    "or sign in with": "или войти с помощью",
-   "or": "или"
+   "or": "или",
+   "online": "В сети",
+   "last seen": "Был(а) ",
+   "typing": "Печатает...",
+   "copy": "Скопировать",
+   "delete": "Удалить",
+   "cancel": "отмена",
+   "confirm": "подтвердить",
+   "clear chat": "Очистить чат",
+   "are you sure you want to clear chat": "Вы точно хотите очистить этот чат?",
+   "also clear for": "Также очистить для ",
+   "delete message": "Удалить сообщение",
+   "are you sure you want to delete message": "Вы точно хотите удалить это сообщение?",
+   "also delete for": "Также удалить для ",
+   "message": "Сообщение",
+   "toggle dark": "Темная тема",
+   "toggle light": "Светлая тема"
 }
