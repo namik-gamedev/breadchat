@@ -17,12 +17,11 @@ export interface ConfirmDialogProps {
    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
    title: string;
    contentText: string;
-   checkbox?: boolean;
    checkboxLabel?: React.ReactNode;
    handleAction: (checked: boolean) => any;
 }
 
-export const ConfirmDialog: FC<ConfirmDialogProps> = ({ open, setOpen, title, contentText, checkbox = false, checkboxLabel, handleAction }) => {
+export const ConfirmDialog: FC<ConfirmDialogProps> = ({ open, setOpen, title, contentText, checkboxLabel, handleAction }) => {
    const [checked, setChecked] = useState(false);
 
    const handleChange = () => {
@@ -44,7 +43,7 @@ export const ConfirmDialog: FC<ConfirmDialogProps> = ({ open, setOpen, title, co
          <DialogTitle>{title}</DialogTitle>
          <DialogContent>
             <DialogContentText>{contentText}</DialogContentText>
-            {checkbox && <FormControlLabel control={<Checkbox onChange={handleChange} checked={checked} />} label={checkboxLabel} />}
+            {checkboxLabel && <FormControlLabel control={<Checkbox onChange={handleChange} checked={checked} />} label={checkboxLabel} />}
          </DialogContent>
          <DialogActions>
             <Button color='info' onClick={handleClose}>

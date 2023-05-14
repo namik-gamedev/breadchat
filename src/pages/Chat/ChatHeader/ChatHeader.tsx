@@ -62,7 +62,6 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ chat, interlocutor }) => {
                setOpen={setDialogOpen}
                title='Clear chat'
                contentText='Are you sure you want to clear this chat?'
-               checkbox
                checkboxLabel={
                   <Typography>
                      Also clear for{' '}
