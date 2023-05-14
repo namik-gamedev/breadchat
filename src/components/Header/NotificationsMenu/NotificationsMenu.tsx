@@ -20,12 +20,11 @@ export const NotificationsMenu: FC<NotificationsMenuProps> = ({}) => {
 
    const chats = useAppSelector((state) => state.chats.data);
    const chatsWithUnreadedMessages = chats.filter((chat) => chat.unreadedMessagesCount > 0);
-   const totalUnreadedMessagesCount = chatsWithUnreadedMessages.reduce((total, chat) => total + chat.unreadedMessagesCount, 0);
 
    return (
       <Box>
          <IconButton onClick={handleShow}>
-            <Badge badgeContent={totalUnreadedMessagesCount} color='info'>
+            <Badge variant='dot' color='info'>
                <NotificationsNoneIcon color='primary' />
             </Badge>
          </IconButton>
