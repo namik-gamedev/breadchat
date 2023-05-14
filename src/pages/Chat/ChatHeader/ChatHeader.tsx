@@ -14,6 +14,7 @@ import ChatService from 'src/services/chat.service';
 import { UserThumbnail } from 'src/components/UI/UserThumbnail';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 import { useOpen } from 'src/hooks/useOpen';
+import { ChatHeaderDialog } from './ChatHeaderDialog';
 
 export interface ChatHeaderProps {
    chat: IChat | undefined;
@@ -54,21 +55,7 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ chat, interlocutor }) => {
                </IconButton>
             </Box>
 
-            <ConfirmDialog
-               open={open}
-               handleClose={handleClose}
-               title='Clear chat'
-               contentText='Are you sure you want to clear this chat?'
-               checkboxLabel={
-                  <Typography>
-                     Also clear for{' '}
-                     <Typography component='span' color='primary'>
-                        {interlocutor.displayName}
-                     </Typography>
-                  </Typography>
-               }
-               handleAction={handleClear}
-            />
+            <ChatHeaderDialog open={open} handleClose={handleClose} interlocutorDisplayName={interlocutor.displayName} handleAction={handleClear} />
          </Stack>
       </Box>
    );
