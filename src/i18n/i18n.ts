@@ -1,14 +1,14 @@
 import i18n, { Resource } from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import headerEn from 'src/translations/en/header.json';
-import headerRu from 'src/translations/ru/header.json';
+import translationEn from 'src/translations/translation.en.json';
+import translationRu from 'src/translations/translation.ru.json';
 
 const resources: Resource = {
    en: {
-      header: headerEn,
+      translation: translationEn,
    },
    ru: {
-      header: headerRu,
+      translation: translationRu,
    },
 };
 
