@@ -1,5 +1,5 @@
 export const enLocaleSpec: moment.LocaleSpecification = {
-   monthsShort: 'Jan._Feb._Mar._Apr._May._Jun._Jul._Aug._Sep._Oct._Nov._Dec.'.split('_'),
+   monthsShort: 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec.'.split('_'),
    weekdaysShort: 'Mon_Tue_Wed_Thu_Fri_Sat_Sun'.split('_'),
    calendar: {
       lastDay: '[yesterday] HH:mm',
