@@ -65,6 +65,8 @@ export const ChatForm: FC<ChatFormProps> = ({ chat, interlocutor }) => {
             onChange={handleChange}
             label='Message'
             fullWidth
+            multiline
+            maxRows={7}
             InputProps={{
                endAdornment: (
                   <Stack>
