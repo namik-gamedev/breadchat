@@ -72,7 +72,6 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
             setOpen={setDialogOpen}
             title='Delete message'
             contentText='Are you sure you want to delete this message?'
-            checkbox
             checkboxLabel={
                <Typography>
                   Also delete for{' '}
