@@ -70,7 +70,6 @@ export const useDBSetup = () => {
                online: true,
                lastSeen: Date.now(),
             };
-            console.log('newUser', newUser);
 
             UserService.setOnline(user.uid, true);
 
