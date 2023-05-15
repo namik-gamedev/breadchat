@@ -21,7 +21,7 @@
    "or sign in with": "or sign in with",
    "or": "or",
    "online": "Online",
-   "last seen": "Last seen ",
+   "last seen ": "Last seen {{time}}",
    "typing": "Typing...",
    "copy": "Copy",
    "delete": "Delete",
