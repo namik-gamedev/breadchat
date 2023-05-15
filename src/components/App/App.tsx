@@ -37,6 +37,7 @@ export const App: FC<AppProps> = ({}) => {
 
    useEffect(() => {
       if (user) {
+         UserService.setOnline(user.uid, true);
          const userOnlineRef = ref(db, `users/${user.uid}/online`);
          const lastSeeneRef = ref(db, `users/${user.uid}/lastSeen`);
          onDisconnect(userOnlineRef).set(false);
