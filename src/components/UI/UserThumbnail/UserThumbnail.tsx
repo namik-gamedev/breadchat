@@ -12,6 +12,7 @@ import { IUser } from 'src/types/types';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import { Trans } from 'react-i18next';
 
 export interface UserThumbnailProps {
    goToChatOnClick?: boolean;
@@ -39,7 +40,7 @@ export const UserThumbnail: FC<UserThumbnailProps> = ({ goToChatOnClick = false,
                {user.displayName}
             </Typography>
             <Typography variant='body1' sx={{ color: 'text.secondary' }}>
-               {user.online ? 'Online' : `last seen ${moment(user.lastSeen).calendar()}`}
+               <Trans values={{ time: moment(user.lastSeen).calendar() }}>{user.online ? 'online' : 'last seen {{time}}'}</Trans>
             </Typography>
          </Box>
       </Stack>
