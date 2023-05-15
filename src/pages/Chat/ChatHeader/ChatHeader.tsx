@@ -30,6 +30,7 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ chat, interlocutor }) => {
    const { t } = useTranslation();
 
    const handleClear = (alsoForInterlocutor: boolean) => {
+      console.log('clear');
       ChatService.clear(user.uid, interlocutor.uid, alsoForInterlocutor);
    };
 

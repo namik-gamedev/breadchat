@@ -1,14 +1,14 @@
-import { child, increment, ref, remove, set } from 'firebase/database';
+import { child, increment, ref, remove, set, update } from 'firebase/database';
 import { db } from 'src/firebase/firebase';
 import { IUser } from 'src/types/types';
 
 export default class ChatService {
    static create(user: IUser, interlocutor: IUser) {
-      const chatRef = ref(db, `chats/${user.uid}/${interlocutor.uid}`);
-      set(chatRef, { interlocutor });
+      const interlocutorRef = ref(db, `chats/${user.uid}/${interlocutor.uid}/interlocutor`);
+      update(interlocutorRef, { interlocutor });
 
-      const interlocutorChatRef = ref(db, `chats/${interlocutor.uid}/${user.uid}`);
-      set(interlocutorChatRef, { interlocutor: user });
+      const interlocutorsInterlocutorRef = ref(db, `chats/${interlocutor.uid}/${user.uid}/interlocutor`);
+      update(interlocutorsInterlocutorRef, { interlocutor: user });
    }
 
    static clear(uid: string, interlocutorUid: string, alsoForInterlocutor: boolean = false) {
