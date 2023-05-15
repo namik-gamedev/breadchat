@@ -12,18 +12,21 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { isMessageUnreaded } from 'src/utils/isMessageUnreaded.util';
 import { UnreadedMessagesCountDisplay } from 'src/components/UI/UnreadedMessagesCountDisplay';
 import moment from 'moment';
+import { useAppSelector } from 'src/hooks/useAppSelector';
 
 export interface ChatThumbnailProps {
    chat: IChat;
 }
 
 export const ChatThumbnail: FC<ChatThumbnailProps> = ({ chat }) => {
+   const interlocutor = useAppSelector((state) => state.users.data).find((user) => user.uid === chat.interlocutor.uid)!;
+
    const lastMessage = chat.messages[chat.messages.length - 1];
    const isLastMessageUnreaded = isMessageUnreaded(chat, lastMessage);
 
    return (
       <Stack component={UnstyledLink} to={`/chat/${chat.interlocutor.uid}`} sx={{ alignItems: 'center' }} direction='row' spacing={2}>
-         <UserAvatar sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={chat.interlocutor} />
+         <UserAvatar sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={interlocutor} />
          <Box sx={{ minWidth: 0, width: 1 }}>
             <Stack direction='row' spacing={1} sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
                <Typography noWrap variant='h6' sx={{ fontWeight: chat.unreadedMessagesCount > 0 ? 500 : 'normal' }} component='h2'>
