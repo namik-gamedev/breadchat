@@ -18,7 +18,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ chat }) => {
    useEffect(() => {
       scroll();
    }, [chat?.messages]);
-   console.log(chat);
 
    return (
       <Box ref={ref} sx={{ height: 1, overflow: 'auto' }}>

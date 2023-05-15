@@ -7,8 +7,6 @@ export interface UnreadedMessagesCountDisplayProps extends StackProps {
 }
 
 export const UnreadedMessagesCountDisplay = styled(({ count, ...props }: UnreadedMessagesCountDisplayProps) => {
-   console.log(count);
-
    return (
       <Stack {...props}>
          <Typography sx={{ fontSize: 'inherit' }} variant='subtitle2'>
