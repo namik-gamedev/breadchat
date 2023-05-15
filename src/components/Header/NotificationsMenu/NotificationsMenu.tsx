@@ -24,7 +24,7 @@ export const NotificationsMenu: FC<NotificationsMenuProps> = ({}) => {
    return (
       <Box>
          <IconButton onClick={handleShow}>
-            <Badge variant='dot' color='info'>
+            <Badge invisible={!chatsWithUnreadedMessages.length} variant='dot' color='info'>
                <NotificationsNoneIcon color='primary' />
             </Badge>
          </IconButton>
