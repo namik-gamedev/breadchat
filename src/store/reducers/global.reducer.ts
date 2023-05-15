@@ -5,8 +5,14 @@ export interface IDataLoad {
    chats: boolean;
 }
 
+export enum Language {
+   EN = 'en',
+   RU = 'ru',
+}
+
 interface StateType {
    darkTheme: boolean;
+   language: Language;
    dataLoad: IDataLoad;
 }
 
@@ -17,6 +23,7 @@ const dataLoadInitialState = {
 
 const initialState: StateType = {
    darkTheme: false,
+   language: Language.EN,
    dataLoad: dataLoadInitialState,
 };
 
@@ -26,6 +33,9 @@ const GlobalSlice = createSlice({
    reducers: {
       setDarkTheme: (state, { payload }: PayloadAction<boolean>) => {
          state.darkTheme = payload;
+      },
+      setLanguage: (state, { payload }: PayloadAction<Language>) => {
+         state.language = payload;
       },
       setUsersLoad: (state, { payload }: PayloadAction<boolean>) => {
          state.dataLoad.users = payload;
@@ -40,4 +50,4 @@ const GlobalSlice = createSlice({
 });
 
 export const globalReducer = GlobalSlice.reducer;
-export const { setDarkTheme, setUsersLoad, setChatsLoad, unsetDataLoad } = GlobalSlice.actions;
+export const { setDarkTheme, setUsersLoad, setChatsLoad, unsetDataLoad, setLanguage } = GlobalSlice.actions;
