@@ -22,7 +22,7 @@ export const LanguageToggler: FC<LanguageTogglerProps> = ({}) => {
 
    useEffect(() => {
       dispatch(setLanguage(lang));
-      moment.updateLocale(lang, lang === Language.EN ? ruLocaleSpec : enLocaleSpec);
+      moment.updateLocale(lang, lang === Language.EN ? enLocaleSpec : ruLocaleSpec);
       i18n.changeLanguage(lang);
    }, [lang]);
 
