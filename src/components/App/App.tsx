@@ -32,13 +32,17 @@ export const App: FC<AppProps> = ({}) => {
    useDBSetup();
 
    useEffect(() => {
-      const userOnlineRef = ref(db, `users/${user?.uid}/online`);
-      const lastSeeneRef = ref(db, `users/${user?.uid}/lastSeen`);
-      onDisconnect(userOnlineRef).set(false);
-      onDisconnect(lastSeeneRef).set(serverTimestamp());
-
       moment.updateLocale(language, enLocaleSpec);
    }, []);
+
+   useEffect(() => {
+      if (user) {
+         const userOnlineRef = ref(db, `users/${user.uid}/online`);
+         const lastSeeneRef = ref(db, `users/${user.uid}/lastSeen`);
+         onDisconnect(userOnlineRef).set(false);
+         onDisconnect(lastSeeneRef).set(serverTimestamp());
+      }
+   }, [user]);
 
    return (
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
