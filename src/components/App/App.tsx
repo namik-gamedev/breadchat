@@ -18,6 +18,8 @@ import { useDBSetup } from 'src/hooks/useDBSetup';
 import { useBeforeUnload } from 'react-router-dom';
 import { useDataLoaded } from 'src/hooks/useDataLoaded';
 import UserService from 'src/services/user.service';
+import { enLocaleSpec } from 'src/locales/en.localeSpec';
+import moment from 'moment';
 
 export interface AppProps {}
 
@@ -25,6 +27,7 @@ export const App: FC<AppProps> = ({}) => {
    const isDark = useAppSelector((state) => state.global.darkTheme);
    const user = useAppSelector((state) => state.user.data);
    const allDataLoaded = useDataLoaded();
+   const language = useAppSelector((state) => state.global.language);
 
    useDBSetup();
 
@@ -33,6 +36,8 @@ export const App: FC<AppProps> = ({}) => {
       const lastSeeneRef = ref(db, `users/${user?.uid}/lastSeen`);
       onDisconnect(userOnlineRef).set(false);
       onDisconnect(lastSeeneRef).set(serverTimestamp());
+
+      moment.updateLocale(language, enLocaleSpec);
    }, []);
 
    return (
