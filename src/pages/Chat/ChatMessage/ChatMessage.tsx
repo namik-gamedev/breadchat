@@ -55,17 +55,17 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
 
    return (
       <Stack {...props}>
-         <Box onClick={handleShow} className='chatMessageWrapper'>
+         <Stack spacing={0.2} onClick={handleShow} className='chatMessageWrapper'>
+            <Typography variant='body2' className='chatMessageDate'>
+               {moment(message.createdAt).calendar()}
+               {message.sender === 0 && (isUnreaded ? <CheckIcon fontSize='small' /> : <DoneAllIcon fontSize='small' />)}
+            </Typography>
             <Stack direction='row' spacing={1} alignItems='end'>
                <Typography variant='body1' className='chatMessageText'>
                   {message.text}
                </Typography>
-               <Typography variant='body2' className='chatMessageDate'>
-                  {moment(message.createdAt).calendar()}
-                  {message.sender === 0 && (isUnreaded ? <CheckIcon fontSize='small' /> : <DoneAllIcon fontSize='small' />)}
-               </Typography>
             </Stack>
-         </Box>
+         </Stack>
 
          <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
             <ChatMessageMenuItems handleClose={handleClose} handleDeleteClick={handleDeleteClick} messageText={message.text} />
@@ -121,6 +121,7 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
          display: 'flex',
          gap: spacing(0.5),
          wordBreak: 'keep-all',
+         whiteSpace: 'nowrap',
          color: 'rgba(255, 255, 255, 0.6)',
       },
    },
