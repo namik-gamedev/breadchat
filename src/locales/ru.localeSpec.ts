@@ -1,5 +1,6 @@
 export const ruLocaleSpec: moment.LocaleSpecification = {
    monthsShort: 'Янв_Фев_Мар_Апр_Май_Июн_Июл_Авг_Сен_Окт_Ноя_Дек'.split('_'),
+   weekdays: 'Понедельник_Вторник_Среда_Четверг_Пятница_Суббота_Воскресенье'.split('_'),
    weekdaysMin: 'Пн_Вт_Ср_Чт_Пт_Сб_Вс'.split('_'),
    calendar: {
       lastDay: '[вчера] HH:mm',

@@ -21,7 +21,7 @@
    "or sign in with": "или войти с помощью",
    "or": "или",
    "online": "В сети",
-   "last seen": "Был(а) ",
+   "last seen {{time}}": "Был(а) {{time}}",
    "typing": "Печатает...",
    "copy": "Скопировать",
    "delete": "Удалить",

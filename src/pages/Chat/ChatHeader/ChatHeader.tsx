@@ -15,7 +15,7 @@ import { UserThumbnail } from 'src/components/UI/UserThumbnail';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 import { useOpen } from 'src/hooks/useOpen';
 import { ChatHeaderDialog } from './ChatHeaderDialog';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 
 export interface ChatHeaderProps {
    chat: IChat | undefined;
@@ -43,11 +43,9 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ chat, interlocutor }) => {
                      {interlocutor.displayName}
                   </Typography>
                   <Typography variant='body1' sx={{ color: 'text.secondary' }}>
-                     {chat?.interlocutorTyping
-                        ? t('typing')
-                        : interlocutor.online
-                        ? t('online')
-                        : `${t('last seen')}  ${moment(interlocutor.lastSeen).calendar()}`}
+                     <Trans values={{ time: moment(interlocutor.lastSeen).calendar() }}>
+                        {chat?.interlocutorTyping ? 'typing' : interlocutor.online ? 'online' : `last seen {{time}}`}
+                     </Trans>
                   </Typography>
                </Box>
             </Stack>
