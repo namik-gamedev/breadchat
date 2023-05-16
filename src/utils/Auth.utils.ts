@@ -1,6 +1,6 @@
 import { EMAIL_ALREADY_IN_USE_ERR, TOO_MANY_REQUESTS_ERR, USER_NOT_FOUND_ERR, WRONG_PASSWORD_ERR } from 'src/constants/Auth.consts';
 
-export type SignInErrorField = 'status' | 'email' | 'password';
+export type SignInErrorField = 'email' | 'password';
 export interface SignInError {
    field: SignInErrorField;
    message: string;
@@ -21,7 +21,7 @@ export const getSignInError = (code: string): SignInError | undefined => {
          };
       case 'auth/too-many-requests':
          return {
-            field: 'status',
+            field: 'email',
             message: TOO_MANY_REQUESTS_ERR,
          };
       default: {
