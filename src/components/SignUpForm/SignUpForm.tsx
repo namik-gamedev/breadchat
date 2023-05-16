@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import FormHelperText from '@mui/material/FormHelperText';
 import * as Yup from 'yup';
-import { useFormik } from 'formik';
+import { FormikHelpers, useFormik } from 'formik';
 import {
    CONFIRM_PASSWORD_FORM_ERR,
    EMAIL_FORM_REGEXP,
@@ -25,6 +25,7 @@ import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import UserService from 'src/services/user.service';
 import { getSignUpError } from 'src/utils/Auth.utils';
+import { Trans, useTranslation } from 'react-i18next';
 
 type photoURLType = string | null;
 
@@ -57,35 +58,35 @@ export const SignUpForm: FC<SignUpFormProps> = ({}) => {
    const dispatch = useAppDispatch();
    const navigate = useNavigate();
 
-   const { handleChange, handleBlur, handleSubmit, errors, isSubmitting, status } = useFormik<SignUpValues>({
-      initialValues,
-      onSubmit: async ({ email, password, name }, { setSubmitting, setFieldError, setStatus }) => {
-         try {
-            const auth = appAuth;
+   const { t } = useTranslation();
 
-            const {
-               user: { uid, displayName, photoURL },
-            } = await createUserWithEmailAndPassword(auth, email, password);
-            await updateProfile(appAuth.currentUser!, { displayName, photoURL });
-            await UserService.setup({ displayName: name, uid, photoURL, online: true, lastSeen: Date.now() }); // TODO: add here photoURL
+   const onSubmit = async ({ email, password, name }: SignUpValues, { setSubmitting, setFieldError, setStatus }: FormikHelpers<SignUpValues>) => {
+      try {
+         const auth = appAuth;
 
-            await signInWithEmailAndPassword(auth, email, password);
+         const {
+            user: { uid, displayName, photoURL },
+         } = await createUserWithEmailAndPassword(auth, email, password);
+         await updateProfile(appAuth.currentUser!, { displayName, photoURL });
+         await UserService.setup({ displayName: name, uid, photoURL, online: true, lastSeen: Date.now() }); // TODO: add here photoURL
 
-            dispatch(setUser({ displayName: name, uid, online: true, lastSeen: Date.now() }));
-            navigate('/');
-         } catch (e: any) {
-            const error = getSignUpError(e.code);
-            if (error) {
-               const { field, message } = error;
-               if (field === 'status') {
-                  setStatus(message);
-               } else {
-                  setFieldError(field, message);
-               }
-            }
+         await signInWithEmailAndPassword(auth, email, password);
+
+         dispatch(setUser({ displayName: name, uid, online: true, lastSeen: Date.now() }));
+         navigate('/');
+      } catch (e: any) {
+         const error = getSignUpError(e.code);
+         if (error) {
+            const { field, message } = error;
+            setFieldError(field, message);
          }
-         setSubmitting(false);
-      },
+      }
+      setSubmitting(false);
+   };
+
+   const { handleChange, handleBlur, handleSubmit, errors, isSubmitting } = useFormik<SignUpValues>({
+      initialValues,
+      onSubmit,
       validationSchema,
    });
 
@@ -93,7 +94,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({}) => {
       <StyledForm onSubmit={handleSubmit}>
          <TextField
             error={!!errors.name}
-            helperText={errors.name}
+            helperText={errors.name && t(errors.name)}
             onBlur={handleBlur}
             onChange={handleChange}
             type='text'
@@ -103,7 +104,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({}) => {
          />
          <TextField
             error={!!errors.email}
-            helperText={errors.email}
+            helperText={errors.email && t(errors.email)}
             onBlur={handleBlur}
             onChange={handleChange}
             type='email'
@@ -113,7 +114,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({}) => {
          />
          <PasswordField
             error={!!errors.password}
-            helperText={errors.password}
+            helperText={errors.password && t(errors.password)}
             onBlur={handleBlur}
             onChange={handleChange}
             name='password'
@@ -122,7 +123,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({}) => {
          />
          <PasswordField
             error={!!errors.confirmPassword}
-            helperText={errors.confirmPassword}
+            helperText={errors.confirmPassword && t(errors.confirmPassword)}
             onBlur={handleBlur}
             onChange={handleChange}
             name='confirmPassword'
@@ -132,7 +133,6 @@ export const SignUpForm: FC<SignUpFormProps> = ({}) => {
          <Button disabled={isSubmitting} type='submit' variant='contained'>
             Sign up
          </Button>
-         {status && <FormHelperText sx={{ color: 'error.main' }}>{status}</FormHelperText>}
       </StyledForm>
    );
 };
