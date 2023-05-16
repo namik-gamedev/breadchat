@@ -29,3 +29,17 @@ export const getSignInError = (code: string): SignInError | undefined => {
       }
    }
 };
+
+export const getSignUpError = (code: string): SignInError | undefined => {
+   // todo: дополнить ошибки
+   switch (code) {
+      case 'auth/email-already-in-use':
+         return {
+            field: 'status',
+            message: TOO_MANY_REQUESTS_ERR,
+         };
+      default: {
+         return;
+      }
+   }
+};
