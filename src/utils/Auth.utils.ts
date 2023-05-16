@@ -1,4 +1,4 @@
-import { TOO_MANY_REQUESTS_ERR, USER_NOT_FOUND_ERR, WRONG_PASSWORD_ERR } from 'src/constants/Auth.consts';
+import { EMAIL_ALREADY_IN_USE_ERR, TOO_MANY_REQUESTS_ERR, USER_NOT_FOUND_ERR, WRONG_PASSWORD_ERR } from 'src/constants/Auth.consts';
 
 export type SignInErrorField = 'status' | 'email' | 'password';
 export interface SignInError {
@@ -35,8 +35,8 @@ export const getSignUpError = (code: string): SignInError | undefined => {
    switch (code) {
       case 'auth/email-already-in-use':
          return {
-            field: 'status',
-            message: TOO_MANY_REQUESTS_ERR,
+            field: 'email',
+            message: EMAIL_ALREADY_IN_USE_ERR,
          };
       default: {
          return;
