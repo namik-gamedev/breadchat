@@ -7,6 +7,7 @@ import { ChatMessage } from '../ChatMessage/ChatMessage';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useScroll } from 'src/hooks/useScroll';
 import { StyledBox } from 'src/components/UI/StyledBox';
+import { Trans } from 'react-i18next';
 
 export interface ChatMessagesProps {
    chat: IChat | undefined;
@@ -34,7 +35,9 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ chat }) => {
             </Stack>
          ) : (
             <Stack sx={{ justifyContent: 'center', alignItems: 'center', height: 1 }}>
-               <Typography variant='body1'>No messages in chat ;(</Typography>
+               <Typography variant='body1'>
+                  <Trans>no messages</Trans>
+               </Typography>
             </Stack>
          )}
       </Box>

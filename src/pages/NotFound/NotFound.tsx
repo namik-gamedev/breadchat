@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 import errorImg from 'src/assets/img/404.png';
+import { Trans } from 'react-i18next';
 
 export interface NotFoundProps {}
 
@@ -32,7 +33,7 @@ export const NotFound: FC<NotFoundProps> = ({}) => {
             }}
             variant='h2'
          >
-            Oops...
+            <Trans>oops</Trans>
          </Typography>
          <Typography
             sx={{
@@ -42,10 +43,9 @@ export const NotFound: FC<NotFoundProps> = ({}) => {
                },
                letterSpacing: 1,
                fontWeight: 300,
-               color: 'text.secondary',
             }}
          >
-            We couldn't find that page.
+            <Trans>we couldn't find that page</Trans>
          </Typography>
          {/* <UnstyledLink to='/'>
             <Button size='large' variant='contained'>

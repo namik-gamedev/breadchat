@@ -8,6 +8,7 @@ import moment from 'moment';
 import { enLocaleSpec } from 'src/locales/en.localeSpec';
 import { ruLocaleSpec } from 'src/locales/ru.localeSpec';
 import i18n from 'src/i18n/i18n';
+import { useTranslation } from 'react-i18next';
 
 export interface LanguageTogglerProps {}
 
@@ -15,6 +16,8 @@ export const LanguageToggler: FC<LanguageTogglerProps> = ({}) => {
    const dispatch = useAppDispatch();
 
    const [lang, setLang] = useState<Language>(Language.EN);
+
+   const { t } = useTranslation();
 
    const handleClick = () => {
       setLang(lang === Language.EN ? Language.RU : Language.EN);
@@ -27,7 +30,7 @@ export const LanguageToggler: FC<LanguageTogglerProps> = ({}) => {
    }, [lang]);
 
    return (
-      <Tooltip title={`Toggle ${lang === Language.EN ? 'russian' : 'english'}`} arrow>
+      <Tooltip title={t(lang === Language.EN ? 'toggle russian' : 'toggle english')} arrow>
          <IconButton onClick={handleClick}>
             {lang === Language.RU ? (
                <Typography fontWeight='bold' color='primary'>

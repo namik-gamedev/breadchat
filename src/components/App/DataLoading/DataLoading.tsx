@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import { Trans } from 'react-i18next';
 
 export interface DataLoadingProps {}
 
@@ -12,10 +13,10 @@ export const DataLoading: FC<DataLoadingProps> = ({}) => {
       <Stack alignItems='center' spacing={3} sx={{ pt: '30vh' }}>
          <CircularProgress size={70} />
          <Typography variant='h5' textAlign='center'>
-            Please, wait for few seconds!
+            <Trans>wait for few seconds</Trans>
          </Typography>
-         <Typography variant='body1' sx={{ color: 'text.secondary', letterSpacing: 1, textAlign: 'center' }}>
-            We're just trying to load a data before you'll see all the content ;)
+         <Typography variant='body1' sx={{ letterSpacing: 1, textAlign: 'center' }}>
+            <Trans>we're trying to load a data</Trans>
          </Typography>
       </Stack>
    );

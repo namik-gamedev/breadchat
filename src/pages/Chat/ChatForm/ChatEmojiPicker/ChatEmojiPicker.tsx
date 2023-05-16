@@ -11,6 +11,9 @@ import Picker from '@emoji-mart/react';
 import emojiMartData from '@emoji-mart/data/sets/14/apple.json';
 import { useTheme } from '@mui/material';
 import { useAnchorEl } from 'src/hooks/useAnchorEl';
+import { useAppSelector } from 'src/hooks/useAppSelector';
+import EmojiPicker, { EmojiStyle, Theme, Categories } from 'emoji-picker-react';
+import { useTranslation } from 'react-i18next';
 
 export interface ChatEmojiPickerProps {
    setMessageText: React.Dispatch<SetStateAction<string>>;
@@ -18,6 +21,8 @@ export interface ChatEmojiPickerProps {
 
 export const ChatEmojiPicker: FC<ChatEmojiPickerProps> = ({ setMessageText }) => {
    const { anchorEl, open, handleShow, handleClose } = useAnchorEl();
+
+   const { t } = useTranslation();
 
    const theme = useTheme();
 
@@ -45,7 +50,50 @@ export const ChatEmojiPicker: FC<ChatEmojiPickerProps> = ({ setMessageText }) =>
             onClose={handleClose}
             elevation={3}
          >
-            <Picker set='apple' data={emojiMartData} theme={theme.palette.mode} emojiSize={20} perLine={10} onEmojiSelect={handleEmojiSelect} />
+            <EmojiPicker
+               emojiStyle={EmojiStyle.APPLE}
+               categories={[
+                  {
+                     category: Categories.SUGGESTED,
+                     name: t('recently used"'),
+                  },
+                  {
+                     category: Categories.SMILEYS_PEOPLE,
+                     name: t('smileys and people'),
+                  },
+                  {
+                     category: Categories.ANIMALS_NATURE,
+                     name: t('animals and nature'),
+                  },
+                  {
+                     category: Categories.FOOD_DRINK,
+                     name: t('food and drink'),
+                  },
+                  {
+                     category: Categories.TRAVEL_PLACES,
+                     name: t('travel and places'),
+                  },
+                  {
+                     category: Categories.ACTIVITIES,
+                     name: t('activities'),
+                  },
+                  {
+                     category: Categories.OBJECTS,
+                     name: t('objects'),
+                  },
+                  {
+                     category: Categories.SYMBOLS,
+                     name: t('symbols'),
+                  },
+                  {
+                     category: Categories.FLAGS,
+                     name: t('flags'),
+                  },
+               ]}
+               theme={theme.palette.mode as Theme}
+               lazyLoadEmojis
+               onEmojiClick={handleEmojiSelect}
+            />
          </Popover>
       </Box>
    );

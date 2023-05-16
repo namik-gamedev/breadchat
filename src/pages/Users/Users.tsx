@@ -11,6 +11,7 @@ import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { UserThumbnail } from '../../components/UI/UserThumbnail';
 import IconButton from '@mui/material/IconButton';
+import { Trans, useTranslation } from 'react-i18next';
 
 export interface UsersProps {}
 
@@ -20,8 +21,10 @@ export const Users: FC<UsersProps> = ({}) => {
    const users = useAppSelector((state) => state.users.data);
    const { uid } = useAppSelector((state) => state.user.data!);
 
+   const { t } = useTranslation();
+
    useEffect(() => {
-      document.title = 'Users';
+      document.title = t('users');
 
       return () => {
          document.title = 'Bread';
@@ -31,7 +34,7 @@ export const Users: FC<UsersProps> = ({}) => {
    return (
       <Stack component={StyledBox} spacing={1} sx={{ pt: 2, height: 1, overflow: 'auto' }}>
          <Typography sx={{ textAlign: 'center' }} variant='h4'>
-            Users
+            <Trans>users</Trans>
          </Typography>
          {users.length > 0 ? (
             <MenuList>
@@ -54,7 +57,9 @@ export const Users: FC<UsersProps> = ({}) => {
             </MenuList>
          ) : (
             <Stack sx={{ justifyContent: 'center', alignItems: 'center', height: 1 }}>
-               <Typography variant='body1'>No users ;(</Typography>
+               <Typography variant='body1'>
+                  <Trans>no users</Trans>
+               </Typography>
             </Stack>
          )}
       </Stack>

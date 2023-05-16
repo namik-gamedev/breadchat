@@ -11,6 +11,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import { IUser } from 'src/types/types';
 import Stack from '@mui/material/Stack';
+import { Trans } from 'react-i18next';
 
 export interface ConfirmDialogProps {
    open: boolean;
@@ -43,10 +44,10 @@ export const ConfirmDialog: FC<ConfirmDialogProps> = ({ open, handleClose, title
          </DialogContent>
          <DialogActions>
             <Button color='info' onClick={handleClose}>
-               Cancel
+               <Trans>cancel</Trans>
             </Button>
             <Button color='error' onClick={handleConfirm}>
-               Confirm
+               <Trans>confirm</Trans>
             </Button>
          </DialogActions>
       </Dialog>

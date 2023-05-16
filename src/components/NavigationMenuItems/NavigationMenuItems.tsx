@@ -6,6 +6,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import ForumIcon from '@mui/icons-material/Forum';
 import Typography from '@mui/material/Typography';
 import { UnstyledLink } from '../UI/UnstyledLink';
+import { Trans } from 'react-i18next';
 
 export interface NavigationMenuItemsProps {
    handleClose?: () => void;
@@ -18,14 +19,18 @@ export const NavigationMenuItems: FC<NavigationMenuItemsProps> = ({ handleClose 
             <ListItemIcon>
                <GroupIcon color='primary' />
             </ListItemIcon>
-            <Typography>Users</Typography>
+            <Typography>
+               <Trans>users</Trans>
+            </Typography>
          </MenuItem>
 
          <MenuItem component={UnstyledLink} to='/chats' onClick={handleClose}>
             <ListItemIcon>
                <ForumIcon color='primary' />
             </ListItemIcon>
-            <Typography>Chats</Typography>
+            <Typography>
+               <Trans>chats</Trans>
+            </Typography>
          </MenuItem>
       </>
    );

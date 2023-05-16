@@ -22,6 +22,7 @@ import ChatService from 'src/services/chat.service';
 import { ChatEmojiPicker } from './ChatEmojiPicker';
 import { debounce } from 'src/utils/debounce.util';
 import { useDebounce } from 'src/hooks/useDebounce';
+import { useTranslation } from 'react-i18next';
 
 export interface ChatFormProps {
    chat: IChat | undefined;
@@ -32,6 +33,8 @@ export const ChatForm: FC<ChatFormProps> = ({ chat, interlocutor }) => {
    const user = useAppSelector((state) => state.user.data!);
    const [messageText, setMessageText] = useState('');
    const [isInputError, setIsInputError] = useState(false);
+
+   const { t } = useTranslation();
 
    const setUserTypingToFalse = useDebounce(() => {
       ChatService.setTyping(user.uid, interlocutor.uid, false);
@@ -63,7 +66,7 @@ export const ChatForm: FC<ChatFormProps> = ({ chat, interlocutor }) => {
             error={isInputError}
             value={messageText}
             onChange={handleChange}
-            label='Message'
+            label={t('message')}
             fullWidth
             multiline
             maxRows={7}
