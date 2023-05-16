@@ -24,6 +24,7 @@ import { setUser } from 'src/store/reducers/user.reducer';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import UserService from 'src/services/user.service';
+import { getSignUpError } from 'src/utils/Auth.utils';
 
 type photoURLType = string | null;
 
@@ -73,10 +74,14 @@ export const SignUpForm: FC<SignUpFormProps> = ({}) => {
             dispatch(setUser({ displayName: name, uid, online: true, lastSeen: Date.now() }));
             navigate('/');
          } catch (e: any) {
-            switch (e.code) {
-               case 'auth/email-already-in-use':
-                  setFieldError('email', EMAIL_ALREADY_IN_USE_ERR);
-                  break;
+            const error = getSignUpError(e.code);
+            if (error) {
+               const { field, message } = error;
+               if (field === 'status') {
+                  setStatus(message);
+               } else {
+                  setFieldError(field, message);
+               }
             }
          }
          setSubmitting(false);
