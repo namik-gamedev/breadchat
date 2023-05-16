@@ -26,7 +26,7 @@ import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { setUser } from 'src/store/reducers/user.reducer';
 import { StyledForm } from 'src/components/UI/StyledForm';
 import { useNavigate } from 'react-router-dom';
-import { getSignInError } from 'src/utils/getSignInError.util';
+import { getSignInError } from 'src/utils/Auth.utils';
 import { IUser } from 'src/types/types';
 import UserService from 'src/services/user.service';
 import { isAndroid } from 'react-device-detect';
