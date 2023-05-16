@@ -13,6 +13,7 @@ import { IChat } from 'src/types/types';
 import { onValue, ref } from 'firebase/database';
 import { UserThumbnail } from 'src/components/UI/UserThumbnail';
 import { ChatThumbnail } from './ChatThumbnail';
+import { Trans, useTranslation } from 'react-i18next';
 
 export interface ChatsProps {}
 
@@ -21,8 +22,10 @@ export const Chats: FC<ChatsProps> = ({}) => {
    const users = useAppSelector((state) => state.users.data);
    const chats = useAppSelector((state) => state.chats.data);
 
+   const { t } = useTranslation();
+
    useEffect(() => {
-      document.title = 'Chats';
+      document.title = t('chats');
 
       return () => {
          document.title = 'Bread';
@@ -32,7 +35,7 @@ export const Chats: FC<ChatsProps> = ({}) => {
    return (
       <Stack component={StyledBox} spacing={1} sx={{ pt: 2, height: 1, overflow: 'auto' }}>
          <Typography sx={{ textAlign: 'center' }} variant='h4'>
-            Chats
+            <Trans>chats</Trans>
          </Typography>
 
          {chats.length > 0 ? (
@@ -53,7 +56,9 @@ export const Chats: FC<ChatsProps> = ({}) => {
             </MenuList>
          ) : (
             <Stack sx={{ justifyContent: 'center', alignItems: 'center', height: 1 }}>
-               <Typography variant='body1'>No chats ;(</Typography>
+               <Typography variant='body1'>
+                  <Trans>no chats</Trans>
+               </Typography>
             </Stack>
          )}
       </Stack>

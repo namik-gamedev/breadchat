@@ -12,6 +12,7 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import Typography from '@mui/material/Typography';
 import { UserThumbnail } from 'src/components/UI/UserThumbnail';
 import { ChatThumbnail } from 'src/pages/Chats/ChatThumbnail';
+import { Trans } from 'react-i18next';
 
 export interface NotificationsMenuProps {}
 
@@ -54,7 +55,9 @@ export const NotificationsMenu: FC<NotificationsMenuProps> = ({}) => {
                      </Box>
                   ))
                ) : (
-                  <Typography sx={{ textAlign: 'center' }}>No notifications ;(</Typography>
+                  <Typography sx={{ textAlign: 'center' }}>
+                     <Trans>no notifications</Trans>
+                  </Typography>
                )}
             </Stack>
          </Popover>

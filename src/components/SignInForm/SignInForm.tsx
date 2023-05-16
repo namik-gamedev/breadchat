@@ -30,6 +30,8 @@ import { getSignInError } from 'src/utils/Auth.utils';
 import { IUser } from 'src/types/types';
 import UserService from 'src/services/user.service';
 import { isAndroid } from 'react-device-detect';
+import { Trans, useTranslation } from 'react-i18next';
+
 export interface SignInFormProps {}
 
 export interface SignInValues {
@@ -55,6 +57,8 @@ export const SignInForm: FC<SignInFormProps> = ({}) => {
    const dispatch = useAppDispatch();
    const navigate = useNavigate();
 
+   const { t } = useTranslation();
+
    const onSubmit = async ({ email, password }: SignInValues, { setSubmitting, setFieldError, setStatus }: FormikHelpers<SignInValues>) => {
       const auth = appAuth;
 
@@ -68,11 +72,7 @@ export const SignInForm: FC<SignInFormProps> = ({}) => {
          const error = getSignInError(e.code);
          if (error) {
             const { field, message } = error;
-            if (field === 'status') {
-               setStatus(message);
-            } else {
-               setFieldError(field, message);
-            }
+            setFieldError(field, message);
          }
       }
    };
@@ -106,30 +106,32 @@ export const SignInForm: FC<SignInFormProps> = ({}) => {
          <StyledForm onSubmit={handleSubmit}>
             <TextField
                error={!!errors.email}
-               helperText={errors.email}
+               helperText={errors.email && t(errors.email)}
                onBlur={handleBlur}
                onChange={handleChange}
                type='email'
                name='email'
-               label='Email'
+               label={t('email')}
                required
             />
             <PasswordField
                error={!!errors.password}
-               helperText={errors.password}
+               helperText={errors.password && t(errors.password)}
                onBlur={handleBlur}
                onChange={handleChange}
                name='password'
-               label='Password'
+               label={t('password')}
                required
             />
             <Button disabled={isSubmitting} type='submit' variant='contained'>
-               Sign in
+               <Trans>sign in</Trans>
             </Button>
             {status && <FormHelperText sx={{ color: 'error.main' }}>{status}</FormHelperText>}
          </StyledForm>
          <Divider>
-            <Typography sx={{ color: 'text.secondary' }}>or sign in with</Typography>
+            <Typography sx={{ color: 'text.secondary' }}>
+               <Trans>or sign in with</Trans>
+            </Typography>
             {/* google and other icons */}
          </Divider>
          <Stack justifyContent='center' spacing={2} direction='row'>

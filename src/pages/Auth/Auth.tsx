@@ -8,6 +8,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import Box from '@mui/material/Box';
 import { SignInForm } from 'src/components/SignInForm';
 import { SignUpForm } from 'src/components/SignUpForm';
+import { Trans, useTranslation } from 'react-i18next';
 
 export interface AuthProps {}
 
@@ -17,6 +18,8 @@ const tabSx = { fontSize: '1.2em', fontWeight: 500 };
 const orTabSx = { ...tabSx, fontWeight: 400 };
 
 export const Auth: FC<AuthProps> = ({}) => {
+   const { t } = useTranslation();
+
    const [tab, setTab] = useState<AuthTab>('signIn');
 
    const handleTabChange = (e: any, newValue: AuthTab) => {
@@ -25,9 +28,9 @@ export const Auth: FC<AuthProps> = ({}) => {
 
    useEffect(() => {
       if (tab === 'signIn') {
-         document.title = 'Sign in';
+         document.title = t('sign in');
       } else {
-         document.title = 'Sign up';
+         document.title = t('sign up');
       }
 
       return () => {
@@ -38,13 +41,41 @@ export const Auth: FC<AuthProps> = ({}) => {
    return (
       <Stack spacing={2} justifyContent='center' alignItems='center'>
          <Typography sx={{ fontWeight: 300, textAlign: 'center' }} variant='h4'>
-            You want to...
+            <Trans>you want to</Trans>
          </Typography>
          <TabContext value={tab}>
             <TabList selectionFollowsFocus onChange={handleTabChange}>
-               <Tab label={<Typography sx={tabSx}>sign in</Typography>} value='signIn' />
-               <Tab disabled label={<Typography sx={orTabSx}>or</Typography>} value='signUp' />
-               <Tab label={<Typography sx={tabSx}>sign up</Typography>} value='signUp' />
+               <Tab
+                  label={
+                     <Typography sx={tabSx}>
+                        <Trans>sign in</Trans>
+                     </Typography>
+                  }
+                  value='signIn'
+               />
+               <Tab
+                  sx={{
+                     display: {
+                        sm: 'block',
+                        xs: 'none',
+                     },
+                  }}
+                  disabled
+                  label={
+                     <Typography sx={orTabSx}>
+                        <Trans>or</Trans>
+                     </Typography>
+                  }
+                  value='signUp'
+               />
+               <Tab
+                  label={
+                     <Typography sx={tabSx}>
+                        <Trans>sign up</Trans>
+                     </Typography>
+                  }
+                  value='signUp'
+               />
             </TabList>
             <Box
                sx={{

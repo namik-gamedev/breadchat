@@ -6,6 +6,7 @@ import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { setDarkTheme } from 'src/store/reducers/global.reducer';
 import Tooltip from '@mui/material/Tooltip';
+import { useTranslation } from 'react-i18next';
 
 export interface ThemeTogglerProps {}
 
@@ -13,6 +14,8 @@ export const ThemeToggler: FC<ThemeTogglerProps> = ({}) => {
    const dispatch = useAppDispatch();
 
    const [dark, setDark] = useState(false);
+
+   const { t } = useTranslation();
 
    const handleClick = () => {
       setDark((prev) => !prev);
@@ -23,7 +26,7 @@ export const ThemeToggler: FC<ThemeTogglerProps> = ({}) => {
    }, [dark]);
 
    return (
-      <Tooltip title={`Enable ${dark ? 'light' : 'dark'}`} arrow>
+      <Tooltip title={t(dark ? 'toggle light' : 'toggle dark')} arrow>
          <IconButton onClick={handleClick}>{dark ? <LightModeOutlinedIcon color='primary' /> : <DarkModeOutlinedIcon color='primary' />}</IconButton>
       </Tooltip>
    );

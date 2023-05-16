@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import Typography from '@mui/material/Typography';
 import { ConfirmDialog } from 'src/components/UI/ConfirmDialog';
+import { Trans, useTranslation } from 'react-i18next';
 
 export interface ChatHeaderDialogProps {
    open: boolean;
@@ -10,15 +11,17 @@ export interface ChatHeaderDialogProps {
 }
 
 export const ChatHeaderDialog: FC<ChatHeaderDialogProps> = ({ open, handleClose, interlocutorDisplayName, handleAction }) => {
+   const { t } = useTranslation();
+
    return (
       <ConfirmDialog
          open={open}
          handleClose={handleClose}
-         title='Clear chat'
-         contentText='Are you sure you want to clear this chat?'
+         title={t('clear chat')}
+         contentText={t('are you sure you want to clear chat')}
          checkboxLabel={
             <Typography>
-               Also clear for{' '}
+               <Trans>also clear for</Trans>
                <Typography component='span' color='primary'>
                   {interlocutorDisplayName}
                </Typography>

@@ -99,7 +99,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({}) => {
             onChange={handleChange}
             type='text'
             name='name'
-            label='Name'
+            label={t('name')}
             required
          />
          <TextField
@@ -109,7 +109,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({}) => {
             onChange={handleChange}
             type='email'
             name='email'
-            label='Email'
+            label={t('email')}
             required
          />
          <PasswordField
@@ -118,7 +118,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({}) => {
             onBlur={handleBlur}
             onChange={handleChange}
             name='password'
-            label='Password'
+            label={t('password')}
             required
          />
          <PasswordField
@@ -127,11 +127,11 @@ export const SignUpForm: FC<SignUpFormProps> = ({}) => {
             onBlur={handleBlur}
             onChange={handleChange}
             name='confirmPassword'
-            label='Confirm password'
+            label={t('confirm password')}
             required
          />
          <Button disabled={isSubmitting} type='submit' variant='contained'>
-            Sign up
+            <Trans>sign up</Trans>
          </Button>
       </StyledForm>
    );
