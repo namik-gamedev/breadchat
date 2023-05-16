@@ -36,6 +36,7 @@ export const Users: FC<UsersProps> = ({}) => {
          {users.length > 0 ? (
             <MenuList>
                <Stack>
+                  <Divider />
                   {users.map(
                      (user) =>
                         user.uid !== uid && (

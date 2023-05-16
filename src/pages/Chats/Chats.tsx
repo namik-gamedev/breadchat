@@ -38,6 +38,7 @@ export const Chats: FC<ChatsProps> = ({}) => {
          {chats.length > 0 ? (
             <MenuList>
                <Stack>
+                  <Divider />
                   {chats.map((chat) => (
                      <>
                         <MenuItem>
