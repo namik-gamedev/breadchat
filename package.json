@@ -10,7 +10,7 @@
       "preview": "vite preview",
       "component": " npx generate-react-cli component",
       "page": " npx generate-react-cli component --path src/pages",
-      "skeleton": " npx generate-react-cli component --path src/components/skeletons",
+      "skeleton": " npx generate-react-cli component --path src/components/UI/skeletons",
       "uiComponent": " npx generate-react-cli component --path src/components/UI"
    },
    "dependencies": {
