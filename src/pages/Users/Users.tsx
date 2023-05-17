@@ -39,18 +39,14 @@ export const Users: FC<UsersProps> = ({}) => {
          {users.length > 0 ? (
             <MenuList>
                <Stack>
-                  <Divider />
                   {users.map(
                      (user) =>
                         user.uid !== uid && (
-                           <>
-                              <MenuItem>
-                                 <Box sx={{ width: 1 }}>
-                                    <UserThumbnail goToChatOnClick user={user} />
-                                 </Box>
-                              </MenuItem>
-                              <Divider />
-                           </>
+                           <MenuItem divider>
+                              <Box sx={{ width: 1 }}>
+                                 <UserThumbnail goToChatOnClick user={user} />
+                              </Box>
+                           </MenuItem>
                         )
                   )}
                </Stack>
