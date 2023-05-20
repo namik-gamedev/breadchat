@@ -26,8 +26,8 @@ export const ChatEmojiPicker: FC<ChatEmojiPickerProps> = ({ setMessageText }) =>
 
    const theme = useTheme();
 
-   const handleEmojiSelect = (emoji: any) => {
-      setMessageText((prev) => prev + emoji.native);
+   const handleEmojiSelect = ({ emoji }: EmojiClickData) => {
+      setMessageText((prev) => prev + emoji);
    };
 
    return (
@@ -55,7 +55,7 @@ export const ChatEmojiPicker: FC<ChatEmojiPickerProps> = ({ setMessageText }) =>
                categories={[
                   {
                      category: Categories.SUGGESTED,
-                     name: t('recently used"'),
+                     name: t('recently used'),
                   },
                   {
                      category: Categories.SMILEYS_PEOPLE,
