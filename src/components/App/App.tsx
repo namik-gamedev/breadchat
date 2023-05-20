@@ -26,7 +26,6 @@ export interface AppProps {}
 export const App: FC<AppProps> = ({}) => {
    const isDark = useAppSelector((state) => state.global.darkTheme);
    const user = useAppSelector((state) => state.user.data);
-   const allDataLoaded = useDataLoaded();
    const language = useAppSelector((state) => state.global.language);
 
    useDBSetup();
@@ -47,16 +46,10 @@ export const App: FC<AppProps> = ({}) => {
 
    return (
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-         {allDataLoaded ? (
-            <>
-               <CssBaseline enableColorScheme />
-               <Layout>
-                  <AppRoutes />
-               </Layout>
-            </>
-         ) : (
-            <DataLoading /> // todo: replace with skeletons
-         )}
+         <CssBaseline enableColorScheme />
+         <Layout>
+            <AppRoutes />
+         </Layout>
       </ThemeProvider>
    );
 };

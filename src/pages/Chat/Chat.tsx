@@ -26,11 +26,14 @@ import { ConfirmDialog } from 'src/components/UI/ConfirmDialog';
 import { IUser } from 'src/types/types';
 import ChatService from 'src/services/chat.service';
 import { useScroll } from 'src/hooks/useScroll';
+import { ChatSkeleton } from 'src/components/UI/skeletons/ChatSkeleton';
 
 export interface ChatProps {}
 
 export const Chat: FC<ChatProps> = ({}) => {
    const { interlocutorUid } = useParams();
+
+   const chatsLoad = useAppSelector((state) => state.global.dataLoad.chats);
 
    const user = useAppSelector((state) => state.user.data!);
    const interlocutor = useAppSelector((state) => state.users.data).find((user) => user.uid === interlocutorUid);
@@ -43,7 +46,7 @@ export const Chat: FC<ChatProps> = ({}) => {
       return () => {
          document.title = 'Bread';
       };
-   }, []);
+   }, [interlocutor]);
 
    useEffect(() => {
       if (interlocutor) {
@@ -55,17 +58,19 @@ export const Chat: FC<ChatProps> = ({}) => {
       }
    }, [chat?.messages]);
 
-   if (!interlocutor) {
-      return <NotFound />;
+   if (chatsLoad) {
+      return interlocutor ? (
+         <StyledBox sx={{ p: 2, height: 1 }}>
+            <Stack spacing={2} direction='column' sx={{ height: 1 }}>
+               <ChatHeader chat={chat} interlocutor={interlocutor} />
+               <ChatMessages chat={chat} />
+               <ChatForm chat={chat} interlocutor={interlocutor} />
+            </Stack>
+         </StyledBox>
+      ) : (
+         <NotFound />
+      );
+   } else {
+      return <ChatSkeleton />;
    }
-
-   return (
-      <StyledBox sx={{ p: 2, height: 1 }}>
-         <Stack spacing={2} direction='column' sx={{ height: 1 }}>
-            <ChatHeader chat={chat} interlocutor={interlocutor} />
-            <ChatMessages chat={chat} />
-            <ChatForm chat={chat} interlocutor={interlocutor} />
-         </Stack>
-      </StyledBox>
-   );
 };

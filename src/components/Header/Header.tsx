@@ -9,7 +9,6 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import { HeaderProfileMenu } from './HeaderProfileMenu';
 import Box from '@mui/material/Box';
 import { HeaderNavigationMenu } from './HeaderNavigationMenu';
-import { NotificationsMenu } from './NotificationsMenu';
 import { LanguageToggler } from './LanguageToggler';
 
 export interface HeaderProps {}
@@ -25,7 +24,6 @@ export const Header: FC<HeaderProps> = ({}) => {
                   {user && <HeaderNavigationMenu />}
                   <Logo />
                   <Stack spacing={1} direction='row' alignItems='center'>
-                     {user && <NotificationsMenu />}
                      <LanguageToggler />
                      <ThemeToggler />
                      {user && <HeaderProfileMenu />}
