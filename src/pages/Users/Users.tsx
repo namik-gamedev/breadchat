@@ -12,6 +12,9 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import { UserThumbnail } from '../../components/UI/UserThumbnail';
 import IconButton from '@mui/material/IconButton';
 import { Trans, useTranslation } from 'react-i18next';
+import { ChatsSkeleton } from 'src/components/UI/skeletons/ChatsSkeleton';
+import { useUsersLoad } from 'src/hooks/useUsersLoad';
+import { UsersSkeleton } from 'src/components/UI/skeletons/UsersSkeleton';
 
 export interface UsersProps {}
 
@@ -19,6 +22,7 @@ export interface UsersProps {}
 
 export const Users: FC<UsersProps> = ({}) => {
    const users = useAppSelector((state) => state.users.data);
+   const usersLoaded = useAppSelector((state) => state.global.dataLoad.users);
    const { uid } = useAppSelector((state) => state.user.data!);
 
    const { t } = useTranslation();
@@ -36,27 +40,31 @@ export const Users: FC<UsersProps> = ({}) => {
          <Typography sx={{ textAlign: 'center' }} variant='h4'>
             <Trans>users</Trans>
          </Typography>
-         {users.length > 0 ? (
-            <MenuList>
-               <Stack>
-                  {users.map(
-                     (user) =>
-                        user.uid !== uid && (
-                           <MenuItem divider>
-                              <Box sx={{ width: 1 }}>
-                                 <UserThumbnail goToChatOnClick user={user} />
-                              </Box>
-                           </MenuItem>
-                        )
-                  )}
+         {usersLoaded ? (
+            users.length > 0 ? (
+               <MenuList>
+                  <Stack>
+                     {users.map(
+                        (user) =>
+                           user.uid !== uid && (
+                              <MenuItem divider>
+                                 <Box sx={{ width: 1 }}>
+                                    <UserThumbnail goToChatOnClick user={user} />
+                                 </Box>
+                              </MenuItem>
+                           )
+                     )}
+                  </Stack>
+               </MenuList>
+            ) : (
+               <Stack sx={{ justifyContent: 'center', alignItems: 'center', height: 1 }}>
+                  <Typography variant='body1'>
+                     <Trans>no users</Trans>
+                  </Typography>
                </Stack>
-            </MenuList>
+            )
          ) : (
-            <Stack sx={{ justifyContent: 'center', alignItems: 'center', height: 1 }}>
-               <Typography variant='body1'>
-                  <Trans>no users</Trans>
-               </Typography>
-            </Stack>
+            <UsersSkeleton />
          )}
       </Stack>
    );

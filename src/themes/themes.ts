@@ -22,7 +22,7 @@ export const lightThemeOptions: ThemeOptions = {
    palette: {
       mode: 'light',
       primary: {
-         main: '#9c6141',
+         main: '#955d40',
          contrastText: '#eae0e0',
       },
       secondary: {
@@ -32,7 +32,8 @@ export const lightThemeOptions: ThemeOptions = {
          primary: 'rgba(0,0,0,0.87)',
       },
       background: {
-         paper: grey[300],
+         default: grey[200],
+         paper: grey[50],
       },
       error: {
          main: '#e04949',
@@ -45,7 +46,7 @@ export const darkThemeOptions: ThemeOptions = {
    palette: {
       mode: 'dark',
       primary: {
-         main: '#83543b',
+         main: '#955d40',
          contrastText: '#eae0e0',
       },
       secondary: {
@@ -55,7 +56,7 @@ export const darkThemeOptions: ThemeOptions = {
          primary: 'rgba(255,255,255,0.87)',
          secondary: 'rgba(255,255,255,0.57)',
       },
-      background: { default: '#1d1b1a', paper: '#292625' },
+      background: { default: '#171515', paper: '#221f1d' },
       error: {
          main: '#b94444',
       },
