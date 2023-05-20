@@ -12,7 +12,7 @@ import emojiMartData from '@emoji-mart/data/sets/14/apple.json';
 import { useTheme } from '@mui/material';
 import { useAnchorEl } from 'src/hooks/useAnchorEl';
 import { useAppSelector } from 'src/hooks/useAppSelector';
-import EmojiPicker, { EmojiStyle, Theme, Categories } from 'emoji-picker-react';
+import EmojiPicker, { EmojiStyle, Theme, Categories, EmojiClickData } from 'emoji-picker-react';
 import { useTranslation } from 'react-i18next';
 
 export interface ChatEmojiPickerProps {
