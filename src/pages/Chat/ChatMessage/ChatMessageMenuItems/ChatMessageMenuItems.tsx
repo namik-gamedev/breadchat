@@ -5,6 +5,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import copy from 'copy-to-clipboard';
+import { Trans } from 'react-i18next';
 
 export interface ChatMessageMenuItemsProps {
    handleClose: () => void;
@@ -24,13 +25,17 @@ export const ChatMessageMenuItems: FC<ChatMessageMenuItemsProps> = ({ handleClos
             <ListItemIcon sx={{ color: 'primary.main' }}>
                <ContentCopyIcon />
             </ListItemIcon>
-            <Typography>Copy</Typography>
+            <Typography>
+               <Trans>copy</Trans>
+            </Typography>
          </MenuItem>
          <MenuItem onClick={handleDeleteClick}>
             <ListItemIcon sx={{ color: 'primary.main' }}>
                <DeleteOutlinedIcon />
             </ListItemIcon>
-            <Typography>Delete</Typography>
+            <Typography>
+               <Trans>delete</Trans>
+            </Typography>
          </MenuItem>
       </>
    );
