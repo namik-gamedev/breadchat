@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useAppDispatch } from './useAppDispatch';
 import { onAuthStateChanged } from 'firebase/auth';
 import { appAuth } from 'src/firebase/firebase';
-import { unsetDataLoad } from 'src/store/reducers/global.reducer';
+import { setUserLoad, unsetDataLoad } from 'src/store/reducers/global.reducer';
 import { IUser } from 'src/types/types';
 import UserService from 'src/services/user.service';
 import { setUser } from 'src/store/reducers/user.reducer';
@@ -27,6 +27,7 @@ export const useUserLoad = () => {
 
             dispatch(setUser(newUser));
          }
+         dispatch(setUserLoad(true));
       });
 
       return unsubAuthState;
