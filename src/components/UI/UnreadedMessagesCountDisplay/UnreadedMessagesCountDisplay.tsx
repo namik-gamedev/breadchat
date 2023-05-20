@@ -15,7 +15,7 @@ export const UnreadedMessagesCountDisplay = styled(({ count, ...props }: Unreade
       </Stack>
    );
 })(({ count, theme: { palette, spacing } }) => ({
-   transition: '200ms ease',
+   transition: '200ms ease transform',
    transform: count === 0 ? 'scale(0)' : 'scale(1)',
    fontSize: '0.75em',
    paddingInline: 7,
