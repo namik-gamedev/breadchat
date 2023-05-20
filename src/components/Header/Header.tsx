@@ -26,7 +26,7 @@ export const Header: FC<HeaderProps> = ({}) => {
                   <Stack spacing={1} direction='row' alignItems='center'>
                      <LanguageToggler />
                      <ThemeToggler />
-                     {user && <HeaderProfileMenu />}
+                     <HeaderProfileMenu />
                   </Stack>
                </Stack>
             </Container>

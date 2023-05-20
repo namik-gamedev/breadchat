@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface IDataLoad {
+   user: boolean;
    users: boolean;
    chats: boolean;
 }
@@ -17,6 +18,7 @@ interface StateType {
 }
 
 const dataLoadInitialState = {
+   user: false,
    users: false,
    chats: false,
 };
@@ -37,6 +39,9 @@ const GlobalSlice = createSlice({
       setLanguage: (state, { payload }: PayloadAction<Language>) => {
          state.language = payload;
       },
+      setUserLoad: (state, { payload }: PayloadAction<boolean>) => {
+         state.dataLoad.user = payload;
+      },
       setUsersLoad: (state, { payload }: PayloadAction<boolean>) => {
          state.dataLoad.users = payload;
       },
@@ -50,4 +55,4 @@ const GlobalSlice = createSlice({
 });
 
 export const globalReducer = GlobalSlice.reducer;
-export const { setDarkTheme, setUsersLoad, setChatsLoad, unsetDataLoad, setLanguage } = GlobalSlice.actions;
+export const { setDarkTheme, setUsersLoad, setUserLoad, setChatsLoad, unsetDataLoad, setLanguage } = GlobalSlice.actions;

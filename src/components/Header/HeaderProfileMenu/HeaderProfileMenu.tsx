@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
+import Skeleton from '@mui/material/Skeleton';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -21,22 +22,33 @@ import { useAnchorEl } from 'src/hooks/useAnchorEl';
 export interface HeaderProfileMenuProps {}
 
 export const HeaderProfileMenu: FC<HeaderProfileMenuProps> = ({}) => {
-   const user = useAppSelector((state) => state.user.data!);
+   const user = useAppSelector((state) => state.user.data);
+   const userLoaded = useAppSelector((state) => state.global.dataLoad.user);
    const { anchorEl, open, handleShow, handleClose } = useAnchorEl();
 
-   return (
-      <Box
-         sx={{
-            display: {
-               sm: 'block',
-               xs: 'none',
-            },
-         }}
-      >
-         <UserAvatar user={user} onClick={handleShow} withoutBadge />
-         <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
-            <ProfileMenuItems handleClose={handleClose} />
-         </StyledMenu>
-      </Box>
-   );
+   if (user) {
+      return (
+         <Box
+            sx={{
+               display: {
+                  sm: 'block',
+                  xs: 'none',
+               },
+            }}
+         >
+            {userLoaded ? (
+               <UserAvatar user={user} onClick={handleShow} withoutBadge />
+            ) : (
+               <Skeleton variant='circular'>
+                  <Avatar />
+               </Skeleton>
+            )}
+            <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
+               <ProfileMenuItems handleClose={handleClose} />
+            </StyledMenu>
+         </Box>
+      );
+   } else {
+      return null;
+   }
 };
