@@ -27,6 +27,7 @@ import { IUser } from 'src/types/types';
 import ChatService from 'src/services/chat.service';
 import { useScroll } from 'src/hooks/useScroll';
 import { ChatSkeleton } from 'src/components/UI/skeletons/ChatSkeleton';
+import { useTranslation } from 'react-i18next';
 
 export interface ChatProps {}
 
@@ -40,8 +41,10 @@ export const Chat: FC<ChatProps> = ({}) => {
 
    const chat = useAppSelector((state) => state.chats.data).find((chat) => chat.interlocutor.uid === interlocutorUid);
 
+   const { t } = useTranslation();
+
    useEffect(() => {
-      document.title = interlocutor?.displayName || 'No user with this id';
+      document.title = interlocutor?.displayName || t('no user with this id');
 
       return () => {
          document.title = 'Bread';
