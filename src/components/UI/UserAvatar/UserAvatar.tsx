@@ -22,7 +22,7 @@ export const UserAvatar: FC<UserAvatarProps> = ({ user: { displayName, photoURL,
    return (
       <OnlineBadge online={online} invisible={withoutBadge}>
          <Tooltip title={displayName} arrow>
-            <Avatar sx={{ ...sx, bgcolor: theme.palette.primary.main }} src={photoURL as string | undefined} {...props} />
+            <Avatar sx={{ ...sx, bgcolor: theme.palette.primary.main }} src={photoURL || ''} {...props} />
          </Tooltip>
       </OnlineBadge>
    );
