@@ -4,10 +4,10 @@ import { IUser } from 'src/types/types';
 
 export default class ChatService {
    static create(user: IUser, interlocutor: IUser) {
-      const interlocutorRef = ref(db, `chats/${user.uid}/${interlocutor.uid}/interlocutor`);
+      const interlocutorRef = ref(db, `chats/${user.uid}/${interlocutor.uid}`);
       update(interlocutorRef, { interlocutor });
 
-      const interlocutorsInterlocutorRef = ref(db, `chats/${interlocutor.uid}/${user.uid}/interlocutor`);
+      const interlocutorsInterlocutorRef = ref(db, `chats/${interlocutor.uid}/${user.uid}`);
       update(interlocutorsInterlocutorRef, { interlocutor: user });
    }
 
@@ -67,7 +67,7 @@ export default class ChatService {
    }
 
    static setTyping(uid: string, interlocutorUid: string, typing: boolean) {
-      const typingRef = ref(db, `chats/${interlocutorUid}/${uid}/interlocutorTyping`);
+      const typingRef = ref(db, `chats/${uid}/${interlocutorUid}/interlocutor/typing`);
       set(typingRef, typing);
    }
 }
