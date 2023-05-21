@@ -21,6 +21,7 @@ export const useUserLoad = () => {
                photoURL: user.photoURL,
                online: true,
                lastSeen: Date.now(),
+               typing: false,
             };
 
             UserService.setOnline(user.uid, true);
