@@ -23,7 +23,7 @@ export interface UsersProps {}
 export const Users: FC<UsersProps> = ({}) => {
    const users = useAppSelector((state) => state.users.data);
    const usersLoaded = useAppSelector((state) => state.global.dataLoad.users);
-   const { uid } = useAppSelector((state) => state.user.data!);
+   const user = useAppSelector((state) => state.user.data);
 
    const { t } = useTranslation();
 
@@ -45,11 +45,11 @@ export const Users: FC<UsersProps> = ({}) => {
                <MenuList>
                   <Stack>
                      {users.map(
-                        (user) =>
-                           user.uid !== uid && (
+                        (u) =>
+                           user.uid !== u.uid && (
                               <MenuItem divider>
                                  <Box sx={{ width: 1 }}>
-                                    <UserThumbnail goToChatOnClick user={user} />
+                                    <UserThumbnail goToChatOnClick user={u} />
                                  </Box>
                               </MenuItem>
                            )
