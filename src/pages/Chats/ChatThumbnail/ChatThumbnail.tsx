@@ -13,6 +13,7 @@ import { isMessageUnreaded } from 'src/utils/isMessageUnreaded.util';
 import { UnreadedMessagesCountDisplay } from 'src/components/UI/UnreadedMessagesCountDisplay';
 import moment from 'moment';
 import { useAppSelector } from 'src/hooks/useAppSelector';
+import { Trans } from 'react-i18next';
 
 export interface ChatThumbnailProps {
    chat: IChat;
@@ -42,11 +43,11 @@ export const ChatThumbnail: FC<ChatThumbnailProps> = ({ chat }) => {
                   variant='body1'
                   noWrap
                   sx={{
-                     color: chat.unreadedMessagesCount > 0 ? 'text' : 'text.secondary',
-                     fontWeight: chat.unreadedMessagesCount > 0 ? 500 : 'normal',
+                     color: chat.unreadedMessagesCount > 0 || interlocutor.typing ? 'text' : 'text.secondary',
+                     fontWeight: chat.unreadedMessagesCount > 0 || interlocutor.typing ? 500 : 'normal',
                   }}
                >
-                  {lastMessage.text}
+                  <Trans>{interlocutor.typing ? 'typing' : lastMessage.text}</Trans>
                </Typography>
                <Stack direction='row'>
                   <UnreadedMessagesCountDisplay count={chat.unreadedMessagesCount} />
