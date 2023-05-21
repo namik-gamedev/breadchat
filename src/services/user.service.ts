@@ -6,7 +6,7 @@ export default class UserService {
    static async setup(user: IUser) {
       const userRef = ref(db, `users/${user.uid}`);
 
-      await set(userRef, { ...user, online: true });
+      await set(userRef, user);
    }
    static setOnline(uid: string, online: boolean) {
       const onlineRef = ref(db, `users/${uid}/online`);
