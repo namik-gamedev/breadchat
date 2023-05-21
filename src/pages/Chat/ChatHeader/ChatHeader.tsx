@@ -45,7 +45,7 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ chat, interlocutor }) => {
                   </Typography>
                   <Typography variant='body1' sx={{ color: 'text.secondary' }}>
                      <Trans values={{ time: moment(interlocutor.lastSeen).calendar() }}>
-                        {chat?.interlocutorTyping ? 'typing' : interlocutor.online ? 'online' : `last seen {{time}}`}
+                        {interlocutor.typing ? 'typing' : interlocutor.online ? 'online' : `last seen {{time}}`}
                      </Trans>
                   </Typography>
                </Box>

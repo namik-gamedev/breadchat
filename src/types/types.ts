@@ -6,6 +6,7 @@ export interface IUser {
    photoURL?: string | null;
    online: boolean;
    lastSeen: number;
+   typing: boolean;
 }
 
 export interface IMessage {
@@ -19,5 +20,4 @@ export interface IChat {
    messages: IMessage[];
    unreadedMessagesCount: number; // count of not readed messages from interlocutor
    selfUnreadedMessagesCount: number; // count of not readed by interlocutor messages
-   interlocutorTyping: boolean;
 }
