@@ -4,6 +4,7 @@ export interface IUser {
    uid: string;
    displayName: string;
    photoURL?: string | null;
+   about?: string;
    online: boolean;
    lastSeen: number;
    typing: boolean;

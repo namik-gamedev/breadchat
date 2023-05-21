@@ -4,10 +4,11 @@ import { Auth } from 'src/pages/Auth';
 import { Chats } from 'src/pages/Chats';
 import { NotFound } from 'src/pages/NotFound';
 import { Users } from 'src/pages/Users';
+import { Account } from 'src/pages/Account';
 
 export interface IRoute {
    path: string;
-   component: React.FC;
+   component: React.FC<any>;
    authRequired: boolean;
 }
 
@@ -30,6 +31,11 @@ export const routes: IRoute[] = [
    {
       path: '/chat/:interlocutorUid',
       component: Chat,
+      authRequired: true,
+   },
+   {
+      path: '/account/:userUid',
+      component: Account,
       authRequired: true,
    },
 ];
