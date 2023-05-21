@@ -11,8 +11,6 @@ export const useUserLoad = () => {
    const dispatch = useAppDispatch();
    useEffect(() => {
       const unsubAuthState = onAuthStateChanged(appAuth, (user) => {
-         dispatch(unsetDataLoad());
-
          if (user) {
             // TODO: ADD HERE PHOTOURL
             const newUser: IUser = {
@@ -27,6 +25,8 @@ export const useUserLoad = () => {
             UserService.setOnline(user.uid, true);
 
             dispatch(setUser(newUser));
+         } else {
+            dispatch(unsetDataLoad());
          }
          dispatch(setUserLoad(true));
       });
