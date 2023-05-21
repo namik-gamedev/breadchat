@@ -1,4 +1,6 @@
-import { ref, set } from 'firebase/database';
+import { ref, remove, set, update } from 'firebase/database';
+import { getDownloadURL, ref as storageRef, uploadBytes } from 'firebase/storage';
+import { storage } from 'src/firebase/firebase';
 import { db } from 'src/firebase/firebase';
 import { IUser } from 'src/types/types';
 
@@ -13,6 +15,21 @@ export default class UserService {
       const aboutRef = ref(db, `users/${uid}/about`);
 
       set(aboutRef, about);
+   }
+
+   static async setPhotoURL(uid: string, file: File) {
+      const fileRef = storageRef(storage, `avatars/${uid}`);
+      const uploadTask = await uploadBytes(fileRef, file);
+
+      const url = await getDownloadURL(uploadTask.ref);
+
+      const userRef = ref(db, `users/${uid}`);
+      update(userRef, { photoURL: url });
+   }
+
+   static unsetPhotoURL(uid: string) {
+      const photoURLRef = ref(db, `users/${uid}/photoURL`);
+      remove(photoURLRef);
    }
 
    static setOnline(uid: string, online: boolean) {
