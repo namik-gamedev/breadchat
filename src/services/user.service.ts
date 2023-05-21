@@ -8,6 +8,13 @@ export default class UserService {
 
       await set(userRef, user);
    }
+
+   static setAbout(uid: string, about: string) {
+      const aboutRef = ref(db, `users/${uid}/about`);
+
+      set(aboutRef, about);
+   }
+
    static setOnline(uid: string, online: boolean) {
       const onlineRef = ref(db, `users/${uid}/online`);
       set(onlineRef, online);

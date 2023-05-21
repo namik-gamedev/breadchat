@@ -35,30 +35,28 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ chat, interlocutor }) => {
    };
 
    return (
-      <Box>
-         <Stack direction='row' justifyContent='space-between' alignItems='center'>
-            <Stack direction='row' spacing={2} alignItems='center'>
+      <Stack direction='row' justifyContent='space-between' alignItems='center' sx={{ cursor: 'pointer' }}>
+         <Stack direction='row' spacing={2} alignItems='center'>
+            <UnstyledLink to={`/account/${interlocutor.uid}`}>
                <UserAvatar sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={interlocutor} />
-               <Box>
-                  <Typography variant='h6' sx={{ fontWeight: 'normal' }} component='h2'>
-                     {interlocutor.displayName}
-                  </Typography>
-                  <Typography variant='body1' sx={{ color: 'text.secondary' }}>
-                     <Trans values={{ time: moment(interlocutor.lastSeen).calendar() }}>
-                        {interlocutor.typing ? 'typing' : interlocutor.online ? 'online' : `last seen {{time}}`}
-                     </Trans>
-                  </Typography>
-               </Box>
-            </Stack>
-
+            </UnstyledLink>
             <Box>
-               <IconButton onClick={handleShow}>
-                  <DeleteIcon />
-               </IconButton>
+               <Typography variant='h6' sx={{ fontWeight: 'normal' }} component='h2'>
+                  {interlocutor.displayName}
+               </Typography>
+               <Typography variant='body1' sx={{ color: 'text.secondary' }}>
+                  <Trans values={{ time: moment(interlocutor.lastSeen).calendar() }}>
+                     {interlocutor.typing ? 'typing' : interlocutor.online ? 'online' : `last seen {{time}}`}
+                  </Trans>
+               </Typography>
             </Box>
-
-            <ChatHeaderDialog open={open} handleClose={handleClose} interlocutorDisplayName={interlocutor.displayName} handleAction={handleClear} />
          </Stack>
-      </Box>
+
+         <IconButton onClick={handleShow}>
+            <DeleteIcon />
+         </IconButton>
+
+         <ChatHeaderDialog open={open} handleClose={handleClose} interlocutorDisplayName={interlocutor.displayName} handleAction={handleClear} />
+      </Stack>
    );
 };

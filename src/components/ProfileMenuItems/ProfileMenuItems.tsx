@@ -14,13 +14,14 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import UserService from 'src/services/user.service';
 import { Trans } from 'react-i18next';
+import { UnstyledLink } from '../UI/UnstyledLink';
 
 export interface ProfileMenuItemsProps {
    handleClose?: () => void;
 }
 
 export const ProfileMenuItems: FC<ProfileMenuItemsProps> = ({ handleClose }) => {
-   const user = useAppSelector((state) => state.user.data!);
+   const user = useAppSelector((state) => state.user.data)!;
    const dispatch = useAppDispatch();
 
    const handleSignOut = async () => {
@@ -33,7 +34,7 @@ export const ProfileMenuItems: FC<ProfileMenuItemsProps> = ({ handleClose }) => 
 
    return (
       <>
-         <MenuItem onClick={handleClose}>
+         <MenuItem component={UnstyledLink} to={`/account/${user.uid}`} onClick={handleClose}>
             <ListItemIcon sx={{ color: 'primary.main' }}>
                <PersonIcon />
             </ListItemIcon>
