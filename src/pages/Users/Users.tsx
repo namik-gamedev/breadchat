@@ -46,7 +46,7 @@ export const Users: FC<UsersProps> = ({}) => {
                   <Stack>
                      {users.map(
                         (u) =>
-                           user.uid !== u.uid && (
+                           user!.uid !== u.uid && (
                               <MenuItem divider>
                                  <Box sx={{ width: 1 }}>
                                     <UserThumbnail goToChatOnClick user={u} />
