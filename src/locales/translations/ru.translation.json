@@ -53,5 +53,7 @@
    "activities": "занятия",
    "objects": "предметы",
    "symbols": "символы",
-   "flags": "флаги"
+   "flags": "флаги",
+   "about user": "О пользователе",
+   "no user with this id": "Нет пользователя с таким id"
 }
