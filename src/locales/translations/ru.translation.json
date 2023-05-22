@@ -55,5 +55,8 @@
    "symbols": "символы",
    "flags": "флаги",
    "about user": "О пользователе",
-   "no user with this id": "Нет пользователя с таким id"
+   "no user with this id": "Нет пользователя с таким id",
+   "edit": "Изменить",
+   "editing": "Редактируется...",
+   "edited": "Изменено"
 }

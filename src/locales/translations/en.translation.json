@@ -55,5 +55,8 @@
    "symbols": "symbols",
    "flags": "flags",
    "about user": "About user",
-   "no user with this id": "No user with this id"
+   "no user with this id": "No user with this id",
+   "edit": "Edit",
+   "editing": "Editing...",
+   "edited": "Edited"
 }

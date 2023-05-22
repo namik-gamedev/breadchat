@@ -23,7 +23,7 @@ import { ChatForm } from './ChatForm';
 import moment from 'moment';
 import { ChatHeader } from './ChatHeader';
 import { ConfirmDialog } from 'src/components/UI/ConfirmDialog';
-import { IUser } from 'src/types/types';
+import { IMessage, IUser } from 'src/types/types';
 import ChatService from 'src/services/chat.service';
 import { useScroll } from 'src/hooks/useScroll';
 import { ChatSkeleton } from 'src/components/UI/skeletons/ChatSkeleton';
@@ -40,6 +40,8 @@ export const Chat: FC<ChatProps> = ({}) => {
    const interlocutor = useAppSelector((state) => state.users.data).find((user) => user.uid === interlocutorUid);
 
    const chat = useAppSelector((state) => state.chats.data).find((chat) => chat.interlocutor.uid === interlocutorUid);
+
+   const [editingMessage, setEditingMessage] = useState<IMessage | null>(null);
 
    const { t } = useTranslation();
 
@@ -66,8 +68,8 @@ export const Chat: FC<ChatProps> = ({}) => {
          <StyledBox sx={{ p: 2, height: 1 }}>
             <Stack spacing={2} direction='column' sx={{ height: 1 }}>
                <ChatHeader chat={chat} interlocutor={interlocutor} />
-               <ChatMessages chat={chat} />
-               <ChatForm chat={chat} interlocutor={interlocutor} />
+               <ChatMessages editingMessage={editingMessage} setEditingMessage={setEditingMessage} chat={chat} />
+               <ChatForm editingMessage={editingMessage} setEditingMessage={setEditingMessage} chat={chat} interlocutor={interlocutor} />
             </Stack>
          </StyledBox>
       ) : (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import Stack, { StackProps } from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
@@ -26,15 +26,18 @@ import { Close } from '@mui/icons-material';
 import { useOpen } from 'src/hooks/useOpen';
 import { ChatMessageDialog } from './ChatMessageDialog';
 import { ChatMessageMenuItems } from './ChatMessageMenuItems';
+import { Trans } from 'react-i18next';
 
 export interface ChatMessageProps extends StackProps {
    interlocutor: IUser;
    message: IMessage;
+   editingMessage: IMessage | null;
+   setEditingMessage: Dispatch<SetStateAction<IMessage | null>>;
 }
 
 const BORDER_RADIUS_PX = 16;
 
-export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMessageProps) => {
+export const ChatMessage = styled(({ interlocutor, message, editingMessage, setEditingMessage, ...props }: ChatMessageProps) => {
    const user = useAppSelector((state) => state.user.data!);
    const chat = useAppSelector((state) => state.chats.data).find((chat) => chat.interlocutor.uid === interlocutor.uid)!;
 
@@ -49,6 +52,11 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
       handleDialogShow();
    };
 
+   const handleEditClick = () => {
+      handleClose();
+      setEditingMessage(message);
+   };
+
    const handleDelete = (alsoForInterlocutor: boolean) => {
       ChatService.deleteMessage(user.uid, interlocutor.uid, message.createdAt, alsoForInterlocutor, alsoForInterlocutor ? isUnreaded : false);
    };
@@ -59,6 +67,7 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
             <Typography variant='body2' className='chatMessageDate'>
                {moment(message.createdAt).calendar()}
                {message.sender === 0 && (isUnreaded ? <CheckIcon fontSize='small' /> : <DoneAllIcon fontSize='small' />)}
+               <Trans>{message.edited ? 'edited' : editingMessage?.createdAt === message.createdAt && 'editing'}</Trans>
             </Typography>
             <Stack direction='row' spacing={1} alignItems='end'>
                <Typography variant='body1' className='chatMessageText'>
@@ -68,7 +77,13 @@ export const ChatMessage = styled(({ interlocutor, message, ...props }: ChatMess
          </Stack>
 
          <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
-            <ChatMessageMenuItems handleClose={handleClose} handleDeleteClick={handleDeleteClick} messageText={message.text} />
+            <ChatMessageMenuItems
+               sender={message.sender}
+               handleClose={handleClose}
+               handleDeleteClick={handleDeleteClick}
+               handleEditClick={handleEditClick}
+               messageText={message.text}
+            />
          </StyledMenu>
 
          <ChatMessageDialog

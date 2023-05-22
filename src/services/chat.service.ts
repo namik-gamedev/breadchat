@@ -24,12 +24,12 @@ export default class ChatService {
       const createdAt = Date.now();
 
       const chatRef = ref(db, `chats/${uid}/${interlocutorUid}`);
-      set(child(chatRef, `messages/${createdAt}`), { sender: 0, text, createdAt });
+      set(child(chatRef, `messages/${createdAt}`), { sender: 0, text, createdAt, edited: false });
 
       this.increaseUnreadedMessagesCount(uid, interlocutorUid);
 
       const interlocutorChatRef = ref(db, `chats/${interlocutorUid}/${uid}`);
-      set(child(interlocutorChatRef, `messages/${createdAt}`), { sender: 1, text, createdAt });
+      set(child(interlocutorChatRef, `messages/${createdAt}`), { sender: 1, text, createdAt, edited: false });
    }
 
    static deleteMessage(uid: string, interlocutorUid: string, createdAt: number, alsoForInterlocutor: boolean = false, isUnreaded: boolean = false) {
@@ -42,6 +42,14 @@ export default class ChatService {
             this.decreaseUnreadedMessagesCount(uid, interlocutorUid);
          }
       }
+   }
+
+   static editMessage(uid: string, interlocutorUid: string, createdAt: number, newText: string) {
+      const messageRef = ref(db, `chats/${uid}/${interlocutorUid}/messages/${createdAt}`);
+      update(messageRef, { text: newText, edited: true });
+
+      const interocutorMessageRef = ref(db, `chats/${interlocutorUid}/${uid}/messages/${createdAt}`);
+      update(interocutorMessageRef, { text: newText, edited: true });
    }
 
    static increaseUnreadedMessagesCount(uid: string, interlocutorUid: string) {
