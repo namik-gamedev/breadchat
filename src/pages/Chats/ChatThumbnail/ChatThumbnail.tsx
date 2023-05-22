@@ -43,11 +43,11 @@ export const ChatThumbnail: FC<ChatThumbnailProps> = ({ chat }) => {
                   variant='body1'
                   noWrap
                   sx={{
-                     color: chat.unreadedMessagesCount > 0 || interlocutor.typing ? 'text' : 'text.secondary',
-                     fontWeight: chat.unreadedMessagesCount > 0 || interlocutor.typing ? 500 : 'normal',
+                     color: chat.unreadedMessagesCount > 0 || chat.interlocutorTyping ? 'text' : 'text.secondary',
+                     fontWeight: chat.unreadedMessagesCount > 0 || chat.interlocutorTyping ? 500 : 'normal',
                   }}
                >
-                  <Trans>{interlocutor.typing ? 'typing' : lastMessage.text}</Trans>
+                  <Trans>{chat.interlocutorTyping ? 'typing' : lastMessage.text}</Trans>
                </Typography>
                <Stack direction='row'>
                   <UnreadedMessagesCountDisplay count={chat.unreadedMessagesCount} />

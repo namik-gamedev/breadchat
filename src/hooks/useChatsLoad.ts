@@ -32,6 +32,7 @@ export const useChatsLoad = () => {
                interlocutor: chatSnapshot.val().interlocutor,
                unreadedMessagesCount: chatSnapshot.val().unreadedMessagesCount,
                selfUnreadedMessagesCount: chatSnapshot.val().selfUnreadedMessagesCount,
+               interlocutorTyping: chatSnapshot.val().interlocutorTyping,
             };
 
             newChats.push(chat);

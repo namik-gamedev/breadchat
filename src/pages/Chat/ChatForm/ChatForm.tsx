@@ -37,12 +37,12 @@ export const ChatForm: FC<ChatFormProps> = ({ chat, interlocutor }) => {
    const { t } = useTranslation();
 
    const setUserTypingToFalse = useDebounce(() => {
-      UserService.setTyping(user.uid, false);
+      ChatService.setTyping(user.uid, interlocutor.uid, false);
    }, 1000);
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setMessageText(e.target.value);
-      UserService.setTyping(user.uid, true);
+      ChatService.setTyping(user.uid, interlocutor.uid, true);
       setUserTypingToFalse();
 
       setIsInputError(false);
