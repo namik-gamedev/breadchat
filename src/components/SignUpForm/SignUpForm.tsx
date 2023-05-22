@@ -72,7 +72,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({}) => {
 
          await signInWithEmailAndPassword(auth, email, password);
 
-         dispatch(setUser({ displayName: name, uid, online: true, lastSeen: Date.now(), typing: false }));
+         dispatch(setUser({ displayName: name, uid, online: true, lastSeen: Date.now() }));
          navigate('/');
       } catch (e: any) {
          const error = getSignUpError(e.code);
