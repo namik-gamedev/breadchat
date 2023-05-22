@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction, useEffect, useMemo, useRef, useState } from 'react';
 import { StyledForm } from 'src/components/UI/StyledForm';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -11,8 +11,9 @@ import SendIcon from '@mui/icons-material/Send';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import { child, get, onValue, push, ref, set } from 'firebase/database';
 import { useAppSelector } from 'src/hooks/useAppSelector';
+import CloseIcon from '@mui/icons-material/Close';
 import { db } from 'src/firebase/firebase';
-import { IChat, IUser } from 'src/types/types';
+import { IChat, IMessage, IUser } from 'src/types/types';
 import Picker from '@emoji-mart/react';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import { BrowserView, MobileView, useDeviceData } from 'react-device-detect';
@@ -22,15 +23,17 @@ import ChatService from 'src/services/chat.service';
 import { ChatEmojiPicker } from './ChatEmojiPicker';
 import { debounce } from 'src/utils/debounce.util';
 import { useDebounce } from 'src/hooks/useDebounce';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 export interface ChatFormProps {
    chat: IChat | undefined;
    interlocutor: IUser;
+   editingMessage: IMessage | null;
+   setEditingMessage: Dispatch<SetStateAction<IMessage | null>>;
 }
 
-export const ChatForm: FC<ChatFormProps> = ({ chat, interlocutor }) => {
-   const user = useAppSelector((state) => state.user.data!);
+export const ChatForm: FC<ChatFormProps> = ({ chat, interlocutor, editingMessage, setEditingMessage }) => {
+   const user = useAppSelector((state) => state.user.data)!;
    const [messageText, setMessageText] = useState('');
    const [isInputError, setIsInputError] = useState(false);
 
@@ -55,10 +58,26 @@ export const ChatForm: FC<ChatFormProps> = ({ chat, interlocutor }) => {
          setIsInputError(true);
          return;
       }
-      setMessageText('');
 
+      if (editingMessage) {
+         ChatService.editMessage(user.uid, interlocutor.uid, editingMessage.createdAt, messageText);
+         setEditingMessage(null);
+         return;
+      }
+
+      setMessageText('');
       await ChatService.message(user.uid, interlocutor.uid, messageText);
    };
+
+   const handleClick = () => {
+      console.log(1);
+
+      setEditingMessage(null);
+   };
+
+   useEffect(() => {
+      setMessageText(editingMessage?.text || '');
+   }, [editingMessage]);
 
    return (
       <Stack onSubmit={handleSubmit} component='form' sx={{ position: 'relative' }}>
@@ -66,7 +85,7 @@ export const ChatForm: FC<ChatFormProps> = ({ chat, interlocutor }) => {
             error={isInputError}
             value={messageText}
             onChange={handleChange}
-            label={t('message')}
+            label={<Trans>{editingMessage ? 'edit' : 'message'}</Trans>}
             fullWidth
             multiline
             maxRows={7}
@@ -74,6 +93,11 @@ export const ChatForm: FC<ChatFormProps> = ({ chat, interlocutor }) => {
                endAdornment: (
                   <Stack>
                      <InputAdornment position='end'>
+                        {editingMessage && (
+                           <IconButton onClick={handleClick}>
+                              <CloseIcon />
+                           </IconButton>
+                        )}
                         <BrowserView>
                            <ChatEmojiPicker setMessageText={setMessageText} />
                         </BrowserView>

@@ -13,6 +13,7 @@ export interface IMessage {
    sender: number; // 0 is current user, 1 is user, we are chatting with
    text: string;
    createdAt: number;
+   edited: boolean;
 }
 
 export interface IChat {

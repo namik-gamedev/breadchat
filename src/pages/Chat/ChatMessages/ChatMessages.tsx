@@ -1,4 +1,4 @@
-import React, { FC, createRef, useEffect, useRef, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction, createRef, useEffect, useRef, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Box, { BoxProps } from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -11,9 +11,11 @@ import { Trans } from 'react-i18next';
 
 export interface ChatMessagesProps {
    chat: IChat | undefined;
+   editingMessage: IMessage | null;
+   setEditingMessage: Dispatch<SetStateAction<IMessage | null>>;
 }
 
-export const ChatMessages: FC<ChatMessagesProps> = ({ chat }) => {
+export const ChatMessages: FC<ChatMessagesProps> = ({ chat, editingMessage, setEditingMessage }) => {
    const { ref, scroll } = useScroll<HTMLDivElement>();
 
    useEffect(() => {
@@ -30,7 +32,15 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ chat }) => {
                }}
             >
                {chat?.messages.map((message) => {
-                  return <ChatMessage interlocutor={chat?.interlocutor} message={message} key={message.createdAt} />;
+                  return (
+                     <ChatMessage
+                        editingMessage={editingMessage}
+                        setEditingMessage={setEditingMessage}
+                        interlocutor={chat?.interlocutor}
+                        message={message}
+                        key={message.createdAt}
+                     />
+                  );
                })}
             </Stack>
          ) : (
