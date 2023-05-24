@@ -65,8 +65,8 @@ export const Chat: FC<ChatProps> = ({}) => {
 
    if (chatsLoad) {
       return interlocutor ? (
-         <StyledBox sx={{ p: 2, height: 1 }}>
-            <Stack spacing={2} direction='column' sx={{ height: 1 }}>
+         <StyledBox sx={{ p: 1, height: 1 }}>
+            <Stack spacing={1} direction='column' sx={{ height: 1 }}>
                <ChatHeader chat={chat} interlocutor={interlocutor} />
                <ChatMessages editingMessage={editingMessage} setEditingMessage={setEditingMessage} chat={chat} />
                <ChatForm editingMessage={editingMessage} setEditingMessage={setEditingMessage} chat={chat} interlocutor={interlocutor} />
