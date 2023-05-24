@@ -21,6 +21,7 @@ import { useOpen } from 'src/hooks/useOpen';
 import { EditAboutUserForm } from './EditAboutUserForm';
 import { AccountHeader } from './AccountHeader';
 import { AboutUser } from './AboutUser';
+import { AccountSkeleton } from 'src/components/UI/skeletons/AccountSkeleton';
 
 export interface AccountProps {}
 
@@ -43,7 +44,7 @@ export const Account: FC<AccountProps> = ({}) => {
    if (usersLoaded) {
       if (user) {
          return (
-            <Stack component={StyledBox} spacing={2} sx={{ p: 2, height: 1, overflow: 'auto' }}>
+            <Stack component={StyledBox} spacing={2} sx={{ p: 1, height: 1, overflow: 'auto' }}>
                <AccountHeader isCurrentUser={isCurrentUser} user={user} />
 
                {!open && <AboutUser isCurrentUser={isCurrentUser} user={user} handleFormShow={handleShow} />}
@@ -56,6 +57,6 @@ export const Account: FC<AccountProps> = ({}) => {
       }
    } else {
       // todo: skeleton
-      return null;
+      return <AccountSkeleton />;
    }
 };

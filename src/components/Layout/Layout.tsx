@@ -18,7 +18,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
       <Stack direction='column' sx={{ height: 'calc(100vh - 65px)' }}>
          <Header />
          <Container sx={{ height: 1 }}>
-            <Grid container spacing={2} sx={{ pt: 2, height: 1 }}>
+            <Grid container spacing={1} sx={{ pt: 1, height: 1 }}>
                {user && (
                   <Grid
                      item
