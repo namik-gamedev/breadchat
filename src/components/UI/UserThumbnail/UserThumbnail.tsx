@@ -13,6 +13,8 @@ import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import { Trans } from 'react-i18next';
+import { useAppSelector } from 'src/hooks/useAppSelector';
+import { UserOnlineStatus } from '../UserOnlineStatus';
 
 export interface UserThumbnailProps {
    goToChatOnClick?: boolean;
@@ -21,6 +23,8 @@ export interface UserThumbnailProps {
 
 export const UserThumbnail: FC<UserThumbnailProps> = ({ goToChatOnClick = false, user }) => {
    const navigate = useNavigate();
+   const currentUser = useAppSelector((state) => state.user.data)!;
+   const isUserBlocked = currentUser.blockedUsers.some((uid) => uid === user.uid);
 
    const handleClick = () => {
       navigate(`/chat/${user.uid}`);
@@ -40,7 +44,7 @@ export const UserThumbnail: FC<UserThumbnailProps> = ({ goToChatOnClick = false,
                {user.displayName}
             </Typography>
             <Typography variant='body1' sx={{ color: 'text.secondary' }}>
-               <Trans values={{ time: moment(user.lastSeen).calendar() }}>{user.online ? 'online' : 'last seen {{time}}'}</Trans>
+               <UserOnlineStatus user={user} />
             </Typography>
          </Box>
       </Stack>

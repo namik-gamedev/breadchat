@@ -14,8 +14,10 @@ import ChatService from 'src/services/chat.service';
 import { UserThumbnail } from 'src/components/UI/UserThumbnail';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 import { useOpen } from 'src/hooks/useOpen';
-import { ChatHeaderDialog } from './ChatHeaderDialog';
+import { ClearChatDialog } from './ClearChatDialog';
 import { useTranslation, Trans } from 'react-i18next';
+import { ChatHeaderOnlineStatus } from './ChatHeaderOnlineStatus';
+import { UserOnlineStatus } from 'src/components/UI/UserOnlineStatus';
 
 export interface ChatHeaderProps {
    chat: IChat | undefined;
@@ -23,16 +25,9 @@ export interface ChatHeaderProps {
 }
 
 export const ChatHeader: FC<ChatHeaderProps> = ({ chat, interlocutor }) => {
-   const user = useAppSelector((state) => state.user.data!);
-
    const { open, handleClose, handleShow } = useOpen();
-
+   console.log(chat);
    const { t } = useTranslation();
-
-   const handleClear = (alsoForInterlocutor: boolean) => {
-      console.log('clear');
-      ChatService.clear(user.uid, interlocutor.uid, alsoForInterlocutor);
-   };
 
    return (
       <Stack direction='row' justifyContent='space-between' alignItems='center' sx={{ cursor: 'pointer' }}>
@@ -45,9 +40,7 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ chat, interlocutor }) => {
                   {interlocutor.displayName}
                </Typography>
                <Typography variant='body1' sx={{ color: 'text.secondary' }}>
-                  <Trans values={{ time: moment(interlocutor.lastSeen).calendar() }}>
-                     {chat?.interlocutorTyping ? 'typing' : interlocutor.online ? 'online' : `last seen {{time}}`}
-                  </Trans>
+                  {chat ? <ChatHeaderOnlineStatus chat={chat} /> : <UserOnlineStatus user={interlocutor} />}
                </Typography>
             </Box>
          </Stack>
@@ -56,7 +49,7 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ chat, interlocutor }) => {
             <DeleteIcon />
          </IconButton>
 
-         <ChatHeaderDialog open={open} handleClose={handleClose} interlocutorDisplayName={interlocutor.displayName} handleAction={handleClear} />
+         <ClearChatDialog open={open} handleClose={handleClose} interlocutor={interlocutor} />
       </Stack>
    );
 };

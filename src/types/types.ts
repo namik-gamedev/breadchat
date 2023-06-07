@@ -7,6 +7,7 @@ export interface IUser {
    about?: string;
    online: boolean;
    lastSeen: number;
+   blockedUsers: string[];
 }
 
 export interface IMessage {

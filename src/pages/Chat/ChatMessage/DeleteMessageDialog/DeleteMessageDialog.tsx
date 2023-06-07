@@ -2,16 +2,33 @@ import React, { FC } from 'react';
 import Typography from '@mui/material/Typography';
 import { ConfirmDialog } from 'src/components/UI/ConfirmDialog';
 import { useTranslation, Trans } from 'react-i18next';
+import ChatService from 'src/services/chat.service';
+import { useAppSelector } from 'src/hooks/useAppSelector';
+import { IMessage, IUser } from 'src/types/types';
 
-export interface ChatMessageDialogProps {
+export interface DeleteMessageDialogProps {
    open: boolean;
    handleClose: () => void;
    interlocutorDisplayName: string;
-   handleAction: (b: boolean) => void;
+   interlocutor: IUser;
+   message: IMessage;
+   isUnreaded: boolean;
 }
 
-export const ChatMessageDialog: FC<ChatMessageDialogProps> = ({ open, handleClose, interlocutorDisplayName, handleAction }) => {
+export const DeleteMessageDialog: FC<DeleteMessageDialogProps> = ({
+   open,
+   handleClose,
+   interlocutorDisplayName,
+   interlocutor,
+   message,
+   isUnreaded,
+}) => {
+   const user = useAppSelector((state) => state.user.data)!;
    const { t } = useTranslation();
+
+   const handleAction = (alsoForInterlocutor: boolean) => {
+      ChatService.deleteMessage(user.uid, interlocutor.uid, message.createdAt, alsoForInterlocutor, alsoForInterlocutor ? isUnreaded : false);
+   };
 
    return (
       <ConfirmDialog

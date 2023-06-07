@@ -1,4 +1,4 @@
-import { DataSnapshot, onValue, ref } from 'firebase/database';
+import { DataSnapshot, child, onValue, ref } from 'firebase/database';
 import { useEffect } from 'react';
 import { db } from 'src/firebase/firebase';
 import { IUser } from 'src/types/types';
@@ -12,7 +12,16 @@ export const useUsersLoad = () => {
    const callback = (usersSnapshot: DataSnapshot) => {
       const newUsers: IUser[] = [];
       usersSnapshot.forEach((userSnapshot) => {
-         const user = userSnapshot.val();
+         const blockedUsers: string[] = [];
+         const blockedUsersRef = child(userSnapshot.ref, 'blockedUsers');
+         onValue(blockedUsersRef, (blockedUsersSnapshot) => {
+            blockedUsersSnapshot.forEach((blockedUserSnapshot) => {
+               blockedUsers.push(blockedUserSnapshot.val());
+            });
+         });
+
+         const user: IUser = { ...userSnapshot.val(), blockedUsers };
+
          newUsers.push(user);
       });
       dispatch(setUsers(newUsers));

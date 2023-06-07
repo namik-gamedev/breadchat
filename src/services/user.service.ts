@@ -4,6 +4,7 @@ import { storage } from 'src/firebase/firebase';
 import { db } from 'src/firebase/firebase';
 import { IUser } from 'src/types/types';
 
+// todo: постараться вынести юзера в класс а не передавать постоянно в метод
 export default class UserService {
    static async setup(user: IUser) {
       const userRef = ref(db, `users/${user.uid}`);
@@ -38,6 +39,15 @@ export default class UserService {
       if (!online) {
          const lastSeenRef = ref(db, `users/${uid}/lastSeen`);
          set(lastSeenRef, Date.now());
+      }
+   }
+
+   static setUserBlocked(uid: string, targetUser: IUser, blocked: boolean) {
+      const blockedUserRef = ref(db, `users/${uid}/blockedUsers/${targetUser.uid}`);
+      if (blocked) {
+         set(blockedUserRef, targetUser.uid);
+      } else {
+         remove(blockedUserRef);
       }
    }
 }

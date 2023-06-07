@@ -58,5 +58,10 @@
    "no user with this id": "Нет пользователя с таким id",
    "edit": "Изменить",
    "editing": "Редактируется...",
-   "edited": "Изменено"
+   "edited": "Изменено",
+   "block user": "Заблокировать пользователя",
+   "unblock user": "Разблокировать пользователя",
+   "are you sure you want to block user": "Вы точно хотите заблокировать этого пользователя?",
+   "are you sure you want to unblock user": "Вы точно хотите разблокировать этого пользователя?",
+   "user blocked you": "Пользователь заблокировал вас"
 }
