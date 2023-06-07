@@ -18,26 +18,19 @@ import { UserOnlineStatus } from '../UserOnlineStatus';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 
 export interface UserThumbnailProps {
-   goToChatOnClick?: boolean;
    user: IUser;
 }
 
-export const UserThumbnail: FC<UserThumbnailProps> = ({ goToChatOnClick = false, user }) => {
+export const UserThumbnail: FC<UserThumbnailProps> = ({ user }) => {
    const navigate = useNavigate();
    const currentUser = useAppSelector((state) => state.user.data)!;
 
    const handleClick = () => {
-      navigate(`/chat/${user.uid}`);
+      navigate(`/account/${user.uid}`);
    };
 
    return (
-      <Stack
-         onClick={goToChatOnClick ? handleClick : undefined}
-         sx={{ cursor: goToChatOnClick ? 'pointer' : 'default' }}
-         direction='row'
-         spacing={2}
-         alignItems='center'
-      >
+      <Stack onClick={handleClick} sx={{ cursor: 'pointer' }} direction='row' spacing={2} alignItems='center'>
          <UserAvatar sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={user} />
          <Box>
             <Typography variant='h6' sx={{ fontWeight: 'normal' }} component='h2'>
