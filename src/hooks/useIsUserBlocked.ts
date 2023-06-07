@@ -6,7 +6,7 @@ export const useIsUserBlocked = (userUid: string | undefined, blockedByUid: stri
    const blockedBy = useAppSelector((state) => state.users.data).find((u) => u.uid === blockedByUid)!;
 
    if (!user || !blockedBy) {
-      return;
+      return false;
    }
 
    return blockedBy.blockedUsers.some((uid) => uid === user.uid);
