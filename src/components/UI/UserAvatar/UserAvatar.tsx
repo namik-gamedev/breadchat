@@ -16,13 +16,16 @@ export interface UserAvatarProps extends AvatarProps {
    withoutBadge?: boolean;
 }
 
-export const UserAvatar: FC<UserAvatarProps> = ({ user: { displayName, photoURL, online }, withoutBadge = false, sx, ...props }) => {
+export const UserAvatar: FC<UserAvatarProps> = ({ user, withoutBadge = false, sx, ...props }) => {
    const theme = useTheme();
 
+   const currentUser = useAppSelector((state) => state.user.data)!;
+   const isSelfBlockedByUser = user.blockedUsers.some((uid) => uid === currentUser.uid);
+
    return (
-      <OnlineBadge online={online} invisible={withoutBadge}>
-         <Tooltip title={displayName} arrow>
-            <Avatar sx={{ ...sx, bgcolor: theme.palette.primary.main }} src={photoURL || ''} {...props} />
+      <OnlineBadge online={user.online} invisible={withoutBadge || isSelfBlockedByUser}>
+         <Tooltip title={user.displayName} arrow>
+            <Avatar sx={{ ...sx, bgcolor: theme.palette.primary.main }} src={isSelfBlockedByUser ? '' : user.photoURL || ''} {...props} />
          </Tooltip>
       </OnlineBadge>
    );

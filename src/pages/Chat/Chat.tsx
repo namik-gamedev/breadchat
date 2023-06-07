@@ -28,16 +28,21 @@ import ChatService from 'src/services/chat.service';
 import { useScroll } from 'src/hooks/useScroll';
 import { ChatSkeleton } from 'src/components/UI/skeletons/ChatSkeleton';
 import { useTranslation } from 'react-i18next';
+import { UnblockButton } from './UnblockButton';
+import { UserBlockedYouMessage } from './UserBlockedYouMessage';
 
 export interface ChatProps {}
 
 export const Chat: FC<ChatProps> = ({}) => {
    const { interlocutorUid } = useParams();
 
-   const chatsLoad = useAppSelector((state) => state.global.dataLoad.chats);
+   const chatsLoaded = useAppSelector((state) => state.global.dataLoad.chats);
 
-   const user = useAppSelector((state) => state.user.data!);
+   const user = useAppSelector((state) => state.user.data);
    const interlocutor = useAppSelector((state) => state.users.data).find((user) => user.uid === interlocutorUid);
+
+   const isSelfBlockedByInterlocutor = interlocutor?.blockedUsers.some((uid) => uid === user?.uid);
+   const isInterlocutorBlocked = user?.blockedUsers.some((uid) => uid === interlocutor?.uid);
 
    const chat = useAppSelector((state) => state.chats.data).find((chat) => chat.interlocutor.uid === interlocutorUid);
 
@@ -56,20 +61,23 @@ export const Chat: FC<ChatProps> = ({}) => {
    useEffect(() => {
       if (interlocutor) {
          if (chat) {
-            ChatService.unsetUnreadedMessagesCount(user.uid, interlocutor!.uid);
+            ChatService.unsetUnreadedMessagesCount(user!.uid, interlocutor!.uid);
          } else {
-            ChatService.create(user, interlocutor);
+            ChatService.create(user!, interlocutor);
          }
       }
    }, [chat?.messages]);
 
-   if (chatsLoad) {
+   if (chatsLoaded) {
       return interlocutor ? (
          <StyledBox sx={{ p: 1, height: 1 }}>
             <Stack spacing={1} direction='column' sx={{ height: 1 }}>
                <ChatHeader chat={chat} interlocutor={interlocutor} />
                <ChatMessages editingMessage={editingMessage} setEditingMessage={setEditingMessage} chat={chat} />
-               <ChatForm editingMessage={editingMessage} setEditingMessage={setEditingMessage} chat={chat} interlocutor={interlocutor} />
+               {isInterlocutorBlocked && <UnblockButton user={interlocutor} />}
+               {!isSelfBlockedByInterlocutor && !isInterlocutorBlocked && (
+                  <ChatForm editingMessage={editingMessage} setEditingMessage={setEditingMessage} chat={chat} interlocutor={interlocutor} />
+               )}
             </Stack>
          </StyledBox>
       ) : (

@@ -24,7 +24,7 @@ import { isMessageUnreaded } from 'src/utils/isMessageUnreaded.util';
 import copy from 'copy-to-clipboard';
 import { Close } from '@mui/icons-material';
 import { useOpen } from 'src/hooks/useOpen';
-import { ChatMessageDialog } from './ChatMessageDialog';
+import { DeleteMessageDialog } from './DeleteMessageDialog';
 import { ChatMessageMenuItems } from './ChatMessageMenuItems';
 import { Trans } from 'react-i18next';
 
@@ -38,7 +38,7 @@ export interface ChatMessageProps extends StackProps {
 const BORDER_RADIUS_PX = 16;
 
 export const ChatMessage = styled(({ interlocutor, message, editingMessage, setEditingMessage, ...props }: ChatMessageProps) => {
-   const user = useAppSelector((state) => state.user.data!);
+   const user = useAppSelector((state) => state.user.data)!;
    const chat = useAppSelector((state) => state.chats.data).find((chat) => chat.interlocutor.uid === interlocutor.uid)!;
 
    const isUnreaded = isMessageUnreaded(chat, message);
@@ -55,10 +55,6 @@ export const ChatMessage = styled(({ interlocutor, message, editingMessage, setE
    const handleEditClick = () => {
       handleClose();
       setEditingMessage(message);
-   };
-
-   const handleDelete = (alsoForInterlocutor: boolean) => {
-      ChatService.deleteMessage(user.uid, interlocutor.uid, message.createdAt, alsoForInterlocutor, alsoForInterlocutor ? isUnreaded : false);
    };
 
    return (
@@ -86,11 +82,13 @@ export const ChatMessage = styled(({ interlocutor, message, editingMessage, setE
             />
          </StyledMenu>
 
-         <ChatMessageDialog
+         <DeleteMessageDialog
             open={dialogOpen}
             interlocutorDisplayName={interlocutor.displayName}
             handleClose={handleDialogClose}
-            handleAction={handleDelete}
+            interlocutor={interlocutor}
+            isUnreaded={isUnreaded}
+            message={message}
          />
       </Stack>
    );

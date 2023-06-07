@@ -5,6 +5,7 @@ import { IUser } from 'src/types/types';
 import Backdrop from '@mui/material/Backdrop';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
+import PersonOffIcon from '@mui/icons-material/PersonOff';
 import Input from '@mui/material/Input';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -16,6 +17,9 @@ import { UserAvatar } from 'src/components/UI/UserAvatar';
 import moment from 'moment';
 import { Trans } from 'react-i18next';
 import { useOpen } from 'src/hooks/useOpen';
+import { BlockUserDialog } from './BlockUserDialog';
+import ChatService from 'src/services/chat.service';
+import { UserOnlineStatus } from 'src/components/UI/UserOnlineStatus';
 
 export interface AccountHeaderProps {
    user: IUser;
@@ -23,9 +27,14 @@ export interface AccountHeaderProps {
 }
 
 export const AccountHeader: FC<AccountHeaderProps> = ({ user, isCurrentUser }) => {
+   const currentUser = useAppSelector((state) => state.user.data)!;
+   const isUserBlocked = currentUser.blockedUsers.some((uid) => uid === user.uid);
+
    const inputRef = useRef<HTMLInputElement | null>(null);
 
    const { open, handleClose, handleShow } = useOpen();
+
+   const { open: dialogOpen, handleClose: handleDialogClose, handleShow: handleDialogShow } = useOpen();
 
    const handleClick = () => {
       inputRef.current?.click();
@@ -55,25 +64,30 @@ export const AccountHeader: FC<AccountHeaderProps> = ({ user, isCurrentUser }) =
                   {user.displayName}
                </Typography>
                <Typography variant='body1' sx={{ color: 'text.secondary' }}>
-                  <Trans values={{ time: moment(user.lastSeen).calendar() }}>{user.online ? 'online' : 'last seen {{time}}'}</Trans>
+                  <UserOnlineStatus user={user} />
                </Typography>
             </Box>
          </Stack>
 
-         <Box>
-            {isCurrentUser ? (
-               <>
-                  <IconButton onClick={handleClick}>
-                     <AddAPhotoIcon color='primary' />
-                  </IconButton>
-                  <input style={{ display: 'none' }} ref={inputRef} type='file' accept='image/*' onChange={handleChange} />
-               </>
-            ) : (
+         {isCurrentUser ? (
+            <Box>
+               <IconButton onClick={handleClick}>
+                  <AddAPhotoIcon color='primary' />
+               </IconButton>
+               <input style={{ display: 'none' }} ref={inputRef} type='file' accept='image/*' onChange={handleChange} />
+            </Box>
+         ) : (
+            <Box>
+               <IconButton onClick={handleDialogShow}>
+                  <PersonOffIcon />
+               </IconButton>
                <IconButton component={UnstyledLink} to={`/chat/${user.uid}`}>
                   <ChatIcon color='primary' />
                </IconButton>
-            )}
-         </Box>
+            </Box>
+         )}
+
+         <BlockUserDialog open={dialogOpen} handleClose={handleDialogClose} user={user} blocked={isUserBlocked} />
 
          <Backdrop sx={{ zIndex: 1100 }} open={open} onClick={handleClose}>
             <Box component='img' src={user.photoURL || ''} sx={{ maxHeight: 1, maxWidth: 1 }} />
