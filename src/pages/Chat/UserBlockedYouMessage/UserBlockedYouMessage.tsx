@@ -10,7 +10,7 @@ export const UserBlockedYouMessage: FC<UserBlockedYouMessageProps> = ({}) => {
       <Stack sx={{ height: 1, overflow: 'auto' }}>
          <Stack sx={{ justifyContent: 'center', height: 1 }}>
             <Typography variant='body1' textAlign='center'>
-               <Trans>user blocked you</Trans>
+               <Trans>you are blocked</Trans>
             </Typography>
          </Stack>
       </Stack>

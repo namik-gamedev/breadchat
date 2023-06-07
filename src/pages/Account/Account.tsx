@@ -30,8 +30,6 @@ export const Account: FC<AccountProps> = ({}) => {
    const { userUid } = useParams();
    const usersLoaded = useAppSelector((state) => state.global.dataLoad.users);
    const user = useAppSelector((state) => state.users.data).find((u) => u.uid === userUid);
-   const currentUser = useAppSelector((state) => state.user.data);
-   const isCurrentUser = user?.uid === currentUser?.uid;
 
    const { t } = useTranslation();
 
@@ -45,11 +43,11 @@ export const Account: FC<AccountProps> = ({}) => {
       if (user) {
          return (
             <Stack component={StyledBox} spacing={2} sx={{ p: 1, height: 1, overflow: 'auto' }}>
-               <AccountHeader isCurrentUser={isCurrentUser} user={user} />
+               <AccountHeader user={user} />
 
-               {!open && <AboutUser isCurrentUser={isCurrentUser} user={user} handleFormShow={handleShow} />}
+               {!open && <AboutUser user={user} handleFormShow={handleShow} />}
 
-               {open && <EditAboutUserForm user={user} initialDescription={user?.about} onSubmit={handleClose} />}
+               {open && <EditAboutUserForm user={user} initialDescription={user?.about} handleClose={handleClose} />}
             </Stack>
          );
       } else {

@@ -24,12 +24,14 @@ import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 
 export interface AccountHeaderProps {
    user: IUser;
-   isCurrentUser: boolean;
 }
 
-export const AccountHeader: FC<AccountHeaderProps> = ({ user, isCurrentUser }) => {
+export const AccountHeader: FC<AccountHeaderProps> = ({ user }) => {
    const currentUser = useAppSelector((state) => state.user.data)!;
    const isUserBlocked = useIsUserBlocked(user.uid, currentUser.uid);
+   const isSelfBlockedByUser = useIsUserBlocked(currentUser.uid, user.uid);
+
+   const isCurrentUser = currentUser.uid === user.uid;
 
    const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -56,7 +58,7 @@ export const AccountHeader: FC<AccountHeaderProps> = ({ user, isCurrentUser }) =
    return (
       <Stack direction='row' sx={{ justifyContent: 'space-between' }}>
          <Stack direction='row' spacing={2} alignItems='center'>
-            <Box onClick={handleShow}>
+            <Box onClick={isSelfBlockedByUser ? undefined : handleShow}>
                <UserAvatar sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={user} />
             </Box>
 
