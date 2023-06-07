@@ -49,7 +49,7 @@ export const Users: FC<UsersProps> = ({}) => {
                            user!.uid !== u.uid && (
                               <MenuItem divider>
                                  <Box sx={{ width: 1 }}>
-                                    <UserThumbnail goToChatOnClick user={u} />
+                                    <UserThumbnail user={u} />
                                  </Box>
                               </MenuItem>
                            )
