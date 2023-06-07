@@ -30,6 +30,7 @@ import { ChatSkeleton } from 'src/components/UI/skeletons/ChatSkeleton';
 import { useTranslation } from 'react-i18next';
 import { UnblockButton } from './UnblockButton';
 import { UserBlockedYouMessage } from './UserBlockedYouMessage';
+import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 
 export interface ChatProps {}
 
@@ -41,8 +42,8 @@ export const Chat: FC<ChatProps> = ({}) => {
    const user = useAppSelector((state) => state.user.data);
    const interlocutor = useAppSelector((state) => state.users.data).find((user) => user.uid === interlocutorUid);
 
-   const isSelfBlockedByInterlocutor = interlocutor?.blockedUsers.some((uid) => uid === user?.uid);
-   const isInterlocutorBlocked = user?.blockedUsers.some((uid) => uid === interlocutor?.uid);
+   const isSelfBlockedByInterlocutor = useIsUserBlocked(user?.uid, interlocutor?.uid);
+   const isInterlocutorBlocked = useIsUserBlocked(interlocutor?.uid, user?.uid);
 
    const chat = useAppSelector((state) => state.chats.data).find((chat) => chat.interlocutor.uid === interlocutorUid);
 
