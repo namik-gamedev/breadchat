@@ -18,7 +18,7 @@ export const UserOnlineStatus: FC<LastSeenProps> = ({ user }) => {
 
    useEffect(() => {
       if (isSelfBlockedByUser) {
-         setStatus('user blocked you');
+         setStatus('you are blocked');
       } else if (user.online) {
          setStatus('online');
       } else {
