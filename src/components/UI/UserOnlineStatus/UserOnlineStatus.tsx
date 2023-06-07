@@ -2,6 +2,7 @@ import moment from 'moment';
 import React, { FC, useEffect, useState } from 'react';
 import { Trans } from 'react-i18next';
 import { useAppSelector } from 'src/hooks/useAppSelector';
+import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 import { IUser } from 'src/types/types';
 
 export interface LastSeenProps {
@@ -11,7 +12,7 @@ export interface LastSeenProps {
 export const UserOnlineStatus: FC<LastSeenProps> = ({ user }) => {
    const currentUser = useAppSelector((state) => state.user.data)!;
 
-   const isSelfBlockedByUser = user.blockedUsers?.some((uid) => uid === currentUser.uid);
+   const isSelfBlockedByUser = useIsUserBlocked(currentUser.uid, user.uid);
 
    const [status, setStatus] = useState('');
 

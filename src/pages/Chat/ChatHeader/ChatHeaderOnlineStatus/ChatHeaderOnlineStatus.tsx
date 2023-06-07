@@ -2,6 +2,7 @@ import moment from 'moment';
 import React, { FC, useEffect, useState } from 'react';
 import { Trans } from 'react-i18next';
 import { useAppSelector } from 'src/hooks/useAppSelector';
+import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 import { IChat } from 'src/types/types';
 
 export interface ChatHeaderOnlineStatusProps {
@@ -12,8 +13,7 @@ export const ChatHeaderOnlineStatus: FC<ChatHeaderOnlineStatusProps> = ({ chat }
    const user = useAppSelector((state) => state.users.data).find((u) => u.uid === chat.interlocutor.uid)!;
    const currentUser = useAppSelector((state) => state.user.data)!;
 
-   const isSelfBlockedByUser = user.blockedUsers?.some((uid) => uid === currentUser.uid);
-   console.log(isSelfBlockedByUser);
+   const isSelfBlockedByUser = useIsUserBlocked(currentUser.uid, user.uid);
 
    const [status, setStatus] = useState('');
 

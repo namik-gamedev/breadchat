@@ -9,6 +9,7 @@ import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 import { SxProps, getContrastRatio } from '@mui/material';
 import { IUser } from 'src/types/types';
 import { useTheme } from '@mui/material';
+import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 
 export interface UserAvatarProps extends AvatarProps {
    user: IUser;
@@ -20,7 +21,7 @@ export const UserAvatar: FC<UserAvatarProps> = ({ user, withoutBadge = false, sx
    const theme = useTheme();
 
    const currentUser = useAppSelector((state) => state.user.data)!;
-   const isSelfBlockedByUser = user.blockedUsers.some((uid) => uid === currentUser.uid);
+   const isSelfBlockedByUser = useIsUserBlocked(currentUser.uid, user.uid);
 
    return (
       <OnlineBadge online={user.online} invisible={withoutBadge || isSelfBlockedByUser}>

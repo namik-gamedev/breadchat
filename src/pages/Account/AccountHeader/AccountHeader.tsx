@@ -20,6 +20,7 @@ import { useOpen } from 'src/hooks/useOpen';
 import { BlockUserDialog } from './BlockUserDialog';
 import ChatService from 'src/services/chat.service';
 import { UserOnlineStatus } from 'src/components/UI/UserOnlineStatus';
+import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 
 export interface AccountHeaderProps {
    user: IUser;
@@ -28,7 +29,7 @@ export interface AccountHeaderProps {
 
 export const AccountHeader: FC<AccountHeaderProps> = ({ user, isCurrentUser }) => {
    const currentUser = useAppSelector((state) => state.user.data)!;
-   const isUserBlocked = currentUser.blockedUsers.some((uid) => uid === user.uid);
+   const isUserBlocked = useIsUserBlocked(user.uid, currentUser.uid);
 
    const inputRef = useRef<HTMLInputElement | null>(null);
 

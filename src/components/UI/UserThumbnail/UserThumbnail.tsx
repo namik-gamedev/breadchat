@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { Trans } from 'react-i18next';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { UserOnlineStatus } from '../UserOnlineStatus';
+import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 
 export interface UserThumbnailProps {
    goToChatOnClick?: boolean;
@@ -24,7 +25,6 @@ export interface UserThumbnailProps {
 export const UserThumbnail: FC<UserThumbnailProps> = ({ goToChatOnClick = false, user }) => {
    const navigate = useNavigate();
    const currentUser = useAppSelector((state) => state.user.data)!;
-   const isUserBlocked = currentUser.blockedUsers.some((uid) => uid === user.uid);
 
    const handleClick = () => {
       navigate(`/chat/${user.uid}`);
