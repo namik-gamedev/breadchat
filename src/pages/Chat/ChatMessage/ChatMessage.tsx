@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
 import Stack, { StackProps } from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
@@ -8,7 +8,7 @@ import Alert from '@mui/material/Alert';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { styled, Typography } from '@mui/material';
-import { IMessage, IUser } from 'src/types/types';
+import { IChat, IMessage, IUser } from 'src/types/types';
 import { blue, orange } from '@mui/material/colors';
 import { CSSProperties } from '@mui/styled-engine-sc';
 import { useAppSelector } from 'src/hooks/useAppSelector';
@@ -27,19 +27,17 @@ import { useOpen } from 'src/hooks/useOpen';
 import { DeleteMessageDialog } from './DeleteMessageDialog';
 import { ChatMessageMenuItems } from './ChatMessageMenuItems';
 import { Trans } from 'react-i18next';
+import { ChatContext } from '../Chat';
 
 export interface ChatMessageProps extends StackProps {
-   interlocutor: IUser;
    message: IMessage;
-   editingMessage: IMessage | null;
-   setEditingMessage: Dispatch<SetStateAction<IMessage | null>>;
 }
 
 const BORDER_RADIUS_PX = 16;
 
-export const ChatMessage = styled(({ interlocutor, message, editingMessage, setEditingMessage, ...props }: ChatMessageProps) => {
-   const user = useAppSelector((state) => state.user.data)!;
-   const chat = useAppSelector((state) => state.chats.data).find((chat) => chat.interlocutor.uid === interlocutor.uid)!;
+export const ChatMessage = styled(({ message, ...props }: ChatMessageProps) => {
+   const chat = useContext(ChatContext).chat!;
+   const { editingMessage, setEditingMessage } = useContext(ChatContext);
 
    const isUnreaded = isMessageUnreaded(chat, message);
 
@@ -84,9 +82,9 @@ export const ChatMessage = styled(({ interlocutor, message, editingMessage, setE
 
          <DeleteMessageDialog
             open={dialogOpen}
-            interlocutorDisplayName={interlocutor.displayName}
+            interlocutorDisplayName={chat.interlocutor.displayName}
             handleClose={handleDialogClose}
-            interlocutor={interlocutor}
+            interlocutor={chat.interlocutor}
             isUnreaded={isUnreaded}
             message={message}
          />

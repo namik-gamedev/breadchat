@@ -1,6 +1,6 @@
-import React, { Dispatch, FC, SetStateAction, createRef, useEffect, useRef, useState } from 'react';
-import Stack from '@mui/material/Stack';
+import React, { Dispatch, FC, SetStateAction, createRef, useContext, useEffect, useRef, useState } from 'react';
 import Box, { BoxProps } from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { IChat, IMessage, IUser } from 'src/types/types';
 import { ChatMessage } from '../ChatMessage/ChatMessage';
@@ -8,15 +8,16 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useScroll } from 'src/hooks/useScroll';
 import { StyledBox } from 'src/components/UI/StyledBox';
 import { Trans } from 'react-i18next';
+import { NoMessagesMessage } from './NoMessagesMessage';
+import { ChatMessagesList } from './ChatMessagesList';
+import { ChatContext } from '../Chat';
 
-export interface ChatMessagesProps {
-   chat: IChat | undefined;
-   editingMessage: IMessage | null;
-   setEditingMessage: Dispatch<SetStateAction<IMessage | null>>;
-}
+export interface ChatMessagesProps {}
 
-export const ChatMessages: FC<ChatMessagesProps> = ({ chat, editingMessage, setEditingMessage }) => {
+export const ChatMessages: FC<ChatMessagesProps> = ({}) => {
    const { ref, scroll } = useScroll<HTMLDivElement>();
+
+   const { chat } = useContext(ChatContext);
 
    useEffect(() => {
       scroll();
@@ -24,32 +25,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ chat, editingMessage, setE
 
    return (
       <Box ref={ref} sx={{ height: 1, overflow: 'auto' }}>
-         {chat && chat.messages.length > 0 ? (
-            <Stack
-               spacing={0.2}
-               sx={{
-                  p: 1,
-               }}
-            >
-               {chat?.messages.map((message) => {
-                  return (
-                     <ChatMessage
-                        editingMessage={editingMessage}
-                        setEditingMessage={setEditingMessage}
-                        interlocutor={chat?.interlocutor}
-                        message={message}
-                        key={message.createdAt}
-                     />
-                  );
-               })}
-            </Stack>
-         ) : (
-            <Stack sx={{ justifyContent: 'center', alignItems: 'center', height: 1 }}>
-               <Typography variant='body1'>
-                  <Trans>no messages</Trans>
-               </Typography>
-            </Stack>
-         )}
+         <ChatMessagesList />
       </Box>
    );
 };

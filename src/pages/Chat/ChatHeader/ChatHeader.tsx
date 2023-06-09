@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -11,22 +11,22 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import { StyledBox } from 'src/components/UI/StyledBox';
 import { ConfirmDialog } from 'src/components/UI/ConfirmDialog';
 import ChatService from 'src/services/chat.service';
-import { UserThumbnail } from 'src/components/UI/UserThumbnail';
+import { UserThumbnail } from 'src/pages/Users/UserThumbnail';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 import { useOpen } from 'src/hooks/useOpen';
 import { ClearChatDialog } from './ClearChatDialog';
 import { useTranslation, Trans } from 'react-i18next';
 import { ChatHeaderOnlineStatus } from './ChatHeaderOnlineStatus';
 import { UserOnlineStatus } from 'src/components/UI/UserOnlineStatus';
+import { ChatContext } from '../Chat';
 
-export interface ChatHeaderProps {
-   chat: IChat | undefined;
-   interlocutor: IUser;
-}
+export interface ChatHeaderProps {}
 
-export const ChatHeader: FC<ChatHeaderProps> = ({ chat, interlocutor }) => {
+export const ChatHeader: FC<ChatHeaderProps> = ({}) => {
+   const chat = useContext(ChatContext).chat!;
+   const interlocutor = useContext(ChatContext).interlocutor!;
+
    const { open, handleClose, handleShow } = useOpen();
-   console.log(chat);
    const { t } = useTranslation();
 
    return (

@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { StyledForm } from 'src/components/UI/StyledForm';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -24,18 +24,17 @@ import { ChatEmojiPicker } from './ChatEmojiPicker';
 import { debounce } from 'src/utils/debounce.util';
 import { useDebounce } from 'src/hooks/useDebounce';
 import { Trans, useTranslation } from 'react-i18next';
+import { ChatContext } from '../Chat';
 
-export interface ChatFormProps {
-   chat: IChat | undefined;
-   interlocutor: IUser;
-   editingMessage: IMessage | null;
-   setEditingMessage: Dispatch<SetStateAction<IMessage | null>>;
-}
+export interface ChatFormProps {}
 
-export const ChatForm: FC<ChatFormProps> = ({ chat, interlocutor, editingMessage, setEditingMessage }) => {
+export const ChatForm: FC<ChatFormProps> = () => {
    const user = useAppSelector((state) => state.user.data)!;
    const [messageText, setMessageText] = useState('');
    const [isInputError, setIsInputError] = useState(false);
+
+   const interlocutor = useContext(ChatContext).interlocutor!;
+   const { editingMessage, setEditingMessage } = useContext(ChatContext);
 
    const { t } = useTranslation();
 
