@@ -10,21 +10,21 @@ export const useUsersLoad = () => {
    const dispatch = useAppDispatch();
 
    const callback = (usersSnapshot: DataSnapshot) => {
-      const newUsers: IUser[] = [];
+      let users: IUser[] = [];
       usersSnapshot.forEach((userSnapshot) => {
-         const blockedUsers: string[] = [];
+         let blockedUsers: string[] = [];
          const blockedUsersRef = child(userSnapshot.ref, 'blockedUsers');
          onValue(blockedUsersRef, (blockedUsersSnapshot) => {
             blockedUsersSnapshot.forEach((blockedUserSnapshot) => {
-               blockedUsers.push(blockedUserSnapshot.val());
+               blockedUsers = [...blockedUsers, blockedUserSnapshot.val()];
             });
          });
 
          const user: IUser = { ...userSnapshot.val(), blockedUsers };
 
-         newUsers.push(user);
+         users = [...users, user];
       });
-      dispatch(setUsers(newUsers));
+      dispatch(setUsers(users));
       dispatch(setUsersLoad(true));
    };
 
