@@ -30,7 +30,6 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
                         },
                      }}
                   >
-                     {/* TODO: SHOW HEADER MENU WHEN SIDEBAR IS HIDDEN */}
                      <Sidebar />
                   </Grid>
                )}
@@ -39,7 +38,6 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
                </Grid>
             </Grid>
          </Container>
-         {/* todo: footer */}
       </Stack>
    );
 };

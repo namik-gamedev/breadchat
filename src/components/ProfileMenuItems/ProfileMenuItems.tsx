@@ -25,7 +25,6 @@ export const ProfileMenuItems: FC<ProfileMenuItemsProps> = ({ handleClose }) => 
    const dispatch = useAppDispatch();
 
    const handleSignOut = async () => {
-      // TODO: add here all resets
       await signOut(appAuth);
       UserService.setOnline(user.uid, false);
       dispatch(unsetUser());
