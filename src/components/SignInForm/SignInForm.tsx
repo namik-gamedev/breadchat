@@ -60,12 +60,9 @@ export const SignInForm: FC<SignInFormProps> = ({}) => {
    const { t } = useTranslation();
 
    const onSubmit = async ({ email, password }: SignInValues, { setSubmitting, setFieldError, setStatus }: FormikHelpers<SignInValues>) => {
-      const auth = appAuth;
-
       try {
-         const { user } = await signInWithEmailAndPassword(auth, email, password);
+         const { user } = await signInWithEmailAndPassword(appAuth, email, password);
 
-         dispatch(setUser({ displayName: user.displayName!, uid: user.uid, online: true, lastSeen: Date.now(), blockedUsers: [] })); // TODO: add here photoURL
          setSubmitting(false);
          navigate('/');
       } catch (e: any) {
@@ -88,17 +85,6 @@ export const SignInForm: FC<SignInFormProps> = ({}) => {
       if (!user) {
          return;
       }
-
-      const newUser: IUser = {
-         displayName: user.displayName!,
-         uid: user.uid,
-         photoURL: user.photoURL,
-         online: true,
-         lastSeen: Date.now(),
-         blockedUsers: [],
-      };
-      await UserService.setup(newUser);
-      dispatch(setUser(newUser)); // TODO: add here photoURL
       navigate('/');
    };
 

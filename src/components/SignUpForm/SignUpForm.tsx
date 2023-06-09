@@ -62,17 +62,14 @@ export const SignUpForm: FC<SignUpFormProps> = ({}) => {
 
    const onSubmit = async ({ email, password, name }: SignUpValues, { setSubmitting, setFieldError, setStatus }: FormikHelpers<SignUpValues>) => {
       try {
-         const auth = appAuth;
-
          const {
             user: { uid, displayName, photoURL },
-         } = await createUserWithEmailAndPassword(auth, email, password);
+         } = await createUserWithEmailAndPassword(appAuth, email, password);
          await updateProfile(appAuth.currentUser!, { displayName, photoURL });
-         await UserService.setup({ displayName: name, uid, photoURL, online: true, lastSeen: Date.now() }); // TODO: add here photoURL
+         await UserService.setup({ displayName: name, uid, photoURL, online: true, lastSeen: Date.now(), blockedUsers: [] });
 
-         await signInWithEmailAndPassword(auth, email, password);
+         await signInWithEmailAndPassword(appAuth, email, password);
 
-         dispatch(setUser({ displayName: name, uid, online: true, lastSeen: Date.now() }));
          navigate('/');
       } catch (e: any) {
          const error = getSignUpError(e.code);
