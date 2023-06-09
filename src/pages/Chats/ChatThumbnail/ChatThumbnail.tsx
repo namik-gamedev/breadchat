@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import { UserThumbnail, UserThumbnailProps } from 'src/components/UI/UserThumbnail';
+import { UserThumbnail, UserThumbnailProps } from 'src/pages/Users/UserThumbnail';
 import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
