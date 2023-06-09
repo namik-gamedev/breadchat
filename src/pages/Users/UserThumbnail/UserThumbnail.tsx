@@ -14,7 +14,7 @@ import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import { Trans } from 'react-i18next';
 import { useAppSelector } from 'src/hooks/useAppSelector';
-import { UserOnlineStatus } from '../UserOnlineStatus';
+import { UserOnlineStatus } from '../../../components/UI/UserOnlineStatus';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 
 export interface UserThumbnailProps {
@@ -32,8 +32,8 @@ export const UserThumbnail: FC<UserThumbnailProps> = ({ user }) => {
    return (
       <Stack onClick={handleClick} sx={{ cursor: 'pointer' }} direction='row' spacing={2} alignItems='center'>
          <UserAvatar sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={user} />
-         <Box>
-            <Typography variant='h6' sx={{ fontWeight: 'normal' }} component='h2'>
+         <Box sx={{ minWidth: 0, width: 1 }}>
+            <Typography noWrap variant='h6' sx={{ fontWeight: 'normal' }} component='h2'>
                {user.displayName}
             </Typography>
             <Typography variant='body1' sx={{ color: 'text.secondary' }}>
