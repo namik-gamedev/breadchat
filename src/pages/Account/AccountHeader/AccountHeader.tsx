@@ -1,5 +1,5 @@
 import React, { FC, useRef } from 'react';
-import { UserThumbnail } from 'src/components/UI/UserThumbnail';
+import { UserThumbnail } from 'src/pages/Users/UserThumbnail';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { IUser } from 'src/types/types';
 import Backdrop from '@mui/material/Backdrop';

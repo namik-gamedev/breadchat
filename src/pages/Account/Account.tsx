@@ -13,7 +13,7 @@ import { IUser } from 'src/types/types';
 import { useParams } from 'react-router-dom';
 import { OnlineBadge } from 'src/components/UI/OnlineBadge';
 import { UserAvatar } from 'src/components/UI/UserAvatar';
-import { UserThumbnail } from 'src/components/UI/UserThumbnail';
+import { UserThumbnail } from 'src/pages/Users/UserThumbnail';
 import moment from 'moment';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 import { NotFound } from '../NotFound';
@@ -25,7 +25,6 @@ import { AccountSkeleton } from 'src/components/UI/skeletons/AccountSkeleton';
 
 export interface AccountProps {}
 
-// todo: make skeleton for this page
 export const Account: FC<AccountProps> = ({}) => {
    const { userUid } = useParams();
    const usersLoaded = useAppSelector((state) => state.global.dataLoad.users);
@@ -54,7 +53,6 @@ export const Account: FC<AccountProps> = ({}) => {
          return <NotFound />;
       }
    } else {
-      // todo: skeleton
       return <AccountSkeleton />;
    }
 };
