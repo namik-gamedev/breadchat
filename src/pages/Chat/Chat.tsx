@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction, createContext, useEffect, useState } from 'react';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -23,7 +23,7 @@ import { ChatForm } from './ChatForm';
 import moment from 'moment';
 import { ChatHeader } from './ChatHeader';
 import { ConfirmDialog } from 'src/components/UI/ConfirmDialog';
-import { IMessage, IUser } from 'src/types/types';
+import { IChat, IMessage, IUser } from 'src/types/types';
 import ChatService from 'src/services/chat.service';
 import { useScroll } from 'src/hooks/useScroll';
 import { ChatSkeleton } from 'src/components/UI/skeletons/ChatSkeleton';
@@ -33,6 +33,26 @@ import { UserBlockedYouMessage } from './UserBlockedYouMessage';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 
 export interface ChatProps {}
+
+export interface IChatContext {
+   chat: IChat | undefined;
+   interlocutor: IUser | undefined;
+   editingMessage: IMessage | null;
+   setEditingMessage: Dispatch<SetStateAction<IMessage | null>>;
+   isSelfBlockedByInterlocutor: boolean;
+   isInterlocutorBlocked: boolean;
+}
+
+const chatContextInitialValue = {
+   chat: undefined,
+   interlocutor: undefined,
+   editingMessage: null,
+   setEditingMessage: () => {},
+   isSelfBlockedByInterlocutor: false,
+   isInterlocutorBlocked: false,
+};
+
+export const ChatContext = createContext<IChatContext>(chatContextInitialValue);
 
 export const Chat: FC<ChatProps> = ({}) => {
    const { interlocutorUid } = useParams();
@@ -45,7 +65,7 @@ export const Chat: FC<ChatProps> = ({}) => {
    const isSelfBlockedByInterlocutor = useIsUserBlocked(user?.uid, interlocutor?.uid);
    const isInterlocutorBlocked = useIsUserBlocked(interlocutor?.uid, user?.uid);
 
-   const chat = useAppSelector((state) => state.chats.data).find((chat) => chat.interlocutor.uid === interlocutorUid);
+   const chat = useAppSelector((state) => state.chats.data).find((c) => c.interlocutor.uid === interlocutorUid);
 
    const [editingMessage, setEditingMessage] = useState<IMessage | null>(null);
 
@@ -71,16 +91,25 @@ export const Chat: FC<ChatProps> = ({}) => {
 
    if (chatsLoaded) {
       return interlocutor ? (
-         <StyledBox sx={{ p: 1, height: 1 }}>
-            <Stack spacing={1} direction='column' sx={{ height: 1 }}>
-               <ChatHeader chat={chat} interlocutor={interlocutor} />
-               <ChatMessages editingMessage={editingMessage} setEditingMessage={setEditingMessage} chat={chat} />
-               {isInterlocutorBlocked && <UnblockButton user={interlocutor} />}
-               {!isSelfBlockedByInterlocutor && !isInterlocutorBlocked && (
-                  <ChatForm editingMessage={editingMessage} setEditingMessage={setEditingMessage} chat={chat} interlocutor={interlocutor} />
-               )}
-            </Stack>
-         </StyledBox>
+         <ChatContext.Provider
+            value={{
+               chat,
+               interlocutor,
+               editingMessage,
+               setEditingMessage,
+               isInterlocutorBlocked,
+               isSelfBlockedByInterlocutor,
+            }}
+         >
+            <StyledBox sx={{ p: 1, height: 1 }}>
+               <Stack spacing={1} direction='column' sx={{ height: 1 }}>
+                  <ChatHeader />
+                  <ChatMessages />
+                  {isInterlocutorBlocked && <UnblockButton user={interlocutor} />}
+                  {!isSelfBlockedByInterlocutor && !isInterlocutorBlocked && <ChatForm />}
+               </Stack>
+            </StyledBox>
+         </ChatContext.Provider>
       ) : (
          <NotFound />
       );
