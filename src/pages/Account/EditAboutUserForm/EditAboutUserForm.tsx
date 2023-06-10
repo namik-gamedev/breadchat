@@ -33,7 +33,7 @@ export const EditAboutUserForm: FC<EditAboutUserFormProps> = ({ user, initialDes
          return;
       }
 
-      UserService.setAbout(user.uid, about);
+      UserService.setAbout(user.uid, about.trimStart().trimEnd());
       handleClose();
    };
 
