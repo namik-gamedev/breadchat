@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { StyledBox } from 'src/components/UI/StyledBox';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { useAppSelector } from 'src/hooks/useAppSelector';
@@ -17,12 +17,15 @@ import { useUsersLoad } from 'src/hooks/useUsersLoad';
 import { UsersSkeleton } from 'src/components/UI/skeletons/UsersSkeleton';
 import { UsersList } from './UsersList';
 import { NoUsersMessage } from './NoUsersMessage';
+import { UserSearchForm } from './UserSearchForm';
+import { IUser } from 'src/types/types';
 
 export interface UsersProps {}
 
 export const Users: FC<UsersProps> = ({}) => {
-   const users = useAppSelector((state) => state.users.data);
    const usersLoaded = useAppSelector((state) => state.global.dataLoad.users);
+
+   const [filteredUsers, setFilteredUsers] = useState<IUser[]>([]);
 
    const { t } = useTranslation();
 
@@ -41,7 +44,8 @@ export const Users: FC<UsersProps> = ({}) => {
                <Typography sx={{ textAlign: 'center' }} variant='h4'>
                   <Trans>users</Trans>
                </Typography>
-               <UsersList users={users} />
+               <UserSearchForm setFilteredUsers={setFilteredUsers} />
+               <UsersList users={filteredUsers} />
             </>
          ) : (
             <UsersSkeleton />
