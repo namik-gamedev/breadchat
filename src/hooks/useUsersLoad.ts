@@ -5,6 +5,7 @@ import { IUser } from 'src/types/types';
 import { useAppDispatch } from './useAppDispatch';
 import { setUsers } from 'src/store/reducers/users.reducer';
 import { setUsersLoad } from 'src/store/reducers/global.reducer';
+import { useAppSelector } from './useAppSelector';
 
 export const useUsersLoad = () => {
    const dispatch = useAppDispatch();

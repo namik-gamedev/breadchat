@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch } from './useAppDispatch';
 import { onAuthStateChanged } from 'firebase/auth';
 import { appAuth, db } from 'src/firebase/firebase';
-import { setUserLoad, unsetDataLoad } from 'src/store/reducers/global.reducer';
+import { setChatsLoad, setUserLoad, unsetDataLoad } from 'src/store/reducers/global.reducer';
 import { IUser } from 'src/types/types';
 import UserService from 'src/services/user.service';
-import { setUser } from 'src/store/reducers/user.reducer';
+import { setUser, unsetUser } from 'src/store/reducers/user.reducer';
 import { get, onValue, ref } from 'firebase/database';
 import { useAppSelector } from './useAppSelector';
+import { unsetChats } from 'src/store/reducers/chats.reducer';
 
 export const useUserLoad = () => {
    const [authorizedUserUid, setAuthorizedUserUid] = useState<string | undefined>();
@@ -22,7 +23,8 @@ export const useUserLoad = () => {
          if (user) {
             UserService.setOnline(user.uid, true);
          } else {
-            dispatch(unsetDataLoad());
+            dispatch(setChatsLoad(false));
+            dispatch(unsetUser());
          }
          dispatch(setUserLoad(true));
       });
