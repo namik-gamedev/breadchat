@@ -62,5 +62,9 @@
    "unblock user": "Разблокировать пользователя",
    "are you sure you want to block user": "Вы точно хотите заблокировать этого пользователя?",
    "are you sure you want to unblock user": "Вы точно хотите разблокировать этого пользователя?",
-   "you are blocked": "Вы заблокированы"
+   "you are blocked": "Вы заблокированы",
+   "search by": "Искать по",
+   "by name": "Имени",
+   "by id": "Идентификатору",
+   "search user": "Поиск пользователя"
 }
