@@ -24,9 +24,7 @@ export const NavigationMenuItems: FC<NavigationMenuItemsProps> = ({ handleClose 
             <ListItemIcon>
                <GroupIcon color='primary' />
             </ListItemIcon>
-            <Typography>
-               <Trans>users</Trans>
-            </Typography>
+            <Trans>users</Trans>
          </MenuItem>
 
          <MenuItem component={UnstyledLink} to='/chats' onClick={handleClose}>
@@ -35,9 +33,7 @@ export const NavigationMenuItems: FC<NavigationMenuItemsProps> = ({ handleClose 
                   <ForumIcon color='primary' />
                </Badge>
             </ListItemIcon>
-            <Typography>
-               <Trans>chats</Trans>
-            </Typography>
+            <Trans>chats</Trans>
          </MenuItem>
       </>
    );
