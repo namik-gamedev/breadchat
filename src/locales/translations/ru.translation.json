@@ -58,13 +58,16 @@
    "edit": "Изменить",
    "editing": "Редактируется...",
    "edited": "Изменено",
-   "block user": "Заблокировать пользователя",
-   "unblock user": "Разблокировать пользователя",
+   "block user": "Заблокировать",
+   "unblock user": "Разблокировать",
    "are you sure you want to block user": "Вы точно хотите заблокировать этого пользователя?",
    "are you sure you want to unblock user": "Вы точно хотите разблокировать этого пользователя?",
    "you are blocked": "Вы заблокированы",
    "search by": "Искать по",
    "by name": "Имени",
    "by id": "Идентификатору",
-   "search user": "Поиск пользователя"
+   "search user": "Поиск пользователя",
+   "select photo": "Выбрать фото",
+   "copy link": "Копировать ссылку",
+   "go to chat": "Перейти в чат"
 }
