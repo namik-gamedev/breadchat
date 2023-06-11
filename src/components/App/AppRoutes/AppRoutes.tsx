@@ -12,11 +12,16 @@ export interface AppRoutesProps {}
 export const AppRoutes: FC<AppRoutesProps> = ({}) => {
    const user = useAppSelector((state) => state.user.data);
    const userLoaded = useAppSelector((state) => state.global.dataLoad.user);
+   const usersLoaded = useAppSelector((state) => state.global.dataLoad.users);
 
    return (
       <Routes>
          {routes.map((route, index) => (
-            <Route key={index} path={route.path} element={route.authRequired && userLoaded && !user ? <Auth /> : <route.component />} />
+            <Route
+               key={index}
+               path={route.path}
+               element={route.authRequired && usersLoaded && userLoaded && !user ? <Auth /> : <route.component />}
+            />
          ))}
          <Route path='/' element={userLoaded && !user ? <Auth /> : <Chats />} />
          <Route path='*' element={<NotFound />} />
