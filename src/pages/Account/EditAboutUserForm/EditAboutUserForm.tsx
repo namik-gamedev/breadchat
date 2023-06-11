@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useState } from 'react';
+import React, { FC, FormEvent, useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
@@ -8,15 +8,16 @@ import { useTranslation } from 'react-i18next';
 import UserService from 'src/services/user.service';
 import CloseIcon from '@mui/icons-material/Close';
 import { IUser } from 'src/types/types';
+import { AccountContext } from '../Account';
 
 export interface EditAboutUserFormProps {
-   user: IUser;
-   initialDescription?: string;
    handleClose: () => void;
 }
 
-export const EditAboutUserForm: FC<EditAboutUserFormProps> = ({ user, initialDescription, handleClose }) => {
-   const [about, setAbout] = useState(initialDescription || '');
+export const EditAboutUserForm: FC<EditAboutUserFormProps> = ({ handleClose }) => {
+   const user = useContext(AccountContext).user!;
+
+   const [about, setAbout] = useState(user.about || '');
    const [isInputError, setIsInputError] = useState(false);
 
    const { t } = useTranslation();

@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, createContext, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -22,13 +22,34 @@ import { EditAboutUserForm } from './EditAboutUserForm';
 import { AccountHeader } from './AccountHeader';
 import { AboutUser } from './AboutUser';
 import { AccountSkeleton } from 'src/components/UI/skeletons/AccountSkeleton';
+import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 
 export interface AccountProps {}
+
+export interface AccountContextType {
+   user: IUser | undefined;
+   isCurrentUser: boolean;
+   isUserBlocked: boolean;
+   isSelfBlockedByUser: boolean;
+}
+
+const accountContextDefaultValue: AccountContextType = {
+   user: undefined,
+   isCurrentUser: false,
+   isUserBlocked: false,
+   isSelfBlockedByUser: false,
+};
+export const AccountContext = createContext(accountContextDefaultValue);
 
 export const Account: FC<AccountProps> = ({}) => {
    const { userUid } = useParams();
    const usersLoaded = useAppSelector((state) => state.global.dataLoad.users);
+
+   const currentUser = useAppSelector((state) => state.user.data);
    const user = useAppSelector((state) => state.users.data).find((u) => u.uid === userUid);
+   const isUserBlocked = useIsUserBlocked(user?.uid, currentUser?.uid);
+   const isSelfBlockedByUser = useIsUserBlocked(currentUser?.uid, user?.uid);
+   const isCurrentUser = currentUser?.uid === user?.uid;
 
    const { t } = useTranslation();
 
@@ -41,13 +62,15 @@ export const Account: FC<AccountProps> = ({}) => {
    if (usersLoaded) {
       if (user) {
          return (
-            <Stack component={StyledBox} spacing={2} sx={{ p: 1, height: 1, overflow: 'auto' }}>
-               <AccountHeader user={user} />
+            <AccountContext.Provider value={{ user, isUserBlocked, isCurrentUser, isSelfBlockedByUser }}>
+               <Stack component={StyledBox} spacing={2} sx={{ p: 1, height: 1, overflow: 'auto' }}>
+                  <AccountHeader />
 
-               {!open && <AboutUser user={user} handleFormShow={handleShow} />}
+                  {!open && <AboutUser handleFormShow={handleShow} />}
 
-               {open && <EditAboutUserForm user={user} initialDescription={user?.about} handleClose={handleClose} />}
-            </Stack>
+                  {open && <EditAboutUserForm handleClose={handleClose} />}
+               </Stack>
+            </AccountContext.Provider>
          );
       } else {
          return <NotFound />;
