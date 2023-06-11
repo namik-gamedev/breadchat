@@ -24,6 +24,8 @@ import { UserOnlineStatus } from 'src/components/UI/UserOnlineStatus';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 import { AccountMoreMenu } from './AccountMoreMenu';
 import { AccountContext } from '../Account';
+import { GoToChatButton } from './GoToChatButton';
+import { UserAvatarBackdrop } from 'src/components/UI/UserAvatarBackdrop';
 
 export interface AccountHeaderProps {}
 
@@ -33,14 +35,14 @@ export const AccountHeader: FC<AccountHeaderProps> = () => {
 
    const inputRef = useRef<HTMLInputElement | null>(null);
 
-   const { open, handleClose, handleShow } = useOpen();
+   const { open: avatarOpen, handleClose: handleAvatarClose, handleShow: handleAvatarShow } = useOpen();
 
    const { open: dialogOpen, handleClose: handleDialogClose, handleShow: handleDialogShow } = useOpen();
 
    return (
       <Stack direction='row' sx={{ justifyContent: 'space-between' }}>
          <Stack direction='row' spacing={2} alignItems='center'>
-            <Box onClick={isSelfBlockedByUser ? undefined : handleShow}>
+            <Box onClick={isSelfBlockedByUser ? undefined : handleAvatarShow}>
                <UserAvatar sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={user} />
             </Box>
 
@@ -54,23 +56,14 @@ export const AccountHeader: FC<AccountHeaderProps> = () => {
             </Box>
          </Stack>
 
-         <Stack direction='row' spacing={1}>
-            {/* todo: вынести */}
-            {!isCurrentUser && (
-               <Box>
-                  <Button variant='contained' startIcon={<ChatIcon />} component={UnstyledLink} to={`/chat/${user.uid}`}>
-                     <Trans>go to chat</Trans>
-                  </Button>
-               </Box>
-            )}
+         <Stack direction='row' sx={{ alignItems: 'center' }} spacing={1}>
+            {!isCurrentUser && <GoToChatButton />}
             <AccountMoreMenu handleBlockDialogShow={handleDialogShow} />
          </Stack>
 
          <BlockUserDialog open={dialogOpen} handleClose={handleDialogClose} user={user} blocked={isUserBlocked} />
 
-         <Backdrop sx={{ zIndex: 1100 }} open={open} onClick={handleClose}>
-            <Box component='img' src={user.photoURL || ''} sx={{ maxHeight: 1, maxWidth: 1 }} />
-         </Backdrop>
+         <UserAvatarBackdrop open={avatarOpen} handleClose={handleAvatarClose} photoURL={user.photoURL} />
       </Stack>
    );
 };
