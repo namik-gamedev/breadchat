@@ -28,26 +28,20 @@ export const ChatMessageMenuItems: FC<ChatMessageMenuItemsProps> = ({ sender, ha
             <ListItemIcon sx={{ color: 'primary.main' }}>
                <ContentCopyIcon />
             </ListItemIcon>
-            <Typography>
-               <Trans>copy</Trans>
-            </Typography>
+            <Trans>copy</Trans>
          </MenuItem>
          <MenuItem onClick={handleDeleteClick}>
             <ListItemIcon sx={{ color: 'primary.main' }}>
                <DeleteOutlinedIcon />
             </ListItemIcon>
-            <Typography>
-               <Trans>delete</Trans>
-            </Typography>
+            <Trans>delete</Trans>
          </MenuItem>
          {sender === 0 && (
             <MenuItem onClick={handleEditClick}>
                <ListItemIcon sx={{ color: 'primary.main' }}>
                   <CreateIcon />
                </ListItemIcon>
-               <Typography>
-                  <Trans>edit</Trans>
-               </Typography>
+               <Trans>edit</Trans>
             </MenuItem>
          )}
       </>
