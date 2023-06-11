@@ -30,7 +30,7 @@ export const ChatHeader: FC<ChatHeaderProps> = ({}) => {
    const { t } = useTranslation();
 
    return (
-      <Stack direction='row' justifyContent='space-between' alignItems='center' sx={{ cursor: 'pointer' }}>
+      <Stack direction='row' justifyContent='space-between' alignItems='center'>
          <Stack direction='row' spacing={2} alignItems='center'>
             <UnstyledLink to={`/account/${interlocutor.uid}`}>
                <UserAvatar sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={interlocutor} />
