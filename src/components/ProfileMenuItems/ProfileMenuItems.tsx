@@ -36,26 +36,20 @@ export const ProfileMenuItems: FC<ProfileMenuItemsProps> = ({ handleClose }) => 
             <ListItemIcon sx={{ color: 'primary.main' }}>
                <PersonIcon />
             </ListItemIcon>
-            <Typography>
-               <Trans>account</Trans>
-            </Typography>
+            <Trans>account</Trans>
          </MenuItem>
          <MenuItem onClick={handleClose}>
             <ListItemIcon sx={{ color: 'primary.main' }}>
                <SettingsIcon />
             </ListItemIcon>
-            <Typography>
-               <Trans>settings</Trans>
-            </Typography>
+            <Trans>settings</Trans>
          </MenuItem>
          <Divider />
          <MenuItem onClick={handleSignOut}>
             <ListItemIcon sx={{ color: 'primary.main' }}>
                <LogoutIcon />
             </ListItemIcon>
-            <Typography>
-               <Trans>sign out</Trans>
-            </Typography>
+            <Trans>sign out</Trans>
          </MenuItem>
       </>
    );
