@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, createContext, useContext, useRef } from 'react';
 import { UserThumbnail } from 'src/pages/Users/UserThumbnail';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { IUser } from 'src/types/types';
@@ -9,6 +9,7 @@ import PersonOffIcon from '@mui/icons-material/PersonOff';
 import Input from '@mui/material/Input';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 import ChatIcon from '@mui/icons-material/Chat';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
@@ -21,39 +22,20 @@ import { BlockUserDialog } from './BlockUserDialog';
 import ChatService from 'src/services/chat.service';
 import { UserOnlineStatus } from 'src/components/UI/UserOnlineStatus';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
+import { AccountMoreMenu } from './AccountMoreMenu';
+import { AccountContext } from '../Account';
 
-export interface AccountHeaderProps {
-   user: IUser;
-}
+export interface AccountHeaderProps {}
 
-export const AccountHeader: FC<AccountHeaderProps> = ({ user }) => {
-   const currentUser = useAppSelector((state) => state.user.data)!;
-   const isUserBlocked = useIsUserBlocked(user.uid, currentUser.uid);
-   const isSelfBlockedByUser = useIsUserBlocked(currentUser.uid, user.uid);
-
-   const isCurrentUser = currentUser.uid === user.uid;
+export const AccountHeader: FC<AccountHeaderProps> = () => {
+   const { isCurrentUser, isSelfBlockedByUser, isUserBlocked } = useContext(AccountContext);
+   const user = useContext(AccountContext).user!;
 
    const inputRef = useRef<HTMLInputElement | null>(null);
 
    const { open, handleClose, handleShow } = useOpen();
 
    const { open: dialogOpen, handleClose: handleDialogClose, handleShow: handleDialogShow } = useOpen();
-
-   const handleClick = () => {
-      inputRef.current?.click();
-   };
-
-   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const files = e.target.files;
-      console.log(files);
-
-      if (files && files.length > 0) {
-         const file = files[0];
-         console.log(file);
-
-         UserService.setPhotoURL(user.uid, file);
-      }
-   };
 
    return (
       <Stack direction='row' sx={{ justifyContent: 'space-between' }}>
@@ -72,23 +54,17 @@ export const AccountHeader: FC<AccountHeaderProps> = ({ user }) => {
             </Box>
          </Stack>
 
-         {isCurrentUser ? (
-            <Box>
-               <IconButton onClick={handleClick}>
-                  <AddAPhotoIcon color='primary' />
-               </IconButton>
-               <input style={{ display: 'none' }} ref={inputRef} type='file' accept='image/*' onChange={handleChange} />
-            </Box>
-         ) : (
-            <Box>
-               <IconButton onClick={handleDialogShow}>
-                  <PersonOffIcon />
-               </IconButton>
-               <IconButton component={UnstyledLink} to={`/chat/${user.uid}`}>
-                  <ChatIcon color='primary' />
-               </IconButton>
-            </Box>
-         )}
+         <Stack direction='row' spacing={1}>
+            {/* todo: вынести */}
+            {!isCurrentUser && (
+               <Box>
+                  <Button variant='contained' startIcon={<ChatIcon />} component={UnstyledLink} to={`/chat/${user.uid}`}>
+                     <Trans>go to chat</Trans>
+                  </Button>
+               </Box>
+            )}
+            <AccountMoreMenu handleBlockDialogShow={handleDialogShow} />
+         </Stack>
 
          <BlockUserDialog open={dialogOpen} handleClose={handleDialogClose} user={user} blocked={isUserBlocked} />
 
