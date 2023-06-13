@@ -15,6 +15,8 @@ import { IUser } from 'src/types/types';
 
 export interface UserSearchFormProps {
    setFilteredUsers: Dispatch<SetStateAction<IUser[]>>;
+   searchQuery: string;
+   setSearchQuery: Dispatch<SetStateAction<string>>;
 }
 
 export enum SearchBy {
@@ -22,11 +24,12 @@ export enum SearchBy {
    ID,
 }
 
-export const UserSearchForm: FC<UserSearchFormProps> = ({ setFilteredUsers }) => {
+export const UserSearchForm: FC<UserSearchFormProps> = ({ setFilteredUsers, searchQuery, setSearchQuery }) => {
+   const user = useAppSelector((state) => state.user.data)!;
+
    const users = useAppSelector((state) => state.users.data);
    const dispatch = useAppDispatch();
 
-   const [searchQuery, setSearchQuery] = useState('');
    const [searchBy, setSearchBy] = useState(SearchBy.NAME);
 
    const { t } = useTranslation();
@@ -43,16 +46,18 @@ export const UserSearchForm: FC<UserSearchFormProps> = ({ setFilteredUsers }) =>
 
    useEffect(() => {
       const newQuery = searchQuery.toLowerCase().trimStart().trimEnd();
-      const newUsers: IUser[] = users.filter((user) => {
-         if (!user.displayName || !user.uid) {
-            return false;
-         }
-         if (searchBy === SearchBy.NAME) {
-            return user.displayName.toLowerCase().includes(newQuery);
-         } else {
-            return user.uid.toLowerCase().includes(newQuery);
-         }
-      });
+      const newUsers: IUser[] = users
+         .filter((user) => {
+            if (!user.displayName || !user.uid) {
+               return false;
+            }
+            if (searchBy === SearchBy.NAME) {
+               return user.displayName.toLowerCase().includes(newQuery);
+            } else {
+               return user.uid.toLowerCase().includes(newQuery);
+            }
+         })
+         .filter((u) => !(u.uid === user.uid));
 
       setFilteredUsers(newUsers);
    }, [users, searchQuery, searchBy]);

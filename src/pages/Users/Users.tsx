@@ -26,6 +26,7 @@ export const Users: FC<UsersProps> = ({}) => {
    const usersLoaded = useAppSelector((state) => state.global.dataLoad.users);
 
    const [filteredUsers, setFilteredUsers] = useState<IUser[]>([]);
+   const [searchQuery, setSearchQuery] = useState('');
 
    const { t } = useTranslation();
 
@@ -44,8 +45,8 @@ export const Users: FC<UsersProps> = ({}) => {
                <Typography sx={{ textAlign: 'center' }} variant='h4'>
                   <Trans>users</Trans>
                </Typography>
-               <UserSearchForm setFilteredUsers={setFilteredUsers} />
-               <UsersList users={filteredUsers} />
+               <UserSearchForm setFilteredUsers={setFilteredUsers} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+               <UsersList searchQuery={searchQuery} users={filteredUsers} />
             </>
          ) : (
             <UsersSkeleton />
