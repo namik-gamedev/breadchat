@@ -4,21 +4,32 @@ import { IChat, IMessage } from 'src/types/types';
 import { ChatMessage } from '../../ChatMessage/ChatMessage';
 import { ChatContext } from '../../Chat';
 import { NoMessagesMessage } from '../NoMessagesMessage';
+import moment from 'moment';
+import { ChatDate } from '../../ChatDate';
 
 export interface ChatMessagesListProps {}
 
 export const ChatMessagesList: FC<ChatMessagesListProps> = () => {
-   const { chat } = useContext(ChatContext);
+   const chat = useContext(ChatContext).chat!;
 
    return chat ? (
       <Stack
-         spacing={0.2}
+         spacing={0.5}
          sx={{
             p: 1,
          }}
       >
-         {chat?.messages.map((message) => {
-            return <ChatMessage message={message} key={message.createdAt} />;
+         {chat.messages.map((message, index) => {
+            const prevMessage = chat.messages[index - 1];
+            const date = moment(message.createdAt);
+            const prevDate = moment(prevMessage?.createdAt);
+
+            return (
+               <>
+                  {(date.dayOfYear() !== prevDate.dayOfYear() || date.year() !== prevDate.year()) && <ChatDate date={date} />}
+                  <ChatMessage message={message} key={message.createdAt} />
+               </>
+            );
          })}
       </Stack>
    ) : (

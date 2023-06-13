@@ -59,7 +59,7 @@ export const ChatMessage = styled(({ message, ...props }: ChatMessageProps) => {
       <Stack {...props}>
          <Stack spacing={0.2} onClick={handleShow} className='chatMessageWrapper'>
             <Typography variant='body2' className='chatMessageDate'>
-               {moment(message.createdAt).calendar()}{' '}
+               {moment(message.createdAt).format('HH:MM')}{' '}
                {message.sender === 0 && (isUnreaded ? <CheckIcon fontSize='small' /> : <DoneAllIcon fontSize='small' />)}
                <Trans>{message.edited ? 'edited' : editingMessage?.createdAt === message.createdAt && 'editing'}</Trans>
             </Typography>
