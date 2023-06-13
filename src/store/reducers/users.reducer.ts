@@ -14,13 +14,7 @@ const usersSlice = createSlice({
    initialState,
    reducers: {
       setUsers: (state, { payload }: PayloadAction<IUser[]>) => {
-         state.data = payload.sort((a, b) => {
-            if (a.online || b.online) {
-               return -1;
-            } else {
-               return b.lastSeen - a.lastSeen;
-            }
-         });
+         state.data = payload;
       },
       unsetUsers: (state) => {
          state.data = [];
