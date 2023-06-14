@@ -1,11 +1,13 @@
-import { Grid } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
-import { FC, useEffect, useState } from 'react';
+import { Dispatch, FC, SetStateAction, createContext, useEffect, useState } from 'react';
 import { StyledBox } from 'src/components/UI/StyledBox';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { useAppSelector } from 'src/hooks/useAppSelector';
@@ -18,15 +20,29 @@ import { UsersSkeleton } from 'src/components/UI/skeletons/UsersSkeleton';
 import { UsersList } from './UsersList';
 import { NoUsersMessage } from './NoUsersMessage';
 import { UserSearchForm } from './UserSearchForm';
-import { IUser } from 'src/types/types';
+import { IUser, UsersContextType } from 'src/types/types';
+import { UsersShowType } from '../../types/types';
 
 export interface UsersProps {}
+
+// todo: вынести контекст (ы)
+const usersContextInitialValue: UsersContextType = {
+   searchQuery: '',
+   setSearchQuery: () => {},
+   filteredUsers: [],
+   setFilteredUsers: () => {},
+   usersShowType: UsersShowType.ONLINE,
+   setUsersShowType: () => {},
+};
+
+export const UsersContext = createContext(usersContextInitialValue);
 
 export const Users: FC<UsersProps> = ({}) => {
    const usersLoaded = useAppSelector((state) => state.global.dataLoad.users);
 
    const [filteredUsers, setFilteredUsers] = useState<IUser[]>([]);
    const [searchQuery, setSearchQuery] = useState('');
+   const [usersShowType, setUsersShowType] = useState(UsersShowType.ONLINE);
 
    const { t } = useTranslation();
 
@@ -39,18 +55,35 @@ export const Users: FC<UsersProps> = ({}) => {
    }, []);
 
    return (
-      <Stack component={StyledBox} spacing={1} sx={{ pt: 2, height: 1, overflow: 'auto' }}>
-         {usersLoaded ? (
-            <>
-               <Typography sx={{ textAlign: 'center' }} variant='h4'>
-                  <Trans>users</Trans>
-               </Typography>
-               <UserSearchForm setFilteredUsers={setFilteredUsers} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-               <UsersList searchQuery={searchQuery} users={filteredUsers} />
-            </>
-         ) : (
-            <UsersSkeleton />
-         )}
-      </Stack>
+      <UsersContext.Provider
+         value={{
+            searchQuery,
+            setSearchQuery,
+            filteredUsers,
+            setFilteredUsers,
+            usersShowType,
+            setUsersShowType,
+         }}
+      >
+         <Stack component={StyledBox} spacing={1} sx={{ pt: 1, height: 1 }}>
+            {usersLoaded ? (
+               <>
+                  <Stack sx={{ alignItems: 'center' }}>
+                     <Typography variant='h5'>
+                        <Trans>users</Trans>
+                     </Typography>
+                  </Stack>
+
+                  <UserSearchForm />
+
+                  <Box sx={{ height: 1, overflow: 'auto' }}>
+                     <UsersList />
+                  </Box>
+               </>
+            ) : (
+               <UsersSkeleton />
+            )}
+         </Stack>
+      </UsersContext.Provider>
    );
 };
