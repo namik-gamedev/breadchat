@@ -6,6 +6,7 @@
    "sign out": "Sign out",
    "no users online": "No users online yet 😕.",
    "no users found": "No users found 😕.",
+   "no users": "No users 😕.",
    "no chats": "No chats yet 😕.",
    "no messages": "No messages yet 😕.",
    "oops": "Oops...",
@@ -70,5 +71,7 @@
    "search user": "Search user",
    "select photo": "Select photo",
    "copy link": "Copy link",
-   "go to chat": "Go to chat"
+   "go to chat": "Go to chat",
+   "show": "Show",
+   "all": "All"
 }
