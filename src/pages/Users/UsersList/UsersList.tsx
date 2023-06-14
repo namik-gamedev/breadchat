@@ -8,14 +8,14 @@ import { UserThumbnail } from 'src/pages/Users/UserThumbnail';
 import { IUser } from 'src/types/types';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { NoUsersMessage } from '../NoUsersMessage';
-import { UsersContext } from '../Users';
+import { useUsersContext } from 'src/hooks/useUsersContext';
 
 export interface UsersListProps {}
 
 const USERS_IN_PAGE = 20;
 
 export const UsersList: FC<UsersListProps> = ({}) => {
-   const { filteredUsers: users, searchQuery, usersShowType } = useContext(UsersContext);
+   const { filteredUsers: users, searchQuery, usersShowType } = useUsersContext();
 
    const [newUsers, setNewUsers] = useState(users);
 

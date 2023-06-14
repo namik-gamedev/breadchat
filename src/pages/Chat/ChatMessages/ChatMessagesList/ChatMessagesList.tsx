@@ -2,15 +2,15 @@ import React, { Dispatch, FC, SetStateAction, useContext } from 'react';
 import Stack from '@mui/material/Stack';
 import { IChat, IMessage } from 'src/types/types';
 import { ChatMessage } from '../../ChatMessage/ChatMessage';
-import { ChatContext } from '../../Chat';
 import { NoMessagesMessage } from '../NoMessagesMessage';
 import moment from 'moment';
 import { ChatDate } from '../../ChatDate';
+import { useChatContext } from 'src/hooks/useChatContext';
 
 export interface ChatMessagesListProps {}
 
 export const ChatMessagesList: FC<ChatMessagesListProps> = () => {
-   const chat = useContext(ChatContext).chat!;
+   const chat = useChatContext().chat!;
 
    return chat ? (
       <Stack

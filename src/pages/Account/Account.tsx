@@ -9,7 +9,7 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { Trans, useTranslation } from 'react-i18next';
 import { StyledBox } from 'src/components/UI/StyledBox';
 import { useAppSelector } from 'src/hooks/useAppSelector';
-import { AccountContextType, IUser } from 'src/types/types';
+import { IAccountContext, IUser } from 'src/types/types';
 import { useParams } from 'react-router-dom';
 import { OnlineBadge } from 'src/components/UI/OnlineBadge';
 import { UserAvatar } from 'src/components/UI/UserAvatar';
@@ -23,16 +23,9 @@ import { AccountHeader } from './AccountHeader';
 import { AboutUser } from './AboutUser';
 import { AccountSkeleton } from 'src/components/UI/skeletons/AccountSkeleton';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
+import { AccountProvider } from 'src/providers/AccountProvider';
 
 export interface AccountProps {}
-
-const accountContextDefaultValue: AccountContextType = {
-   user: undefined,
-   isCurrentUser: false,
-   isUserBlocked: false,
-   isSelfBlockedByUser: false,
-};
-export const AccountContext = createContext(accountContextDefaultValue);
 
 export const Account: FC<AccountProps> = ({}) => {
    const { userUid } = useParams();
@@ -55,7 +48,7 @@ export const Account: FC<AccountProps> = ({}) => {
    if (usersLoaded) {
       if (user) {
          return (
-            <AccountContext.Provider value={{ user, isUserBlocked, isCurrentUser, isSelfBlockedByUser }}>
+            <AccountProvider value={{ user, isUserBlocked, isCurrentUser, isSelfBlockedByUser }}>
                <Stack component={StyledBox} spacing={2} sx={{ p: 1, height: 1, overflow: 'auto' }}>
                   <AccountHeader />
 
@@ -63,7 +56,7 @@ export const Account: FC<AccountProps> = ({}) => {
 
                   {open && <EditAboutUserForm handleClose={handleClose} />}
                </Stack>
-            </AccountContext.Provider>
+            </AccountProvider>
          );
       } else {
          return <NotFound />;

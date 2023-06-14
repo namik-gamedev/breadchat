@@ -2,8 +2,8 @@ import React, { FC, useContext } from 'react';
 import { Trans } from 'react-i18next';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { UsersContext } from '../Users';
 import { UsersShowType } from 'src/types/types';
+import { useUsersContext } from 'src/hooks/useUsersContext';
 
 export interface NoUsersMessageProps {}
 
@@ -19,7 +19,7 @@ const getMessageText = (searchQueryIsEmpty: boolean, usersShowType: UsersShowTyp
 };
 
 export const NoUsersMessage: FC<NoUsersMessageProps> = ({}) => {
-   const { searchQuery, usersShowType } = useContext(UsersContext);
+   const { searchQuery, usersShowType } = useUsersContext();
 
    return (
       <Stack sx={{ alignItems: 'center', pt: 2 }}>

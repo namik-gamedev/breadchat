@@ -9,7 +9,7 @@ import { IUser } from 'src/types/types';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 import { current } from '@reduxjs/toolkit';
-import { AccountContext } from '../Account';
+import { useAccountContext } from 'src/hooks/useAccountContext';
 
 export interface AboutUserProps {
    handleFormShow: () => void;
@@ -18,8 +18,8 @@ export interface AboutUserProps {
 export const AboutUser: FC<AboutUserProps> = ({ handleFormShow }) => {
    const currentUser = useAppSelector((state) => state.user.data);
 
-   const { isCurrentUser, isSelfBlockedByUser } = useContext(AccountContext);
-   const user = useContext(AccountContext).user!;
+   const { isCurrentUser, isSelfBlockedByUser } = useAccountContext();
+   const user = useAccountContext().user!;
 
    return (
       <Stack direction='row' sx={{ justifyContent: 'space-between' }}>

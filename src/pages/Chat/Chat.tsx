@@ -31,28 +31,9 @@ import { useTranslation } from 'react-i18next';
 import { UnblockButton } from './UnblockButton';
 import { UserBlockedYouMessage } from './UserBlockedYouMessage';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
+import { ChatProvider } from 'src/providers/ChatProvider';
 
 export interface ChatProps {}
-
-export interface IChatContext {
-   chat: IChat | undefined;
-   interlocutor: IUser | undefined;
-   editingMessage: IMessage | null;
-   setEditingMessage: Dispatch<SetStateAction<IMessage | null>>;
-   isSelfBlockedByInterlocutor: boolean;
-   isInterlocutorBlocked: boolean;
-}
-
-const chatContextInitialValue = {
-   chat: undefined,
-   interlocutor: undefined,
-   editingMessage: null,
-   setEditingMessage: () => {},
-   isSelfBlockedByInterlocutor: false,
-   isInterlocutorBlocked: false,
-};
-
-export const ChatContext = createContext<IChatContext>(chatContextInitialValue);
 
 export const Chat: FC<ChatProps> = ({}) => {
    const { interlocutorUid } = useParams();
@@ -91,7 +72,7 @@ export const Chat: FC<ChatProps> = ({}) => {
 
    if (chatsLoaded) {
       return interlocutor ? (
-         <ChatContext.Provider
+         <ChatProvider
             value={{
                chat,
                interlocutor,
@@ -109,7 +90,7 @@ export const Chat: FC<ChatProps> = ({}) => {
                   {!isSelfBlockedByInterlocutor && !isInterlocutorBlocked && <ChatForm />}
                </Stack>
             </StyledBox>
-         </ChatContext.Provider>
+         </ChatProvider>
       ) : (
          <NotFound />
       );
