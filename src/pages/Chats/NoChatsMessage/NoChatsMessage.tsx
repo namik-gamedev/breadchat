@@ -7,7 +7,7 @@ export interface NoChatsMessageProps {}
 
 export const NoChatsMessage: FC<NoChatsMessageProps> = ({}) => {
    return (
-      <Stack sx={{ justifyContent: 'center', alignItems: 'center', height: 1 }}>
+      <Stack sx={{ alignItems: 'center', pt: 2 }}>
          <Typography variant='body1'>
             <Trans>no chats</Trans>
          </Typography>

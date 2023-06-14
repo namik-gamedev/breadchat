@@ -37,13 +37,18 @@ export const Chats: FC<ChatsProps> = ({}) => {
    }, []);
 
    return (
-      <Stack component={StyledBox} spacing={1} sx={{ pt: 2, height: 1, overflow: 'auto' }}>
+      <Stack component={StyledBox} spacing={1} sx={{ pt: 1, height: 1 }}>
          {chatsLoaded ? (
             <>
-               <Typography sx={{ textAlign: 'center' }} variant='h4'>
-                  <Trans>chats</Trans>
-               </Typography>
-               <ChatsList chats={chats} />
+               <Stack sx={{ alignItems: 'center' }}>
+                  <Typography variant='h5'>
+                     <Trans>chats</Trans>
+                  </Typography>
+               </Stack>
+
+               <Box sx={{ height: 1, overflow: 'auto' }}>
+                  <ChatsList chats={chats} />
+               </Box>
             </>
          ) : (
             <ChatsSkeleton />
