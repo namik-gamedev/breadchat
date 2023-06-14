@@ -10,14 +10,14 @@ import { StyledBox } from 'src/components/UI/StyledBox';
 import { Trans } from 'react-i18next';
 import { NoMessagesMessage } from './NoMessagesMessage';
 import { ChatMessagesList } from './ChatMessagesList';
-import { ChatContext } from '../Chat';
+import { useChatContext } from 'src/hooks/useChatContext';
 
 export interface ChatMessagesProps {}
 
 export const ChatMessages: FC<ChatMessagesProps> = ({}) => {
    const { ref, scroll } = useScroll<HTMLDivElement>();
 
-   const { chat } = useContext(ChatContext);
+   const { chat } = useChatContext();
 
    useEffect(() => {
       scroll();

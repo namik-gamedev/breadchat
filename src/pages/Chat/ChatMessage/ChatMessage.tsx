@@ -27,7 +27,7 @@ import { useOpen } from 'src/hooks/useOpen';
 import { DeleteMessageDialog } from './DeleteMessageDialog';
 import { ChatMessageMenuItems } from './ChatMessageMenuItems';
 import { Trans } from 'react-i18next';
-import { ChatContext } from '../Chat';
+import { useChatContext } from 'src/hooks/useChatContext';
 
 export interface ChatMessageProps extends StackProps {
    message: IMessage;
@@ -36,8 +36,8 @@ export interface ChatMessageProps extends StackProps {
 const BORDER_RADIUS_PX = 16;
 
 export const ChatMessage = styled(({ message, ...props }: ChatMessageProps) => {
-   const chat = useContext(ChatContext).chat!;
-   const { editingMessage, setEditingMessage } = useContext(ChatContext);
+   const chat = useChatContext().chat!;
+   const { editingMessage, setEditingMessage } = useChatContext();
 
    const isUnreaded = isMessageUnreaded(chat, message);
 

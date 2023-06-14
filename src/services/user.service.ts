@@ -4,7 +4,6 @@ import { storage } from 'src/firebase/firebase';
 import { db } from 'src/firebase/firebase';
 import { IUser } from 'src/types/types';
 
-// todo: постараться вынести юзера в класс а не передавать постоянно в метод
 export default class UserService {
    static async setup(user: IUser) {
       const userRef = ref(db, `users/${user.uid}`);

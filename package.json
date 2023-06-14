@@ -11,7 +11,8 @@
       "component": " npx generate-react-cli component",
       "page": " npx generate-react-cli component --path src/pages",
       "skeleton": " npx generate-react-cli component --path src/components/UI/skeletons",
-      "uiComponent": " npx generate-react-cli component --path src/components/UI"
+      "uiComponent": " npx generate-react-cli component --path src/components/UI",
+      "provider": "npx generate-react-cli component --path src/providers"
    },
    "dependencies": {
       "@emoji-mart/data": "^1.1.2",

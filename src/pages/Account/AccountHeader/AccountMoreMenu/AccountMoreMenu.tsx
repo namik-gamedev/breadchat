@@ -1,8 +1,8 @@
 import React, { FC, useContext, useRef } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import Box from '@mui/material/Box';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import IconButton from '@mui/material/IconButton';
@@ -18,20 +18,20 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 import copy from 'copy-to-clipboard';
 import UserService from 'src/services/user.service';
-import { AccountContext } from '../../Account';
+import { AccountMoreMenuItems } from './AccountMoreMenuItems';
+import { useAccountContext } from 'src/hooks/useAccountContext';
 
 export interface AccountMoreMenuProps {
    handleBlockDialogShow: () => void;
 }
 
-// todo: вынести меню айтемы в отдельный компонент
 export const AccountMoreMenu: FC<AccountMoreMenuProps> = ({ handleBlockDialogShow }) => {
    const { anchorEl, handleShow, handleClose, open } = useAnchorEl();
 
    const inputRef = useRef<HTMLInputElement | null>(null);
 
-   const { isCurrentUser, isUserBlocked } = useContext(AccountContext);
-   const user = useContext(AccountContext).user!;
+   const { isCurrentUser, isUserBlocked } = useAccountContext();
+   const user = useAccountContext().user!;
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const files = e.target.files;
@@ -51,43 +51,7 @@ export const AccountMoreMenu: FC<AccountMoreMenuProps> = ({ handleBlockDialogSho
             <MoreVertIcon />
          </IconButton>
          <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
-            {isCurrentUser ? (
-               <MenuItem
-                  onClick={() => {
-                     // todo: вынести
-
-                     handleClose();
-                     inputRef.current?.click();
-                  }}
-               >
-                  <ListItemIcon>
-                     <AddAPhotoIcon color='primary' />
-                  </ListItemIcon>
-                  <Trans>select photo</Trans>
-               </MenuItem>
-            ) : (
-               <MenuItem
-                  onClick={() => {
-                     // todo: вынести
-                     handleClose();
-                     handleBlockDialogShow();
-                  }}
-               >
-                  <ListItemIcon>{isUserBlocked ? <PersonIcon color='primary' /> : <PersonOffIcon color='primary' />}</ListItemIcon>
-                  <Trans>{isUserBlocked ? 'unblock user' : 'block user'}</Trans>
-               </MenuItem>
-            )}
-            <MenuItem
-               onClick={() => {
-                  handleClose();
-                  copy(document.URL);
-               }}
-            >
-               <ListItemIcon>
-                  <ReplyIcon color='primary' />
-               </ListItemIcon>
-               <Trans>copy link</Trans>
-            </MenuItem>
+            <AccountMoreMenuItems handleBlockDialogShow={handleBlockDialogShow} handleClose={handleClose} />
          </StyledMenu>
       </Box>
    );

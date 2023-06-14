@@ -24,7 +24,7 @@ import { ChatEmojiPicker } from './ChatEmojiPicker';
 import { debounce } from 'src/utils/debounce.util';
 import { useDebounce } from 'src/hooks/useDebounce';
 import { Trans, useTranslation } from 'react-i18next';
-import { ChatContext } from '../Chat';
+import { useChatContext } from 'src/hooks/useChatContext';
 
 export interface ChatFormProps {}
 
@@ -33,8 +33,8 @@ export const ChatForm: FC<ChatFormProps> = () => {
    const [messageText, setMessageText] = useState('');
    const [isInputError, setIsInputError] = useState(false);
 
-   const interlocutor = useContext(ChatContext).interlocutor!;
-   const { editingMessage, setEditingMessage } = useContext(ChatContext);
+   const interlocutor = useChatContext().interlocutor!;
+   const { editingMessage, setEditingMessage } = useChatContext();
 
    const { t } = useTranslation();
 

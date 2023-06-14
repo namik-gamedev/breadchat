@@ -14,12 +14,12 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { IUser, SearchBy, UsersShowType } from 'src/types/types';
-import { UsersContext } from '../Users';
+import { useUsersContext } from 'src/hooks/useUsersContext';
 
 export interface UserSearchFormProps {}
 
 export const UserSearchForm: FC<UserSearchFormProps> = ({}) => {
-   const { setFilteredUsers, searchQuery, setSearchQuery, usersShowType, setUsersShowType } = useContext(UsersContext);
+   const { setFilteredUsers, searchQuery, setSearchQuery, usersShowType, setUsersShowType } = useUsersContext();
 
    const user = useAppSelector((state) => state.user.data)!;
 

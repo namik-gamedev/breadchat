@@ -23,15 +23,15 @@ import ChatService from 'src/services/chat.service';
 import { UserOnlineStatus } from 'src/components/UI/UserOnlineStatus';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 import { AccountMoreMenu } from './AccountMoreMenu';
-import { AccountContext } from '../Account';
 import { GoToChatButton } from './GoToChatButton';
 import { UserAvatarBackdrop } from 'src/components/UI/UserAvatarBackdrop';
+import { useAccountContext } from 'src/hooks/useAccountContext';
 
 export interface AccountHeaderProps {}
 
 export const AccountHeader: FC<AccountHeaderProps> = () => {
-   const { isCurrentUser, isSelfBlockedByUser, isUserBlocked } = useContext(AccountContext);
-   const user = useContext(AccountContext).user!;
+   const { isCurrentUser, isSelfBlockedByUser, isUserBlocked } = useAccountContext();
+   const user = useAccountContext().user!;
 
    const inputRef = useRef<HTMLInputElement | null>(null);
 

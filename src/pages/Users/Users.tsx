@@ -20,22 +20,11 @@ import { UsersSkeleton } from 'src/components/UI/skeletons/UsersSkeleton';
 import { UsersList } from './UsersList';
 import { NoUsersMessage } from './NoUsersMessage';
 import { UserSearchForm } from './UserSearchForm';
-import { IUser, UsersContextType } from 'src/types/types';
+import { IUser, IUsersContext } from 'src/types/types';
 import { UsersShowType } from '../../types/types';
+import { UsersProvider } from 'src/providers/UsersProvider';
 
 export interface UsersProps {}
-
-// todo: вынести контекст (ы)
-const usersContextInitialValue: UsersContextType = {
-   searchQuery: '',
-   setSearchQuery: () => {},
-   filteredUsers: [],
-   setFilteredUsers: () => {},
-   usersShowType: UsersShowType.ONLINE,
-   setUsersShowType: () => {},
-};
-
-export const UsersContext = createContext(usersContextInitialValue);
 
 export const Users: FC<UsersProps> = ({}) => {
    const usersLoaded = useAppSelector((state) => state.global.dataLoad.users);
@@ -55,7 +44,7 @@ export const Users: FC<UsersProps> = ({}) => {
    }, []);
 
    return (
-      <UsersContext.Provider
+      <UsersProvider
          value={{
             searchQuery,
             setSearchQuery,
@@ -84,6 +73,6 @@ export const Users: FC<UsersProps> = ({}) => {
                <UsersSkeleton />
             )}
          </Stack>
-      </UsersContext.Provider>
+      </UsersProvider>
    );
 };

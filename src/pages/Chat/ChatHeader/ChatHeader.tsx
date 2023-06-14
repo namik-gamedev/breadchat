@@ -18,13 +18,13 @@ import { ClearChatDialog } from './ClearChatDialog';
 import { useTranslation, Trans } from 'react-i18next';
 import { ChatHeaderOnlineStatus } from './ChatHeaderOnlineStatus';
 import { UserOnlineStatus } from 'src/components/UI/UserOnlineStatus';
-import { ChatContext } from '../Chat';
+import { useChatContext } from 'src/hooks/useChatContext';
 
 export interface ChatHeaderProps {}
 
 export const ChatHeader: FC<ChatHeaderProps> = ({}) => {
-   const chat = useContext(ChatContext).chat!;
-   const interlocutor = useContext(ChatContext).interlocutor!;
+   const chat = useChatContext().chat!;
+   const interlocutor = useChatContext().interlocutor!;
 
    const { open, handleClose, handleShow } = useOpen();
    const { t } = useTranslation();

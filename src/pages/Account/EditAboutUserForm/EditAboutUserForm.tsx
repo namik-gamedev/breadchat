@@ -8,14 +8,14 @@ import { useTranslation } from 'react-i18next';
 import UserService from 'src/services/user.service';
 import CloseIcon from '@mui/icons-material/Close';
 import { IUser } from 'src/types/types';
-import { AccountContext } from '../Account';
+import { useAccountContext } from 'src/hooks/useAccountContext';
 
 export interface EditAboutUserFormProps {
    handleClose: () => void;
 }
 
 export const EditAboutUserForm: FC<EditAboutUserFormProps> = ({ handleClose }) => {
-   const user = useContext(AccountContext).user!;
+   const user = useAccountContext().user!;
 
    const [about, setAbout] = useState(user.about || '');
    const [isInputError, setIsInputError] = useState(false);

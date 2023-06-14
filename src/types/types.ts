@@ -36,7 +36,7 @@ export enum SearchBy {
    ID,
 }
 
-export interface UsersContextType {
+export interface IUsersContext {
    searchQuery: string;
    setSearchQuery: Dispatch<SetStateAction<string>>;
    filteredUsers: IUser[];
@@ -45,9 +45,18 @@ export interface UsersContextType {
    setUsersShowType: Dispatch<SetStateAction<UsersShowType>>;
 }
 
-export interface AccountContextType {
+export interface IAccountContext {
    user: IUser | undefined;
    isCurrentUser: boolean;
    isUserBlocked: boolean;
    isSelfBlockedByUser: boolean;
+}
+
+export interface IChatContext {
+   chat: IChat | undefined;
+   interlocutor: IUser | undefined;
+   editingMessage: IMessage | null;
+   setEditingMessage: Dispatch<SetStateAction<IMessage | null>>;
+   isSelfBlockedByInterlocutor: boolean;
+   isInterlocutorBlocked: boolean;
 }
