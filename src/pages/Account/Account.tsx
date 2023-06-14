@@ -9,7 +9,7 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { Trans, useTranslation } from 'react-i18next';
 import { StyledBox } from 'src/components/UI/StyledBox';
 import { useAppSelector } from 'src/hooks/useAppSelector';
-import { IUser } from 'src/types/types';
+import { AccountContextType, IUser } from 'src/types/types';
 import { useParams } from 'react-router-dom';
 import { OnlineBadge } from 'src/components/UI/OnlineBadge';
 import { UserAvatar } from 'src/components/UI/UserAvatar';
@@ -25,13 +25,6 @@ import { AccountSkeleton } from 'src/components/UI/skeletons/AccountSkeleton';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 
 export interface AccountProps {}
-
-export interface AccountContextType {
-   user: IUser | undefined;
-   isCurrentUser: boolean;
-   isUserBlocked: boolean;
-   isSelfBlockedByUser: boolean;
-}
 
 const accountContextDefaultValue: AccountContextType = {
    user: undefined,
