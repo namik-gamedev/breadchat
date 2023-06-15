@@ -20,6 +20,10 @@ import { useDataLoaded } from 'src/hooks/useDataLoaded';
 import UserService from 'src/services/user.service';
 import { enLocaleSpec } from 'src/locales/en.localeSpec';
 import moment from 'moment';
+import {} from 'src/store/reducers/global.reducer';
+import { ruLocaleSpec } from 'src/locales/ru.localeSpec';
+import i18n from 'src/i18n/i18n';
+import { ILanguage } from 'src/types/types';
 
 export interface AppProps {}
 
@@ -31,8 +35,11 @@ export const App: FC<AppProps> = ({}) => {
    useDBSetup();
 
    useEffect(() => {
-      moment.updateLocale(language, enLocaleSpec);
-   }, []);
+      console.log(navigator.language);
+
+      moment.updateLocale(language, language === ILanguage.EN ? enLocaleSpec : ruLocaleSpec);
+      i18n.changeLanguage(language);
+   }, [language]);
 
    useEffect(() => {
       if (user) {

@@ -60,3 +60,14 @@ export interface IChatContext {
    isSelfBlockedByInterlocutor: boolean;
    isInterlocutorBlocked: boolean;
 }
+
+export enum ILanguage {
+   EN = 'en',
+   RU = 'ru',
+}
+
+export interface IDataLoad {
+   user: boolean;
+   users: boolean;
+   chats: boolean;
+}
