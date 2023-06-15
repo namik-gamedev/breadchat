@@ -1,19 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export interface IDataLoad {
-   user: boolean;
-   users: boolean;
-   chats: boolean;
-}
-
-export enum Language {
-   EN = 'en',
-   RU = 'ru',
-}
+import { IDataLoad, ILanguage } from 'src/types/types';
 
 interface StateType {
    darkTheme: boolean;
-   language: Language;
+   language: ILanguage;
    dataLoad: IDataLoad;
 }
 
@@ -25,7 +15,7 @@ const dataLoadInitialState = {
 
 const initialState: StateType = {
    darkTheme: false,
-   language: Language.EN,
+   language: navigator.language === 'ru-RU' ? ILanguage.RU : ILanguage.EN,
    dataLoad: dataLoadInitialState,
 };
 
@@ -36,7 +26,7 @@ const GlobalSlice = createSlice({
       setDarkTheme: (state, { payload }: PayloadAction<boolean>) => {
          state.darkTheme = payload;
       },
-      setLanguage: (state, { payload }: PayloadAction<Language>) => {
+      setLanguage: (state, { payload }: PayloadAction<ILanguage>) => {
          state.language = payload;
       },
       setUserLoad: (state, { payload }: PayloadAction<boolean>) => {
