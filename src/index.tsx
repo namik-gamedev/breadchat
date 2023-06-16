@@ -16,7 +16,6 @@ import { enLocaleSpec } from 'src/locales/en.localeSpec';
 // ПЕРЕНЕСТИ ВСЕ UI-КОМПОНЕНТЫ НА STYLED
 // ЗАМЕНИТЬ ВСЕ КОНКАТЕНАЦИИ СТРОК НА ШАБЛОННЫЕ СТРОКИ
 // rename all SomeComponentNameProps to Props interface name
-// проставить везде key в array.map
 // разобраться со всем handleChange/Click, переименовать на более правильный имена (ВАЖНО)
 
 // TODO: FEATURES
