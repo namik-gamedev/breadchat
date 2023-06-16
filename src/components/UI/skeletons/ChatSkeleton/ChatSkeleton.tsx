@@ -4,9 +4,7 @@ import { StyledBox } from '../../StyledBox';
 import { ChatFormSkeleton } from './ChatFormSkeleton';
 import { ChatHeaderSkeleton } from './ChatHeaderSkeleton';
 
-export interface ChatSkeletonProps {}
-
-export const ChatSkeleton: FC<ChatSkeletonProps> = ({}) => {
+export const ChatSkeleton: FC = () => {
    return (
       <StyledBox sx={{ p: 2, height: 1 }}>
          <Stack spacing={2} direction='column' sx={{ height: 1 }}>

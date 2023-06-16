@@ -7,13 +7,13 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 import { IUser } from 'src/types/types';
 
-export interface UserAvatarProps extends AvatarProps {
+interface Props extends AvatarProps {
    user: IUser;
    sx?: SxProps;
    withoutBadge?: boolean;
 }
 
-export const UserAvatar: FC<UserAvatarProps> = ({ user, withoutBadge = false, sx, ...props }) => {
+export const UserAvatar: FC<Props> = ({ user, withoutBadge = false, sx, ...props }) => {
    const theme = useTheme();
 
    const currentUser = useAppSelector((state) => state.user.data)!;

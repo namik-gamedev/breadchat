@@ -5,8 +5,6 @@ import { Trans } from 'react-i18next';
 import { useUsersContext } from 'src/hooks/useUsersContext';
 import { UsersShowType } from 'src/types/types';
 
-export interface NoUsersMessageProps {}
-
 const getMessageText = (searchQueryIsEmpty: boolean, usersShowType: UsersShowType): string => {
    if (searchQueryIsEmpty) {
       if (usersShowType === UsersShowType.ONLINE) {
@@ -18,7 +16,7 @@ const getMessageText = (searchQueryIsEmpty: boolean, usersShowType: UsersShowTyp
    }
 };
 
-export const NoUsersMessage: FC<NoUsersMessageProps> = ({}) => {
+export const NoUsersMessage: FC = () => {
    const { searchQuery, usersShowType } = useUsersContext();
 
    return (

@@ -7,9 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { setDarkTheme } from 'src/store/reducers/global.reducer';
 
-export interface ThemeTogglerProps {}
-
-export const ThemeToggler: FC<ThemeTogglerProps> = ({}) => {
+export const ThemeToggler: FC = () => {
    const dispatch = useAppDispatch();
 
    const [dark, setDark] = useState(false);

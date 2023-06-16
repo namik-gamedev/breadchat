@@ -5,11 +5,11 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
 import { IChat } from 'src/types/types';
 
-export interface ChatHeaderOnlineStatusProps {
+interface Props {
    chat: IChat;
 }
 
-export const ChatHeaderOnlineStatus: FC<ChatHeaderOnlineStatusProps> = ({ chat }) => {
+export const ChatHeaderOnlineStatus: FC<Props> = ({ chat }) => {
    const user = useAppSelector((state) => state.users.data).find((u) => u.uid === chat.interlocutor.uid)!;
    const currentUser = useAppSelector((state) => state.user.data)!;
 

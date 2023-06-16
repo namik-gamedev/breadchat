@@ -13,9 +13,7 @@ import { useDebounce } from 'src/hooks/useDebounce';
 import ChatService from 'src/services/chat.service';
 import { ChatEmojiPicker } from './ChatEmojiPicker';
 
-export interface ChatFormProps {}
-
-export const ChatForm: FC<ChatFormProps> = () => {
+export const ChatForm: FC = () => {
    const user = useAppSelector((state) => state.user.data)!;
    const [messageText, setMessageText] = useState('');
    const [isInputError, setIsInputError] = useState(false);

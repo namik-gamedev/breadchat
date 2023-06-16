@@ -5,9 +5,7 @@ import { FC } from 'react';
 import { Trans } from 'react-i18next';
 import errorImg from 'src/assets/img/404.png';
 
-export interface NotFoundProps {}
-
-export const NotFound: FC<NotFoundProps> = ({}) => {
+export const NotFound: FC = () => {
    return (
       <Stack spacing={1} alignItems='center'>
          <Box

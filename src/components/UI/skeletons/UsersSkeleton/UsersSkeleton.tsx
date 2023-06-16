@@ -5,9 +5,7 @@ import { FC } from 'react';
 import { Trans } from 'react-i18next';
 import { UserThumbnailSkeleton } from '../UserThumbnailSkeleton';
 
-export interface UsersSkeletonProps {}
-
-export const UsersSkeleton: FC<UsersSkeletonProps> = ({}) => {
+export const UsersSkeleton: FC = () => {
    return (
       <>
          <Typography sx={{ textAlign: 'center' }} variant='h4'>

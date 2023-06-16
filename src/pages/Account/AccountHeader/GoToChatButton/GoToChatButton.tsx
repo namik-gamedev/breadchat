@@ -5,9 +5,7 @@ import { Trans } from 'react-i18next';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 import { useAccountContext } from 'src/hooks/useAccountContext';
 
-export interface GoToChatButtonProps {}
-
-export const GoToChatButton: FC<GoToChatButtonProps> = ({}) => {
+export const GoToChatButton: FC = () => {
    const user = useAccountContext().user!;
 
    return (

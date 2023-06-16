@@ -9,9 +9,7 @@ import { StyledMenu } from 'src/components/UI/StyledMenu';
 import { useAnchorEl } from 'src/hooks/useAnchorEl';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 
-export interface HeaderNavigationMenuProps {}
-
-export const HeaderNavigationMenu: FC<HeaderNavigationMenuProps> = ({}) => {
+export const HeaderNavigationMenu: FC = () => {
    const { anchorEl, open, handleShow, handleClose } = useAnchorEl();
 
    const unreadedMessagesCount = useAppSelector((state) => state.chats.data).reduce((total, chat) => total + chat.unreadedMessagesCount, 0);

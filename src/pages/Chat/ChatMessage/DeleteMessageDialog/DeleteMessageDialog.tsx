@@ -6,7 +6,7 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import ChatService from 'src/services/chat.service';
 import { IMessage, IUser } from 'src/types/types';
 
-export interface DeleteMessageDialogProps {
+interface Props {
    open: boolean;
    handleClose: () => void;
    interlocutorDisplayName: string;
@@ -15,14 +15,7 @@ export interface DeleteMessageDialogProps {
    isUnreaded: boolean;
 }
 
-export const DeleteMessageDialog: FC<DeleteMessageDialogProps> = ({
-   open,
-   handleClose,
-   interlocutorDisplayName,
-   interlocutor,
-   message,
-   isUnreaded,
-}) => {
+export const DeleteMessageDialog: FC<Props> = ({ open, handleClose, interlocutorDisplayName, interlocutor, message, isUnreaded }) => {
    const user = useAppSelector((state) => state.user.data)!;
    const { t } = useTranslation();
 

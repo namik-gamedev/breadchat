@@ -8,9 +8,7 @@ import { ChatsSkeleton } from 'src/components/UI/skeletons/ChatsSkeleton';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { ChatsList } from './ChatsList';
 
-export interface ChatsProps {}
-
-export const Chats: FC<ChatsProps> = ({}) => {
+export const Chats: FC = () => {
    const chatsLoaded = useAppSelector((state) => state.global.dataLoad.chats);
    const chats = useAppSelector((state) => state.chats.data);
 

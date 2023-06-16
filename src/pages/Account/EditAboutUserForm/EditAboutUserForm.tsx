@@ -9,11 +9,11 @@ import { useTranslation } from 'react-i18next';
 import { useAccountContext } from 'src/hooks/useAccountContext';
 import UserService from 'src/services/user.service';
 
-export interface EditAboutUserFormProps {
+interface Props {
    handleFormClose: () => void;
 }
 
-export const EditAboutUserForm: FC<EditAboutUserFormProps> = ({ handleFormClose }) => {
+export const EditAboutUserForm: FC<Props> = ({ handleFormClose }) => {
    const user = useAccountContext().user!;
 
    const [about, setAbout] = useState(user.about || '');

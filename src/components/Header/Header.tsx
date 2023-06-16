@@ -10,9 +10,7 @@ import { HeaderProfileMenu } from './HeaderProfileMenu';
 import { LanguageToggler } from './LanguageToggler';
 import { ThemeToggler } from './ThemeToggler';
 
-export interface HeaderProps {}
-
-export const Header: FC<HeaderProps> = ({}) => {
+export const Header: FC = () => {
    const user = useAppSelector((state) => state.user.data);
 
    return (

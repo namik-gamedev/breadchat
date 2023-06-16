@@ -8,13 +8,13 @@ import { IChat } from 'src/types/types';
 import { ChatThumbnail } from '../ChatThumbnail';
 import { NoChatsMessage } from '../NoChatsMessage';
 
-export interface ChatsListProps {
+interface Props {
    chats: IChat[];
 }
 
 const CHATS_IN_PAGE = 20;
 
-export const ChatsList: FC<ChatsListProps> = ({ chats }) => {
+export const ChatsList: FC<Props> = ({ chats }) => {
    const [page, setPage] = useState(1);
 
    const handleChange = (_e: any, p: number) => {

@@ -5,14 +5,14 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import UserService from 'src/services/user.service';
 import { IUser } from 'src/types/types';
 
-export interface BlockUserDialogProps {
+interface Props {
    open: boolean;
    blocked: boolean;
    handleClose: () => void;
    user: IUser;
 }
 
-export const BlockUserDialog: FC<BlockUserDialogProps> = ({ open, blocked, handleClose, user }) => {
+export const BlockUserDialog: FC<Props> = ({ open, blocked, handleClose, user }) => {
    const { t } = useTranslation();
 
    const currentUser = useAppSelector((state) => state.user.data)!;

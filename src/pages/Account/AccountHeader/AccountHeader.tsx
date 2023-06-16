@@ -11,9 +11,7 @@ import { AccountMoreMenu } from './AccountMoreMenu';
 import { BlockUserDialog } from './BlockUserDialog';
 import { GoToChatButton } from './GoToChatButton';
 
-export interface AccountHeaderProps {}
-
-export const AccountHeader: FC<AccountHeaderProps> = () => {
+export const AccountHeader: FC = () => {
    const { isCurrentUser, isSelfBlockedByUser, isUserBlocked } = useAccountContext();
    const user = useAccountContext().user!;
 

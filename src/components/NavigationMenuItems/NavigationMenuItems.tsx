@@ -8,11 +8,11 @@ import { Trans } from 'react-i18next';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { UnstyledLink } from '../UI/UnstyledLink';
 
-export interface NavigationMenuItemsProps {
+interface Props {
    handleClose?: () => void;
 }
 
-export const NavigationMenuItems: FC<NavigationMenuItemsProps> = ({ handleClose }) => {
+export const NavigationMenuItems: FC<Props> = ({ handleClose }) => {
    const unreadedMessagesCount = useAppSelector((state) => state.chats.data).reduce((total, chat) => total + chat.unreadedMessagesCount, 0);
 
    return (

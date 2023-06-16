@@ -6,11 +6,11 @@ import { useOpen } from 'src/hooks/useOpen';
 import { BlockUserDialog } from 'src/pages/Account/AccountHeader/BlockUserDialog';
 import { IUser } from 'src/types/types';
 
-export interface UnblockButtonProps {
+interface Props {
    user: IUser;
 }
 
-export const UnblockButton: FC<UnblockButtonProps> = ({ user }) => {
+export const UnblockButton: FC<Props> = ({ user }) => {
    const { open, handleClose, handleShow } = useOpen();
 
    return (

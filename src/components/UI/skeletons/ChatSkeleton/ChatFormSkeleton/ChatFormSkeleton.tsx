@@ -1,8 +1,6 @@
 import Skeleton from '@mui/material/Skeleton';
 import { FC } from 'react';
 
-export interface ChatFormSkeletonProps {}
-
-export const ChatFormSkeleton: FC<ChatFormSkeletonProps> = ({}) => {
+export const ChatFormSkeleton: FC = () => {
    return <Skeleton height={50} width={'100%'} variant='rounded' />;
 };

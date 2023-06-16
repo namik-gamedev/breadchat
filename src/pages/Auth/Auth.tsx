@@ -10,14 +10,12 @@ import { Trans, useTranslation } from 'react-i18next';
 import { SignInForm } from 'src/components/SignInForm';
 import { SignUpForm } from 'src/components/SignUpForm';
 
-export interface AuthProps {}
-
 type AuthTab = 'signIn' | 'signUp';
 
 const tabSx = { fontSize: '1.2em', fontWeight: 500 };
 const orTabSx = { ...tabSx, fontWeight: 400 };
 
-export const Auth: FC<AuthProps> = ({}) => {
+export const Auth: FC = () => {
    const { t } = useTranslation();
 
    const [tab, setTab] = useState<AuthTab>('signIn');

@@ -7,11 +7,11 @@ import { UserAvatar } from 'src/components/UI/UserAvatar';
 import { IUser } from 'src/types/types';
 import { UserOnlineStatus } from '../../../components/UI/UserOnlineStatus';
 
-export interface UserThumbnailProps {
+interface Props {
    user: IUser;
 }
 
-export const UserThumbnail: FC<UserThumbnailProps> = ({ user }) => {
+export const UserThumbnail: FC<Props> = ({ user }) => {
    const navigate = useNavigate();
 
    const handleAccountNavigate = () => {

@@ -8,9 +8,7 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import { setLanguage } from 'src/store/reducers/global.reducer';
 import { ILanguage } from 'src/types/types';
 
-export interface LanguageTogglerProps {}
-
-export const LanguageToggler: FC<LanguageTogglerProps> = ({}) => {
+export const LanguageToggler: FC = () => {
    const dispatch = useAppDispatch();
 
    const lang = useAppSelector((state) => state.global.language);

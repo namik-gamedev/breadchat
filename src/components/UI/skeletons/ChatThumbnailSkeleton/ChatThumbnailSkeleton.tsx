@@ -5,9 +5,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 
-export interface ChatThumbnailSkeletonProps {}
-
-export const ChatThumbnailSkeleton: FC<ChatThumbnailSkeletonProps> = ({}) => {
+export const ChatThumbnailSkeleton: FC = () => {
    return (
       <Stack sx={{ width: 1 }} direction='row' spacing={2} alignItems='center'>
          <Skeleton variant='circular'>

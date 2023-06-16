@@ -12,11 +12,11 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import UserService from 'src/services/user.service';
 import { UnstyledLink } from '../UI/UnstyledLink';
 
-export interface ProfileMenuItemsProps {
+interface Props {
    handleClose?: () => void;
 }
 
-export const ProfileMenuItems: FC<ProfileMenuItemsProps> = ({ handleClose }) => {
+export const ProfileMenuItems: FC<Props> = ({ handleClose }) => {
    const user = useAppSelector((state) => state.user.data)!;
 
    const handleSignOut = async () => {

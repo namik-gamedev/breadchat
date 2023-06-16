@@ -13,11 +13,11 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import { IChat } from 'src/types/types';
 import { isMessageUnreaded } from 'src/utils/isMessageUnreaded.util';
 
-export interface ChatThumbnailProps {
+interface Props {
    chat: IChat;
 }
 
-export const ChatThumbnail: FC<ChatThumbnailProps> = ({ chat }) => {
+export const ChatThumbnail: FC<Props> = ({ chat }) => {
    const interlocutor = useAppSelector((state) => state.users.data).find((user) => user.uid === chat.interlocutor.uid)!;
 
    const lastMessage = chat.messages[chat.messages.length - 1];

@@ -7,11 +7,11 @@ import { FC } from 'react';
 import { Trans } from 'react-i18next';
 import { useAccountContext } from 'src/hooks/useAccountContext';
 
-export interface AboutUserProps {
+interface Props {
    handleFormShow: () => void;
 }
 
-export const AboutUser: FC<AboutUserProps> = ({ handleFormShow }) => {
+export const AboutUser: FC<Props> = ({ handleFormShow }) => {
    const { isCurrentUser, isSelfBlockedByUser } = useAccountContext();
    const user = useAccountContext().user!;
 

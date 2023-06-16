@@ -10,9 +10,7 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useUsersContext } from 'src/hooks/useUsersContext';
 import { IUser, SearchBy, UsersShowType } from 'src/types/types';
 
-export interface UserSearchFormProps {}
-
-export const UserSearchForm: FC<UserSearchFormProps> = ({}) => {
+export const UserSearchForm: FC = () => {
    const { setFilteredUsers, searchQuery, setSearchQuery, usersShowType, setUsersShowType } = useUsersContext();
 
    const user = useAppSelector((state) => state.user.data)!;

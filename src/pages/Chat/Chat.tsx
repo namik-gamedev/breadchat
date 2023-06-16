@@ -15,9 +15,7 @@ import { ChatHeader } from './ChatHeader';
 import { ChatMessages } from './ChatMessages';
 import { UnblockButton } from './UnblockButton';
 
-export interface ChatProps {}
-
-export const Chat: FC<ChatProps> = ({}) => {
+export const Chat: FC = () => {
    const { interlocutorUid } = useParams();
 
    const chatsLoaded = useAppSelector((state) => state.global.dataLoad.chats);

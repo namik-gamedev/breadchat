@@ -6,9 +6,7 @@ import { ChatDate } from '../../ChatDate';
 import { ChatMessage } from '../../ChatMessage/ChatMessage';
 import { NoMessagesMessage } from '../NoMessagesMessage';
 
-export interface ChatMessagesListProps {}
-
-export const ChatMessagesList: FC<ChatMessagesListProps> = () => {
+export const ChatMessagesList: FC = () => {
    const chat = useChatContext().chat!;
 
    return chat ? (

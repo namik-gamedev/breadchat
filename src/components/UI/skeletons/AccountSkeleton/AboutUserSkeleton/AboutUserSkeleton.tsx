@@ -3,9 +3,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 
-export interface AboutUserSkeletonProps {}
-
-export const AboutUserSkeleton: FC<AboutUserSkeletonProps> = ({}) => {
+export const AboutUserSkeleton: FC = () => {
    return (
       <Stack>
          <Typography variant='body1'>

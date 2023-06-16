@@ -8,11 +8,9 @@ import { useUsersContext } from 'src/hooks/useUsersContext';
 import { UserThumbnail } from 'src/pages/Users/UserThumbnail';
 import { NoUsersMessage } from '../NoUsersMessage';
 
-export interface UsersListProps {}
-
 const USERS_IN_PAGE = 20;
 
-export const UsersList: FC<UsersListProps> = ({}) => {
+export const UsersList: FC = () => {
    const { filteredUsers: users } = useUsersContext();
 
    const [page, setPage] = useState(1);

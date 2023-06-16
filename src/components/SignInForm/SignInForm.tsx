@@ -23,8 +23,6 @@ import { appAuth, authProvider } from 'src/firebase/firebase';
 import { getSignInError } from 'src/utils/Auth.utils';
 import * as Yup from 'yup';
 
-export interface SignInFormProps {}
-
 // todo: вынести тип
 export interface SignInValues {
    email: string;
@@ -45,7 +43,7 @@ const validationSchema = Yup.object({
       .matches(PASSWORD_FORM_REGEXP, INVALID_PASSWORD_FORM_ERR),
 });
 
-export const SignInForm: FC<SignInFormProps> = ({}) => {
+export const SignInForm: FC = () => {
    const navigate = useNavigate();
 
    const { t } = useTranslation();
