@@ -1,14 +1,11 @@
-import { useEffect, useState } from 'react';
-import { useAppDispatch } from './useAppDispatch';
 import { onAuthStateChanged } from 'firebase/auth';
-import { appAuth, db } from 'src/firebase/firebase';
-import { setChatsLoad, setUserLoad, unsetDataLoad } from 'src/store/reducers/global.reducer';
-import { IUser } from 'src/types/types';
+import { useEffect, useState } from 'react';
+import { appAuth } from 'src/firebase/firebase';
 import UserService from 'src/services/user.service';
+import { setChatsLoad, setUserLoad } from 'src/store/reducers/global.reducer';
 import { setUser, unsetUser } from 'src/store/reducers/user.reducer';
-import { get, onValue, ref } from 'firebase/database';
+import { useAppDispatch } from './useAppDispatch';
 import { useAppSelector } from './useAppSelector';
-import { unsetChats } from 'src/store/reducers/chats.reducer';
 
 export const useUserLoad = () => {
    const [authorizedUserUid, setAuthorizedUserUid] = useState<string | undefined>();

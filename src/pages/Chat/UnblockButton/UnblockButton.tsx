@@ -1,12 +1,10 @@
-import React, { FC } from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { BlockUserDialog } from 'src/pages/Account/AccountHeader/BlockUserDialog';
-import { useOpen } from 'src/hooks/useOpen';
-import UserService from 'src/services/user.service';
-import { useAppSelector } from 'src/hooks/useAppSelector';
-import { IUser } from 'src/types/types';
+import { FC } from 'react';
 import { Trans } from 'react-i18next';
+import { useOpen } from 'src/hooks/useOpen';
+import { BlockUserDialog } from 'src/pages/Account/AccountHeader/BlockUserDialog';
+import { IUser } from 'src/types/types';
 
 export interface UnblockButtonProps {
    user: IUser;

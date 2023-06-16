@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
 import Skeleton from '@mui/material/Skeleton';
-import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import { FC } from 'react';
 
 export interface AboutUserSkeletonProps {}
 

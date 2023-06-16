@@ -1,7 +1,5 @@
-import React, { FC } from 'react';
-import Stack from '@mui/material/Stack';
 import Skeleton from '@mui/material/Skeleton';
-import Box from '@mui/material/Box';
+import { FC } from 'react';
 
 export interface ChatFormSkeletonProps {}
 

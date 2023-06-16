@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import { FC } from 'react';
 
 export interface UserThumbnailSkeletonProps {}
 

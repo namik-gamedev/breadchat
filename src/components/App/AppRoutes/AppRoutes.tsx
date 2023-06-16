@@ -1,11 +1,10 @@
-import React, { FC } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { FC } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { useAppSelector } from 'src/hooks/useAppSelector';
 import { Auth } from 'src/pages/Auth';
 import { Chats } from 'src/pages/Chats';
 import { NotFound } from 'src/pages/NotFound';
-import { useAppSelector } from 'src/hooks/useAppSelector';
 import { routes } from 'src/routes/routes';
-import { Chat } from 'src/pages/Chat';
 
 export interface AppRoutesProps {}
 

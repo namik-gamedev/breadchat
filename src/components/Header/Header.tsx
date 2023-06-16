@@ -1,15 +1,14 @@
-import React, { FC, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
-import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
+import Stack from '@mui/material/Stack';
 import Toolbar from '@mui/material/Toolbar';
+import { FC } from 'react';
 import { Logo } from 'src/components/Header/Logo';
-import { ThemeToggler } from './ThemeToggler';
 import { useAppSelector } from 'src/hooks/useAppSelector';
-import { HeaderProfileMenu } from './HeaderProfileMenu';
-import Box from '@mui/material/Box';
 import { HeaderNavigationMenu } from './HeaderNavigationMenu';
+import { HeaderProfileMenu } from './HeaderProfileMenu';
 import { LanguageToggler } from './LanguageToggler';
+import { ThemeToggler } from './ThemeToggler';
 
 export interface HeaderProps {}
 

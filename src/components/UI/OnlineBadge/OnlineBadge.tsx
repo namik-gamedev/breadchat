@@ -1,6 +1,5 @@
-import React, { FC } from 'react';
-import Badge, { BadgeProps } from '@mui/material/Badge';
 import { styled } from '@mui/material';
+import Badge, { BadgeProps } from '@mui/material/Badge';
 
 export interface OnlineBadgeProps extends BadgeProps {
    online?: boolean;

@@ -1,6 +1,5 @@
-import React, { FC } from 'react';
-import Stack, { StackProps } from '@mui/material/Stack';
 import { styled, Typography } from '@mui/material';
+import Stack, { StackProps } from '@mui/material/Stack';
 
 export interface UnreadedMessagesCountDisplayProps extends StackProps {
    count: number;
@@ -14,7 +13,7 @@ export const UnreadedMessagesCountDisplay = styled(({ count, ...props }: Unreade
          </Typography>
       </Stack>
    );
-})(({ count, theme: { palette, spacing } }) => ({
+})(({ count, theme: { palette } }) => ({
    transition: '200ms ease transform',
    transform: count === 0 ? 'scale(0)' : 'scale(1)',
    fontSize: '0.75em',

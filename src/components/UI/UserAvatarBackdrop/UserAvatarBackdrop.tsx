@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import Box from '@mui/material/Box';
 import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import { FC } from 'react';
 
 export interface UserAvatarBackdropProps {
    open: boolean;

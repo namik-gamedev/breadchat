@@ -1,11 +1,10 @@
 import { DataSnapshot, child, onValue, ref } from 'firebase/database';
 import { useEffect } from 'react';
 import { db } from 'src/firebase/firebase';
+import { setUsersLoad } from 'src/store/reducers/global.reducer';
+import { setUsers } from 'src/store/reducers/users.reducer';
 import { IUser } from 'src/types/types';
 import { useAppDispatch } from './useAppDispatch';
-import { setUsers } from 'src/store/reducers/users.reducer';
-import { setUsersLoad } from 'src/store/reducers/global.reducer';
-import { useAppSelector } from './useAppSelector';
 
 export const useUsersLoad = () => {
    const dispatch = useAppDispatch();

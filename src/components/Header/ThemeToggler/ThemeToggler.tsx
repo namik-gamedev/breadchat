@@ -1,12 +1,11 @@
-import React, { FC, useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import { FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { setDarkTheme } from 'src/store/reducers/global.reducer';
-import Tooltip from '@mui/material/Tooltip';
-import { useTranslation } from 'react-i18next';
 
 export interface ThemeTogglerProps {}
 

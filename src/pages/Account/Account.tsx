@@ -1,29 +1,17 @@
-import React, { FC, createContext, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import ChatIcon from '@mui/icons-material/Chat';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import { Trans, useTranslation } from 'react-i18next';
-import { StyledBox } from 'src/components/UI/StyledBox';
-import { useAppSelector } from 'src/hooks/useAppSelector';
-import { IAccountContext, IUser } from 'src/types/types';
+import { FC, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { OnlineBadge } from 'src/components/UI/OnlineBadge';
-import { UserAvatar } from 'src/components/UI/UserAvatar';
-import { UserThumbnail } from 'src/pages/Users/UserThumbnail';
-import moment from 'moment';
-import { UnstyledLink } from 'src/components/UI/UnstyledLink';
-import { NotFound } from '../NotFound';
-import { useOpen } from 'src/hooks/useOpen';
-import { EditAboutUserForm } from './EditAboutUserForm';
-import { AccountHeader } from './AccountHeader';
-import { AboutUser } from './AboutUser';
+import { StyledBox } from 'src/components/UI/StyledBox';
 import { AccountSkeleton } from 'src/components/UI/skeletons/AccountSkeleton';
+import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
+import { useOpen } from 'src/hooks/useOpen';
 import { AccountProvider } from 'src/providers/AccountProvider';
+import { NotFound } from '../NotFound';
+import { AboutUser } from './AboutUser';
+import { AccountHeader } from './AccountHeader';
+import { EditAboutUserForm } from './EditAboutUserForm';
 
 export interface AccountProps {}
 

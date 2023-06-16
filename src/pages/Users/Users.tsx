@@ -1,28 +1,16 @@
-import Grid from '@mui/material/Grid';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import { Dispatch, FC, SetStateAction, createContext, useEffect, useState } from 'react';
-import { StyledBox } from 'src/components/UI/StyledBox';
-import { useAppDispatch } from 'src/hooks/useAppDispatch';
-import { useAppSelector } from 'src/hooks/useAppSelector';
-import { UserThumbnail } from './UserThumbnail';
-import IconButton from '@mui/material/IconButton';
+import { FC, useEffect, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { ChatsSkeleton } from 'src/components/UI/skeletons/ChatsSkeleton';
-import { useUsersLoad } from 'src/hooks/useUsersLoad';
+import { StyledBox } from 'src/components/UI/StyledBox';
 import { UsersSkeleton } from 'src/components/UI/skeletons/UsersSkeleton';
-import { UsersList } from './UsersList';
-import { NoUsersMessage } from './NoUsersMessage';
-import { UserSearchForm } from './UserSearchForm';
-import { IUser, IUsersContext } from 'src/types/types';
-import { UsersShowType } from '../../types/types';
+import { useAppSelector } from 'src/hooks/useAppSelector';
 import { UsersProvider } from 'src/providers/UsersProvider';
+import { IUser } from 'src/types/types';
+import { UsersShowType } from '../../types/types';
+import { UserSearchForm } from './UserSearchForm';
+import { UsersList } from './UsersList';
 
 export interface UsersProps {}
 

@@ -1,9 +1,7 @@
-import React, { FC } from 'react';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import { FC } from 'react';
 import { Trans } from 'react-i18next';
 
 export interface DataLoadingProps {}

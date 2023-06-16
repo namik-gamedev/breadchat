@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Trans } from 'react-i18next';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';

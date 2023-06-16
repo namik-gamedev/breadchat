@@ -1,14 +1,13 @@
-import React, { Dispatch, FC, SetStateAction } from 'react';
-import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
-import CreateIcon from '@mui/icons-material/Create';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import CreateIcon from '@mui/icons-material/Create';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import MenuItem from '@mui/material/MenuItem';
 import copy from 'copy-to-clipboard';
+import { FC } from 'react';
 import { Trans } from 'react-i18next';
-import { IMessage } from 'src/types/types';
 import { useChatContext } from 'src/hooks/useChatContext';
+import { IMessage } from 'src/types/types';
 
 export interface ChatMessageMenuItemsProps {
    sender: number;

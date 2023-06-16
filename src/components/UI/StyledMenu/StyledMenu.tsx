@@ -1,4 +1,3 @@
-import React, { FC } from 'react';
 import { styled } from '@mui/material';
 import Menu, { MenuProps } from '@mui/material/Menu';
 

@@ -1,15 +1,12 @@
-import React, { FC } from 'react';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import GroupIcon from '@mui/icons-material/Group';
 import ForumIcon from '@mui/icons-material/Forum';
-import Typography from '@mui/material/Typography';
+import GroupIcon from '@mui/icons-material/Group';
 import Badge from '@mui/material/Badge';
-import { UnstyledLink } from '../UI/UnstyledLink';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import MenuItem from '@mui/material/MenuItem';
+import { FC } from 'react';
 import { Trans } from 'react-i18next';
 import { useAppSelector } from 'src/hooks/useAppSelector';
-import { UnreadedMessagesCountDisplay } from '../UI/UnreadedMessagesCountDisplay';
+import { UnstyledLink } from '../UI/UnstyledLink';
 
 export interface NavigationMenuItemsProps {
    handleClose?: () => void;

@@ -1,25 +1,12 @@
-import React, { FC, useContext, useRef } from 'react';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Box from '@mui/material/Box';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import { useAnchorEl } from 'src/hooks/useAnchorEl';
-import { Trans } from 'react-i18next';
-import Typography from '@mui/material/Typography';
-import PersonOffIcon from '@mui/icons-material/PersonOff';
-import PersonIcon from '@mui/icons-material/Person';
-import ReplyIcon from '@mui/icons-material/Reply';
+import React, { FC, useRef } from 'react';
 import { StyledMenu } from 'src/components/UI/StyledMenu';
-import { IUser } from 'src/types/types';
-import { useAppSelector } from 'src/hooks/useAppSelector';
-import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
-import copy from 'copy-to-clipboard';
+import { useAccountContext } from 'src/hooks/useAccountContext';
+import { useAnchorEl } from 'src/hooks/useAnchorEl';
 import UserService from 'src/services/user.service';
 import { AccountMoreMenuItems } from './AccountMoreMenuItems';
-import { useAccountContext } from 'src/hooks/useAccountContext';
 
 export interface AccountMoreMenuProps {
    handleBlockDialogShow: () => void;
@@ -30,7 +17,6 @@ export const AccountMoreMenu: FC<AccountMoreMenuProps> = ({ handleBlockDialogSho
 
    const inputRef = useRef<HTMLInputElement | null>(null);
 
-   const { isCurrentUser, isUserBlocked } = useAccountContext();
    const user = useAccountContext().user!;
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

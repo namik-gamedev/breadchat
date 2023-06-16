@@ -1,11 +1,9 @@
-import React, { FC } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import { UnstyledLink } from 'src/components/UI/UnstyledLink';
-import errorImg from 'src/assets/img/404.png';
+import { FC } from 'react';
 import { Trans } from 'react-i18next';
+import errorImg from 'src/assets/img/404.png';
 
 export interface NotFoundProps {}
 

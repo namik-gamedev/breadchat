@@ -1,15 +1,11 @@
-import React, { FC } from 'react';
+import { SxProps, useTheme } from '@mui/material';
 import Avatar, { AvatarProps } from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
-import Box from '@mui/material/Box';
-import { BadgeProps } from '@mui/material/Badge';
-import { useAppSelector } from 'src/hooks/useAppSelector';
+import { FC } from 'react';
 import { OnlineBadge } from 'src/components/UI/OnlineBadge';
-import { UnstyledLink } from 'src/components/UI/UnstyledLink';
-import { SxProps, getContrastRatio } from '@mui/material';
-import { IUser } from 'src/types/types';
-import { useTheme } from '@mui/material';
+import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
+import { IUser } from 'src/types/types';
 
 export interface UserAvatarProps extends AvatarProps {
    user: IUser;

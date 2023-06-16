@@ -1,10 +1,9 @@
-import React, { FC } from 'react';
-import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
-import { UserThumbnailSkeleton } from '../UserThumbnailSkeleton';
-import { ChatThumbnailSkeleton } from '../ChatThumbnailSkeleton';
+import MenuList from '@mui/material/MenuList';
 import Typography from '@mui/material/Typography';
+import { FC } from 'react';
 import { Trans } from 'react-i18next';
+import { ChatThumbnailSkeleton } from '../ChatThumbnailSkeleton';
 
 export interface ChatsSkeletonProps {}
 
