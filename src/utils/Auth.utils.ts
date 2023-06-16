@@ -7,7 +7,6 @@ export interface SignInError {
 }
 
 export const getSignInError = (code: string): SignInError | undefined => {
-   // todo: дополнить ошибки
    switch (code) {
       case 'auth/user-not-found':
          return {
@@ -31,7 +30,6 @@ export const getSignInError = (code: string): SignInError | undefined => {
 };
 
 export const getSignUpError = (code: string): SignInError | undefined => {
-   // todo: дополнить ошибки
    switch (code) {
       case 'auth/email-already-in-use':
          return {

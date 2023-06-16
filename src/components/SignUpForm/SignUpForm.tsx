@@ -19,16 +19,9 @@ import {
 } from 'src/constants/AuthForm.consts';
 import { appAuth } from 'src/firebase/firebase';
 import UserService from 'src/services/user.service';
+import { SignUpValues } from 'src/types/types';
 import { getSignUpError } from 'src/utils/Auth.utils';
 import * as Yup from 'yup';
-
-// todo: вынести тип
-export interface SignUpValues {
-   name: string;
-   email: string;
-   password: string;
-   confirmPassword: string;
-}
 
 const initialValues: SignUpValues = {
    name: '',
