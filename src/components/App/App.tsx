@@ -15,9 +15,7 @@ import { ILanguage } from 'src/types/types';
 import { Layout } from '../Layout';
 import { AppRoutes } from './AppRoutes';
 
-export interface AppProps {}
-
-export const App: FC<AppProps> = ({}) => {
+export const App: FC = () => {
    const isDark = useAppSelector((state) => state.global.darkTheme);
    const user = useAppSelector((state) => state.user.data);
    const language = useAppSelector((state) => state.global.language);

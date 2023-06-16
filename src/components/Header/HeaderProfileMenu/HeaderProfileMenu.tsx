@@ -8,9 +8,7 @@ import { UserAvatar } from 'src/components/UI/UserAvatar';
 import { useAnchorEl } from 'src/hooks/useAnchorEl';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 
-export interface HeaderProfileMenuProps {}
-
-export const HeaderProfileMenu: FC<HeaderProfileMenuProps> = ({}) => {
+export const HeaderProfileMenu: FC = () => {
    const user = useAppSelector((state) => state.user.data);
    const userLoaded = useAppSelector((state) => state.global.dataLoad.user);
    const { anchorEl, open, handleShow, handleClose } = useAnchorEl();

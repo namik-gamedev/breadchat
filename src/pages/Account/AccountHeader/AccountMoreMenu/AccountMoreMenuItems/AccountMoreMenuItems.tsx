@@ -9,12 +9,12 @@ import { FC, useRef } from 'react';
 import { Trans } from 'react-i18next';
 import { useAccountContext } from 'src/hooks/useAccountContext';
 
-export interface AccountMoreMenuItemsProps {
+interface Props {
    handleClose: () => void;
    handleBlockDialogShow: () => void;
 }
 
-export const AccountMoreMenuItems: FC<AccountMoreMenuItemsProps> = ({ handleClose, handleBlockDialogShow }) => {
+export const AccountMoreMenuItems: FC<Props> = ({ handleClose, handleBlockDialogShow }) => {
    const { isCurrentUser, isUserBlocked } = useAccountContext();
 
    const inputRef = useRef<HTMLInputElement | null>(null);

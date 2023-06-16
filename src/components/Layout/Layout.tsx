@@ -6,11 +6,11 @@ import { Sidebar } from 'src/components/Sidebar';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { Header } from '../Header';
 
-export interface LayoutProps {
+interface Props {
    children: React.ReactNode;
 }
 
-export const Layout: FC<LayoutProps> = ({ children }) => {
+export const Layout: FC<Props> = ({ children }) => {
    const user = useAppSelector((state) => state.user.data);
 
    return (

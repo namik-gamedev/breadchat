@@ -9,14 +9,14 @@ import { Trans } from 'react-i18next';
 import { useChatContext } from 'src/hooks/useChatContext';
 import { IMessage } from 'src/types/types';
 
-export interface ChatMessageMenuItemsProps {
+interface Props {
    sender: number;
    handleMenuClose: () => void;
    message: IMessage;
    handleDialogShow: () => void;
 }
 
-export const ChatMessageMenuItems: FC<ChatMessageMenuItemsProps> = ({ sender, message, handleMenuClose, handleDialogShow }) => {
+export const ChatMessageMenuItems: FC<Props> = ({ sender, message, handleMenuClose, handleDialogShow }) => {
    const { setEditingMessage } = useChatContext();
 
    const handleMessageCopy = () => {

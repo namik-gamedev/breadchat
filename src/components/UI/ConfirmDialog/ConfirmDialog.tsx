@@ -9,7 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import React, { FC, useState } from 'react';
 import { Trans } from 'react-i18next';
 
-export interface ConfirmDialogProps {
+interface Props {
    open: boolean;
    handleClose: () => void;
    title: string;
@@ -18,7 +18,7 @@ export interface ConfirmDialogProps {
    handleAction: (checked: boolean) => any;
 }
 
-export const ConfirmDialog: FC<ConfirmDialogProps> = ({ open, handleClose, title, contentText, checkboxLabel, handleAction }) => {
+export const ConfirmDialog: FC<Props> = ({ open, handleClose, title, contentText, checkboxLabel, handleAction }) => {
    const [checked, setChecked] = useState(false);
 
    const handleChange = () => {

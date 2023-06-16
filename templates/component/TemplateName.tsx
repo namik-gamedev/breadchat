@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
-export interface TemplateNameProps {}
+interface Props {}
 
-export const TemplateName: FC<TemplateNameProps> = ({}) => {
+export const TemplateName: FC<Props> = ({}) => {
    return <div>TemplateName</div>;
 };

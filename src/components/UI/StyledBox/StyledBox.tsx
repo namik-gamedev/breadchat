@@ -1,8 +1,6 @@
 import { styled } from '@mui/material';
 import Box from '@mui/material/Box';
 
-export interface StyledBoxProps {}
-
 export const StyledBox = styled(Box)(({ theme }) => ({
    // paddingBlock: theme.spacing(1),
    // paddingInline: theme.spacing(2),

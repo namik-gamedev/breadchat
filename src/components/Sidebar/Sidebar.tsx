@@ -3,9 +3,7 @@ import { FC } from 'react';
 import { NavigationMenuItems } from '../NavigationMenuItems';
 import { StyledBox } from '../UI/StyledBox';
 
-export interface SidebarProps {}
-
-export const Sidebar: FC<SidebarProps> = ({}) => {
+export const Sidebar: FC = () => {
    return (
       <StyledBox>
          {/* <Stack spacing={2}> */}

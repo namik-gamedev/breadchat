@@ -13,13 +13,13 @@ import { isMessageUnreaded } from 'src/utils/isMessageUnreaded.util';
 import { ChatMessageMenuItems } from './ChatMessageMenuItems';
 import { DeleteMessageDialog } from './DeleteMessageDialog';
 
-export interface ChatMessageProps extends StackProps {
+interface Props extends StackProps {
    message: IMessage;
 }
 
 const BORDER_RADIUS_PX = 16;
 
-export const ChatMessage = styled(({ message, ...props }: ChatMessageProps) => {
+export const ChatMessage = styled(({ message, ...props }: Props) => {
    const chat = useChatContext().chat!;
    const { editingMessage } = useChatContext();
 

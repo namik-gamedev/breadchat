@@ -22,8 +22,6 @@ import UserService from 'src/services/user.service';
 import { getSignUpError } from 'src/utils/Auth.utils';
 import * as Yup from 'yup';
 
-export interface SignUpFormProps {}
-
 // todo: вынести тип
 export interface SignUpValues {
    name: string;
@@ -48,7 +46,7 @@ const validationSchema = Yup.object({
       .equals([Yup.ref('password')], CONFIRM_PASSWORD_FORM_ERR),
 });
 
-export const SignUpForm: FC<SignUpFormProps> = ({}) => {
+export const SignUpForm: FC = () => {
    const navigate = useNavigate();
 
    const { t } = useTranslation();

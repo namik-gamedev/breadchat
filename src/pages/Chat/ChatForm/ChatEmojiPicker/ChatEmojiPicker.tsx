@@ -8,11 +8,11 @@ import React, { FC, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAnchorEl } from 'src/hooks/useAnchorEl';
 
-export interface ChatEmojiPickerProps {
+interface Props {
    setMessageText: React.Dispatch<SetStateAction<string>>;
 }
 
-export const ChatEmojiPicker: FC<ChatEmojiPickerProps> = ({ setMessageText }) => {
+export const ChatEmojiPicker: FC<Props> = ({ setMessageText }) => {
    const { anchorEl, open, handleShow, handleClose } = useAnchorEl();
 
    const { t } = useTranslation();

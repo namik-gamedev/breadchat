@@ -8,11 +8,11 @@ import { useAnchorEl } from 'src/hooks/useAnchorEl';
 import UserService from 'src/services/user.service';
 import { AccountMoreMenuItems } from './AccountMoreMenuItems';
 
-export interface AccountMoreMenuProps {
+interface Props {
    handleBlockDialogShow: () => void;
 }
 
-export const AccountMoreMenu: FC<AccountMoreMenuProps> = ({ handleBlockDialogShow }) => {
+export const AccountMoreMenu: FC<Props> = ({ handleBlockDialogShow }) => {
    const { anchorEl, handleShow, handleClose, open } = useAnchorEl();
 
    const inputRef = useRef<HTMLInputElement | null>(null);

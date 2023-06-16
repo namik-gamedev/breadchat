@@ -12,9 +12,8 @@ import { UsersShowType } from '../../types/types';
 import { UserSearchForm } from './UserSearchForm';
 import { UsersList } from './UsersList';
 
-export interface UsersProps {}
 
-export const Users: FC<UsersProps> = ({}) => {
+export const Users: FC = () => {
    const usersLoaded = useAppSelector((state) => state.global.dataLoad.users);
 
    const [filteredUsers, setFilteredUsers] = useState<IUser[]>([]);

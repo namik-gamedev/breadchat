@@ -12,9 +12,7 @@ import { useOpen } from 'src/hooks/useOpen';
 import { ChatHeaderOnlineStatus } from './ChatHeaderOnlineStatus';
 import { ClearChatDialog } from './ClearChatDialog';
 
-export interface ChatHeaderProps {}
-
-export const ChatHeader: FC<ChatHeaderProps> = ({}) => {
+export const ChatHeader: FC = () => {
    const chat = useChatContext().chat!;
    const interlocutor = useChatContext().interlocutor!;
 

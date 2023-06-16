@@ -1,11 +1,11 @@
 import { styled, Typography } from '@mui/material';
 import Stack, { StackProps } from '@mui/material/Stack';
 
-export interface UnreadedMessagesCountDisplayProps extends StackProps {
+interface Props extends StackProps {
    count: number;
 }
 
-export const UnreadedMessagesCountDisplay = styled(({ count, ...props }: UnreadedMessagesCountDisplayProps) => {
+export const UnreadedMessagesCountDisplay = styled(({ count, ...props }: Props) => {
    return (
       <Stack {...props}>
          <Typography sx={{ fontSize: 'inherit' }} variant='subtitle2'>

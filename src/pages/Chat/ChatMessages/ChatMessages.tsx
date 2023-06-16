@@ -4,9 +4,7 @@ import { useChatContext } from 'src/hooks/useChatContext';
 import { useScroll } from 'src/hooks/useScroll';
 import { ChatMessagesList } from './ChatMessagesList';
 
-export interface ChatMessagesProps {}
-
-export const ChatMessages: FC<ChatMessagesProps> = ({}) => {
+export const ChatMessages: FC = () => {
    const { ref, scroll } = useScroll<HTMLDivElement>();
 
    const { chat } = useChatContext();

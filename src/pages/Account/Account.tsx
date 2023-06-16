@@ -13,9 +13,7 @@ import { AboutUser } from './AboutUser';
 import { AccountHeader } from './AccountHeader';
 import { EditAboutUserForm } from './EditAboutUserForm';
 
-export interface AccountProps {}
-
-export const Account: FC<AccountProps> = ({}) => {
+export const Account: FC = () => {
    const { userUid } = useParams();
    const usersLoaded = useAppSelector((state) => state.global.dataLoad.users);
 

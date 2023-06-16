@@ -1,12 +1,9 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { FC } from 'react';
 import { Trans } from 'react-i18next';
 
-export interface DataLoadingProps {}
-
-export const DataLoading: FC<DataLoadingProps> = ({}) => {
+export const DataLoading = () => {
    return (
       <Stack alignItems='center' spacing={3} sx={{ pt: '30vh' }}>
          <CircularProgress size={70} />

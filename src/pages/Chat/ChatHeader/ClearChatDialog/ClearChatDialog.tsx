@@ -6,13 +6,13 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import ChatService from 'src/services/chat.service';
 import { IUser } from 'src/types/types';
 
-export interface ClearChatDialogProps {
+interface Props {
    open: boolean;
    handleClose: () => void;
    interlocutor: IUser;
 }
 
-export const ClearChatDialog: FC<ClearChatDialogProps> = ({ open, handleClose, interlocutor }) => {
+export const ClearChatDialog: FC<Props> = ({ open, handleClose, interlocutor }) => {
    const user = useAppSelector((state) => state.user.data)!;
    const { t } = useTranslation();
 

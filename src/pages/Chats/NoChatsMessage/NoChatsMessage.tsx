@@ -3,9 +3,7 @@ import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 import { Trans } from 'react-i18next';
 
-export interface NoChatsMessageProps {}
-
-export const NoChatsMessage: FC<NoChatsMessageProps> = ({}) => {
+export const NoChatsMessage: FC = () => {
    return (
       <Stack sx={{ alignItems: 'center', pt: 2 }}>
          <Typography variant='body1'>

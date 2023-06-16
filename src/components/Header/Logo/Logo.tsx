@@ -4,9 +4,7 @@ import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 
-export interface LogoProps {}
-
-export const Logo: FC<LogoProps> = ({}) => {
+export const Logo: FC = () => {
    return (
       <UnstyledLink to='/'>
          <Stack spacing={1} alignItems='center' component='a' direction='row'>

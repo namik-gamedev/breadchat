@@ -6,9 +6,7 @@ import { Chats } from 'src/pages/Chats';
 import { NotFound } from 'src/pages/NotFound';
 import { routes } from 'src/routes/routes';
 
-export interface AppRoutesProps {}
-
-export const AppRoutes: FC<AppRoutesProps> = ({}) => {
+export const AppRoutes: FC = () => {
    const user = useAppSelector((state) => state.user.data);
    const userLoaded = useAppSelector((state) => state.global.dataLoad.user);
    const usersLoaded = useAppSelector((state) => state.global.dataLoad.users);

@@ -1,11 +1,11 @@
 import { styled } from '@mui/material';
 import Badge, { BadgeProps } from '@mui/material/Badge';
 
-export interface OnlineBadgeProps extends BadgeProps {
+interface Props extends BadgeProps {
    online?: boolean;
 }
 
-export const OnlineBadge = styled(({ online = true, ...props }: OnlineBadgeProps) => (
+export const OnlineBadge = styled(({ online = true, ...props }: Props) => (
    <Badge overlap='circular' anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant='dot' {...props} />
 ))(({ theme, online }) => ({
    '& .MuiBadge-badge': {
