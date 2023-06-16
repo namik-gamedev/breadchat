@@ -19,15 +19,15 @@ const CHATS_IN_PAGE = 20;
 export const ChatsList: FC<ChatsListProps> = ({ chats }) => {
    const [page, setPage] = useState(1);
 
-   const handleChange = (e: React.ChangeEvent<unknown>, p: number) => {
+   const handleChange = (e: any, p: number) => {
       setPage(p);
    };
 
    return chats.length > 0 ? (
       <Box>
          <MenuList>
-            {chats.slice((page - 1) * CHATS_IN_PAGE, (page - 1) * CHATS_IN_PAGE + CHATS_IN_PAGE).map((chat) => (
-               <MenuItem divider>
+            {chats.slice((page - 1) * CHATS_IN_PAGE, (page - 1) * CHATS_IN_PAGE + CHATS_IN_PAGE).map((chat, index) => (
+               <MenuItem key={index} divider>
                   <Box sx={{ width: 1 }}>
                      <ChatThumbnail chat={chat} />
                   </Box>

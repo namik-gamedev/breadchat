@@ -21,22 +21,20 @@ export const UsersList: FC<UsersListProps> = ({}) => {
 
    const [page, setPage] = useState(1);
 
-   const handleChange = (e: React.ChangeEvent<unknown>, p: number) => {
+   const handleChange = (e: any, p: number) => {
       setPage(p);
    };
 
    return users.length > 0 ? (
       <Box>
          <MenuList>
-            {users.slice((page - 1) * USERS_IN_PAGE, (page - 1) * USERS_IN_PAGE + USERS_IN_PAGE).map((u) => {
-               return (
-                  <MenuItem divider>
-                     <Box sx={{ width: 1 }}>
-                        <UserThumbnail user={u} />
-                     </Box>
-                  </MenuItem>
-               );
-            })}
+            {users.slice((page - 1) * USERS_IN_PAGE, (page - 1) * USERS_IN_PAGE + USERS_IN_PAGE).map((user) => (
+               <MenuItem key={user.uid} divider>
+                  <Box sx={{ width: 1 }}>
+                     <UserThumbnail user={user} />
+                  </Box>
+               </MenuItem>
+            ))}
          </MenuList>
 
          {users.length > USERS_IN_PAGE && (
