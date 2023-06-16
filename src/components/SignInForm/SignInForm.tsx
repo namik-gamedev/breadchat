@@ -20,14 +20,9 @@ import {
    REQUIRED_FORM_ERR,
 } from 'src/constants/AuthForm.consts';
 import { appAuth, authProvider } from 'src/firebase/firebase';
+import { SignInValues } from 'src/types/types';
 import { getSignInError } from 'src/utils/Auth.utils';
 import * as Yup from 'yup';
-
-// todo: вынести тип
-export interface SignInValues {
-   email: string;
-   password: string;
-}
 
 const initialValues: SignInValues = {
    email: '',
