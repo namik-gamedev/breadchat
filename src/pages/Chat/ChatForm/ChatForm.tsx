@@ -1,30 +1,17 @@
-import React, { Dispatch, FC, SetStateAction, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { StyledForm } from 'src/components/UI/StyledForm';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Popover, { PopoverActions } from '@mui/material/Popover';
-import IconButton from '@mui/material/IconButton';
-import SendIcon from '@mui/icons-material/Send';
-import AddReactionIcon from '@mui/icons-material/AddReaction';
-import { child, get, onValue, push, ref, set } from 'firebase/database';
-import { useAppSelector } from 'src/hooks/useAppSelector';
 import CloseIcon from '@mui/icons-material/Close';
-import { db } from 'src/firebase/firebase';
-import { IChat, IMessage, IUser } from 'src/types/types';
-import Picker from '@emoji-mart/react';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import { BrowserView, MobileView, useDeviceData } from 'react-device-detect';
-import { isAndroid } from 'react-device-detect';
-import UserService from 'src/services/user.service';
+import SendIcon from '@mui/icons-material/Send';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import React, { FC, useEffect, useState } from 'react';
+import { BrowserView } from 'react-device-detect';
+import { Trans } from 'react-i18next';
+import { useAppSelector } from 'src/hooks/useAppSelector';
+import { useChatContext } from 'src/hooks/useChatContext';
+import { useDebounce } from 'src/hooks/useDebounce';
 import ChatService from 'src/services/chat.service';
 import { ChatEmojiPicker } from './ChatEmojiPicker';
-import { debounce } from 'src/utils/debounce.util';
-import { useDebounce } from 'src/hooks/useDebounce';
-import { Trans, useTranslation } from 'react-i18next';
-import { useChatContext } from 'src/hooks/useChatContext';
 
 export interface ChatFormProps {}
 
@@ -35,8 +22,6 @@ export const ChatForm: FC<ChatFormProps> = () => {
 
    const interlocutor = useChatContext().interlocutor!;
    const { editingMessage, setEditingMessage } = useChatContext();
-
-   const { t } = useTranslation();
 
    const setUserTypingToFalse = useDebounce(() => {
       ChatService.setTyping(user.uid, interlocutor.uid, false);

@@ -1,16 +1,17 @@
-import React, { FC, useState } from 'react';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import FormHelperText from '@mui/material/FormHelperText';
 import GoogleIcon from '@mui/icons-material/Google';
-import Stack from '@mui/material/Stack';
-import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
+import FormHelperText from '@mui/material/FormHelperText';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import * as Yup from 'yup';
+import { User, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { FormikHelpers, useFormik } from 'formik';
+import { FC } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { PasswordField } from 'src/components/UI/PasswordField';
+import { StyledForm } from 'src/components/UI/StyledForm';
 import {
    EMAIL_FORM_REGEXP,
    INVALID_EMAIL_FORM_ERR,
@@ -18,19 +19,9 @@ import {
    PASSWORD_FORM_REGEXP,
    REQUIRED_FORM_ERR,
 } from 'src/constants/AuthForm.consts';
-import { WRONG_PASSWORD_ERR, USER_NOT_FOUND_ERR, TOO_MANY_REQUESTS_ERR } from 'src/constants/Auth.consts';
-import { PasswordField } from 'src/components/UI/PasswordField';
-import { User, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect } from 'firebase/auth';
 import { appAuth, authProvider } from 'src/firebase/firebase';
-import { useAppDispatch } from 'src/hooks/useAppDispatch';
-import { setUser } from 'src/store/reducers/user.reducer';
-import { StyledForm } from 'src/components/UI/StyledForm';
-import { useNavigate } from 'react-router-dom';
 import { getSignInError } from 'src/utils/Auth.utils';
-import { IUser } from 'src/types/types';
-import UserService from 'src/services/user.service';
-import { isAndroid } from 'react-device-detect';
-import { Trans, useTranslation } from 'react-i18next';
+import * as Yup from 'yup';
 
 export interface SignInFormProps {}
 
@@ -55,14 +46,13 @@ const validationSchema = Yup.object({
 });
 
 export const SignInForm: FC<SignInFormProps> = ({}) => {
-   const dispatch = useAppDispatch();
    const navigate = useNavigate();
 
    const { t } = useTranslation();
 
-   const onSubmit = async ({ email, password }: SignInValues, { setSubmitting, setFieldError, setStatus }: FormikHelpers<SignInValues>) => {
+   const onSubmit = async ({ email, password }: SignInValues, { setSubmitting, setFieldError }: FormikHelpers<SignInValues>) => {
       try {
-         const { user } = await signInWithEmailAndPassword(appAuth, email, password);
+         await signInWithEmailAndPassword(appAuth, email, password);
 
          setSubmitting(false);
          navigate('/');

@@ -1,4 +1,3 @@
-import { IUser } from 'src/types/types';
 import { useAppSelector } from './useAppSelector';
 
 export const useIsUserBlocked = (userUid: string | undefined, blockedByUid: string | undefined) => {

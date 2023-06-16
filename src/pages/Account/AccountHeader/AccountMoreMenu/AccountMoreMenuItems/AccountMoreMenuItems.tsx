@@ -1,12 +1,12 @@
-import React, { FC, useContext, useRef } from 'react';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import ReplyIcon from '@mui/icons-material/Reply';
-import PersonOffIcon from '@mui/icons-material/PersonOff';
 import PersonIcon from '@mui/icons-material/Person';
-import { Trans } from 'react-i18next';
+import PersonOffIcon from '@mui/icons-material/PersonOff';
+import ReplyIcon from '@mui/icons-material/Reply';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import MenuItem from '@mui/material/MenuItem';
 import copy from 'copy-to-clipboard';
+import { FC, useRef } from 'react';
+import { Trans } from 'react-i18next';
 import { useAccountContext } from 'src/hooks/useAccountContext';
 
 export interface AccountMoreMenuItemsProps {

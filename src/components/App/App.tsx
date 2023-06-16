@@ -1,29 +1,19 @@
-import React, { FC, useEffect, useState } from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import { Header } from 'src/components/Header';
-import { Auth } from 'src/pages/Auth';
-import { AppRoutes } from './AppRoutes';
-import { Layout } from '../Layout';
 import { ThemeProvider } from '@emotion/react';
-import { useAppSelector } from 'src/hooks/useAppSelector';
-import { darkTheme, lightTheme } from 'src/themes/themes';
-import { onAuthStateChanged } from 'firebase/auth';
-import { appAuth, db } from 'src/firebase/firebase';
-import { useAppDispatch } from 'src/hooks/useAppDispatch';
-import { onDisconnect, onValue, ref, serverTimestamp } from 'firebase/database';
-import { setUsers } from 'src/store/reducers/users.reducer';
-import { DataLoading } from './DataLoading';
-import { setChats } from 'src/store/reducers/chats.reducer';
-import { useDBSetup } from 'src/hooks/useDBSetup';
-import { useBeforeUnload } from 'react-router-dom';
-import { useDataLoaded } from 'src/hooks/useDataLoaded';
-import UserService from 'src/services/user.service';
-import { enLocaleSpec } from 'src/locales/en.localeSpec';
+import CssBaseline from '@mui/material/CssBaseline';
+import { onDisconnect, ref, serverTimestamp } from 'firebase/database';
 import moment from 'moment';
-import {} from 'src/store/reducers/global.reducer';
-import { ruLocaleSpec } from 'src/locales/ru.localeSpec';
+import { FC, useEffect } from 'react';
+import { db } from 'src/firebase/firebase';
+import { useAppSelector } from 'src/hooks/useAppSelector';
+import { useDBSetup } from 'src/hooks/useDBSetup';
 import i18n from 'src/i18n/i18n';
+import { enLocaleSpec } from 'src/locales/en.localeSpec';
+import { ruLocaleSpec } from 'src/locales/ru.localeSpec';
+import {} from 'src/store/reducers/global.reducer';
+import { darkTheme, lightTheme } from 'src/themes/themes';
 import { ILanguage } from 'src/types/types';
+import { Layout } from '../Layout';
+import { AppRoutes } from './AppRoutes';
 
 export interface AppProps {}
 

@@ -1,19 +1,17 @@
-import React, { FC } from 'react';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import { UserThumbnail, UserThumbnailProps } from 'src/pages/Users/UserThumbnail';
-import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
-import { UnstyledLink } from 'src/components/UI/UnstyledLink';
-import { IChat } from 'src/types/types';
-import { UserAvatar } from 'src/components/UI/UserAvatar';
 import CheckIcon from '@mui/icons-material/Check';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
-import { isMessageUnreaded } from 'src/utils/isMessageUnreaded.util';
-import { UnreadedMessagesCountDisplay } from 'src/components/UI/UnreadedMessagesCountDisplay';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import moment from 'moment';
-import { useAppSelector } from 'src/hooks/useAppSelector';
+import { FC } from 'react';
 import { Trans } from 'react-i18next';
+import { UnreadedMessagesCountDisplay } from 'src/components/UI/UnreadedMessagesCountDisplay';
+import { UnstyledLink } from 'src/components/UI/UnstyledLink';
+import { UserAvatar } from 'src/components/UI/UserAvatar';
+import { useAppSelector } from 'src/hooks/useAppSelector';
+import { IChat } from 'src/types/types';
+import { isMessageUnreaded } from 'src/utils/isMessageUnreaded.util';
 
 export interface ChatThumbnailProps {
    chat: IChat;

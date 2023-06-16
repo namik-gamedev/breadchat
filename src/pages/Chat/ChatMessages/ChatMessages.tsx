@@ -1,16 +1,8 @@
-import React, { Dispatch, FC, SetStateAction, createRef, useContext, useEffect, useRef, useState } from 'react';
-import Box, { BoxProps } from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import { IChat, IMessage, IUser } from 'src/types/types';
-import { ChatMessage } from '../ChatMessage/ChatMessage';
-import { useAppSelector } from 'src/hooks/useAppSelector';
-import { useScroll } from 'src/hooks/useScroll';
-import { StyledBox } from 'src/components/UI/StyledBox';
-import { Trans } from 'react-i18next';
-import { NoMessagesMessage } from './NoMessagesMessage';
-import { ChatMessagesList } from './ChatMessagesList';
+import Box from '@mui/material/Box';
+import { FC, useEffect } from 'react';
 import { useChatContext } from 'src/hooks/useChatContext';
+import { useScroll } from 'src/hooks/useScroll';
+import { ChatMessagesList } from './ChatMessagesList';
 
 export interface ChatMessagesProps {}
 

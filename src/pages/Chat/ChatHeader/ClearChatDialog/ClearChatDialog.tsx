@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
 import Typography from '@mui/material/Typography';
-import { ConfirmDialog } from 'src/components/UI/ConfirmDialog';
+import { FC } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
+import { ConfirmDialog } from 'src/components/UI/ConfirmDialog';
+import { useAppSelector } from 'src/hooks/useAppSelector';
 import ChatService from 'src/services/chat.service';
 import { IUser } from 'src/types/types';
-import { useAppSelector } from 'src/hooks/useAppSelector';
 
 export interface ClearChatDialogProps {
    open: boolean;

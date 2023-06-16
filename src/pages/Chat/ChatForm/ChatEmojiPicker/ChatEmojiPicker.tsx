@@ -1,19 +1,12 @@
-import React, { FC, SetStateAction, useState } from 'react';
-import Box from '@mui/material/Box';
-import { BrowserView } from 'react-device-detect';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import Popover from '@mui/material/Popover';
-import IconButton from '@mui/material/IconButton';
-import SendIcon from '@mui/icons-material/Send';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
-import Picker from '@emoji-mart/react';
-import emojiMartData from '@emoji-mart/data/sets/14/apple.json';
 import { useTheme } from '@mui/material';
-import { useAnchorEl } from 'src/hooks/useAnchorEl';
-import { useAppSelector } from 'src/hooks/useAppSelector';
-import EmojiPicker, { EmojiStyle, Theme, Categories, EmojiClickData } from 'emoji-picker-react';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Popover from '@mui/material/Popover';
+import EmojiPicker, { Categories, EmojiClickData, EmojiStyle, Theme } from 'emoji-picker-react';
+import React, { FC, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAnchorEl } from 'src/hooks/useAnchorEl';
 
 export interface ChatEmojiPickerProps {
    setMessageText: React.Dispatch<SetStateAction<string>>;

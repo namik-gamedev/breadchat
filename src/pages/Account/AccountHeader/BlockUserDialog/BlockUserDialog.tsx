@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ConfirmDialog } from 'src/components/UI/ConfirmDialog';
 import { useAppSelector } from 'src/hooks/useAppSelector';

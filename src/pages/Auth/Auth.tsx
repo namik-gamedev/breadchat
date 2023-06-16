@@ -1,14 +1,14 @@
-import React, { FC, useEffect, useState } from 'react';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import TabList from '@mui/lab/TabList';
-import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import { FC, useEffect, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { SignInForm } from 'src/components/SignInForm';
 import { SignUpForm } from 'src/components/SignUpForm';
-import { Trans, useTranslation } from 'react-i18next';
 
 export interface AuthProps {}
 
@@ -22,7 +22,7 @@ export const Auth: FC<AuthProps> = ({}) => {
 
    const [tab, setTab] = useState<AuthTab>('signIn');
 
-   const handleTabChange = (e: any, newValue: AuthTab) => {
+   const handleTabChange = (_e: any, newValue: AuthTab) => {
       setTab(newValue);
    };
 

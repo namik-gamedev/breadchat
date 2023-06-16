@@ -1,10 +1,9 @@
 import React from 'react';
-import { Chat } from 'src/pages/Chat';
-import { Auth } from 'src/pages/Auth';
-import { Chats } from 'src/pages/Chats';
-import { NotFound } from 'src/pages/NotFound';
-import { Users } from 'src/pages/Users';
 import { Account } from 'src/pages/Account';
+import { Auth } from 'src/pages/Auth';
+import { Chat } from 'src/pages/Chat';
+import { Chats } from 'src/pages/Chats';
+import { Users } from 'src/pages/Users';
 
 export interface IRoute {
    path: string;

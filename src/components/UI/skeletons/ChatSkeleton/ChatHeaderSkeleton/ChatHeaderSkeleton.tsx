@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import { UserThumbnailSkeleton } from '../../UserThumbnailSkeleton';
-import Stack from '@mui/material/Stack';
 import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+import { FC } from 'react';
+import { UserThumbnailSkeleton } from '../../UserThumbnailSkeleton';
 
 export interface ChatHeaderSkeletonProps {}
 

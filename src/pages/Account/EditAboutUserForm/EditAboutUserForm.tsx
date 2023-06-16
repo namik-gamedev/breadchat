@@ -1,14 +1,13 @@
-import React, { FC, FormEvent, useContext, useState } from 'react';
+import CloseIcon from '@mui/icons-material/Close';
+import CreateIcon from '@mui/icons-material/Create';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
-import CreateIcon from '@mui/icons-material/Create';
+import TextField from '@mui/material/TextField';
+import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import UserService from 'src/services/user.service';
-import CloseIcon from '@mui/icons-material/Close';
-import { IUser } from 'src/types/types';
 import { useAccountContext } from 'src/hooks/useAccountContext';
+import UserService from 'src/services/user.service';
 
 export interface EditAboutUserFormProps {
    handleFormClose: () => void;

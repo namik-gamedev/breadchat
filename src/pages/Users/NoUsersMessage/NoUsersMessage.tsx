@@ -1,9 +1,9 @@
-import React, { FC, useContext } from 'react';
-import { Trans } from 'react-i18next';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { UsersShowType } from 'src/types/types';
+import { FC } from 'react';
+import { Trans } from 'react-i18next';
 import { useUsersContext } from 'src/hooks/useUsersContext';
+import { UsersShowType } from 'src/types/types';
 
 export interface NoUsersMessageProps {}
 

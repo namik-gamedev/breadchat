@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import { FC } from 'react';
+import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 
 export interface LogoProps {}
 

@@ -1,27 +1,23 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
-import MenuList from '@mui/material/MenuList';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Pagination from '@mui/material/Pagination';
 import MenuItem from '@mui/material/MenuItem';
-import { UserThumbnail } from 'src/pages/Users/UserThumbnail';
-import { IUser } from 'src/types/types';
-import { useAppSelector } from 'src/hooks/useAppSelector';
-import { NoUsersMessage } from '../NoUsersMessage';
+import MenuList from '@mui/material/MenuList';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import { FC, useState } from 'react';
 import { useUsersContext } from 'src/hooks/useUsersContext';
+import { UserThumbnail } from 'src/pages/Users/UserThumbnail';
+import { NoUsersMessage } from '../NoUsersMessage';
 
 export interface UsersListProps {}
 
 const USERS_IN_PAGE = 20;
 
 export const UsersList: FC<UsersListProps> = ({}) => {
-   const { filteredUsers: users, searchQuery, usersShowType } = useUsersContext();
-
-   const [newUsers, setNewUsers] = useState(users);
+   const { filteredUsers: users } = useUsersContext();
 
    const [page, setPage] = useState(1);
 
-   const handleChange = (e: any, p: number) => {
+   const handleChange = (_e: any, p: number) => {
       setPage(p);
    };
 

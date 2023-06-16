@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
 import Stack from '@mui/material/Stack';
+import { FC } from 'react';
 import { StyledBox } from '../../StyledBox';
 import { ChatHeaderSkeleton } from '../ChatSkeleton/ChatHeaderSkeleton';
 import { AboutUserSkeleton } from './AboutUserSkeleton';

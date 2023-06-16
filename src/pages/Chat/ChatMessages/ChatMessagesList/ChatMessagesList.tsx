@@ -1,11 +1,10 @@
-import React, { Dispatch, FC, SetStateAction, useContext } from 'react';
 import Stack from '@mui/material/Stack';
-import { IChat, IMessage } from 'src/types/types';
+import moment from 'moment';
+import { FC } from 'react';
+import { useChatContext } from 'src/hooks/useChatContext';
+import { ChatDate } from '../../ChatDate';
 import { ChatMessage } from '../../ChatMessage/ChatMessage';
 import { NoMessagesMessage } from '../NoMessagesMessage';
-import moment from 'moment';
-import { ChatDate } from '../../ChatDate';
-import { useChatContext } from 'src/hooks/useChatContext';
 
 export interface ChatMessagesListProps {}
 

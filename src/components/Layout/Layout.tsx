@@ -1,11 +1,10 @@
-import React, { FC } from 'react';
-import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import Container from '@mui/material/Container';
-import { Header } from '../Header';
+import React, { FC } from 'react';
 import { Sidebar } from 'src/components/Sidebar';
 import { useAppSelector } from 'src/hooks/useAppSelector';
+import { Header } from '../Header';
 
 export interface LayoutProps {
    children: React.ReactNode;

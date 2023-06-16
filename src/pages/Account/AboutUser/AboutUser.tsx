@@ -1,14 +1,10 @@
-import React, { FC, useContext } from 'react';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
 import CreateIcon from '@mui/icons-material/Create';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import { FC } from 'react';
 import { Trans } from 'react-i18next';
-import { IUser } from 'src/types/types';
-import { useAppSelector } from 'src/hooks/useAppSelector';
-import { useIsUserBlocked } from 'src/hooks/useIsUserBlocked';
-import { current } from '@reduxjs/toolkit';
 import { useAccountContext } from 'src/hooks/useAccountContext';
 
 export interface AboutUserProps {
@@ -16,8 +12,6 @@ export interface AboutUserProps {
 }
 
 export const AboutUser: FC<AboutUserProps> = ({ handleFormShow }) => {
-   const currentUser = useAppSelector((state) => state.user.data);
-
    const { isCurrentUser, isSelfBlockedByUser } = useAccountContext();
    const user = useAccountContext().user!;
 

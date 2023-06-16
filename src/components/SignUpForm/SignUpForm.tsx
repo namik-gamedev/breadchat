@@ -1,9 +1,12 @@
-import React, { FC, useState } from 'react';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import FormHelperText from '@mui/material/FormHelperText';
-import * as Yup from 'yup';
+import TextField from '@mui/material/TextField';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { FormikHelpers, useFormik } from 'formik';
+import { FC } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { PasswordField } from 'src/components/UI/PasswordField';
+import { StyledForm } from 'src/components/UI/StyledForm';
 import {
    CONFIRM_PASSWORD_FORM_ERR,
    EMAIL_FORM_REGEXP,
@@ -14,18 +17,10 @@ import {
    PASSWORD_FORM_REGEXP,
    REQUIRED_FORM_ERR,
 } from 'src/constants/AuthForm.consts';
-import { PasswordField } from 'src/components/UI/PasswordField';
-import { appAuth, db } from 'src/firebase/firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
-import { EMAIL_ALREADY_IN_USE_ERR } from 'src/constants/Auth.consts';
-import { StyledForm } from 'src/components/UI/StyledForm';
-import { setUser } from 'src/store/reducers/user.reducer';
-import { useAppDispatch } from 'src/hooks/useAppDispatch';
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import { appAuth } from 'src/firebase/firebase';
 import UserService from 'src/services/user.service';
 import { getSignUpError } from 'src/utils/Auth.utils';
-import { Trans, useTranslation } from 'react-i18next';
+import * as Yup from 'yup';
 
 export interface SignUpFormProps {}
 
@@ -54,20 +49,20 @@ const validationSchema = Yup.object({
 });
 
 export const SignUpForm: FC<SignUpFormProps> = ({}) => {
-   const dispatch = useAppDispatch();
    const navigate = useNavigate();
 
    const { t } = useTranslation();
 
-   const onSubmit = async ({ email, password, name }: SignUpValues, { setSubmitting, setFieldError, setStatus }: FormikHelpers<SignUpValues>) => {
+   const onSubmit = async ({ email, password, name }: SignUpValues, { setSubmitting, setFieldError }: FormikHelpers<SignUpValues>) => {
       try {
          const {
             user: { uid, displayName, photoURL },
          } = await createUserWithEmailAndPassword(appAuth, email, password);
-         await updateProfile(appAuth.currentUser!, { displayName, photoURL });
-         await UserService.setup({ displayName: name, uid, photoURL, online: true, lastSeen: Date.now(), blockedUsers: [] });
-
-         await signInWithEmailAndPassword(appAuth, email, password);
+         await Promise.all([
+            updateProfile(appAuth.currentUser!, { displayName, photoURL }),
+            UserService.setup({ displayName: name, uid, photoURL, online: true, lastSeen: Date.now(), blockedUsers: [] }),
+            signInWithEmailAndPassword(appAuth, email, password),
+         ]);
 
          navigate('/');
       } catch (e: any) {

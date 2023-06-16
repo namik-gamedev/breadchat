@@ -1,13 +1,11 @@
-import React, { FC, useState } from 'react';
-import MenuList from '@mui/material/MenuList';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import MenuItem from '@mui/material/MenuItem';
-import { UserThumbnail } from 'src/pages/Users/UserThumbnail';
-import { IChat, IUser } from 'src/types/types';
-import { useAppSelector } from 'src/hooks/useAppSelector';
-import { ChatThumbnail } from '../ChatThumbnail';
+import MenuList from '@mui/material/MenuList';
 import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import { FC, useState } from 'react';
+import { IChat } from 'src/types/types';
+import { ChatThumbnail } from '../ChatThumbnail';
 import { NoChatsMessage } from '../NoChatsMessage';
 
 export interface ChatsListProps {
@@ -19,7 +17,7 @@ const CHATS_IN_PAGE = 20;
 export const ChatsList: FC<ChatsListProps> = ({ chats }) => {
    const [page, setPage] = useState(1);
 
-   const handleChange = (e: any, p: number) => {
+   const handleChange = (_e: any, p: number) => {
       setPage(p);
    };
 

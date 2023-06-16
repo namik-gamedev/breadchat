@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
 import Typography from '@mui/material/Typography';
+import { FC } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { ConfirmDialog } from 'src/components/UI/ConfirmDialog';
-import { useTranslation, Trans } from 'react-i18next';
-import ChatService from 'src/services/chat.service';
 import { useAppSelector } from 'src/hooks/useAppSelector';
+import ChatService from 'src/services/chat.service';
 import { IMessage, IUser } from 'src/types/types';
 
 export interface DeleteMessageDialogProps {

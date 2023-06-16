@@ -1,20 +1,14 @@
-import React, { Dispatch, FC, SetStateAction, useContext, useEffect, useState } from 'react';
-import Stack from '@mui/material/Stack';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import Grid from '@mui/material/Grid';
 import InputLabel from '@mui/material/InputLabel';
-import { useAppSelector } from 'src/hooks/useAppSelector';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
+import React, { FC, useEffect, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
-import { useAppDispatch } from 'src/hooks/useAppDispatch';
-import { IUser, SearchBy, UsersShowType } from 'src/types/types';
+import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useUsersContext } from 'src/hooks/useUsersContext';
+import { IUser, SearchBy, UsersShowType } from 'src/types/types';
 
 export interface UserSearchFormProps {}
 
@@ -24,7 +18,6 @@ export const UserSearchForm: FC<UserSearchFormProps> = ({}) => {
    const user = useAppSelector((state) => state.user.data)!;
 
    const users = useAppSelector((state) => state.users.data);
-   const dispatch = useAppDispatch();
 
    const [searchBy, setSearchBy] = useState(SearchBy.NAME);
 

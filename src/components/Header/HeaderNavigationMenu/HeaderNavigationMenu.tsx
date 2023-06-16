@@ -1,12 +1,11 @@
-import React, { FC, useState } from 'react';
-import { useMediaQuery } from '@mui/material';
-import Box from '@mui/material/Box';
-import Badge from '@mui/material/Badge';
-import { NavigationMenuItems } from 'src/components/NavigationMenuItems';
-import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { StyledMenu } from 'src/components/UI/StyledMenu';
+import Badge from '@mui/material/Badge';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import { FC } from 'react';
+import { NavigationMenuItems } from 'src/components/NavigationMenuItems';
 import { ProfileMenuItems } from 'src/components/ProfileMenuItems';
+import { StyledMenu } from 'src/components/UI/StyledMenu';
 import { useAnchorEl } from 'src/hooks/useAnchorEl';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 
