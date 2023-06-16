@@ -25,12 +25,12 @@ export interface IChat {
    interlocutorTyping: boolean;
 }
 
-export enum UsersShowType {
+export enum IUsersShowType {
    ONLINE,
    ALL,
 }
 
-export enum SearchBy {
+export enum ISearchBy {
    NAME,
    ID,
 }
@@ -40,8 +40,8 @@ export interface IUsersContext {
    setSearchQuery: Dispatch<SetStateAction<string>>;
    filteredUsers: IUser[];
    setFilteredUsers: Dispatch<SetStateAction<IUser[]>>;
-   usersShowType: UsersShowType;
-   setUsersShowType: Dispatch<SetStateAction<UsersShowType>>;
+   usersShowType: IUsersShowType;
+   setUsersShowType: Dispatch<SetStateAction<IUsersShowType>>;
 }
 
 export interface IAccountContext {
@@ -71,14 +71,16 @@ export interface IDataLoad {
    chats: boolean;
 }
 
-export interface SignInValues {
+export interface ISignInValues {
    email: string;
    password: string;
 }
 
-export interface SignUpValues {
+export interface ISignUpValues {
    name: string;
    email: string;
    password: string;
    confirmPassword: string;
 }
+
+export type IAuthTab = 'signIn' | 'signUp';

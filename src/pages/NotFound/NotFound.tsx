@@ -43,11 +43,6 @@ export const NotFound: FC = () => {
          >
             <Trans>we couldn't find that page</Trans>
          </Typography>
-         {/* <UnstyledLink to='/'>
-            <Button size='large' variant='contained'>
-               Home
-            </Button>
-         </UnstyledLink> */}
       </Stack>
    );
 };

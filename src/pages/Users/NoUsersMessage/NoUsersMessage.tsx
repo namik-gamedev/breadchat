@@ -3,11 +3,11 @@ import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 import { Trans } from 'react-i18next';
 import { useUsersContext } from 'src/hooks/useUsersContext';
-import { UsersShowType } from 'src/types/types';
+import { IUsersShowType } from 'src/types/types';
 
-const getMessageText = (searchQueryIsEmpty: boolean, usersShowType: UsersShowType): string => {
+const getMessageText = (searchQueryIsEmpty: boolean, usersShowType: IUsersShowType): string => {
    if (searchQueryIsEmpty) {
-      if (usersShowType === UsersShowType.ONLINE) {
+      if (usersShowType === IUsersShowType.ONLINE) {
          return 'no users online';
       }
       return 'no users';

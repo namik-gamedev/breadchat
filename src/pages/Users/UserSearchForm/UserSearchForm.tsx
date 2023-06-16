@@ -8,7 +8,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useUsersContext } from 'src/hooks/useUsersContext';
-import { IUser, SearchBy, UsersShowType } from 'src/types/types';
+import { ISearchBy, IUser, IUsersShowType } from 'src/types/types';
 
 export const UserSearchForm: FC = () => {
    const { setFilteredUsers, searchQuery, setSearchQuery, usersShowType, setUsersShowType } = useUsersContext();
@@ -17,7 +17,7 @@ export const UserSearchForm: FC = () => {
 
    const users = useAppSelector((state) => state.users.data);
 
-   const [searchBy, setSearchBy] = useState(SearchBy.NAME);
+   const [searchBy, setSearchBy] = useState(ISearchBy.NAME);
 
    const { t } = useTranslation();
 
@@ -27,19 +27,19 @@ export const UserSearchForm: FC = () => {
       setSearchQuery(newQuery);
    };
 
-   const handleSearchByChange = (e: SelectChangeEvent<SearchBy>) => {
-      setSearchBy(e.target.value as SearchBy);
+   const handleSearchByChange = (e: SelectChangeEvent<ISearchBy>) => {
+      setSearchBy(e.target.value as ISearchBy);
    };
 
-   const handleUsersShowChange = (e: SelectChangeEvent<UsersShowType>) => {
-      setUsersShowType(e.target.value as UsersShowType);
+   const handleUsersShowChange = (e: SelectChangeEvent<IUsersShowType>) => {
+      setUsersShowType(e.target.value as IUsersShowType);
    };
 
    useEffect(() => {
       const newQuery = searchQuery.toLowerCase().trimStart().trimEnd();
       let newUsers: IUser[] = users.filter((u) => !(u.uid === user.uid));
 
-      if (usersShowType === UsersShowType.ONLINE) {
+      if (usersShowType === IUsersShowType.ONLINE) {
          newUsers = newUsers.filter((u) => u.online);
       }
 
@@ -49,7 +49,7 @@ export const UserSearchForm: FC = () => {
             return false;
          }
 
-         if (searchBy === SearchBy.NAME) {
+         if (searchBy === ISearchBy.NAME) {
             return u.displayName.toLowerCase().includes(newQuery);
          } else {
             return u.uid.toLowerCase().includes(newQuery);
@@ -72,10 +72,10 @@ export const UserSearchForm: FC = () => {
                </InputLabel>
 
                <Select onChange={handleSearchByChange} label={t('search by')} labelId='search-by-label-id' value={searchBy}>
-                  <MenuItem value={SearchBy.NAME}>
+                  <MenuItem value={ISearchBy.NAME}>
                      <Trans>by name</Trans>
                   </MenuItem>
-                  <MenuItem value={SearchBy.ID}>
+                  <MenuItem value={ISearchBy.ID}>
                      <Trans>by id</Trans>
                   </MenuItem>
                </Select>
@@ -89,10 +89,10 @@ export const UserSearchForm: FC = () => {
                </InputLabel>
 
                <Select value={usersShowType} label={t('show')} labelId='show-label-id' onChange={handleUsersShowChange}>
-                  <MenuItem value={UsersShowType.ONLINE}>
+                  <MenuItem value={IUsersShowType.ONLINE}>
                      <Trans>online</Trans>
                   </MenuItem>
-                  <MenuItem value={UsersShowType.ALL}>
+                  <MenuItem value={IUsersShowType.ALL}>
                      <Trans>all</Trans>
                   </MenuItem>
                </Select>

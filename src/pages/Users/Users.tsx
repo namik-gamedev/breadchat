@@ -8,17 +8,16 @@ import { UsersSkeleton } from 'src/components/UI/skeletons/UsersSkeleton';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { UsersProvider } from 'src/providers/UsersProvider';
 import { IUser } from 'src/types/types';
-import { UsersShowType } from '../../types/types';
+import { IUsersShowType } from '../../types/types';
 import { UserSearchForm } from './UserSearchForm';
 import { UsersList } from './UsersList';
-
 
 export const Users: FC = () => {
    const usersLoaded = useAppSelector((state) => state.global.dataLoad.users);
 
    const [filteredUsers, setFilteredUsers] = useState<IUser[]>([]);
    const [searchQuery, setSearchQuery] = useState('');
-   const [usersShowType, setUsersShowType] = useState(UsersShowType.ONLINE);
+   const [usersShowType, setUsersShowType] = useState(IUsersShowType.ONLINE);
 
    const { t } = useTranslation();
 
