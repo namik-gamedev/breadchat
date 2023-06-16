@@ -11,10 +11,10 @@ import { IUser } from 'src/types/types';
 import { useAccountContext } from 'src/hooks/useAccountContext';
 
 export interface EditAboutUserFormProps {
-   handleClose: () => void;
+   handleFormClose: () => void;
 }
 
-export const EditAboutUserForm: FC<EditAboutUserFormProps> = ({ handleClose }) => {
+export const EditAboutUserForm: FC<EditAboutUserFormProps> = ({ handleFormClose }) => {
    const user = useAccountContext().user!;
 
    const [about, setAbout] = useState(user.about || '');
@@ -35,7 +35,7 @@ export const EditAboutUserForm: FC<EditAboutUserFormProps> = ({ handleClose }) =
       }
 
       UserService.setAbout(user.uid, about.trimStart().trimEnd());
-      handleClose();
+      handleFormClose();
    };
 
    return (
@@ -52,7 +52,7 @@ export const EditAboutUserForm: FC<EditAboutUserFormProps> = ({ handleClose }) =
             InputProps={{
                endAdornment: (
                   <InputAdornment position='end'>
-                     <IconButton onClick={handleClose}>
+                     <IconButton onClick={handleFormClose}>
                         <CloseIcon />
                      </IconButton>
                      <IconButton type='submit'>

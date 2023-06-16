@@ -27,10 +27,9 @@ import UserService from 'src/services/user.service';
 import { getSignUpError } from 'src/utils/Auth.utils';
 import { Trans, useTranslation } from 'react-i18next';
 
-type photoURLType = string | null;
-
 export interface SignUpFormProps {}
 
+// todo: вынести тип
 export interface SignUpValues {
    name: string;
    email: string;

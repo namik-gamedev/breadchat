@@ -26,7 +26,7 @@ export const ChatHeader: FC<ChatHeaderProps> = ({}) => {
    const chat = useChatContext().chat!;
    const interlocutor = useChatContext().interlocutor!;
 
-   const { open, handleClose, handleShow } = useOpen();
+   const { open: dialogOpen, handleClose: handleDialogClose, handleShow: handleDialogShow } = useOpen();
    const { t } = useTranslation();
 
    return (
@@ -45,11 +45,11 @@ export const ChatHeader: FC<ChatHeaderProps> = ({}) => {
             </Box>
          </Stack>
 
-         <IconButton onClick={handleShow}>
+         <IconButton onClick={handleDialogShow}>
             <DeleteIcon />
          </IconButton>
 
-         <ClearChatDialog open={open} handleClose={handleClose} interlocutor={interlocutor} />
+         <ClearChatDialog open={dialogOpen} handleClose={handleDialogClose} interlocutor={interlocutor} />
       </Stack>
    );
 };

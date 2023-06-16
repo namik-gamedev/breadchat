@@ -30,7 +30,7 @@ export const UserSearchForm: FC<UserSearchFormProps> = ({}) => {
 
    const { t } = useTranslation();
 
-   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+   const handleSearchQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newQuery = e.target.value.trimStart().trimEnd().toLowerCase();
 
       setSearchQuery(newQuery);
@@ -71,7 +71,7 @@ export const UserSearchForm: FC<UserSearchFormProps> = ({}) => {
    return (
       <Grid container spacing={1} sx={{ pr: 1, width: 1 }} component='form'>
          <Grid item xs={12} sm>
-            <TextField fullWidth onChange={handleChange} label={t('search user')} />
+            <TextField fullWidth onChange={handleSearchQueryChange} label={t('search user')} />
          </Grid>
 
          <Grid item xs sm>
