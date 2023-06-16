@@ -1,50 +1,24 @@
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { FormikHelpers, useFormik } from 'formik';
 import { FC } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { PasswordField } from 'src/components/UI/PasswordField';
 import { StyledForm } from 'src/components/UI/StyledForm';
-import {
-   CONFIRM_PASSWORD_FORM_ERR,
-   EMAIL_FORM_REGEXP,
-   INVALID_EMAIL_FORM_ERR,
-   INVALID_NAME_FORM_ERR,
-   INVALID_PASSWORD_FORM_ERR,
-   NAME_FORM_REGEXP,
-   PASSWORD_FORM_REGEXP,
-   REQUIRED_FORM_ERR,
-} from 'src/constants/AuthForm.consts';
+import { signUpInitialValues, signUpValidationSchema } from 'src/constants/AuthForm.consts';
 import { appAuth } from 'src/firebase/firebase';
 import UserService from 'src/services/user.service';
-import { SignUpValues } from 'src/types/types';
+import { ISignUpValues } from 'src/types/types';
 import { getSignUpError } from 'src/utils/Auth.utils';
-import * as Yup from 'yup';
-
-const initialValues: SignUpValues = {
-   name: '',
-   email: '',
-   password: '',
-   confirmPassword: '',
-};
-
-const validationSchema = Yup.object({
-   name: Yup.string().required(REQUIRED_FORM_ERR).matches(NAME_FORM_REGEXP, INVALID_NAME_FORM_ERR),
-   email: Yup.string().required(REQUIRED_FORM_ERR).matches(EMAIL_FORM_REGEXP, INVALID_EMAIL_FORM_ERR),
-   password: Yup.string().required(REQUIRED_FORM_ERR).min(8, INVALID_PASSWORD_FORM_ERR).matches(PASSWORD_FORM_REGEXP, INVALID_PASSWORD_FORM_ERR),
-   confirmPassword: Yup.string()
-      .required(REQUIRED_FORM_ERR)
-      .equals([Yup.ref('password')], CONFIRM_PASSWORD_FORM_ERR),
-});
+import { SignUpButton } from './SignUpButton';
 
 export const SignUpForm: FC = () => {
    const navigate = useNavigate();
 
    const { t } = useTranslation();
 
-   const onSubmit = async ({ email, password, name }: SignUpValues, { setSubmitting, setFieldError }: FormikHelpers<SignUpValues>) => {
+   const onSubmit = async ({ email, password, name }: ISignUpValues, { setSubmitting, setFieldError }: FormikHelpers<ISignUpValues>) => {
       try {
          const {
             user: { uid, displayName, photoURL },
@@ -66,10 +40,10 @@ export const SignUpForm: FC = () => {
       setSubmitting(false);
    };
 
-   const { handleChange, handleBlur, handleSubmit, errors, isSubmitting } = useFormik<SignUpValues>({
-      initialValues,
+   const { handleChange, handleBlur, handleSubmit, errors, isSubmitting } = useFormik<ISignUpValues>({
+      initialValues: signUpInitialValues,
       onSubmit,
-      validationSchema,
+      validationSchema: signUpValidationSchema,
    });
 
    return (
@@ -112,9 +86,8 @@ export const SignUpForm: FC = () => {
             label={t('confirm password')}
             required
          />
-         <Button disabled={isSubmitting} type='submit' variant='contained'>
-            <Trans>sign up</Trans>
-         </Button>
+
+         <SignUpButton disabled={isSubmitting} />
       </StyledForm>
    );
 };

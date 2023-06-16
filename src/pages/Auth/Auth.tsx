@@ -1,28 +1,16 @@
 import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import { FC, useEffect, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { SignInForm } from 'src/components/SignInForm';
-import { SignUpForm } from 'src/components/SignUpForm';
-
-type AuthTab = 'signIn' | 'signUp';
-
-const tabSx = { fontSize: '1.2em', fontWeight: 500 };
-const orTabSx = { ...tabSx, fontWeight: 400 };
+import { IAuthTab } from 'src/types/types';
+import { AuthTabList } from './AuthTabList';
+import { AuthTabPanels } from './AuthTabPanels';
 
 export const Auth: FC = () => {
    const { t } = useTranslation();
 
-   const [tab, setTab] = useState<AuthTab>('signIn');
-
-   const handleTabChange = (_e: any, newValue: AuthTab) => {
-      setTab(newValue);
-   };
+   const [tab, setTab] = useState<IAuthTab>('signIn');
 
    useEffect(() => {
       if (tab === 'signIn') {
@@ -42,55 +30,8 @@ export const Auth: FC = () => {
             <Trans>you want to</Trans>
          </Typography>
          <TabContext value={tab}>
-            <TabList selectionFollowsFocus onChange={handleTabChange}>
-               <Tab
-                  label={
-                     <Typography sx={tabSx}>
-                        <Trans>sign in</Trans>
-                     </Typography>
-                  }
-                  value='signIn'
-               />
-               <Tab
-                  sx={{
-                     display: {
-                        sm: 'block',
-                        xs: 'none',
-                     },
-                  }}
-                  disabled
-                  label={
-                     <Typography sx={orTabSx}>
-                        <Trans>or</Trans>
-                     </Typography>
-                  }
-                  value='signUp'
-               />
-               <Tab
-                  label={
-                     <Typography sx={tabSx}>
-                        <Trans>sign up</Trans>
-                     </Typography>
-                  }
-                  value='signUp'
-               />
-            </TabList>
-            <Box
-               sx={{
-                  width: {
-                     md: '60%',
-                     sm: '70%',
-                     xs: 1,
-                  },
-               }}
-            >
-               <TabPanel value='signIn'>
-                  <SignInForm />
-               </TabPanel>
-               <TabPanel value='signUp'>
-                  <SignUpForm />
-               </TabPanel>
-            </Box>
+            <AuthTabList setTab={setTab} />
+            <AuthTabPanels />
          </TabContext>
       </Stack>
    );
