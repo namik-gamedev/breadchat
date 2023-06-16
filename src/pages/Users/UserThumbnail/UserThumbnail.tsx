@@ -25,12 +25,12 @@ export const UserThumbnail: FC<UserThumbnailProps> = ({ user }) => {
    const navigate = useNavigate();
    const currentUser = useAppSelector((state) => state.user.data)!;
 
-   const handleClick = () => {
+   const handleAccountNavigate = () => {
       navigate(`/account/${user.uid}`);
    };
 
    return (
-      <Stack onClick={handleClick} sx={{ cursor: 'pointer' }} direction='row' spacing={2} alignItems='center'>
+      <Stack onClick={handleAccountNavigate} sx={{ cursor: 'pointer' }} direction='row' spacing={2} alignItems='center'>
          <UserAvatar sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={user} />
          <Box sx={{ minWidth: 0, width: 1 }}>
             <Typography noWrap variant='h6' sx={{ fontWeight: 'normal' }} component='h2'>

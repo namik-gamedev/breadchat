@@ -21,13 +21,13 @@ export const LanguageToggler: FC<LanguageTogglerProps> = ({}) => {
 
    const { t } = useTranslation();
 
-   const handleClick = () => {
+   const handleLanguageChange = () => {
       dispatch(setLanguage(lang === ILanguage.EN ? ILanguage.RU : ILanguage.EN));
    };
 
    return (
       <Tooltip title={t(lang === ILanguage.EN ? 'toggle russian' : 'toggle english')} arrow>
-         <IconButton onClick={handleClick}>
+         <IconButton onClick={handleLanguageChange}>
             {lang === ILanguage.RU ? (
                <Typography fontWeight='bold' color='primary'>
                   EN

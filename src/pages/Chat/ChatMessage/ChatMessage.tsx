@@ -37,27 +37,17 @@ const BORDER_RADIUS_PX = 16;
 
 export const ChatMessage = styled(({ message, ...props }: ChatMessageProps) => {
    const chat = useChatContext().chat!;
-   const { editingMessage, setEditingMessage } = useChatContext();
+   const { editingMessage } = useChatContext();
 
    const isUnreaded = isMessageUnreaded(chat, message);
 
-   const { anchorEl, open, handleShow, handleClose } = useAnchorEl();
+   const { anchorEl: menuAnchorEl, open: menuOpen, handleShow: handleMenuShow, handleClose: handleMenuClose } = useAnchorEl();
 
    const { open: dialogOpen, handleShow: handleDialogShow, handleClose: handleDialogClose } = useOpen();
 
-   const handleDeleteClick = () => {
-      handleClose();
-      handleDialogShow();
-   };
-
-   const handleEditClick = () => {
-      handleClose();
-      setEditingMessage(message);
-   };
-
    return (
       <Stack {...props}>
-         <Stack spacing={0.2} onClick={handleShow} className='chatMessageWrapper'>
+         <Stack spacing={0.2} onClick={handleMenuShow} className='chatMessageWrapper'>
             <Typography variant='body2' className='chatMessageDate'>
                {moment(message.createdAt).format('HH:MM')}{' '}
                {message.sender === 0 && (isUnreaded ? <CheckIcon fontSize='small' /> : <DoneAllIcon fontSize='small' />)}
@@ -70,14 +60,8 @@ export const ChatMessage = styled(({ message, ...props }: ChatMessageProps) => {
             </Stack>
          </Stack>
 
-         <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
-            <ChatMessageMenuItems
-               sender={message.sender}
-               handleClose={handleClose}
-               handleDeleteClick={handleDeleteClick}
-               handleEditClick={handleEditClick}
-               messageText={message.text}
-            />
+         <StyledMenu anchorEl={menuAnchorEl} open={menuOpen} onClose={handleMenuClose}>
+            <ChatMessageMenuItems sender={message.sender} handleMenuClose={handleMenuClose} handleDialogShow={handleDialogShow} message={message} />
          </StyledMenu>
 
          <DeleteMessageDialog

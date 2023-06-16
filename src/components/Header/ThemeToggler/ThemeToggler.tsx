@@ -17,7 +17,7 @@ export const ThemeToggler: FC<ThemeTogglerProps> = ({}) => {
 
    const { t } = useTranslation();
 
-   const handleClick = () => {
+   const handleDarkToggle = () => {
       setDark((prev) => !prev);
    };
 
@@ -27,7 +27,9 @@ export const ThemeToggler: FC<ThemeTogglerProps> = ({}) => {
 
    return (
       <Tooltip title={t(dark ? 'toggle light' : 'toggle dark')} arrow>
-         <IconButton onClick={handleClick}>{dark ? <LightModeOutlinedIcon color='primary' /> : <DarkModeOutlinedIcon color='primary' />}</IconButton>
+         <IconButton onClick={handleDarkToggle}>
+            {dark ? <LightModeOutlinedIcon color='primary' /> : <DarkModeOutlinedIcon color='primary' />}
+         </IconButton>
       </Tooltip>
    );
 };

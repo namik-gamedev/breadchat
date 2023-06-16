@@ -9,7 +9,7 @@ import { styled } from '@mui/material';
 export const PasswordField: FC<TextFieldProps> = (props) => {
    const [show, setShow] = useState(false);
 
-   const handleShowPassword = () => {
+   const handlePasswordShow = () => {
       setShow((prev) => !prev);
    };
 
@@ -21,7 +21,7 @@ export const PasswordField: FC<TextFieldProps> = (props) => {
          InputProps={{
             endAdornment: (
                <InputAdornment position='end'>
-                  <IconButton onClick={handleShowPassword}>
+                  <IconButton onClick={handlePasswordShow}>
                      {show ? <Visibility sx={{ color: 'text.secondary' }} /> : <VisibilityOff sx={{ color: 'text.secondary' }} />}
                   </IconButton>
                </InputAdornment>

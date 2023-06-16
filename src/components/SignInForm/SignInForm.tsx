@@ -34,6 +34,7 @@ import { Trans, useTranslation } from 'react-i18next';
 
 export interface SignInFormProps {}
 
+// todo: вынести тип
 export interface SignInValues {
    email: string;
    password: string;
@@ -88,6 +89,7 @@ export const SignInForm: FC<SignInFormProps> = ({}) => {
       navigate('/');
    };
 
+   // todo: decomposition
    return (
       <Stack spacing={2}>
          <StyledForm onSubmit={handleSubmit}>
