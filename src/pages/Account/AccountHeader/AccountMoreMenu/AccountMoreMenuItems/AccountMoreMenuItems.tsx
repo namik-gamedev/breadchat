@@ -8,6 +8,8 @@ import copy from 'copy-to-clipboard';
 import { FC, useRef } from 'react';
 import { Trans } from 'react-i18next';
 import { useAccountContext } from 'src/hooks/useAccountContext';
+import { useAppSelector } from 'src/hooks/useAppSelector';
+import UserService from 'src/services/user.service';
 
 interface Props {
    handleClose: () => void;
@@ -16,12 +18,24 @@ interface Props {
 
 export const AccountMoreMenuItems: FC<Props> = ({ handleClose, handleBlockDialogShow }) => {
    const { isCurrentUser, isUserBlocked } = useAccountContext();
+   const user = useAppSelector((state) => state.user.data)!;
 
    const inputRef = useRef<HTMLInputElement | null>(null);
 
    const handlePhotoAdd = () => {
-      handleClose();
       inputRef.current?.click();
+   };
+
+   const handlePhotoSet = (e: React.ChangeEvent<HTMLInputElement>) => {
+      handleClose();
+
+      const files = e.target.files;
+
+      if (files && files.length > 0) {
+         const file = files[0];
+
+         UserService.setPhotoURL(user.uid, file);
+      }
    };
 
    const handleUserBlock = () => {
@@ -36,6 +50,7 @@ export const AccountMoreMenuItems: FC<Props> = ({ handleClose, handleBlockDialog
 
    return (
       <>
+         <input style={{ display: 'none' }} ref={inputRef} type='file' accept='image/*' onChange={handlePhotoSet} />
          {isCurrentUser ? (
             <MenuItem onClick={handlePhotoAdd}>
                <ListItemIcon>
