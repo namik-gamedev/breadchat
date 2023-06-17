@@ -1,5 +1,5 @@
 import TextField from '@mui/material/TextField';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { FormikHelpers, useFormik } from 'formik';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -20,11 +20,9 @@ export const SignUpForm: FC = () => {
 
    const onSubmit = async ({ email, password, name }: ISignUpValues, { setSubmitting, setFieldError }: FormikHelpers<ISignUpValues>) => {
       try {
-         const {
-            user: { uid, displayName, photoURL },
-         } = await createUserWithEmailAndPassword(appAuth, email, password);
+         const { user } = await createUserWithEmailAndPassword(appAuth, email, password);
+         const { photoURL, uid } = user;
          await Promise.all([
-            updateProfile(appAuth.currentUser!, { displayName, photoURL }),
             UserService.setup({ displayName: name, uid, photoURL, online: true, lastSeen: Date.now(), blockedUsers: [] }),
             signInWithEmailAndPassword(appAuth, email, password),
          ]);
