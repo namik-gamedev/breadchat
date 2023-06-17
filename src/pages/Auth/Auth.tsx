@@ -25,7 +25,7 @@ export const Auth: FC = () => {
    }, [tab]);
 
    return (
-      <Stack spacing={2} justifyContent='center' alignItems='center'>
+      <Stack spacing={1} justifyContent='center' alignItems='center'>
          <Typography sx={{ fontWeight: 300, textAlign: 'center' }} variant='h4'>
             <Trans>you want to</Trans>
          </Typography>
