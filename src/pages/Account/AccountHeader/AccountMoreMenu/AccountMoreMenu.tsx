@@ -15,24 +15,8 @@ interface Props {
 export const AccountMoreMenu: FC<Props> = ({ handleBlockDialogShow }) => {
    const { anchorEl, handleShow, handleClose, open } = useAnchorEl();
 
-   const inputRef = useRef<HTMLInputElement | null>(null);
-
-   const user = useAccountContext().user!;
-
-   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const files = e.target.files;
-
-      if (files && files.length > 0) {
-         const file = files[0];
-
-         UserService.setPhotoURL(user.uid, file);
-      }
-   };
-
    return (
       <Box>
-         <input style={{ display: 'none' }} ref={inputRef} type='file' accept='image/*' onChange={handleChange} />
-
          <IconButton onClick={handleShow}>
             <MoreVertIcon />
          </IconButton>
