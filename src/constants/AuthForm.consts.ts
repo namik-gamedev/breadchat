@@ -11,15 +11,11 @@ export const CONFIRM_PASSWORD_FORM_ERR: string = 'passwords must match';
 export const NAME_FORM_REGEXP = /^[a-zA-Zа-яА-я]*$/;
 export const EMAIL_FORM_REGEXP =
    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-export const PASSWORD_FORM_REGEXP = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{0,}$/;
+export const PASSWORD_FORM_REGEXP = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[0-9a-zA-Z]{8,}$/;
 
 export const signInValidationSchema = Yup.object({
    email: Yup.string().required(REQUIRED_FORM_ERR).matches(EMAIL_FORM_REGEXP, INVALID_EMAIL_FORM_ERR),
-   password: Yup.string()
-      .required(REQUIRED_FORM_ERR)
-      .min(8, INVALID_PASSWORD_FORM_ERR)
-      .max(16, INVALID_PASSWORD_FORM_ERR)
-      .matches(PASSWORD_FORM_REGEXP, INVALID_PASSWORD_FORM_ERR),
+   password: Yup.string().required(REQUIRED_FORM_ERR).min(8, INVALID_PASSWORD_FORM_ERR).matches(PASSWORD_FORM_REGEXP, INVALID_PASSWORD_FORM_ERR),
 });
 
 export const signInInitialValues: ISignInValues = {
