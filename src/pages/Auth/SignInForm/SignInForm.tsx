@@ -68,8 +68,9 @@ export const SignInForm: FC = () => {
          </StyledForm>
 
          <SignInDivider />
-
-         <GoogleButton />
+         <Stack justifyContent='center' spacing={2} direction='row'>
+            <GoogleButton />
+         </Stack>
       </Stack>
    );
 };

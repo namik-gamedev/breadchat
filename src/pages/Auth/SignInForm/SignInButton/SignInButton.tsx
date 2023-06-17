@@ -8,7 +8,7 @@ interface Props {
 
 export const SignInButton: FC<Props> = ({ disabled }) => {
    return (
-      <Button disabled type='submit' variant='contained'>
+      <Button disabled={disabled} type='submit' variant='contained'>
          <Trans>sign in</Trans>
       </Button>
    );
