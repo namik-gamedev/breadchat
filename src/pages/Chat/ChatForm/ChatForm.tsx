@@ -52,8 +52,6 @@ export const ChatForm: FC = () => {
    };
 
    const handleClick = () => {
-      console.log(1);
-
       setEditingMessage(null);
    };
 
