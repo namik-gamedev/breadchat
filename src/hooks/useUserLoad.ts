@@ -38,17 +38,6 @@ export const useUserLoad = () => {
       if (authorizedUserUid) {
          const user = users.find((u) => u.uid === authorizedUserUid)!;
          dispatch(setUser(user));
-
-         const userOnlineRef = ref(db, `users/${authorizedUserUid}/online`);
-         const unsub = onValue(userOnlineRef, (snapshot) => {
-            const online = snapshot.val();
-
-            if (!online) {
-               set(userOnlineRef, true);
-            }
-         });
-
-         return unsub;
       }
    }, [users, authorizedUserUid]);
 };
