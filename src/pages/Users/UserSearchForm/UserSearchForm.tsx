@@ -44,11 +44,6 @@ export const UserSearchForm: FC = () => {
       }
 
       newUsers = newUsers.filter((u) => {
-         // todo: убрать эту проверку после очистки БД
-         if (!u.displayName || !u.uid) {
-            return false;
-         }
-
          if (searchBy === ISearchBy.NAME) {
             return u.displayName.toLowerCase().includes(newQuery);
          } else {
