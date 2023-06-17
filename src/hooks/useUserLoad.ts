@@ -1,11 +1,12 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
-import { appAuth } from 'src/firebase/firebase';
+import { appAuth, db } from 'src/firebase/firebase';
 import UserService from 'src/services/user.service';
 import { setChatsLoad, setUserLoad } from 'src/store/reducers/global.reducer';
 import { setUser, unsetUser } from 'src/store/reducers/user.reducer';
 import { useAppDispatch } from './useAppDispatch';
 import { useAppSelector } from './useAppSelector';
+import { onValue, ref, set } from 'firebase/database';
 
 export const useUserLoad = () => {
    const [authorizedUserUid, setAuthorizedUserUid] = useState<string | undefined>();
@@ -26,9 +27,7 @@ export const useUserLoad = () => {
          dispatch(setUserLoad(true));
       });
 
-      return () => {
-         unsubAuthState();
-      };
+      return unsubAuthState;
    }, []);
 
    useEffect(() => {
@@ -39,6 +38,17 @@ export const useUserLoad = () => {
       if (authorizedUserUid) {
          const user = users.find((u) => u.uid === authorizedUserUid)!;
          dispatch(setUser(user));
+
+         const userOnlineRef = ref(db, `users/${authorizedUserUid}/online`);
+         const unsub = onValue(userOnlineRef, (snapshot) => {
+            const online = snapshot.val();
+
+            if (!online) {
+               set(userOnlineRef, true);
+            }
+         });
+
+         return unsub;
       }
    }, [users, authorizedUserUid]);
 };
