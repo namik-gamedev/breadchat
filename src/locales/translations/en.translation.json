@@ -47,6 +47,7 @@
    "invalid password": "Password must contain at least 8 characters: letters, of which at least one capital and at least one digit!",
    "passwords must match": "Passwords must match!",
    "too many requests": "Too many requests on this email!",
+   "delete photo": "Delete photo",
    "recently used": "frequently used",
    "smileys and people": "smileys & people",
    "animals and nature": "animals & nature",

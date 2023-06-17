@@ -1,5 +1,5 @@
 import { ref, remove, set, update } from 'firebase/database';
-import { getDownloadURL, ref as storageRef, uploadBytes } from 'firebase/storage';
+import { deleteObject, getDownloadURL, ref as storageRef, uploadBytes } from 'firebase/storage';
 import { storage } from 'src/firebase/firebase';
 import { db } from 'src/firebase/firebase';
 import { IUser } from 'src/types/types';
@@ -23,11 +23,14 @@ export default class UserService {
 
       const url = await getDownloadURL(uploadTask.ref);
 
-      const userRef = ref(db, `users/${uid}`);
-      update(userRef, { photoURL: url });
+      const photoURLRef = ref(db, `users/${uid}/photoURL`);
+      set(photoURLRef, url);
    }
 
    static unsetPhotoURL(uid: string) {
+      const fileRef = storageRef(storage, `avatars/${uid}`);
+      deleteObject(fileRef);
+
       const photoURLRef = ref(db, `users/${uid}/photoURL`);
       remove(photoURLRef);
    }
