@@ -44,7 +44,7 @@
    "invalid name": "Invalid name!",
    "invalid email": "Invalid email address!",
    "email already in user": "Email already in use!",
-   "invalid password": "Password must contain 8 and more characters, at least 1 lowercase, 1 uppercase letters and 1 digit!",
+   "invalid password": "Password must contain at least 8 characters: letters, of which at least one capital and at least one digit!",
    "passwords must match": "Passwords must match!",
    "too many requests": "Too many requests on this email!",
    "recently used": "frequently used",
