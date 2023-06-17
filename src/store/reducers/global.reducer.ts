@@ -14,7 +14,7 @@ const dataLoadInitialState = {
 };
 
 const initialState: StateType = {
-   darkTheme: false,
+   darkTheme: window.matchMedia('(prefers-color-scheme: dark)').matches,
    language: navigator.language === 'ru-RU' ? ILanguage.RU : ILanguage.EN,
    dataLoad: dataLoadInitialState,
 };
