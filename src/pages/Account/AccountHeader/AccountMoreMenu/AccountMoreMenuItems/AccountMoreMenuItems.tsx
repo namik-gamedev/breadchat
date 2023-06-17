@@ -2,6 +2,7 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import PersonIcon from '@mui/icons-material/Person';
 import PersonOffIcon from '@mui/icons-material/PersonOff';
 import ReplyIcon from '@mui/icons-material/Reply';
+import NoPhotographyIcon from '@mui/icons-material/NoPhotography';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import MenuItem from '@mui/material/MenuItem';
 import copy from 'copy-to-clipboard';
@@ -38,6 +39,12 @@ export const AccountMoreMenuItems: FC<Props> = ({ handleClose, handleBlockDialog
       }
    };
 
+   const handlePhotoDelete = () => {
+      handleClose();
+
+      UserService.unsetPhotoURL(user.uid);
+   };
+
    const handleUserBlock = () => {
       handleClose();
       handleBlockDialogShow();
@@ -52,12 +59,23 @@ export const AccountMoreMenuItems: FC<Props> = ({ handleClose, handleBlockDialog
       <>
          <input style={{ display: 'none' }} ref={inputRef} type='file' accept='image/*' onChange={handlePhotoSet} />
          {isCurrentUser ? (
-            <MenuItem onClick={handlePhotoAdd}>
-               <ListItemIcon>
-                  <AddAPhotoIcon color='primary' />
-               </ListItemIcon>
-               <Trans>select photo</Trans>
-            </MenuItem>
+            <>
+               <MenuItem onClick={handlePhotoAdd}>
+                  <ListItemIcon>
+                     <AddAPhotoIcon color='primary' />
+                  </ListItemIcon>
+                  <Trans>select photo</Trans>
+               </MenuItem>
+
+               {user.photoURL && (
+                  <MenuItem onClick={handlePhotoDelete}>
+                     <ListItemIcon>
+                        <NoPhotographyIcon color='primary' />
+                     </ListItemIcon>
+                     <Trans>delete photo</Trans>
+                  </MenuItem>
+               )}
+            </>
          ) : (
             <MenuItem onClick={handleUserBlock}>
                <ListItemIcon>{isUserBlocked ? <PersonIcon color='primary' /> : <PersonOffIcon color='primary' />}</ListItemIcon>
