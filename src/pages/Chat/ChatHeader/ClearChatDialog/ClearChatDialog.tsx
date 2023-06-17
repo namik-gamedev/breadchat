@@ -17,7 +17,6 @@ export const ClearChatDialog: FC<Props> = ({ open, handleClose, interlocutor }) 
    const { t } = useTranslation();
 
    const handleAction = (alsoForInterlocutor: boolean) => {
-      console.log('clear');
       ChatService.clear(user.uid, interlocutor.uid, alsoForInterlocutor);
    };
 

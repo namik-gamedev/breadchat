@@ -23,8 +23,6 @@ export const App: FC = () => {
    useDBSetup();
 
    useEffect(() => {
-      console.log(navigator.language);
-
       moment.updateLocale(language, language === ILanguage.EN ? enLocaleSpec : ruLocaleSpec);
       i18n.changeLanguage(language);
    }, [language]);
