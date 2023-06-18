@@ -1,6 +1,7 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import { FC } from 'react';
 import { NavigationMenuItems } from 'src/components/NavigationMenuItems';
@@ -38,6 +39,7 @@ export const HeaderNavigationMenu: FC = () => {
                   },
                }}
             >
+               <Divider />
                <ProfileMenuItems handleClose={handleClose} />
             </Box>
          </StyledMenu>
