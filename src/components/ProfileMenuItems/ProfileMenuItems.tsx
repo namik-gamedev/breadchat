@@ -1,6 +1,5 @@
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
-import SettingsIcon from '@mui/icons-material/Settings';
 import Divider from '@mui/material/Divider';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import MenuItem from '@mui/material/MenuItem';
@@ -33,12 +32,7 @@ export const ProfileMenuItems: FC<Props> = ({ handleClose }) => {
             </ListItemIcon>
             <Trans>account</Trans>
          </MenuItem>
-         <MenuItem onClick={handleClose}>
-            <ListItemIcon sx={{ color: 'primary.main' }}>
-               <SettingsIcon />
-            </ListItemIcon>
-            <Trans>settings</Trans>
-         </MenuItem>
+
          <Divider />
          <MenuItem onClick={handleSignOut}>
             <ListItemIcon sx={{ color: 'primary.main' }}>
