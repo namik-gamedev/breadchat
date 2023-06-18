@@ -22,10 +22,7 @@ export const SignUpForm: FC = () => {
       try {
          const { user } = await createUserWithEmailAndPassword(appAuth, email, password);
          const { photoURL, uid } = user;
-         await Promise.all([
-            UserService.setup({ displayName: name, uid, photoURL, online: true, lastSeen: Date.now(), blockedUsers: [] }),
-            signInWithEmailAndPassword(appAuth, email, password),
-         ]);
+         await UserService.setup({ displayName: name, uid, photoURL, online: true, lastSeen: Date.now(), blockedUsers: [] });
 
          navigate('/');
       } catch (e: any) {
