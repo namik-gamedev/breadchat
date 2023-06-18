@@ -21,7 +21,7 @@ export const GoogleButton: FC = () => {
             UserService.setup({
                displayName: user.displayName!,
                uid: user.uid,
-               photoURL: user.displayName,
+               photoURL: user.photoURL,
                online: true,
                lastSeen: Date.now(),
                blockedUsers: [],
