@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { useChatContext } from 'src/hooks/useChatContext';
 import { useScroll } from 'src/hooks/useScroll';
 import { ChatMessagesList } from './ChatMessagesList';
@@ -7,11 +7,11 @@ import { ChatMessagesList } from './ChatMessagesList';
 export const ChatMessages: FC = () => {
    const { ref, scroll } = useScroll<HTMLDivElement>();
 
-   const { chat } = useChatContext();
+   const messagesLength = useChatContext().chat!.messages.length;
 
    useEffect(() => {
       scroll();
-   }, [chat?.messages]);
+   }, [messagesLength]);
 
    return (
       <Box ref={ref} sx={{ height: 1, overflow: 'auto' }}>
