@@ -1,6 +1,7 @@
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import TranslateIcon from '@mui/icons-material/Translate';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
@@ -22,15 +23,7 @@ export const LanguageToggler: FC = () => {
    return (
       <Tooltip title={t(lang === ILanguage.EN ? 'toggle russian' : 'toggle english')} arrow>
          <IconButton onClick={handleLanguageChange}>
-            {lang === ILanguage.RU ? (
-               <Typography fontWeight='bold' color='primary'>
-                  EN
-               </Typography>
-            ) : (
-               <Typography fontWeight='bold' color='primary'>
-                  RU
-               </Typography>
-            )}
+            <TranslateIcon color='primary' />
          </IconButton>
       </Tooltip>
    );
