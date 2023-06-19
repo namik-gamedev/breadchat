@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { FC, useEffect, useMemo, useRef, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { useChatContext } from 'src/hooks/useChatContext';
 import { useScroll } from 'src/hooks/useScroll';
 import { ChatMessagesList } from './ChatMessagesList';
