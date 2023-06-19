@@ -11,7 +11,7 @@ export const ChatMessages: FC = () => {
 
    useEffect(() => {
       scroll();
-   }, [chat?.messages]);
+   }, [chat?.messages.length]);
 
    return (
       <Box ref={ref} sx={{ height: 1, overflow: 'auto' }}>
