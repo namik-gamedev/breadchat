@@ -20,10 +20,10 @@ export const ChatHeaderOnlineStatus: FC<Props> = ({ chat }) => {
    useEffect(() => {
       if (isSelfBlockedByUser) {
          setStatus('you are blocked');
-      } else if (user.online) {
-         setStatus('online');
       } else if (chat.interlocutorTyping) {
          setStatus('typing');
+      } else if (user.online) {
+         setStatus('online');
       } else {
          setStatus('last seen {{time}}');
       }
