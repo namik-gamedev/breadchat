@@ -7,11 +7,11 @@ import { ChatMessagesList } from './ChatMessagesList';
 export const ChatMessages: FC = () => {
    const { ref, scroll } = useScroll<HTMLDivElement>();
 
-   const messagesLength = useChatContext().chat!.messages.length;
+   const { chat } = useChatContext();
 
    useEffect(() => {
       scroll();
-   }, [messagesLength]);
+   }, [chat?.messages]);
 
    return (
       <Box ref={ref} sx={{ height: 1, overflow: 'auto' }}>

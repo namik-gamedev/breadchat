@@ -7,7 +7,7 @@ import { ChatMessage } from '../../ChatMessage/ChatMessage';
 import { NoMessagesMessage } from '../NoMessagesMessage';
 
 export const ChatMessagesList: FC = () => {
-   const chat = useChatContext().chat!;
+   const { chat } = useChatContext();
 
    return chat ? (
       <Stack
