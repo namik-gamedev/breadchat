@@ -1,4 +1,5 @@
 import React from 'react';
+import { About } from 'src/pages/About';
 import { Account } from 'src/pages/Account';
 import { Auth } from 'src/pages/Auth';
 import { Chat } from 'src/pages/Chat';
@@ -26,6 +27,11 @@ export const routes: IRoute[] = [
       path: '/chats',
       component: Chats,
       authRequired: true,
+   },
+   {
+      path: '/about',
+      component: About,
+      authRequired: false,
    },
    {
       path: '/chat/:interlocutorUid',
