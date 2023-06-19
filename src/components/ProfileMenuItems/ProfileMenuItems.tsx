@@ -33,7 +33,6 @@ export const ProfileMenuItems: FC<Props> = ({ handleClose }) => {
             <Trans>account</Trans>
          </MenuItem>
 
-         <Divider />
          <MenuItem onClick={handleSignOut}>
             <ListItemIcon sx={{ color: 'primary.main' }}>
                <LogoutIcon />
