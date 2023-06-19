@@ -27,7 +27,7 @@ export const Users: FC = () => {
       return () => {
          document.title = 'Bread';
       };
-   }, []);
+   }, [t]);
 
    return (
       <UsersProvider

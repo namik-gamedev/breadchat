@@ -22,7 +22,7 @@ export const Auth: FC = () => {
       return () => {
          document.title = 'Bread';
       };
-   }, [tab]);
+   }, [tab, t]);
 
    return (
       <Stack spacing={1} justifyContent='center' alignItems='center'>

@@ -20,7 +20,7 @@ export const Chats: FC = () => {
       return () => {
          document.title = 'Bread';
       };
-   }, []);
+   }, [t]);
 
    return (
       <Stack component={StyledBox} spacing={1} sx={{ pt: 1, height: 1 }}>
