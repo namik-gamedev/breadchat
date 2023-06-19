@@ -11,7 +11,6 @@ interface Props {
 }
 
 const tabSx: SxProps = { fontSize: '1.2em', fontWeight: 500 };
-const orTabSx: SxProps = { ...tabSx, fontWeight: 400 };
 
 export const AuthTabList: FC<Props> = ({ setTab }) => {
    const handleTabChange = (_e: any, tab: IAuthTab) => {
@@ -27,21 +26,6 @@ export const AuthTabList: FC<Props> = ({ setTab }) => {
                </Typography>
             }
             value='signIn'
-         />
-         <Tab
-            sx={{
-               display: {
-                  sm: 'block',
-                  xs: 'none',
-               },
-            }}
-            disabled
-            label={
-               <Typography sx={orTabSx}>
-                  <Trans>or</Trans>
-               </Typography>
-            }
-            value='signUp'
          />
          <Tab
             label={
