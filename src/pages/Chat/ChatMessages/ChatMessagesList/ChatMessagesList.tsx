@@ -1,13 +1,13 @@
 import Stack from '@mui/material/Stack';
 import moment from 'moment';
 import { FC } from 'react';
-import { useChatContext } from 'src/hooks/useChatContext';
+import { useChat } from 'src/hooks/useChat';
 import { ChatDate } from '../../ChatDate';
 import { ChatMessage } from '../../ChatMessage/ChatMessage';
 import { NoMessagesMessage } from '../NoMessagesMessage';
 
 export const ChatMessagesList: FC = () => {
-   const { chat } = useChatContext();
+   const { chat } = useChat();
 
    return chat ? (
       <Stack

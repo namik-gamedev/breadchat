@@ -1,7 +1,7 @@
 import { createContext } from 'react';
-import { IUsersContext, IUsersShowType } from 'src/types/types';
+import { IUsersFilter, IUsersShowType } from 'src/types/types';
 
-const usersContextInitialValue: IUsersContext = {
+const usersFilterInitialValue: IUsersFilter = {
    searchQuery: '',
    setSearchQuery: () => {},
    filteredUsers: [],
@@ -10,4 +10,4 @@ const usersContextInitialValue: IUsersContext = {
    setUsersShowType: () => {},
 };
 
-export const UsersContext = createContext(usersContextInitialValue);
+export const UsersFilter = createContext(usersFilterInitialValue);

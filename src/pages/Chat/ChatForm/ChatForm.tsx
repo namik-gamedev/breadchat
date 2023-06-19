@@ -8,7 +8,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { BrowserView } from 'react-device-detect';
 import { Trans } from 'react-i18next';
 import { useAppSelector } from 'src/hooks/useAppSelector';
-import { useChatContext } from 'src/hooks/useChatContext';
+import { useChat } from 'src/hooks/useChat';
 import { useDebounce } from 'src/hooks/useDebounce';
 import ChatService from 'src/services/chat.service';
 import { ChatEmojiPicker } from './ChatEmojiPicker';
@@ -18,8 +18,8 @@ export const ChatForm: FC = () => {
    const [messageText, setMessageText] = useState('');
    const [isInputError, setIsInputError] = useState(false);
 
-   const interlocutor = useChatContext().interlocutor!;
-   const { editingMessage, setEditingMessage } = useChatContext();
+   const interlocutor = useChat().interlocutor!;
+   const { editingMessage, setEditingMessage } = useChat();
 
    const setUserTypingToFalse = useDebounce(() => {
       ChatService.setTyping(user.uid, interlocutor.uid, false);

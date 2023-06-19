@@ -35,7 +35,7 @@ export enum ISearchBy {
    ID,
 }
 
-export interface IUsersContext {
+export interface IUsersFilter {
    searchQuery: string;
    setSearchQuery: Dispatch<SetStateAction<string>>;
    filteredUsers: IUser[];

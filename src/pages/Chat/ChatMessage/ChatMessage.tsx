@@ -6,7 +6,7 @@ import moment from 'moment';
 import { Trans } from 'react-i18next';
 import { StyledMenu } from 'src/components/UI/StyledMenu';
 import { useAnchorEl } from 'src/hooks/useAnchorEl';
-import { useChatContext } from 'src/hooks/useChatContext';
+import { useChat } from 'src/hooks/useChat';
 import { useOpen } from 'src/hooks/useOpen';
 import { IMessage } from 'src/types/types';
 import { isMessageUnreaded } from 'src/utils/isMessageUnreaded.util';
@@ -20,8 +20,8 @@ interface Props extends StackProps {
 const BORDER_RADIUS_PX = 16;
 
 export const ChatMessage = styled(({ message, ...props }: Props) => {
-   const chat = useChatContext().chat!;
-   const { editingMessage } = useChatContext();
+   const chat = useChat().chat!;
+   const { editingMessage } = useChat();
 
    const isUnreaded = isMessageUnreaded(chat, message);
 
