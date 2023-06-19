@@ -2,7 +2,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 import { Trans } from 'react-i18next';
-import { useUsersContext } from 'src/hooks/useUsersContext';
+import { useUsersFilter } from 'src/hooks/useUsersFilter';
 import { IUsersShowType } from 'src/types/types';
 
 const getMessageText = (searchQueryIsEmpty: boolean, usersShowType: IUsersShowType): string => {
@@ -17,7 +17,7 @@ const getMessageText = (searchQueryIsEmpty: boolean, usersShowType: IUsersShowTy
 };
 
 export const NoUsersMessage: FC = () => {
-   const { searchQuery, usersShowType } = useUsersContext();
+   const { searchQuery, usersShowType } = useUsersFilter();
 
    return (
       <Stack sx={{ alignItems: 'center', pt: 2 }}>

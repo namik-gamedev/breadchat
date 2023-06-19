@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import copy from 'copy-to-clipboard';
 import { FC } from 'react';
 import { Trans } from 'react-i18next';
-import { useChatContext } from 'src/hooks/useChatContext';
+import { useChat } from 'src/hooks/useChat';
 import { IMessage } from 'src/types/types';
 
 interface Props {
@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const ChatMessageMenuItems: FC<Props> = ({ sender, message, handleMenuClose, handleDialogShow }) => {
-   const { setEditingMessage } = useChatContext();
+   const { setEditingMessage } = useChat();
 
    const handleMessageCopy = () => {
       handleMenuClose();

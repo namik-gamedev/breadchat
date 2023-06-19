@@ -4,14 +4,14 @@ import MenuList from '@mui/material/MenuList';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { FC, useState } from 'react';
-import { useUsersContext } from 'src/hooks/useUsersContext';
+import { useUsersFilter } from 'src/hooks/useUsersFilter';
 import { UserThumbnail } from 'src/pages/Users/UserThumbnail';
 import { NoUsersMessage } from '../NoUsersMessage';
 
 const USERS_IN_PAGE = 20;
 
 export const UsersList: FC = () => {
-   const { filteredUsers: users } = useUsersContext();
+   const { filteredUsers: users } = useUsersFilter();
 
    const [page, setPage] = useState(1);
 

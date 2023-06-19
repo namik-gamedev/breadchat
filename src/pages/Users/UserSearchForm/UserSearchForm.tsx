@@ -7,11 +7,11 @@ import TextField from '@mui/material/TextField';
 import React, { FC, useEffect, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/hooks/useAppSelector';
-import { useUsersContext } from 'src/hooks/useUsersContext';
+import { useUsersFilter } from 'src/hooks/useUsersFilter';
 import { ISearchBy, IUser, IUsersShowType } from 'src/types/types';
 
 export const UserSearchForm: FC = () => {
-   const { setFilteredUsers, searchQuery, setSearchQuery, usersShowType, setUsersShowType } = useUsersContext();
+   const { setFilteredUsers, searchQuery, setSearchQuery, usersShowType, setUsersShowType } = useUsersFilter();
 
    const user = useAppSelector((state) => state.user.data)!;
 

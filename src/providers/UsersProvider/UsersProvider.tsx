@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { UsersContext } from 'src/contexts/users.context';
-import { IUsersContext } from 'src/types/types';
+import { UsersFilter } from 'src/contexts/users.context';
+import { IUsersFilter } from 'src/types/types';
 
 interface Props {
-   value: IUsersContext;
+   value: IUsersFilter;
    children?: React.ReactNode;
 }
 
-export const UsersProvider: FC<Props> = (props) => <UsersContext.Provider {...props} />;
+export const UsersProvider: FC<Props> = (props) => <UsersFilter.Provider {...props} />;

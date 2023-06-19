@@ -7,14 +7,14 @@ import { FC } from 'react';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
 import { UserAvatar } from 'src/components/UI/UserAvatar';
 import { UserOnlineStatus } from 'src/components/UI/UserOnlineStatus';
-import { useChatContext } from 'src/hooks/useChatContext';
+import { useChat } from 'src/hooks/useChat';
 import { useOpen } from 'src/hooks/useOpen';
 import { ChatHeaderOnlineStatus } from './ChatHeaderOnlineStatus';
 import { ClearChatDialog } from './ClearChatDialog';
 
 export const ChatHeader: FC = () => {
-   const chat = useChatContext().chat!;
-   const interlocutor = useChatContext().interlocutor!;
+   const chat = useChat().chat!;
+   const interlocutor = useChat().interlocutor!;
 
    const { open: dialogOpen, handleClose: handleDialogClose, handleShow: handleDialogShow } = useOpen();
 
