@@ -38,7 +38,7 @@ export const Chat: FC = () => {
       return () => {
          document.title = 'Bread';
       };
-   }, [interlocutor]);
+   }, [interlocutor, t]);
 
    useEffect(() => {
       if (interlocutor) {
