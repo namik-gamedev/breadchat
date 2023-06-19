@@ -21,9 +21,11 @@ export const ChatMessagesList: FC = () => {
             const date = moment(message.createdAt);
             const prevDate = moment(prevMessage?.createdAt);
 
+            const isDateNeeded = date.dayOfYear() !== prevDate.dayOfYear() || date.year() !== prevDate.year();
+
             return (
                <>
-                  {(date.dayOfYear() !== prevDate.dayOfYear() || date.year() !== prevDate.year()) && <ChatDate date={date} />}
+                  {isDateNeeded && <ChatDate date={date} />}
                   <ChatMessage message={message} key={message.createdAt} />
                </>
             );
