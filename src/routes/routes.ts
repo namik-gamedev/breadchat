@@ -31,7 +31,7 @@ export const routes: IRoute[] = [
    {
       path: '/about',
       component: About,
-      authRequired: false,
+      authRequired: true,
    },
    {
       path: '/chat/:interlocutorUid',
