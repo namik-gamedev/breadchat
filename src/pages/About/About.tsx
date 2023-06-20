@@ -37,9 +37,13 @@ export const About: FC = () => {
             </Typography>
 
             <Typography>
-               <Trans>for bug reports or suggestions</Trans>
+               <Trans>report a bug or suggest feature</Trans>
                <Typography component='a' href='mailto:gnamik007@gmail.com' color='primary'>
                   gnamik007@gmail.com
+               </Typography>{' '}
+               <Trans>or</Trans>{' '}
+               <Typography component='a' href='https://github.com/namik-gamedev/breadchat/issues' color='primary'>
+                  <Trans>here</Trans>
                </Typography>
                .
             </Typography>
