@@ -57,7 +57,7 @@ export const UserSearchForm: FC = () => {
    return (
       <Grid container spacing={1} sx={{ pr: 1, width: 1 }} component='form'>
          <Grid item xs={12} sm>
-            <TextField fullWidth onChange={handleSearchQueryChange} label={t('search user')} />
+            <TextField fullWidth onChange={handleSearchQueryChange} label={t('search users')} />
          </Grid>
 
          <Grid item xs sm>
