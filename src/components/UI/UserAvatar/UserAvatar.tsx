@@ -22,7 +22,11 @@ export const UserAvatar: FC<Props> = ({ user, withoutBadge = false, sx, ...props
    return (
       <OnlineBadge online={user.online} invisible={withoutBadge || isSelfBlockedByUser}>
          <Tooltip title={user.displayName} arrow>
-            <Avatar sx={{ ...sx, bgcolor: theme.palette.primary.main }} src={isSelfBlockedByUser ? '' : user.photoURL || ''} {...props} />
+            <Avatar
+               sx={{ ...sx, bgcolor: isSelfBlockedByUser || !user.photoURL ? theme.palette.primary.main : '' }}
+               src={isSelfBlockedByUser ? '' : user.photoURL || ''}
+               {...props}
+            />
          </Tooltip>
       </OnlineBadge>
    );
