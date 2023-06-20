@@ -11,7 +11,15 @@ export const useUsersLoad = () => {
 
    const callback = (usersSnapshot: DataSnapshot) => {
       let users: IUser[] = [];
+
       usersSnapshot.forEach((userSnapshot) => {
+         const user: IUser = userSnapshot.val();
+
+         // todo: костыль
+         if (!user.uid) {
+            return;
+         }
+
          let blockedUsers: string[] = [];
          const blockedUsersRef = child(userSnapshot.ref, 'blockedUsers');
          onValue(blockedUsersRef, (blockedUsersSnapshot) => {
@@ -20,9 +28,7 @@ export const useUsersLoad = () => {
             });
          });
 
-         const user: IUser = { ...userSnapshot.val(), blockedUsers };
-
-         users = [...users, user];
+         users = [...users, { ...user, blockedUsers }];
       });
       dispatch(setUsers(users));
       dispatch(setUsersLoad(true));
