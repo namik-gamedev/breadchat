@@ -29,7 +29,7 @@ export const useChatsLoad = () => {
          if (newMessages.length > 0) {
             const chat: IChat = {
                messages: newMessages,
-               interlocutor: chatSnapshot.val().interlocutor,
+               interlocutorUid: chatSnapshot.val().interlocutorUid,
                unreadedMessagesCount: chatSnapshot.val().unreadedMessagesCount,
                selfUnreadedMessagesCount: chatSnapshot.val().selfUnreadedMessagesCount,
                interlocutorTyping: chatSnapshot.val().interlocutorTyping,

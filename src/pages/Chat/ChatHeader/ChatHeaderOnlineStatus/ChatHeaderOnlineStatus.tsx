@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const ChatHeaderOnlineStatus: FC<Props> = ({ chat }) => {
-   const user = useAppSelector((state) => state.users.data).find((u) => u.uid === chat.interlocutor.uid)!;
+   const user = useAppSelector((state) => state.users.data).find((u) => u.uid === chat.interlocutorUid)!;
    const currentUser = useAppSelector((state) => state.user.data)!;
 
    const isSelfBlockedByUser = useIsUserBlocked(currentUser.uid, user.uid);

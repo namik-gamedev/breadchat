@@ -9,13 +9,12 @@ import { IMessage, IUser } from 'src/types/types';
 interface Props {
    open: boolean;
    handleClose: () => void;
-   interlocutorDisplayName: string;
    interlocutor: IUser;
    message: IMessage;
    isUnreaded: boolean;
 }
 
-export const DeleteMessageDialog: FC<Props> = ({ open, handleClose, interlocutorDisplayName, interlocutor, message, isUnreaded }) => {
+export const DeleteMessageDialog: FC<Props> = ({ open, handleClose, interlocutor, message, isUnreaded }) => {
    const user = useAppSelector((state) => state.user.data)!;
    const { t } = useTranslation();
 
@@ -33,7 +32,7 @@ export const DeleteMessageDialog: FC<Props> = ({ open, handleClose, interlocutor
             <Typography>
                <Trans>also delete for</Trans>
                <Typography component='span' color='primary'>
-                  {interlocutorDisplayName}
+                  {interlocutor.displayName}
                </Typography>
             </Typography>
          }
