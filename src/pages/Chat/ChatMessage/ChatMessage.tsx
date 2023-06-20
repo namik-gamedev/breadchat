@@ -21,6 +21,7 @@ const BORDER_RADIUS_PX = 16;
 
 export const ChatMessage = styled(({ message, ...props }: Props) => {
    const chat = useChat().chat!;
+   const interlocutor = useChat().interlocutor!;
    const { editingMessage } = useChat();
 
    const isUnreaded = isMessageUnreaded(chat, message);
@@ -50,9 +51,8 @@ export const ChatMessage = styled(({ message, ...props }: Props) => {
 
          <DeleteMessageDialog
             open={dialogOpen}
-            interlocutorDisplayName={chat.interlocutor.displayName}
             handleClose={handleDialogClose}
-            interlocutor={chat.interlocutor}
+            interlocutor={interlocutor}
             isUnreaded={isUnreaded}
             message={message}
          />

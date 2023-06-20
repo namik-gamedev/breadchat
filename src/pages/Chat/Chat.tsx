@@ -26,7 +26,7 @@ export const Chat: FC = () => {
    const isSelfBlockedByInterlocutor = useIsUserBlocked(user?.uid, interlocutor?.uid);
    const isInterlocutorBlocked = useIsUserBlocked(interlocutor?.uid, user?.uid);
 
-   const chat = useAppSelector((state) => state.chats.data).find((c) => c.interlocutor.uid === interlocutorUid);
+   const chat = useAppSelector((state) => state.chats.data).find((c) => c.interlocutorUid === interlocutorUid);
 
    const [editingMessage, setEditingMessage] = useState<IMessage | null>(null);
 

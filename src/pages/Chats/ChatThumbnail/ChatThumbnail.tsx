@@ -18,18 +18,18 @@ interface Props {
 }
 
 export const ChatThumbnail: FC<Props> = ({ chat }) => {
-   const interlocutor = useAppSelector((state) => state.users.data).find((user) => user.uid === chat.interlocutor.uid)!;
+   const interlocutor = useAppSelector((state) => state.users.data).find((user) => user.uid === chat.interlocutorUid)!;
 
    const lastMessage = chat.messages[chat.messages.length - 1];
    const isLastMessageUnreaded = isMessageUnreaded(chat, lastMessage);
 
    return (
-      <Stack component={UnstyledLink} to={`/chat/${chat.interlocutor.uid}`} sx={{ alignItems: 'center' }} direction='row' spacing={2}>
+      <Stack component={UnstyledLink} to={`/chat/${interlocutor.uid}`} sx={{ alignItems: 'center' }} direction='row' spacing={2}>
          <UserAvatar sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={interlocutor} />
          <Box sx={{ minWidth: 0, width: 1 }}>
             <Stack direction='row' spacing={1} sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
                <Typography noWrap variant='h6' sx={{ fontWeight: chat.unreadedMessagesCount > 0 ? 500 : 'normal' }} component='h2'>
-                  {chat.interlocutor.displayName}
+                  {interlocutor.displayName}
                </Typography>
                <Typography variant='body1' sx={{ color: 'text.secondary' }}>
                   {moment(lastMessage.createdAt).fromNow(true)}
