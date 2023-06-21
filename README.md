@@ -12,6 +12,10 @@
 
 [Bread](https://breadchat.vercel.app) is a messenger, where you can register and exchange messages, information with other users in realtime. Chat and relax.
 
+## Commands
+yarn (install all packages) <br />
+yarn dev (run project)
+
 ## Built With
 
 - [Vite](https://vitejs.dev)
