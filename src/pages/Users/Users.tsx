@@ -6,7 +6,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { StyledBox } from 'src/components/UI/StyledBox';
 import { UsersSkeleton } from 'src/components/UI/skeletons/UsersSkeleton';
 import { useAppSelector } from 'src/hooks/useAppSelector';
-import { UsersProvider } from 'src/providers/UsersProvider';
+import { UsersFilterProvider } from 'src/providers/UsersFilterProvider';
 import { IUser } from 'src/types/types';
 import { IUsersShowType } from '../../types/types';
 import { UserSearchForm } from './UserSearchForm';
@@ -30,7 +30,7 @@ export const Users: FC = () => {
    }, [t]);
 
    return (
-      <UsersProvider
+      <UsersFilterProvider
          value={{
             searchQuery,
             setSearchQuery,
@@ -59,6 +59,6 @@ export const Users: FC = () => {
                <UsersSkeleton />
             )}
          </Stack>
-      </UsersProvider>
+      </UsersFilterProvider>
    );
 };

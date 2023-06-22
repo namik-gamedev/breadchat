@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { AccountContext } from 'src/contexts/account.context';
+import { AccountContext } from 'src/hooks/useAccount';
 import { IAccountContext } from 'src/types/types';
 
 interface Props {

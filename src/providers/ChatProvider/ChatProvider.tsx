@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ChatContext } from 'src/contexts/chat.context';
+import { ChatContext } from 'src/hooks/useChat';
 import { IChatContext } from 'src/types/types';
 
 interface Props {

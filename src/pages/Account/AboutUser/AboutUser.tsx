@@ -5,15 +5,15 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 import { Trans } from 'react-i18next';
-import { useAccountContext } from 'src/hooks/useAccountContext';
+import { useAccount } from 'src/hooks/useAccount';
 
 interface Props {
    handleFormShow: () => void;
 }
 
 export const AboutUser: FC<Props> = ({ handleFormShow }) => {
-   const { isCurrentUser, isSelfBlockedByUser } = useAccountContext();
-   const user = useAccountContext().user!;
+   const { isCurrentUser, isSelfBlockedByUser } = useAccount();
+   const user = useAccount().user!;
 
    return (
       <Stack direction='row' sx={{ justifyContent: 'space-between' }}>

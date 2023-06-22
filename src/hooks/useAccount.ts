@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 import { IAccountContext } from 'src/types/types';
 
 const accountContextDefaultValue: IAccountContext = {
@@ -9,3 +9,5 @@ const accountContextDefaultValue: IAccountContext = {
 };
 
 export const AccountContext = createContext(accountContextDefaultValue);
+
+export const useAccount = () => useContext(AccountContext);

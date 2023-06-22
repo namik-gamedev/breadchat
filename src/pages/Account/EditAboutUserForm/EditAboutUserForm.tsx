@@ -6,7 +6,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAccountContext } from 'src/hooks/useAccountContext';
+import { useAccount } from 'src/hooks/useAccount';
 import UserService from 'src/services/user.service';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const EditAboutUserForm: FC<Props> = ({ handleFormClose }) => {
-   const user = useAccountContext().user!;
+   const user = useAccount().user!;
 
    const [about, setAbout] = useState(user.about || '');
    const [isInputError, setIsInputError] = useState(false);
