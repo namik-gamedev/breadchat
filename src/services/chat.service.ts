@@ -3,12 +3,12 @@ import { db } from 'src/firebase/firebase';
 import { IUser } from 'src/types/types';
 
 export default class ChatService {
-   static create(user: IUser, interlocutor: IUser) {
-      const interlocutorRef = ref(db, `chats/${user.uid}/${interlocutor.uid}`);
-      update(interlocutorRef, { interlocutor });
+   static create(userUid: string, interlocutorUid: string) {
+      const chatRef = ref(db, `chats/${userUid}/${interlocutorUid}`);
+      update(chatRef, { interlocutorUid });
 
-      const interlocutorsInterlocutorRef = ref(db, `chats/${interlocutor.uid}/${user.uid}`);
-      update(interlocutorsInterlocutorRef, { interlocutor: user });
+      const interlocutorChatRef = ref(db, `chats/${interlocutorUid}/${userUid}`);
+      update(interlocutorChatRef, { interlocutorUid: userUid });
    }
 
    static clear(uid: string, interlocutorUid: string, alsoForInterlocutor: boolean = false) {

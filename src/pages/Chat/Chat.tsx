@@ -43,9 +43,9 @@ export const Chat: FC = () => {
    useEffect(() => {
       if (interlocutor) {
          if (chat) {
-            ChatService.unsetUnreadedMessagesCount(user!.uid, interlocutor!.uid);
+            ChatService.unsetUnreadedMessagesCount(user!.uid, interlocutor.uid);
          } else {
-            ChatService.create(user!, interlocutor);
+            ChatService.create(user!.uid, interlocutor.uid);
          }
       }
    }, [chat?.messages]);
