@@ -8,7 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import copy from 'copy-to-clipboard';
 import { FC, useRef } from 'react';
 import { Trans } from 'react-i18next';
-import { useAccountContext } from 'src/hooks/useAccountContext';
+import { useAccount } from 'src/hooks/useAccount';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import UserService from 'src/services/user.service';
 
@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const AccountMoreMenuItems: FC<Props> = ({ handleClose, handleBlockDialogShow }) => {
-   const { isCurrentUser, isUserBlocked } = useAccountContext();
+   const { isCurrentUser, isUserBlocked } = useAccount();
    const user = useAppSelector((state) => state.user.data)!;
 
    const inputRef = useRef<HTMLInputElement | null>(null);

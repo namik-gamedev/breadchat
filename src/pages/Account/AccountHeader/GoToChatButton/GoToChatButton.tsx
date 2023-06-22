@@ -3,10 +3,10 @@ import Button from '@mui/material/Button';
 import { FC } from 'react';
 import { Trans } from 'react-i18next';
 import { UnstyledLink } from 'src/components/UI/UnstyledLink';
-import { useAccountContext } from 'src/hooks/useAccountContext';
+import { useAccount } from 'src/hooks/useAccount';
 
 export const GoToChatButton: FC = () => {
-   const user = useAccountContext().user!;
+   const user = useAccount().user!;
 
    return (
       <Button variant='contained' startIcon={<ChatIcon />} component={UnstyledLink} to={`/chat/${user.uid}`}>

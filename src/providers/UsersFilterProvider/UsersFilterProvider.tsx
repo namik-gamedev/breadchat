@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { UsersFilter } from 'src/contexts/users.context';
+import { UsersFilter } from 'src/hooks/useUsersFilter';
 import { IUsersFilter } from 'src/types/types';
 
 interface Props {
@@ -7,4 +7,4 @@ interface Props {
    children?: React.ReactNode;
 }
 
-export const UsersProvider: FC<Props> = (props) => <UsersFilter.Provider {...props} />;
+export const UsersFilterProvider: FC<Props> = (props) => <UsersFilter.Provider {...props} />;

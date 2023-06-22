@@ -5,15 +5,15 @@ import { FC } from 'react';
 import { UserAvatar } from 'src/components/UI/UserAvatar';
 import { UserAvatarBackdrop } from 'src/components/UI/UserAvatarBackdrop';
 import { UserOnlineStatus } from 'src/components/UI/UserOnlineStatus';
-import { useAccountContext } from 'src/hooks/useAccountContext';
+import { useAccount } from 'src/hooks/useAccount';
 import { useOpen } from 'src/hooks/useOpen';
 import { AccountMoreMenu } from './AccountMoreMenu';
 import { BlockUserDialog } from './BlockUserDialog';
 import { GoToChatButton } from './GoToChatButton';
 
 export const AccountHeader: FC = () => {
-   const { isCurrentUser, isSelfBlockedByUser, isUserBlocked } = useAccountContext();
-   const user = useAccountContext().user!;
+   const { isCurrentUser, isSelfBlockedByUser, isUserBlocked } = useAccount();
+   const user = useAccount().user!;
 
    const { open: avatarOpen, handleClose: handleAvatarClose, handleShow: handleAvatarShow } = useOpen();
 
