@@ -17,5 +17,7 @@ export const EditAboutUserForm: FC<Props> = ({ handleClose }) => {
       UserService.setAbout(user.uid, about);
    };
 
-   return <EditForm label={t('about user')} initialValue={user.about} handleAction={handleAboutSet} handleClose={handleClose} />;
+   return (
+      <EditForm multiline maxRows={3} label={t('about user')} initialValue={user.about} handleAction={handleAboutSet} handleClose={handleClose} />
+   );
 };
