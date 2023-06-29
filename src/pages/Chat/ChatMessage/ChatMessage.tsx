@@ -57,7 +57,7 @@ export const ChatMessage = styled(({ message, ...props }: Props) => {
             </Stack>
 
             {message.images && (
-               <ImageList variant='masonry' cols={message.images.length > 1 ? 2 : 1} gap={6}>
+               <ImageList variant='masonry' cols={message.images.length > 6 ? 3 : message.images.length > 1 ? 2 : 1} gap={6}>
                   {message.images.map((imageUrl, index) => (
                      <ImageListItem onClick={(e) => handleImageClick(e, imageUrl)} className='chatMessageImage' key={index}>
                         <img src={imageUrl} alt='image' loading='lazy' />
