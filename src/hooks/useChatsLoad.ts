@@ -6,6 +6,7 @@ import { useAppDispatch } from './useAppDispatch';
 import { IChat, IMessage } from 'src/types/types';
 import { setChats } from 'src/store/reducers/chats.reducer';
 import { setChatsLoad } from 'src/store/reducers/global.reducer';
+import UserService from 'src/services/user.service';
 
 export const useChatsLoad = () => {
    const user = useAppSelector((state) => state.user.data);
@@ -14,6 +15,10 @@ export const useChatsLoad = () => {
    const callback = (chatsSnapshot: DataSnapshot) => {
       const newChats: IChat[] = [];
       chatsSnapshot.forEach((chatSnapshot) => {
+         if (user && !user.online) {
+            UserService.setOnline(user.uid, true);
+         }
+
          const messagesSnapshot = chatSnapshot.child('messages');
 
          let newMessages: IMessage[] = [];
