@@ -10,9 +10,10 @@ import { AccountMoreMenuItems } from './AccountMoreMenuItems';
 
 interface Props {
    handleBlockDialogShow: () => void;
+   handleFormShow: () => void;
 }
 
-export const AccountMoreMenu: FC<Props> = ({ handleBlockDialogShow }) => {
+export const AccountMoreMenu: FC<Props> = ({ handleBlockDialogShow, handleFormShow }) => {
    const { anchorEl, handleShow, handleClose, open } = useAnchorEl();
 
    return (
@@ -21,7 +22,7 @@ export const AccountMoreMenu: FC<Props> = ({ handleBlockDialogShow }) => {
             <MoreVertIcon />
          </IconButton>
          <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
-            <AccountMoreMenuItems handleBlockDialogShow={handleBlockDialogShow} handleClose={handleClose} />
+            <AccountMoreMenuItems handleFormShow={handleFormShow} handleBlockDialogShow={handleBlockDialogShow} handleClose={handleClose} />
          </StyledMenu>
       </Box>
    );

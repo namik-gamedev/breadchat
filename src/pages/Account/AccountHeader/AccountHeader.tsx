@@ -10,14 +10,15 @@ import { useOpen } from 'src/hooks/useOpen';
 import { AccountMoreMenu } from './AccountMoreMenu';
 import { BlockUserDialog } from './BlockUserDialog';
 import { GoToChatButton } from './GoToChatButton';
+import { EditNameForm } from './EditNameForm';
 
 export const AccountHeader: FC = () => {
    const { isCurrentUser, isSelfBlockedByUser, isUserBlocked } = useAccount();
    const user = useAccount().user!;
 
    const { open: avatarOpen, handleClose: handleAvatarClose, handleShow: handleAvatarShow } = useOpen();
-
    const { open: dialogOpen, handleClose: handleDialogClose, handleShow: handleDialogShow } = useOpen();
+   const { open: formOpen, handleClose: handleFormClose, handleShow: handleFormShow } = useOpen();
 
    return (
       <Stack direction='row' sx={{ justifyContent: 'space-between' }}>
@@ -26,19 +27,23 @@ export const AccountHeader: FC = () => {
                <UserAvatar sx={{ width: 50, height: 50, fontSize: '1.5em' }} user={user} />
             </Box>
 
-            <Box>
-               <Typography variant='h6' sx={{ fontWeight: 'normal' }} component='h2'>
-                  {user.displayName}
-               </Typography>
-               <Typography variant='body1' sx={{ color: 'text.secondary' }}>
-                  <UserOnlineStatus user={user} />
-               </Typography>
-            </Box>
+            {formOpen ? (
+               <EditNameForm handleClose={handleFormClose} />
+            ) : (
+               <Box>
+                  <Typography variant='h6' sx={{ fontWeight: 'normal' }} component='h2'>
+                     {user.displayName}
+                  </Typography>
+                  <Typography variant='body1' sx={{ color: 'text.secondary' }}>
+                     <UserOnlineStatus user={user} />
+                  </Typography>
+               </Box>
+            )}
          </Stack>
 
          <Stack direction='row' sx={{ alignItems: 'center' }} spacing={1}>
             {!isCurrentUser && <GoToChatButton />}
-            <AccountMoreMenu handleBlockDialogShow={handleDialogShow} />
+            <AccountMoreMenu handleFormShow={handleFormShow} handleBlockDialogShow={handleDialogShow} />
          </Stack>
 
          <BlockUserDialog open={dialogOpen} handleClose={handleDialogClose} user={user} blocked={isUserBlocked} />
