@@ -21,11 +21,9 @@ export const useUsersLoad = () => {
          }
 
          let blockedUsers: string[] = [];
-         const blockedUsersRef = child(userSnapshot.ref, 'blockedUsers');
-         onValue(blockedUsersRef, (blockedUsersSnapshot) => {
-            blockedUsersSnapshot.forEach((blockedUserSnapshot) => {
-               blockedUsers = [...blockedUsers, blockedUserSnapshot.val()];
-            });
+         const blockedUsersSnapshot = userSnapshot.child('blockedUsers');
+         blockedUsersSnapshot.forEach((blockedUserSnapshot) => {
+            blockedUsers = [...blockedUsers, blockedUserSnapshot.val()];
          });
 
          users = [...users, { ...user, blockedUsers }];

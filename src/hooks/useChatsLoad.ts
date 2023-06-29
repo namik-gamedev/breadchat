@@ -14,17 +14,14 @@ export const useChatsLoad = () => {
    const callback = (chatsSnapshot: DataSnapshot) => {
       const newChats: IChat[] = [];
       chatsSnapshot.forEach((chatSnapshot) => {
-         const chatRef = chatSnapshot.ref;
-         const messagesRef = child(chatRef, 'messages');
+         const messagesSnapshot = chatSnapshot.child('messages');
 
          let newMessages: IMessage[] = [];
-         onValue(messagesRef, (messagesSnapshot) => {
-            messagesSnapshot.forEach((messageSnapshot) => {
-               const message: IMessage = messageSnapshot.val();
+         messagesSnapshot.forEach((messageSnapshot) => {
+            const message: IMessage = messageSnapshot.val();
 
-               // questions for masiya: if i use a push method, it's gonna be an error object is not extensible. why?
-               newMessages = [...newMessages, message];
-            });
+            // questions for masiya: if i use a push method, it's gonna be an error object is not extensible. why?
+            newMessages = [...newMessages, message];
          });
          if (newMessages.length > 0) {
             const chat: IChat = {
