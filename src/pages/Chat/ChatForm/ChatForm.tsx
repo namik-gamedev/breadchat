@@ -46,7 +46,7 @@ export const ChatForm: FC = () => {
 
       const trimmedMessage = messageText.trimStart().trimEnd();
 
-      if (trimmedMessage === '' && images?.length === 0) {
+      if (messageText === '' && !images) {
          setIsInputError(true);
          return;
       }
