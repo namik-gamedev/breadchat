@@ -12,7 +12,7 @@ export interface IUser {
 
 export interface IMessage {
    sender: number; // 0 is current user, 1 is user, we are chatting with
-   text: string;
+   text: string | undefined;
    createdAt: number;
    edited: boolean;
    images?: string[] | null;
