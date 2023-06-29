@@ -15,6 +15,7 @@ export interface IMessage {
    text: string;
    createdAt: number;
    edited: boolean;
+   images?: string[] | null;
 }
 
 export interface IChat {

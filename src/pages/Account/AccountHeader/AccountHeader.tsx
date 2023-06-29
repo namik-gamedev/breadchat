@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 import { UserAvatar } from 'src/components/UI/UserAvatar';
-import { UserAvatarBackdrop } from 'src/components/UI/UserAvatarBackdrop';
+import { ImageBackdrop } from 'src/components/UI/ImageBackdrop';
 import { UserOnlineStatus } from 'src/components/UI/UserOnlineStatus';
 import { useAccount } from 'src/hooks/useAccount';
 import { useOpen } from 'src/hooks/useOpen';
@@ -44,7 +44,7 @@ export const AccountHeader: FC = () => {
             <AccountMoreMenu handleFormShow={handleFormShow} />
          </Stack>
 
-         <UserAvatarBackdrop open={avatarOpen} handleClose={handleAvatarClose} photoURL={user.photoURL} />
+         <ImageBackdrop open={avatarOpen} handleClose={handleAvatarClose} imageURL={user.photoURL} />
       </Stack>
    );
 };
