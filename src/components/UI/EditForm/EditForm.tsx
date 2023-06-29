@@ -3,20 +3,20 @@ import CreateIcon from '@mui/icons-material/Create';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
-import TextField from '@mui/material/TextField';
+import TextField, { OutlinedTextFieldProps } from '@mui/material/TextField';
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAccount } from 'src/hooks/useAccount';
 import UserService from 'src/services/user.service';
 
-interface Props {
+interface Props extends Omit<OutlinedTextFieldProps, 'variant'> {
    handleClose: () => void;
    handleAction: (newValue: string) => void;
    initialValue: string | undefined;
    label: string;
 }
 
-export const EditForm: FC<Props> = ({ handleClose, label, handleAction, initialValue }) => {
+export const EditForm: FC<Props> = ({ handleClose, label, handleAction, initialValue, ...props }) => {
    const [value, setValue] = useState(initialValue || '');
    const [isInputError, setIsInputError] = useState(false);
 
@@ -40,14 +40,13 @@ export const EditForm: FC<Props> = ({ handleClose, label, handleAction, initialV
    return (
       <Box component='form' onSubmit={handleSubmit}>
          <TextField
+            {...props}
             focused
             value={value}
             onChange={handleChange}
             label={label}
             fullWidth
-            multiline
             error={isInputError}
-            maxRows={3}
             InputProps={{
                endAdornment: (
                   <InputAdornment position='end'>
