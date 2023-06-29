@@ -11,7 +11,7 @@ import UserService from 'src/services/user.service';
 
 interface Props {
    handleClose: () => void;
-   handleAction: () => void;
+   handleAction: (newValue: string) => void;
    initialValue: string | undefined;
    label: string;
 }
@@ -27,12 +27,13 @@ export const EditForm: FC<Props> = ({ handleClose, label, handleAction, initialV
    const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
 
-      if (value.trimStart() === '') {
+      const trimmedValue = value.trimStart().trimEnd();
+      if (trimmedValue === '') {
          setIsInputError(true);
          return;
       }
 
-      handleAction();
+      handleAction(trimmedValue);
       handleClose();
    };
 
