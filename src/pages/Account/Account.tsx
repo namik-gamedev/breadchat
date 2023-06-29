@@ -25,8 +25,6 @@ export const Account: FC = () => {
 
    const { t } = useTranslation();
 
-   const { open: formOpen, handleClose: handleFormClose, handleShow: handleFormShow } = useOpen();
-
    useEffect(() => {
       document.title = user?.displayName || t('no user with this id');
    }, [user]);
@@ -38,9 +36,7 @@ export const Account: FC = () => {
                <Stack component={StyledBox} spacing={2} sx={{ p: 1, height: 1, overflow: 'auto' }}>
                   <AccountHeader />
 
-                  {!formOpen && <AboutUser handleFormShow={handleFormShow} />}
-
-                  {formOpen && <EditAboutUserForm handleFormClose={handleFormClose} />}
+                  <AboutUser />
                </Stack>
             </AccountProvider>
          );

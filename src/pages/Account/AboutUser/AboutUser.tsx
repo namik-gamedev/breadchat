@@ -6,16 +6,18 @@ import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 import { Trans } from 'react-i18next';
 import { useAccount } from 'src/hooks/useAccount';
+import { useOpen } from 'src/hooks/useOpen';
+import { EditAboutUserForm } from '../EditAboutUserForm';
 
-interface Props {
-   handleFormShow: () => void;
-}
-
-export const AboutUser: FC<Props> = ({ handleFormShow }) => {
+export const AboutUser: FC = () => {
    const { isCurrentUser, isSelfBlockedByUser } = useAccount();
    const user = useAccount().user!;
 
-   return (
+   const { open: formOpen, handleClose: handleFormClose, handleShow: handleFormShow } = useOpen();
+
+   return formOpen ? (
+      <EditAboutUserForm handleClose={handleFormClose} />
+   ) : (
       <Stack direction='row' sx={{ justifyContent: 'space-between' }}>
          <Box>
             <Typography variant='body1' color='text.secondary'>

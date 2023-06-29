@@ -6,61 +6,22 @@ import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { EditForm } from 'src/components/UI/EditForm';
 import { useAccount } from 'src/hooks/useAccount';
 import UserService from 'src/services/user.service';
 
 interface Props {
-   handleFormClose: () => void;
+   handleClose: () => void;
 }
 
-export const EditAboutUserForm: FC<Props> = ({ handleFormClose }) => {
+export const EditAboutUserForm: FC<Props> = ({ handleClose }) => {
    const user = useAccount().user!;
-
-   const [about, setAbout] = useState(user.about || '');
-   const [isInputError, setIsInputError] = useState(false);
 
    const { t } = useTranslation();
 
-   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setAbout(e.target.value);
+   const handleAboutSet = (about: string) => {
+      UserService.setAbout(user.uid, about);
    };
 
-   const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
-
-      if (about.trimStart() === '') {
-         setIsInputError(true);
-         return;
-      }
-
-      UserService.setAbout(user.uid, about.trimStart().trimEnd());
-      handleFormClose();
-   };
-
-   return (
-      <Box component='form' onSubmit={handleSubmit}>
-         <TextField
-            focused
-            value={about}
-            onChange={handleChange}
-            label={t('about user')}
-            fullWidth
-            multiline
-            error={isInputError}
-            maxRows={3}
-            InputProps={{
-               endAdornment: (
-                  <InputAdornment position='end'>
-                     <IconButton onClick={handleFormClose}>
-                        <CloseIcon />
-                     </IconButton>
-                     <IconButton type='submit'>
-                        <CreateIcon color='primary' />
-                     </IconButton>
-                  </InputAdornment>
-               ),
-            }}
-         />
-      </Box>
-   );
+   return <EditForm label={t('about user')} initialValue={user.about} handleAction={handleAboutSet} handleClose={handleClose} />;
 };
