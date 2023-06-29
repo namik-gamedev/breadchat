@@ -5,13 +5,13 @@ import { FC } from 'react';
 interface Props {
    open: boolean;
    handleClose: () => void;
-   photoURL: string | null | undefined;
+   imageURL: string | null | undefined;
 }
 
-export const UserAvatarBackdrop: FC<Props> = ({ open, handleClose, photoURL }) => {
+export const ImageBackdrop: FC<Props> = ({ open, handleClose, imageURL }) => {
    return (
       <Backdrop sx={{ zIndex: 1100 }} open={open} onClick={handleClose}>
-         <Box component='img' src={photoURL || ''} sx={{ maxHeight: 1, maxWidth: 1 }} />
+         <Box component='img' src={imageURL || ''} sx={{ maxHeight: 1, maxWidth: 1 }} />
       </Backdrop>
    );
 };
