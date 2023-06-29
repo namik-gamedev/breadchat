@@ -1,5 +1,6 @@
-import { child, increment, ref, remove, set, update } from 'firebase/database';
-import { db } from 'src/firebase/firebase';
+import { child, increment, ref, remove, serverTimestamp, set, update } from 'firebase/database';
+import { getDownloadURL, ref as storageRef, uploadBytes } from 'firebase/storage';
+import { db, storage } from 'src/firebase/firebase';
 import { IUser } from 'src/types/types';
 
 export default class ChatService {
@@ -25,11 +26,30 @@ export default class ChatService {
 
       const messagesRef = ref(db, `chats/${uid}/${interlocutorUid}/messages/${createdAt}`);
       set(messagesRef, { sender: 0, text, createdAt, edited: false });
+      const interlocutorMessagesRef = ref(db, `chats/${interlocutorUid}/${uid}/messages/${createdAt}`);
+      set(interlocutorMessagesRef, { sender: 1, text, createdAt, edited: false });
 
       this.increaseUnreadedMessagesCount(uid, interlocutorUid);
 
-      const interlocutorMessagesRef = ref(db, `chats/${interlocutorUid}/${uid}/messages/${createdAt}`);
-      set(interlocutorMessagesRef, { sender: 1, text, createdAt, edited: false });
+      if (!images) {
+         return;
+      }
+      Array.from(images).forEach((image, index) => {
+         console.log(image);
+
+         // path is "chatImages/{senderUid}/{createdAt}"
+         const fileRef = storageRef(storage, `chatImages/${uid}/${createdAt}/${index}`);
+         uploadBytes(fileRef, image).then((uploadTask) => {
+            getDownloadURL(uploadTask.ref).then((url) => {
+               console.log(url);
+
+               const imageRef = ref(db, `chats/${uid}/${interlocutorUid}/messages/${createdAt}/images/${index}`);
+               set(imageRef, url);
+               const interlocutorImageRef = ref(db, `chats/${interlocutorUid}/${uid}/messages/${createdAt}/images/${index}`);
+               set(interlocutorImageRef, url);
+            });
+         });
+      });
    }
 
    static deleteMessage(uid: string, interlocutorUid: string, createdAt: number, alsoForInterlocutor: boolean = false, isUnreaded: boolean = false) {

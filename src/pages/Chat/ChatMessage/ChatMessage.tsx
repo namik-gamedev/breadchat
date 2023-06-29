@@ -1,9 +1,14 @@
 import CheckIcon from '@mui/icons-material/Check';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
-import { Typography, styled } from '@mui/material';
+import { styled } from '@mui/material';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 import Stack, { StackProps } from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import moment from 'moment';
+import { MouseEvent, useState } from 'react';
 import { Trans } from 'react-i18next';
+import { ImageBackdrop } from 'src/components/UI/ImageBackdrop';
 import { StyledMenu } from 'src/components/UI/StyledMenu';
 import { useAnchorEl } from 'src/hooks/useAnchorEl';
 import { useChat } from 'src/hooks/useChat';
@@ -27,8 +32,15 @@ export const ChatMessage = styled(({ message, ...props }: Props) => {
    const isUnreaded = isMessageUnreaded(chat, message);
 
    const { anchorEl: menuAnchorEl, open: menuOpen, handleShow: handleMenuShow, handleClose: handleMenuClose } = useAnchorEl();
-
    const { open: dialogOpen, handleShow: handleDialogShow, handleClose: handleDialogClose } = useOpen();
+   const { open: imageOpen, handleShow: handleImageShow, handleClose: handleImageClose } = useOpen();
+   const [selectedImageURL, setSelectedImageURL] = useState<string | null>(null);
+
+   const handleImageClick = (e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>, url: string) => {
+      e.stopPropagation();
+      setSelectedImageURL(url);
+      handleImageShow();
+   };
 
    return (
       <Stack {...props}>
@@ -43,6 +55,16 @@ export const ChatMessage = styled(({ message, ...props }: Props) => {
                   {message.text}
                </Typography>
             </Stack>
+
+            {message.images && (
+               <ImageList variant='masonry' cols={message.images.length > 1 ? 2 : 1} gap={6}>
+                  {message.images.map((imageUrl, index) => (
+                     <ImageListItem onClick={(e) => handleImageClick(e, imageUrl)} className='chatMessageImage' key={index}>
+                        <img src={imageUrl} alt='image' loading='lazy' />
+                     </ImageListItem>
+                  ))}
+               </ImageList>
+            )}
          </Stack>
 
          <StyledMenu anchorEl={menuAnchorEl} open={menuOpen} onClose={handleMenuClose}>
@@ -56,6 +78,8 @@ export const ChatMessage = styled(({ message, ...props }: Props) => {
             isUnreaded={isUnreaded}
             message={message}
          />
+
+         <ImageBackdrop open={imageOpen} handleClose={handleImageClose} imageURL={selectedImageURL} />
       </Stack>
    );
 })(({ message: { sender }, theme: { palette, spacing, breakpoints } }) => ({
@@ -71,6 +95,10 @@ export const ChatMessage = styled(({ message, ...props }: Props) => {
       borderColor: `transparent ${sender === 0 ? palette.primary.main : palette.secondary.main} transparent transparent`,
    },
    '> .chatMessageWrapper': {
+      '.chatMessageImage': {
+         overflow: 'hidden',
+         borderRadius: 6,
+      },
       maxWidth: 520,
       [breakpoints.down('md')]: {
          maxWidth: 450,
