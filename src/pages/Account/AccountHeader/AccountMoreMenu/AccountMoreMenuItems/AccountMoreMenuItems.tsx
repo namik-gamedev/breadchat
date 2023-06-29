@@ -1,8 +1,9 @@
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import NoPhotographyIcon from '@mui/icons-material/NoPhotography';
 import PersonIcon from '@mui/icons-material/Person';
+import CreateIcon from '@mui/icons-material/Create';
 import PersonOffIcon from '@mui/icons-material/PersonOff';
 import ReplyIcon from '@mui/icons-material/Reply';
-import NoPhotographyIcon from '@mui/icons-material/NoPhotography';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import MenuItem from '@mui/material/MenuItem';
 import copy from 'copy-to-clipboard';
@@ -14,10 +15,11 @@ import UserService from 'src/services/user.service';
 
 interface Props {
    handleClose: () => void;
+   handleFormShow: () => void;
    handleBlockDialogShow: () => void;
 }
 
-export const AccountMoreMenuItems: FC<Props> = ({ handleClose, handleBlockDialogShow }) => {
+export const AccountMoreMenuItems: FC<Props> = ({ handleClose, handleBlockDialogShow, handleFormShow }) => {
    const { isCurrentUser, isUserBlocked } = useAccount();
    const user = useAppSelector((state) => state.user.data)!;
 
@@ -45,6 +47,11 @@ export const AccountMoreMenuItems: FC<Props> = ({ handleClose, handleBlockDialog
       UserService.unsetPhotoURL(user.uid);
    };
 
+   const handleNameEdit = () => {
+      handleClose();
+      handleFormShow();
+   };
+
    const handleUserBlock = () => {
       handleClose();
       handleBlockDialogShow();
@@ -60,6 +67,13 @@ export const AccountMoreMenuItems: FC<Props> = ({ handleClose, handleBlockDialog
          <input style={{ display: 'none' }} ref={inputRef} type='file' accept='image/*' onChange={handlePhotoSet} />
          {isCurrentUser ? (
             <>
+               <MenuItem onClick={handleNameEdit}>
+                  <ListItemIcon>
+                     <CreateIcon color='primary' />
+                  </ListItemIcon>
+                  <Trans>edit name</Trans>
+               </MenuItem>
+
                <MenuItem onClick={handlePhotoAdd}>
                   <ListItemIcon>
                      <AddAPhotoIcon color='primary' />

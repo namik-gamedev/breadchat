@@ -17,6 +17,12 @@ export default class UserService {
       set(aboutRef, about);
    }
 
+   static setDisplayName(uid: string, displayName: string) {
+      const aboutRef = ref(db, `users/${uid}/displayName`);
+
+      set(aboutRef, displayName);
+   }
+
    static async setPhotoURL(uid: string, file: File) {
       const fileRef = storageRef(storage, `avatars/${uid}`);
       const uploadTask = await uploadBytes(fileRef, file);
