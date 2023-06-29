@@ -1,5 +1,5 @@
 import { child, increment, ref, remove, serverTimestamp, set, update } from 'firebase/database';
-import { getDownloadURL, ref as storageRef, uploadBytes } from 'firebase/storage';
+import { deleteObject, getDownloadURL, list, listAll, ref as storageRef, uploadBytes } from 'firebase/storage';
 import { db, storage } from 'src/firebase/firebase';
 import { IUser } from 'src/types/types';
 
@@ -13,11 +13,23 @@ export default class ChatService {
    }
 
    static clear(uid: string, interlocutorUid: string, alsoForInterlocutor: boolean = false) {
+      const imagesRef = storageRef(storage, `chatImages/${uid}/${interlocutorUid}`);
+      listAll(imagesRef).then((result) => {
+         result.prefixes.forEach((prefixRef) => {
+            listAll(prefixRef).then((result) => {
+               result.items.forEach((itemRef) => {
+                  deleteObject(itemRef);
+               });
+            });
+         });
+      });
+
       const messagesRef = ref(db, `chats/${uid}/${interlocutorUid}/messages`);
       remove(messagesRef);
 
       if (alsoForInterlocutor) {
-         this.clear(interlocutorUid, uid);
+         const interlocutorMessagesRef = ref(db, `chats/${interlocutorUid}/${uid}/messages`);
+         remove(interlocutorMessagesRef);
       }
    }
 
@@ -37,8 +49,8 @@ export default class ChatService {
       Array.from(images).forEach((image, index) => {
          console.log(image);
 
-         // path is "chatImages/{senderUid}/{createdAt}"
-         const fileRef = storageRef(storage, `chatImages/${uid}/${createdAt}/${index}`);
+         // path is "chatImages/{senderUid}/{interlocutorUid}/{createdAt}"
+         const fileRef = storageRef(storage, `chatImages/${uid}/${interlocutorUid}/${createdAt}/${index}`);
          uploadBytes(fileRef, image).then((uploadTask) => {
             getDownloadURL(uploadTask.ref).then((url) => {
                console.log(url);
@@ -53,11 +65,19 @@ export default class ChatService {
    }
 
    static deleteMessage(uid: string, interlocutorUid: string, createdAt: number, alsoForInterlocutor: boolean = false, isUnreaded: boolean = false) {
+      const imagesRef = storageRef(storage, `chatImages/${uid}/${interlocutorUid}/${createdAt}`);
+      listAll(imagesRef).then((result) => {
+         result.items.forEach((itemRef) => {
+            deleteObject(itemRef);
+         });
+      });
+
       const messageRef = ref(db, `chats/${uid}/${interlocutorUid}/messages/${createdAt}`);
       remove(messageRef);
 
       if (alsoForInterlocutor) {
-         this.deleteMessage(interlocutorUid, uid, createdAt);
+         const interlocutorMessageRef = ref(db, `chats/${interlocutorUid}/${uid}/messages/${createdAt}`);
+         remove(interlocutorMessageRef);
          if (isUnreaded) {
             this.decreaseUnreadedMessagesCount(uid, interlocutorUid);
          }
