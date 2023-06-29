@@ -1,20 +1,16 @@
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
-import SendIcon from '@mui/icons-material/Send';
 import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { BrowserView } from 'react-device-detect';
 import { Trans } from 'react-i18next';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useChat } from 'src/hooks/useChat';
 import { useDebounce } from 'src/hooks/useDebounce';
 import ChatService from 'src/services/chat.service';
-import { ChatEmojiPicker } from './ChatEmojiPicker';
 import Typography from '@mui/material/Typography';
 import { UnreadedMessagesCountDisplay } from 'src/components/UI/UnreadedMessagesCountDisplay';
+import { ChatFormEndAdornment } from 'src/components/ChatFormEndAdornment';
 
 export const ChatForm: FC = () => {
    const user = useAppSelector((state) => state.user.data)!;
@@ -107,24 +103,7 @@ export const ChatForm: FC = () => {
             maxRows={7}
             InputProps={{
                endAdornment: (
-                  <Stack>
-                     <InputAdornment position='end'>
-                        {editingMessage && (
-                           <IconButton onClick={handleEditClose}>
-                              <CloseIcon />
-                           </IconButton>
-                        )}
-                        <IconButton onClick={handlePhotoAdd}>
-                           <AddPhotoAlternateIcon />
-                        </IconButton>
-                        <BrowserView>
-                           <ChatEmojiPicker setMessageText={setMessageText} />
-                        </BrowserView>
-                        <IconButton type='submit'>
-                           <SendIcon color='primary' />
-                        </IconButton>
-                     </InputAdornment>
-                  </Stack>
+                  <ChatFormEndAdornment setMessageText={setMessageText} handleEditClose={handleEditClose} handlePhotoAdd={handlePhotoAdd} />
                ),
             }}
          />
