@@ -21,7 +21,7 @@ export const ChatMessageMenuItems: FC<Props> = ({ sender, message, handleMenuClo
 
    const handleMessageCopy = () => {
       handleMenuClose();
-      copy(message.text);
+      copy(message.text || '');
    };
 
    const handleMessageDelete = () => {
