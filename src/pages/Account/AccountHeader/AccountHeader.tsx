@@ -8,16 +8,14 @@ import { UserOnlineStatus } from 'src/components/UI/UserOnlineStatus';
 import { useAccount } from 'src/hooks/useAccount';
 import { useOpen } from 'src/hooks/useOpen';
 import { AccountMoreMenu } from './AccountMoreMenu';
-import { BlockUserDialog } from './BlockUserDialog';
-import { GoToChatButton } from './GoToChatButton';
 import { EditNameForm } from './EditNameForm';
+import { GoToChatButton } from './GoToChatButton';
 
 export const AccountHeader: FC = () => {
-   const { isCurrentUser, isSelfBlockedByUser, isUserBlocked } = useAccount();
+   const { isCurrentUser, isSelfBlockedByUser } = useAccount();
    const user = useAccount().user!;
 
    const { open: avatarOpen, handleClose: handleAvatarClose, handleShow: handleAvatarShow } = useOpen();
-   const { open: dialogOpen, handleClose: handleDialogClose, handleShow: handleDialogShow } = useOpen();
    const { open: formOpen, handleClose: handleFormClose, handleShow: handleFormShow } = useOpen();
 
    return (
@@ -43,10 +41,8 @@ export const AccountHeader: FC = () => {
 
          <Stack direction='row' sx={{ alignItems: 'center' }} spacing={1}>
             {!isCurrentUser && <GoToChatButton />}
-            <AccountMoreMenu handleFormShow={handleFormShow} handleBlockDialogShow={handleDialogShow} />
+            <AccountMoreMenu handleFormShow={handleFormShow} />
          </Stack>
-
-         <BlockUserDialog open={dialogOpen} handleClose={handleDialogClose} user={user} blocked={isUserBlocked} />
 
          <UserAvatarBackdrop open={avatarOpen} handleClose={handleAvatarClose} photoURL={user.photoURL} />
       </Stack>
