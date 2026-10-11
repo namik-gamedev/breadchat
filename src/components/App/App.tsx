@@ -3,6 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { onDisconnect, ref, serverTimestamp } from 'firebase/database';
 import moment from 'moment';
 import { FC, useEffect } from 'react';
+import { STORAGE_KEYS } from 'src/constants/StorageKeys.consts';
 import { db } from 'src/firebase/firebase';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useDBSetup } from 'src/hooks/useDBSetup';
@@ -23,9 +24,15 @@ export const App: FC = () => {
    useDBSetup();
 
    useEffect(() => {
-      moment.updateLocale(language, language === ILanguage.EN ? enLocaleSpec : ruLocaleSpec);
-      i18n.changeLanguage(language);
+      const nextLanguage = language || ILanguage.EN;
+      localStorage.setItem(STORAGE_KEYS.language, nextLanguage);
+      moment.updateLocale(nextLanguage, nextLanguage === ILanguage.EN ? enLocaleSpec : ruLocaleSpec);
+      i18n.changeLanguage(nextLanguage);
    }, [language]);
+
+   useEffect(() => {
+      localStorage.setItem(STORAGE_KEYS.theme, String(isDark));
+   }, [isDark]);
 
    useEffect(() => {
       if (user) {
